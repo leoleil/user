@@ -17,9 +17,17 @@
         select * from my_user
         where id = #{id}
     </select>
-    <select id="loggin" parameterType="java.util.Map" resultMap="User">
-        select * from my_user
-        where username = #{username} and password = #{password}
+    <select id="login" parameterType="java.util.Map" resultMap="User">
+        select my_user.id as user_id,
+        my_user.username,
+        my_user.password,
+        my_user.zq,
+        my_user.jbz,
+        my_user.department,
+        my_user.timestamp,
+        onps_role.name as role
+        from my_user,onps_role,user_role
+        where my_user.username = #{username} and my_user.password = #{password} and my_user.id = user_role.user_id and onps_role.id = user_role.role_id
     </select>
     <insert id="insertUser">
         insert into my_user(username, password, ZQ, JBZ, department)
@@ -29,4 +37,11 @@
         delete from my_user
         where id = #{id}
     </delete>
+    <update id="updateUser">
+        update my_user
+        set ZQ = #{ZQ},
+        JBZ = #{JBZ},
+        department = #{department},
+        where id = #{id}
+    </update>
 </mapper>

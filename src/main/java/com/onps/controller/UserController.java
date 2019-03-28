@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(value = "/manage/user/")
 public class UserController {
-    @Autowired
+    /*@Autowired
     private UserService userService;
 
     private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    /**
+    *//**
      * 登录
      *
      * @param userName 用户名
      * @param pw       密码
      * @return
-     */
+     *//*
     @ResponseBody
     @RequestMapping(value = "login")
     public BaseResult<TMgtUser> login(String userName, String pw) {
@@ -65,6 +65,6 @@ public class UserController {
             br.setMessage("登录时发生异常!");
         }
         return br;
-    }
+    }*/
 }
 

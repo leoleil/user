@@ -1,9 +1,11 @@
 package com.onps.dao;
 
 import com.onps.model.po.PermissionPO;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface PermissionDAO {
     /**
      * 插入权限

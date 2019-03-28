@@ -21,4 +21,18 @@ public interface IUser {
      * @return 返回null为没有用户登录
      */
     User getLoginUser();
+
+    /**
+     * 判断用户是某个角色吗
+     * @param role 角色名字
+     * @return true为真
+     */
+    boolean is(String role);
+
+    /**
+     * 判断用户是否有权限
+     * @param permission 权限名字
+     * @return true为真
+     */
+    boolean havePermission(String permission);
 }

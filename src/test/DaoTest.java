@@ -1,40 +1,34 @@
-import com.onps.dao.DepartmentDAO;
-import com.onps.model.po.DepartmentPO;
+import com.onps.dao.UserDAO;
+import com.onps.model.User;
+import com.onps.model.po.UserPO;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DaoTest {
     private ApplicationContext applicationContext;
     @Test
-    public void departmentTest(){
+    public void userTest(){
         String configLocation = "classpath:spring/applicationContext.xml";
         applicationContext = new ClassPathXmlApplicationContext(configLocation);
-        DepartmentDAO departmentDAO =(DepartmentDAO) applicationContext.getBean("departmentDAO");
-        DepartmentPO departmentPO = new DepartmentPO();
-        departmentPO.setName("计算机学院");
-        /*try {
-            departmentDAO.insertDepartment(departmentPO);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-        departmentPO = departmentDAO.getDepartment("3F6A09D8D4D24722ACD09C77C23AAC09");
-        List<DepartmentPO> departmentPOList;
-        departmentPOList = departmentDAO.getDepartmentList();
-        String s = "光研院";
-        for (DepartmentPO d:departmentPOList
-             ) {
-            if(d.getName().equals(s)){
-                departmentPO = d;
-                break;
-            }
-        }
+        UserDAO userDAO = (UserDAO) applicationContext.getBean("userDAO");
+        UserPO userPO = new UserPO();
+        userPO.setUsername("test2");
+        userPO.setPassword("test2");
+        userPO.setDepartment("test2");
+        userPO.setJBZ("test2");
+        userPO.setZQ("test2");
+
+        User user;
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("password","test");
+        map.put("username","test");
+        user = userDAO.login(map);
         try {
-            departmentDAO.deleteDepartment(departmentPO);
+            userDAO.insertUser(userPO);
         } catch (Exception e) {
             e.printStackTrace();
         }

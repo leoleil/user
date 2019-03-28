@@ -6,11 +6,15 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.Map;
+
 @Component
 @Scope(value = WebApplicationContext.SCOPE_SESSION,
         proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserCondition implements IUser {
     private User user;
+    private Map<String,String> roles;
+    private Map<String,String> permissions;
     /**
      * 登录
      *
