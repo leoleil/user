@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onps.dao.PermissionDAO">
+    <resultMap id="roleList" type="com.onps.model.po.PermissionPO">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+    </resultMap>
+    <select id="getRoleList" resultMap="roleList">
+        select * from ONPS_ROLE
+    </select>
+    <select id="getRole" resultMap="roleList">
+        select * from ONPS_ROLE
+        where id = #{id}
+    </select>
+    <insert id="insertPermission">
+        insert into ONPS_ROLE (name)
+        values (#{name})
+    </insert>
+    <delete id="deletePermission">
+        delete from ONPS_ROLE
+        where id = #{id}
+    </delete>
+</mapper>

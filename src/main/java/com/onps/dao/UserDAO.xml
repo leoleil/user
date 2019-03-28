@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onps.dao.UserDAO">
+    <resultMap id="User" type="com.onps.model.po.UserPO">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="ZQ" property="ZQ"/>
+        <result column="JBZ" property="JBZ"/>
+        <result column="department" property="department"/>
+        <result column="timestamp" property="date"/>
+    </resultMap>
+    <select id="getUserList" resultMap="User">
+        select * from my_user
+    </select>
+    <select id="getUser" resultMap="User">
+        select * from my_user
+        where id = #{id}
+    </select>
+    <select id="loggin" parameterType="java.util.Map" resultMap="User">
+        select * from my_user
+        where username = #{username} and password = #{password}
+    </select>
+    <insert id="insertUser">
+        insert into my_user(username, password, ZQ, JBZ, department)
+        values (#{username},#{password},#{ZQ},#{JBZ},#{department})
+    </insert>
+    <delete id="deleteUser">
+        delete from my_user
+        where id = #{id}
+    </delete>
+</mapper>
