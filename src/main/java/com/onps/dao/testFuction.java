@@ -21,7 +21,7 @@ public class testFuction {
         Map<String,String> map = new HashMap<String,String>();
         map.put("userName","小明");
         map.put("pw","123");
-        User user = userDAO.login(map);
+        //User user = userDAO.login(map);
 
     }
 }

@@ -81,7 +81,7 @@
 		<!-- 登录地址 -->
 		<property name="loginUrl" value="/user/toLogin.do"/>
 		<!-- 登录后跳转到业务页面 -->
-		<!--<property name="successUrl" value="/main.jsp"/>-->
+		<property name="successUrl" value="/home/toHome.do"/>
 		<!-- 错误页面 -->
 		<!--<property name="unauthorizedUrl" value="/error.jsp"/>-->
 		<!-- 权限配置 -->
@@ -95,14 +95,15 @@
 			<value>
 				<!-- anon无需权限既可访问请求的，此处是登录页面和登录请求 -->
 				/user/login.do = anon
-				/static/**=anon
-
+				/js/** = anon
+				/css/** = anon
+				/image/** = anon
 				<!-- 需要权限为add的用户才能访问此请求-->
 				/user=perms[user:add]
 				<!-- 需要管理员角色才能访问此页面 -->
 				/user/add=roles[admin]
 				<!--拦截非静态资源的所有请求-->
-				/** = authc
+				<!--/** = authc-->
 
 			</value>
 		</property>

@@ -2,7 +2,7 @@ package com.onps.service.modules.user;
 
 import com.onps.model.User;
 
-public interface IUser {
+public interface IUserCondition {
     /**
      * 登录
      * @param user 传入登录的User对象
@@ -27,7 +27,7 @@ public interface IUser {
      * @param role 角色名字
      * @return true为真
      */
-    boolean is(String role);
+    boolean isRole(String role);
 
     /**
      * 判断用户是否有权限
@@ -35,4 +35,5 @@ public interface IUser {
      * @return true为真
      */
     boolean havePermission(String permission);
+
 }

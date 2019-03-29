@@ -5,7 +5,7 @@ import com.onps.model.AbstractLink;
 import com.onps.model.AbstractNode;
 import com.onps.model.Topogy;
 import com.onps.model.vo.TopogyVO;
-import com.onps.service.modules.user.IUser;
+import com.onps.service.modules.user.IUserCondition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ import java.util.List;
         proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class TopogyResManage implements ITopogyResManage{
     @Resource
-    private IUser userCondition;//用户状态
+    private IUserCondition userCondition;//用户状态
     private Topogy fiberTopogy = TopogyFactory.create(TopogyFactory.FIBER);
     private Topogy wtmTopogy = TopogyFactory.create(TopogyFactory.WDM);
     private Topogy otnTopogy = TopogyFactory.create(TopogyFactory.OTN);

@@ -12,7 +12,8 @@ public interface UserDAO {
     void insertUser(UserPO userPO)throws Exception;
     void deleteUser(UserPO userPO)throws Exception;
     List<UserPO> getUserList();
-    UserPO getUser(String id);
-    User login(Map<String,String> map);
+    User getUserById(String id);
+    User getUserByUserName(String userName);
+    User login(String username);
     void updateUser(UserPO userPO)throws Exception;
 }

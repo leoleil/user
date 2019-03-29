@@ -14,8 +14,6 @@ public class User {
     private String ZQ;//战区
     private String JBZ;//军兵种
     private Date date;//创建时间
-    /* 其它表字段  */
-    private String role;//用户角色
 
     public String getUserId() {
         return userId;
@@ -41,13 +39,6 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public String getDepartment() {
         return department;
