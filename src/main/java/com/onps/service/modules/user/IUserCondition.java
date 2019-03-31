@@ -2,19 +2,14 @@ package com.onps.service.modules.user;
 
 import com.onps.model.User;
 
+import java.util.List;
+
 public interface IUserCondition {
     /**
      * 登录
      * @param user 传入登录的User对象
      */
     void login(User user);
-
-    /**
-     * 登出
-     * @param user 传入登出的User对象
-     * @return 登出成功返回true,否则为false
-     */
-    boolean logout(User user);
 
     /**
      * 获取登录的User对象
@@ -35,5 +30,17 @@ public interface IUserCondition {
      * @return true为真
      */
     boolean havePermission(String permission);
+
+    /**
+     * 获取角色的list
+     * @return
+     */
+    List<String> getRoleList();
+
+    /**
+     * 获取权限的list
+     * @return
+     */
+    List<String> getPermissionList();
 
 }

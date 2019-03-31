@@ -18,6 +18,7 @@
 		<context:component-scan base-package="com.onps"></context:component-scan>
 		<!-- 不配置这个,shiro的授权方法不会自动调用 -->
 	   	<aop:config proxy-target-class="true"></aop:config>
+
 		
 		<!--配置注解driven ,默认会生成处理器映射器和处理器适配器,不需要再另外配置-->
 		<mvc:annotation-driven/>

@@ -8,6 +8,8 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -15,11 +17,12 @@ import java.util.Map;
         proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserConditionCondition implements IUserCondition {
     private User user;
-    private Map<String,String> roles;
-    private Map<String,String> permissions;
+    private Map<String,String> roles = new HashMap<>();
+    private Map<String,String> permissions = new HashMap<>();
 
     @Autowired
     private UserDAO userDAO;
+
 
     /**
      * 登录
@@ -31,25 +34,6 @@ public class UserConditionCondition implements IUserCondition {
         this.user = user;
     }
 
-    /**
-     * 登出
-     *
-     * @param user 传入登出的User对象
-     * @return 登出成功返回true, 否则为false
-     */
-    @Override
-    public boolean logout(User user) {
-        if(user == null || this.user == null){
-            return false;
-        }else {
-            if(user.getUserName().equals(this.user.getUserName())){
-                this.user = null;
-                return true;
-            } else{
-                return false;
-            }
-        }
-    }
 
     /**
      * 获取登录的User对象
@@ -89,5 +73,25 @@ public class UserConditionCondition implements IUserCondition {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 获取角色的list
+     *
+     * @return
+     */
+    @Override
+    public List<String> getRoleList() {
+        return null;
+    }
+
+    /**
+     * 获取权限的list
+     *
+     * @return
+     */
+    @Override
+    public List<String> getPermissionList() {
+        return null;
     }
 }

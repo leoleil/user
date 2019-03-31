@@ -1,4 +1,4 @@
-package com.onps.controller.page;
+package com.onps.controller;
 
 import com.onps.model.User;
 import com.onps.utils.ConstantString;
@@ -8,19 +8,26 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
-@RequestMapping(value = "/user/")
+@RequestMapping(value = "/user")
 public class UserManageController {
-    @RequestMapping(value = "toLogin")
+    private static Logger logger = LoggerFactory.getLogger(UserManageController.class);//日志
+
+    @RequestMapping(value = "/toLogin")
     public String toLogin(){
-        return "login";
+        return "user/login";
     }
-    @RequestMapping(value = "login")
+
+    @RequestMapping(value = "/login")
     @ResponseBody
     public BaseResult<User> login(String userName, String password){
         //返回的数据信息
@@ -38,19 +45,29 @@ public class UserManageController {
             subject.login(token);
             baseResult.setMessage("登录成功");
             baseResult.setStatus(ConstantString.STATUS_SUCCESS);
+            logger.info(userName+"：登录成功",token);
             return baseResult;
         }catch (UnknownAccountException e){
             //登录失败 用户名不存在
             System.err.println("用户名不存在");
             baseResult.setMessage("用户名不存在");
             baseResult.setStatus(ConstantString.STATUS_FAIL);
+            logger.info(userName+"：用户名不存在",token);
             return baseResult;
         }catch (IncorrectCredentialsException e){
             //登录失败 密码错误
             System.err.println("密码错误");
             baseResult.setMessage("密码错误");
             baseResult.setStatus(ConstantString.STATUS_FAIL);
+            logger.info(userName+"：密码错误",token);
             return baseResult;
         }
     }
+
+    @RequestMapping(value = "/logout")
+    void logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(0);//直接整个页面过期
+    }
+
 }

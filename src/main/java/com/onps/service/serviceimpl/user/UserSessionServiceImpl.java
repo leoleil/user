@@ -10,15 +10,13 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @Scope(value = WebApplicationContext.SCOPE_SESSION,
         proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserSessionServiceImpl implements UserSessionService {
     @Autowired
-    private IUserCondition userCondition;
+    private IUserCondition userCondition;//注入用户状态模块
 
     @Autowired
     private UserDAO userDAO;
@@ -34,17 +32,6 @@ public class UserSessionServiceImpl implements UserSessionService {
     }
 
     /**
-     * 用户登出
-     *
-     * @param userName 用户名
-     * @return
-     */
-    @Override
-    public boolean logout(String userName) {
-        return false;
-    }
-
-    /**
      * 用户登录
      *
      * @param userName 用户名
@@ -53,9 +40,7 @@ public class UserSessionServiceImpl implements UserSessionService {
     @Override
     public User loggin(String userName) {
         User user = userDAO.login(userName);
-        if(user != null){
-            userCondition.login(user);
-        }
         return user;
     }
+
 }

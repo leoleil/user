@@ -67,50 +67,57 @@
 	</aop:config>
 
 	<!-- 配置shiro权限管理器 -->
-	<bean id="myShiro" class="com.onps.utils.MyShrio"></bean>
+	<bean id="myShiro" class="com.onps.utils.MyShrio"/>
+		<!--<property name="cachingEnabled" value="true"/>
+		<property name="authenticationCachingEnabled" value="true"/>
+		<property name="authenticationCacheName" value="authenticationCache"/>
+		<property name="authorizationCachingEnabled" value="true"/>
+		<property name="authorizationCacheName" value="authorizationCache"/>
+	</bean>-->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<!-- 我们自定义的realm -->
 		<property name="realm" ref="myShiro"/>
 		<!-- 缓存管理器 -->
 		<property name="cacheManager" ref="cacheManager"/>
 	</bean>
-
+	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		  depends-on="lifecycleBeanPostProcessor">
+		<property name="proxyTargetClass" value="true" />
+	</bean>
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<!--设置Shiro的securityManager-->
+		<property name="securityManager" ref="securityManager"/>
+	</bean>
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<!-- 权限管理器 -->
 		<property name="securityManager" ref="securityManager"/>
-		<!-- 登录地址 -->
+		<!-- 登录地址 当访问需要认证的资源时 如果没有登录（认证） 将自动跳转到此Url -->
 		<property name="loginUrl" value="/user/toLogin.do"/>
-		<!-- 登录后跳转到业务页面 -->
-		<property name="successUrl" value="/home/toHome.do"/>
-		<!-- 错误页面 -->
-		<!--<property name="unauthorizedUrl" value="/error.jsp"/>-->
-		<!-- 权限配置 -->
+		<!-- 登录后跳转到业务页面 通常不设置 默认认证成功后跳转回上一个url -->
+		<!--<property name="successUrl" value="/home/toHome.do"/>-->
+		<!-- 没有权限跳转的页面 -->
+		<property name="unauthorizedUrl" value="/error.html"/>
+		<!-- 权限配置 shiro 过滤器链 -->
 		<property name="filterChainDefinitions">
 			<!--常用拦截器-->
-			<!--anon:无需认证（权限）即可以访问-->
-			<!--authc:必须认证才能访问-->
 			<!--user:如果使用remenberMe的功能可以访问-->
-			<!--perms:资源必须授予资源权限才能访问-->
 			<!--role:资源必须得到角色权限才能访问-->
 			<value>
 				<!-- anon无需权限既可访问请求的，此处是登录页面和登录请求 -->
+				/user/toLogin.do = anon <!--anon:无需认证（权限）即可以访问-->
 				/user/login.do = anon
-				/js/** = anon
-				/css/** = anon
-				/image/** = anon
-				<!-- 需要权限为add的用户才能访问此请求-->
-				/user=perms[user:add]
+				/user/js/** = anon
+				/user/css/** = anon
+				/user/image/** = anon
+				<!--perms:资源必须授予资源权限才能访问-->
+				/admin/toAdmin.do=perms[ok]
 				<!-- 需要管理员角色才能访问此页面 -->
-				/user/add=roles[admin]
+				<!--/user/add=roles[admin]-->
 				<!--拦截非静态资源的所有请求-->
-				<!--/** = authc-->
-
+				/** = authc<!--authc:必须认证才能访问-->
 			</value>
 		</property>
 	</bean>
-
-
-	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
-	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
-
 </beans>
