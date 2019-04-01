@@ -5,6 +5,7 @@ import com.onps.model.po.PermissionPO;
 import com.onps.model.po.RolePO;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -14,4 +15,6 @@ public interface UserManagementDAO {
     void removeUserRole(String userID, String roleID);
     void removeRolePermission(String roleID, String permissionID);
     List<PermissionPO> getPermissionByUsername(String username);
+    List<RolePO> getRoleByUsername(String username);
+    List<PermissionPO> getPermissionByRolename(String rolename);
 }

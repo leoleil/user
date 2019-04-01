@@ -68,12 +68,6 @@
 
 	<!-- 配置shiro权限管理器 -->
 	<bean id="myShiro" class="com.onps.utils.MyShrio"/>
-		<!--<property name="cachingEnabled" value="true"/>
-		<property name="authenticationCachingEnabled" value="true"/>
-		<property name="authenticationCacheName" value="authenticationCache"/>
-		<property name="authorizationCachingEnabled" value="true"/>
-		<property name="authorizationCacheName" value="authorizationCache"/>
-	</bean>-->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<!-- 我们自定义的realm -->
 		<property name="realm" ref="myShiro"/>
@@ -82,14 +76,6 @@
 	</bean>
 	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
-	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
-		  depends-on="lifecycleBeanPostProcessor">
-		<property name="proxyTargetClass" value="true" />
-	</bean>
-	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-		<!--设置Shiro的securityManager-->
-		<property name="securityManager" ref="securityManager"/>
-	</bean>
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<!-- 权限管理器 -->
 		<property name="securityManager" ref="securityManager"/>
@@ -112,7 +98,7 @@
 				/user/css/** = anon
 				/user/image/** = anon
 				<!--perms:资源必须授予资源权限才能访问-->
-				/admin/toAdmin.do=perms[ok]
+				<!--/admin/toAdmin.do=perms[ok]-->
 				<!-- 需要管理员角色才能访问此页面 -->
 				<!--/user/add=roles[admin]-->
 				<!--拦截非静态资源的所有请求-->

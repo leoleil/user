@@ -168,11 +168,6 @@
       <version>1.1.1</version>
     </dependency>
     <!-- 第五部分:Shiro -->
-    <dependency>
-      <groupId>org.apache.shiro</groupId>
-      <artifactId>shiro-all</artifactId>
-      <version>1.2.2</version>
-    </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring -->
     <dependency>
       <groupId>org.apache.shiro</groupId>

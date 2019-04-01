@@ -1,11 +1,16 @@
 import com.onps.dao.UserDAO;
+import com.onps.dao.UserManagementDAO;
 import com.onps.model.User;
+import com.onps.model.po.PermissionPO;
+import com.onps.model.po.RolePO;
 import com.onps.model.po.UserPO;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DaoTest {
@@ -40,6 +45,16 @@ public class DaoTest {
             e.printStackTrace();
         }
 
+    }
+    @Test
+    public void userManagementTest(){
+        String configLocation = "classpath:spring/applicationContext.xml";
+        applicationContext = new ClassPathXmlApplicationContext(configLocation);
+        UserManagementDAO userManagementDAO = (UserManagementDAO) applicationContext.getBean("userManagementDAO");
+        List<RolePO> rolePOList = userManagementDAO.getRoleByUsername("leo");
+        List<PermissionPO> permissionPOList = userManagementDAO.getPermissionByUsername("leo");
+        RolePO rolePO = rolePOList.get(0);
+        PermissionPO permissionPO = permissionPOList.get(0);
     }
 
 }

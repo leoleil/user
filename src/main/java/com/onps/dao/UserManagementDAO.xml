@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.onps.dao.UserManagementDAO">
+    <resultMap id="permissionList" type="com.onps.model.po.PermissionPO">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+    </resultMap>
+    <resultMap id="roleList" type="com.onps.model.po.RolePO">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+    </resultMap>
+
     <insert id="saveUserRole">
         insert into user_role (user_id, role_id)
         values (#{0},#{1})
@@ -17,5 +26,28 @@
         delete from role_permisson
         where role_id = #{0} and permission_id = #{1}
     </delete>
+    <select id="getPermissionByUsername" resultMap="permissionList">
+        select permission.id as id , permission.name as name
+        from my_user, onps_role, permission, role_permission, user_role
+        where my_user.username = #{username} and
+        my_user.id = user_role.user_id and
+        onps_role.id = user_role.role_id and
+        onps_role.id = role_permission.role_id and
+        permission.id = role_permission.permission_id
+    </select>
+    <select id="getRoleByUsername"  resultMap="roleList">
+        select onps_role.id as id , onps_role.name as name
+        from my_user, onps_role,user_role
+        where my_user.username = #{username} and
+        my_user.id = user_role.user_id and
+        onps_role.id = user_role.role_id
+    </select>
+    <select id="getPermissionByRolename" resultMap="permissionList">
+        select permission.id as id , permission.name as name
+        from onps_role, permission, role_permission
+        where onps_role.name = #{rolename} and
+        onps_role.id = role_permission.role_id and
+        permission.id = role_permission.permission_id
+    </select>
 
 </mapper>

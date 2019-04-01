@@ -1,6 +1,6 @@
 package com.onps.controller.page;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -8,14 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomePageController {
 
     @RequestMapping(value = "/toHome")
-    @RequiresPermissions(value = {"test"})
-    String toHome(){
+    @RequiresRoles(value = "ok")
+    public String toHome(){
         return "index";
     }
 
-    @RequestMapping(value = "/admin/toAdmin")
-    @RequiresPermissions(value = {"test"})
-    String toAdmin(){
-        return "admin/index";
-    }
 }

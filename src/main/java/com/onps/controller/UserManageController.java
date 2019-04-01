@@ -65,7 +65,7 @@ public class UserManageController {
     }
 
     @RequestMapping(value = "/logout")
-    void logout(HttpServletRequest request){
+    public void logout(HttpServletRequest request){
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(0);//直接整个页面过期
     }

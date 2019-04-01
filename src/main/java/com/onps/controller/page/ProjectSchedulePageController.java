@@ -7,22 +7,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/project/schedule")
 public class ProjectSchedulePageController {
     @RequestMapping(value = "/home")
-    String toScheduleIndexPage(){
+    public String toScheduleIndexPage(){
         String returnUrl = "schedule/index";
         return returnUrl;
     }
     @RequestMapping(value = "/view")
-    String toScheduleViewPage(){
+    public String toScheduleViewPage(){
         String returnUrl = "schedule/view";
         return returnUrl;
     }
     @RequestMapping(value = "/new")
-    String toScheduleNewPage(){
+    public String toScheduleNewPage(){
         String returnUrl = "schedule/new";
         return returnUrl;
     }
     @RequestMapping(value = "/form")
-    String toScheduleFormPage(){
+    public String toScheduleFormPage(){
         String returnUrl = "schedule/form";
         return returnUrl;
     }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/controller")
 public class controllerTest{
     @RequestMapping("/jump")
-    String junp(){
+    public String junp(){
         System.out.println("in");
         return "index";
     }

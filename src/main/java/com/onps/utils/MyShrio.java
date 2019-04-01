@@ -10,16 +10,19 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class MyShrio extends AuthorizingRealm {
+
+    @Autowired
+    private UserSessionService userSessionService;
+
     @Override
     public String getName() {
         return "myShrio";
     }
 
-    @Autowired
-    private UserSessionService userSessionService;
     /**
      * 执行授权逻辑
      * @param principalCollection
@@ -28,10 +31,25 @@ public class MyShrio extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         System.out.println("进入授权逻辑");
+        User user =(User) principalCollection.getPrimaryPrincipal();
+        if(user == null){
+            return null;
+        }
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        Set<String> permissions = new HashSet<>();
-        permissions.add("test1");
-        info.setStringPermissions(permissions);
+        List<String> roleList =  userSessionService.getRoleListByUsername(user.getUserName());
+        if(roleList != null){
+            for (String role: roleList
+                 ) {
+                info.addRole(role);
+            }
+        }
+        List<String> permissionList = userSessionService.getPermissionListByUsername(user.getUserName());
+        if(permissionList != null){
+            for (String permission: permissionList
+                 ) {
+                info.addStringPermission(permission);
+            }
+        }
         return info;
     }
 
