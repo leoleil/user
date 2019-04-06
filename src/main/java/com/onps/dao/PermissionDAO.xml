@@ -10,7 +10,7 @@
     </select>
     <select id="getPermission" resultMap="permissionList">
         select * from permission
-        where id = #{id}
+        where name = #{permissionName}
     </select>
     <insert id="insertPermission">
         insert into permission (name)

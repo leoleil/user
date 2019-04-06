@@ -27,23 +27,19 @@ public interface AdminManageService {
 
     List<PermissionPO> getPermissionList();
 
-    PermissionPO getPermission(String id);
+    void insertRole(RolePO rolePO) throws Exception;
 
-    void insertRole(RolePO rolePO);
-
-    void deleteRole(RolePO rolePO);
+    void deleteRole(RolePO rolePO) throws Exception;
 
     List<RolePO> getRoleList();
 
-    RolePO getRole(String id);
+    void saveUserRole(String userName, String roleName) throws Exception;
 
-    void saveUserRole(String userID, String roleID);
+    void saveRolePermission(String roleName, String permissionName) throws Exception;
 
-    void saveRolePermission(String roleID, String permissionID);
+    void removeUserRole(String userName, String roleName) throws Exception;
 
-    void removeUserRole(String userID, String roleID);
-
-    void removeRolePermission(String roleID, String permissionID);
+    void removeRolePermission(String roleName, String permissionName) throws Exception;
 
     List<PermissionPO> getPermissionByUsername(String username);
 

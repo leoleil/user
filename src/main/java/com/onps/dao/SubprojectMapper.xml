@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onps.dao.SubprojectMapper">
+  <resultMap id="BaseResultMap" type="com.onps.model.Subproject">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="SUBNAME" jdbcType="OTHER" property="subname" />
+    <result column="STARTTIME" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="SUBMITFILENAME" jdbcType="OTHER" property="submitfilename" />
+    <result column="SUBMITDEPARTMENT" jdbcType="OTHER" property="submitdepartment" />
+    <result column="SUBMITNUMBER" jdbcType="VARCHAR" property="submitnumber" />
+    <result column="SUBMITDATE" jdbcType="TIMESTAMP" property="submitdate" />
+    <result column="APPROVALNAME" jdbcType="OTHER" property="approvalname" />
+    <result column="APPROVALDEPARTMENT" jdbcType="OTHER" property="approvaldepartment" />
+    <result column="APPROVALNUMBER" jdbcType="VARCHAR" property="approvalnumber" />
+    <result column="APPROVALDATE" jdbcType="TIMESTAMP" property="approvaldate" />
+    <result column="SUBMITFILENAME_TA" jdbcType="OTHER" property="submitfilenameTa" />
+    <result column="SUBMITDEPARTMENT_TA" jdbcType="OTHER" property="submitdepartmentTa" />
+    <result column="SUBMITNUMBER_TA" jdbcType="VARCHAR" property="submitnumberTa" />
+    <result column="SUBMITDATE_TA" jdbcType="TIMESTAMP" property="submitdateTa" />
+    <result column="APPROVALNAME_TA" jdbcType="OTHER" property="approvalnameTa" />
+    <result column="APPROVALDEPARTMENT_TA" jdbcType="OTHER" property="approvaldepartmentTa" />
+    <result column="APPROVALNUMBER_TA" jdbcType="VARCHAR" property="approvalnumberTa" />
+    <result column="APPROVALDATE_TA" jdbcType="TIMESTAMP" property="approvaldateTa" />
+    <result column="REPLYDATE" jdbcType="TIMESTAMP" property="replydate" />
+    <result column="APPROVALPROGRESS" jdbcType="OTHER" property="approvalprogress" />
+    <result column="CONSTRUCTIONCONTENT" jdbcType="OTHER" property="constructioncontent" />
+    <result column="PROJECTNUMBER" jdbcType="OTHER" property="projectnumber" />
+    <result column="CONSTRUCTIONPLACE" jdbcType="OTHER" property="constructionplace" />
+    <result column="CONSTRUCTIONCOMPANY" jdbcType="OTHER" property="constructioncompany" />
+    <result column="ENDTIME" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="RELEASEINVESTMENT" jdbcType="DECIMAL" property="releaseinvestment" />
+    <result column="CONSTRUCTIONPHASE" jdbcType="OTHER" property="constructionphase" />
+    <result column="FIRSTDESIGN" jdbcType="OTHER" property="firstdesign" />
+    <result column="BIDDING" jdbcType="OTHER" property="bidding" />
+    <result column="CONSTRUCTIONDESIGN" jdbcType="OTHER" property="constructiondesign" />
+    <result column="STARTTIME_CON" jdbcType="OTHER" property="starttimeCon" />
+    <result column="PROJECTPROGRESS" jdbcType="OTHER" property="projectprogress" />
+    <result column="COMPLETEDINVESTMENT" jdbcType="DECIMAL" property="completedinvestment" />
+    <result column="FORMEDABILITY" jdbcType="OTHER" property="formedability" />
+    <result column="DESIGNEDABILITY" jdbcType="OTHER" property="designedability" />
+    <result column="REMARKS" jdbcType="OTHER" property="remarks" />
+    <result column="TIMESTAMP" jdbcType="TIMESTAMP" property="timestamp" />
+    <result column="PROJECTID" jdbcType="VARCHAR" property="projectid" />
+    <result column="USERID" jdbcType="VARCHAR" property="userid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, SUBNAME, STARTTIME, SUBMITFILENAME, SUBMITDEPARTMENT, SUBMITNUMBER, SUBMITDATE, 
+    APPROVALNAME, APPROVALDEPARTMENT, APPROVALNUMBER, APPROVALDATE, SUBMITFILENAME_TA, 
+    SUBMITDEPARTMENT_TA, SUBMITNUMBER_TA, SUBMITDATE_TA, APPROVALNAME_TA, APPROVALDEPARTMENT_TA, 
+    APPROVALNUMBER_TA, APPROVALDATE_TA, REPLYDATE, APPROVALPROGRESS, CONSTRUCTIONCONTENT, 
+    PROJECTNUMBER, CONSTRUCTIONPLACE, CONSTRUCTIONCOMPANY, ENDTIME, RELEASEINVESTMENT, 
+    CONSTRUCTIONPHASE, FIRSTDESIGN, BIDDING, CONSTRUCTIONDESIGN, STARTTIME_CON, PROJECTPROGRESS, 
+    COMPLETEDINVESTMENT, FORMEDABILITY, DESIGNEDABILITY, REMARKS, TIMESTAMP, PROJECTID, 
+    USERID
+  </sql>
+  <select id="selectByExample" parameterType="com.onps.model.SubprojectExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SUBPROJECT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SUBPROJECT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SUBPROJECT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.onps.model.SubprojectExample">
+    delete from SUBPROJECT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.onps.model.Subproject">
+    insert into SUBPROJECT (ID, SUBNAME, STARTTIME, 
+      SUBMITFILENAME, SUBMITDEPARTMENT, SUBMITNUMBER, 
+      SUBMITDATE, APPROVALNAME, APPROVALDEPARTMENT, 
+      APPROVALNUMBER, APPROVALDATE, SUBMITFILENAME_TA, 
+      SUBMITDEPARTMENT_TA, SUBMITNUMBER_TA, SUBMITDATE_TA, 
+      APPROVALNAME_TA, APPROVALDEPARTMENT_TA, APPROVALNUMBER_TA, 
+      APPROVALDATE_TA, REPLYDATE, APPROVALPROGRESS, 
+      CONSTRUCTIONCONTENT, PROJECTNUMBER, CONSTRUCTIONPLACE, 
+      CONSTRUCTIONCOMPANY, ENDTIME, RELEASEINVESTMENT, 
+      CONSTRUCTIONPHASE, FIRSTDESIGN, BIDDING, 
+      CONSTRUCTIONDESIGN, STARTTIME_CON, PROJECTPROGRESS, 
+      COMPLETEDINVESTMENT, FORMEDABILITY, DESIGNEDABILITY, 
+      REMARKS, TIMESTAMP, PROJECTID, 
+      USERID)
+    values (#{id,jdbcType=VARCHAR}, #{subname,jdbcType=OTHER}, #{starttime,jdbcType=TIMESTAMP}, 
+      #{submitfilename,jdbcType=OTHER}, #{submitdepartment,jdbcType=OTHER}, #{submitnumber,jdbcType=VARCHAR}, 
+      #{submitdate,jdbcType=TIMESTAMP}, #{approvalname,jdbcType=OTHER}, #{approvaldepartment,jdbcType=OTHER}, 
+      #{approvalnumber,jdbcType=VARCHAR}, #{approvaldate,jdbcType=TIMESTAMP}, #{submitfilenameTa,jdbcType=OTHER}, 
+      #{submitdepartmentTa,jdbcType=OTHER}, #{submitnumberTa,jdbcType=VARCHAR}, #{submitdateTa,jdbcType=TIMESTAMP}, 
+      #{approvalnameTa,jdbcType=OTHER}, #{approvaldepartmentTa,jdbcType=OTHER}, #{approvalnumberTa,jdbcType=VARCHAR}, 
+      #{approvaldateTa,jdbcType=TIMESTAMP}, #{replydate,jdbcType=TIMESTAMP}, #{approvalprogress,jdbcType=OTHER}, 
+      #{constructioncontent,jdbcType=OTHER}, #{projectnumber,jdbcType=OTHER}, #{constructionplace,jdbcType=OTHER}, 
+      #{constructioncompany,jdbcType=OTHER}, #{endtime,jdbcType=TIMESTAMP}, #{releaseinvestment,jdbcType=DECIMAL}, 
+      #{constructionphase,jdbcType=OTHER}, #{firstdesign,jdbcType=OTHER}, #{bidding,jdbcType=OTHER}, 
+      #{constructiondesign,jdbcType=OTHER}, #{starttimeCon,jdbcType=OTHER}, #{projectprogress,jdbcType=OTHER}, 
+      #{completedinvestment,jdbcType=DECIMAL}, #{formedability,jdbcType=OTHER}, #{designedability,jdbcType=OTHER}, 
+      #{remarks,jdbcType=OTHER}, #{timestamp,jdbcType=TIMESTAMP}, #{projectid,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.onps.model.Subproject">
+    insert into SUBPROJECT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="subname != null">
+        SUBNAME,
+      </if>
+      <if test="starttime != null">
+        STARTTIME,
+      </if>
+      <if test="submitfilename != null">
+        SUBMITFILENAME,
+      </if>
+      <if test="submitdepartment != null">
+        SUBMITDEPARTMENT,
+      </if>
+      <if test="submitnumber != null">
+        SUBMITNUMBER,
+      </if>
+      <if test="submitdate != null">
+        SUBMITDATE,
+      </if>
+      <if test="approvalname != null">
+        APPROVALNAME,
+      </if>
+      <if test="approvaldepartment != null">
+        APPROVALDEPARTMENT,
+      </if>
+      <if test="approvalnumber != null">
+        APPROVALNUMBER,
+      </if>
+      <if test="approvaldate != null">
+        APPROVALDATE,
+      </if>
+      <if test="submitfilenameTa != null">
+        SUBMITFILENAME_TA,
+      </if>
+      <if test="submitdepartmentTa != null">
+        SUBMITDEPARTMENT_TA,
+      </if>
+      <if test="submitnumberTa != null">
+        SUBMITNUMBER_TA,
+      </if>
+      <if test="submitdateTa != null">
+        SUBMITDATE_TA,
+      </if>
+      <if test="approvalnameTa != null">
+        APPROVALNAME_TA,
+      </if>
+      <if test="approvaldepartmentTa != null">
+        APPROVALDEPARTMENT_TA,
+      </if>
+      <if test="approvalnumberTa != null">
+        APPROVALNUMBER_TA,
+      </if>
+      <if test="approvaldateTa != null">
+        APPROVALDATE_TA,
+      </if>
+      <if test="replydate != null">
+        REPLYDATE,
+      </if>
+      <if test="approvalprogress != null">
+        APPROVALPROGRESS,
+      </if>
+      <if test="constructioncontent != null">
+        CONSTRUCTIONCONTENT,
+      </if>
+      <if test="projectnumber != null">
+        PROJECTNUMBER,
+      </if>
+      <if test="constructionplace != null">
+        CONSTRUCTIONPLACE,
+      </if>
+      <if test="constructioncompany != null">
+        CONSTRUCTIONCOMPANY,
+      </if>
+      <if test="endtime != null">
+        ENDTIME,
+      </if>
+      <if test="releaseinvestment != null">
+        RELEASEINVESTMENT,
+      </if>
+      <if test="constructionphase != null">
+        CONSTRUCTIONPHASE,
+      </if>
+      <if test="firstdesign != null">
+        FIRSTDESIGN,
+      </if>
+      <if test="bidding != null">
+        BIDDING,
+      </if>
+      <if test="constructiondesign != null">
+        CONSTRUCTIONDESIGN,
+      </if>
+      <if test="starttimeCon != null">
+        STARTTIME_CON,
+      </if>
+      <if test="projectprogress != null">
+        PROJECTPROGRESS,
+      </if>
+      <if test="completedinvestment != null">
+        COMPLETEDINVESTMENT,
+      </if>
+      <if test="formedability != null">
+        FORMEDABILITY,
+      </if>
+      <if test="designedability != null">
+        DESIGNEDABILITY,
+      </if>
+      <if test="remarks != null">
+        REMARKS,
+      </if>
+      <if test="timestamp != null">
+        TIMESTAMP,
+      </if>
+      <if test="projectid != null">
+        PROJECTID,
+      </if>
+      <if test="userid != null">
+        USERID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="subname != null">
+        #{subname,jdbcType=OTHER},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitfilename != null">
+        #{submitfilename,jdbcType=OTHER},
+      </if>
+      <if test="submitdepartment != null">
+        #{submitdepartment,jdbcType=OTHER},
+      </if>
+      <if test="submitnumber != null">
+        #{submitnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="submitdate != null">
+        #{submitdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalname != null">
+        #{approvalname,jdbcType=OTHER},
+      </if>
+      <if test="approvaldepartment != null">
+        #{approvaldepartment,jdbcType=OTHER},
+      </if>
+      <if test="approvalnumber != null">
+        #{approvalnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="approvaldate != null">
+        #{approvaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitfilenameTa != null">
+        #{submitfilenameTa,jdbcType=OTHER},
+      </if>
+      <if test="submitdepartmentTa != null">
+        #{submitdepartmentTa,jdbcType=OTHER},
+      </if>
+      <if test="submitnumberTa != null">
+        #{submitnumberTa,jdbcType=VARCHAR},
+      </if>
+      <if test="submitdateTa != null">
+        #{submitdateTa,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalnameTa != null">
+        #{approvalnameTa,jdbcType=OTHER},
+      </if>
+      <if test="approvaldepartmentTa != null">
+        #{approvaldepartmentTa,jdbcType=OTHER},
+      </if>
+      <if test="approvalnumberTa != null">
+        #{approvalnumberTa,jdbcType=VARCHAR},
+      </if>
+      <if test="approvaldateTa != null">
+        #{approvaldateTa,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replydate != null">
+        #{replydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalprogress != null">
+        #{approvalprogress,jdbcType=OTHER},
+      </if>
+      <if test="constructioncontent != null">
+        #{constructioncontent,jdbcType=OTHER},
+      </if>
+      <if test="projectnumber != null">
+        #{projectnumber,jdbcType=OTHER},
+      </if>
+      <if test="constructionplace != null">
+        #{constructionplace,jdbcType=OTHER},
+      </if>
+      <if test="constructioncompany != null">
+        #{constructioncompany,jdbcType=OTHER},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releaseinvestment != null">
+        #{releaseinvestment,jdbcType=DECIMAL},
+      </if>
+      <if test="constructionphase != null">
+        #{constructionphase,jdbcType=OTHER},
+      </if>
+      <if test="firstdesign != null">
+        #{firstdesign,jdbcType=OTHER},
+      </if>
+      <if test="bidding != null">
+        #{bidding,jdbcType=OTHER},
+      </if>
+      <if test="constructiondesign != null">
+        #{constructiondesign,jdbcType=OTHER},
+      </if>
+      <if test="starttimeCon != null">
+        #{starttimeCon,jdbcType=OTHER},
+      </if>
+      <if test="projectprogress != null">
+        #{projectprogress,jdbcType=OTHER},
+      </if>
+      <if test="completedinvestment != null">
+        #{completedinvestment,jdbcType=DECIMAL},
+      </if>
+      <if test="formedability != null">
+        #{formedability,jdbcType=OTHER},
+      </if>
+      <if test="designedability != null">
+        #{designedability,jdbcType=OTHER},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=OTHER},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projectid != null">
+        #{projectid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.onps.model.SubprojectExample" resultType="java.lang.Integer">
+    select count(*) from SUBPROJECT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SUBPROJECT
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subname != null">
+        SUBNAME = #{record.subname,jdbcType=OTHER},
+      </if>
+      <if test="record.starttime != null">
+        STARTTIME = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.submitfilename != null">
+        SUBMITFILENAME = #{record.submitfilename,jdbcType=OTHER},
+      </if>
+      <if test="record.submitdepartment != null">
+        SUBMITDEPARTMENT = #{record.submitdepartment,jdbcType=OTHER},
+      </if>
+      <if test="record.submitnumber != null">
+        SUBMITNUMBER = #{record.submitnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.submitdate != null">
+        SUBMITDATE = #{record.submitdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.approvalname != null">
+        APPROVALNAME = #{record.approvalname,jdbcType=OTHER},
+      </if>
+      <if test="record.approvaldepartment != null">
+        APPROVALDEPARTMENT = #{record.approvaldepartment,jdbcType=OTHER},
+      </if>
+      <if test="record.approvalnumber != null">
+        APPROVALNUMBER = #{record.approvalnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvaldate != null">
+        APPROVALDATE = #{record.approvaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.submitfilenameTa != null">
+        SUBMITFILENAME_TA = #{record.submitfilenameTa,jdbcType=OTHER},
+      </if>
+      <if test="record.submitdepartmentTa != null">
+        SUBMITDEPARTMENT_TA = #{record.submitdepartmentTa,jdbcType=OTHER},
+      </if>
+      <if test="record.submitnumberTa != null">
+        SUBMITNUMBER_TA = #{record.submitnumberTa,jdbcType=VARCHAR},
+      </if>
+      <if test="record.submitdateTa != null">
+        SUBMITDATE_TA = #{record.submitdateTa,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.approvalnameTa != null">
+        APPROVALNAME_TA = #{record.approvalnameTa,jdbcType=OTHER},
+      </if>
+      <if test="record.approvaldepartmentTa != null">
+        APPROVALDEPARTMENT_TA = #{record.approvaldepartmentTa,jdbcType=OTHER},
+      </if>
+      <if test="record.approvalnumberTa != null">
+        APPROVALNUMBER_TA = #{record.approvalnumberTa,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approvaldateTa != null">
+        APPROVALDATE_TA = #{record.approvaldateTa,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.replydate != null">
+        REPLYDATE = #{record.replydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.approvalprogress != null">
+        APPROVALPROGRESS = #{record.approvalprogress,jdbcType=OTHER},
+      </if>
+      <if test="record.constructioncontent != null">
+        CONSTRUCTIONCONTENT = #{record.constructioncontent,jdbcType=OTHER},
+      </if>
+      <if test="record.projectnumber != null">
+        PROJECTNUMBER = #{record.projectnumber,jdbcType=OTHER},
+      </if>
+      <if test="record.constructionplace != null">
+        CONSTRUCTIONPLACE = #{record.constructionplace,jdbcType=OTHER},
+      </if>
+      <if test="record.constructioncompany != null">
+        CONSTRUCTIONCOMPANY = #{record.constructioncompany,jdbcType=OTHER},
+      </if>
+      <if test="record.endtime != null">
+        ENDTIME = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.releaseinvestment != null">
+        RELEASEINVESTMENT = #{record.releaseinvestment,jdbcType=DECIMAL},
+      </if>
+      <if test="record.constructionphase != null">
+        CONSTRUCTIONPHASE = #{record.constructionphase,jdbcType=OTHER},
+      </if>
+      <if test="record.firstdesign != null">
+        FIRSTDESIGN = #{record.firstdesign,jdbcType=OTHER},
+      </if>
+      <if test="record.bidding != null">
+        BIDDING = #{record.bidding,jdbcType=OTHER},
+      </if>
+      <if test="record.constructiondesign != null">
+        CONSTRUCTIONDESIGN = #{record.constructiondesign,jdbcType=OTHER},
+      </if>
+      <if test="record.starttimeCon != null">
+        STARTTIME_CON = #{record.starttimeCon,jdbcType=OTHER},
+      </if>
+      <if test="record.projectprogress != null">
+        PROJECTPROGRESS = #{record.projectprogress,jdbcType=OTHER},
+      </if>
+      <if test="record.completedinvestment != null">
+        COMPLETEDINVESTMENT = #{record.completedinvestment,jdbcType=DECIMAL},
+      </if>
+      <if test="record.formedability != null">
+        FORMEDABILITY = #{record.formedability,jdbcType=OTHER},
+      </if>
+      <if test="record.designedability != null">
+        DESIGNEDABILITY = #{record.designedability,jdbcType=OTHER},
+      </if>
+      <if test="record.remarks != null">
+        REMARKS = #{record.remarks,jdbcType=OTHER},
+      </if>
+      <if test="record.timestamp != null">
+        TIMESTAMP = #{record.timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.projectid != null">
+        PROJECTID = #{record.projectid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null">
+        USERID = #{record.userid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SUBPROJECT
+    set ID = #{record.id,jdbcType=VARCHAR},
+      SUBNAME = #{record.subname,jdbcType=OTHER},
+      STARTTIME = #{record.starttime,jdbcType=TIMESTAMP},
+      SUBMITFILENAME = #{record.submitfilename,jdbcType=OTHER},
+      SUBMITDEPARTMENT = #{record.submitdepartment,jdbcType=OTHER},
+      SUBMITNUMBER = #{record.submitnumber,jdbcType=VARCHAR},
+      SUBMITDATE = #{record.submitdate,jdbcType=TIMESTAMP},
+      APPROVALNAME = #{record.approvalname,jdbcType=OTHER},
+      APPROVALDEPARTMENT = #{record.approvaldepartment,jdbcType=OTHER},
+      APPROVALNUMBER = #{record.approvalnumber,jdbcType=VARCHAR},
+      APPROVALDATE = #{record.approvaldate,jdbcType=TIMESTAMP},
+      SUBMITFILENAME_TA = #{record.submitfilenameTa,jdbcType=OTHER},
+      SUBMITDEPARTMENT_TA = #{record.submitdepartmentTa,jdbcType=OTHER},
+      SUBMITNUMBER_TA = #{record.submitnumberTa,jdbcType=VARCHAR},
+      SUBMITDATE_TA = #{record.submitdateTa,jdbcType=TIMESTAMP},
+      APPROVALNAME_TA = #{record.approvalnameTa,jdbcType=OTHER},
+      APPROVALDEPARTMENT_TA = #{record.approvaldepartmentTa,jdbcType=OTHER},
+      APPROVALNUMBER_TA = #{record.approvalnumberTa,jdbcType=VARCHAR},
+      APPROVALDATE_TA = #{record.approvaldateTa,jdbcType=TIMESTAMP},
+      REPLYDATE = #{record.replydate,jdbcType=TIMESTAMP},
+      APPROVALPROGRESS = #{record.approvalprogress,jdbcType=OTHER},
+      CONSTRUCTIONCONTENT = #{record.constructioncontent,jdbcType=OTHER},
+      PROJECTNUMBER = #{record.projectnumber,jdbcType=OTHER},
+      CONSTRUCTIONPLACE = #{record.constructionplace,jdbcType=OTHER},
+      CONSTRUCTIONCOMPANY = #{record.constructioncompany,jdbcType=OTHER},
+      ENDTIME = #{record.endtime,jdbcType=TIMESTAMP},
+      RELEASEINVESTMENT = #{record.releaseinvestment,jdbcType=DECIMAL},
+      CONSTRUCTIONPHASE = #{record.constructionphase,jdbcType=OTHER},
+      FIRSTDESIGN = #{record.firstdesign,jdbcType=OTHER},
+      BIDDING = #{record.bidding,jdbcType=OTHER},
+      CONSTRUCTIONDESIGN = #{record.constructiondesign,jdbcType=OTHER},
+      STARTTIME_CON = #{record.starttimeCon,jdbcType=OTHER},
+      PROJECTPROGRESS = #{record.projectprogress,jdbcType=OTHER},
+      COMPLETEDINVESTMENT = #{record.completedinvestment,jdbcType=DECIMAL},
+      FORMEDABILITY = #{record.formedability,jdbcType=OTHER},
+      DESIGNEDABILITY = #{record.designedability,jdbcType=OTHER},
+      REMARKS = #{record.remarks,jdbcType=OTHER},
+      TIMESTAMP = #{record.timestamp,jdbcType=TIMESTAMP},
+      PROJECTID = #{record.projectid,jdbcType=VARCHAR},
+      USERID = #{record.userid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onps.model.Subproject">
+    update SUBPROJECT
+    <set>
+      <if test="subname != null">
+        SUBNAME = #{subname,jdbcType=OTHER},
+      </if>
+      <if test="starttime != null">
+        STARTTIME = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitfilename != null">
+        SUBMITFILENAME = #{submitfilename,jdbcType=OTHER},
+      </if>
+      <if test="submitdepartment != null">
+        SUBMITDEPARTMENT = #{submitdepartment,jdbcType=OTHER},
+      </if>
+      <if test="submitnumber != null">
+        SUBMITNUMBER = #{submitnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="submitdate != null">
+        SUBMITDATE = #{submitdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalname != null">
+        APPROVALNAME = #{approvalname,jdbcType=OTHER},
+      </if>
+      <if test="approvaldepartment != null">
+        APPROVALDEPARTMENT = #{approvaldepartment,jdbcType=OTHER},
+      </if>
+      <if test="approvalnumber != null">
+        APPROVALNUMBER = #{approvalnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="approvaldate != null">
+        APPROVALDATE = #{approvaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitfilenameTa != null">
+        SUBMITFILENAME_TA = #{submitfilenameTa,jdbcType=OTHER},
+      </if>
+      <if test="submitdepartmentTa != null">
+        SUBMITDEPARTMENT_TA = #{submitdepartmentTa,jdbcType=OTHER},
+      </if>
+      <if test="submitnumberTa != null">
+        SUBMITNUMBER_TA = #{submitnumberTa,jdbcType=VARCHAR},
+      </if>
+      <if test="submitdateTa != null">
+        SUBMITDATE_TA = #{submitdateTa,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalnameTa != null">
+        APPROVALNAME_TA = #{approvalnameTa,jdbcType=OTHER},
+      </if>
+      <if test="approvaldepartmentTa != null">
+        APPROVALDEPARTMENT_TA = #{approvaldepartmentTa,jdbcType=OTHER},
+      </if>
+      <if test="approvalnumberTa != null">
+        APPROVALNUMBER_TA = #{approvalnumberTa,jdbcType=VARCHAR},
+      </if>
+      <if test="approvaldateTa != null">
+        APPROVALDATE_TA = #{approvaldateTa,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replydate != null">
+        REPLYDATE = #{replydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="approvalprogress != null">
+        APPROVALPROGRESS = #{approvalprogress,jdbcType=OTHER},
+      </if>
+      <if test="constructioncontent != null">
+        CONSTRUCTIONCONTENT = #{constructioncontent,jdbcType=OTHER},
+      </if>
+      <if test="projectnumber != null">
+        PROJECTNUMBER = #{projectnumber,jdbcType=OTHER},
+      </if>
+      <if test="constructionplace != null">
+        CONSTRUCTIONPLACE = #{constructionplace,jdbcType=OTHER},
+      </if>
+      <if test="constructioncompany != null">
+        CONSTRUCTIONCOMPANY = #{constructioncompany,jdbcType=OTHER},
+      </if>
+      <if test="endtime != null">
+        ENDTIME = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="releaseinvestment != null">
+        RELEASEINVESTMENT = #{releaseinvestment,jdbcType=DECIMAL},
+      </if>
+      <if test="constructionphase != null">
+        CONSTRUCTIONPHASE = #{constructionphase,jdbcType=OTHER},
+      </if>
+      <if test="firstdesign != null">
+        FIRSTDESIGN = #{firstdesign,jdbcType=OTHER},
+      </if>
+      <if test="bidding != null">
+        BIDDING = #{bidding,jdbcType=OTHER},
+      </if>
+      <if test="constructiondesign != null">
+        CONSTRUCTIONDESIGN = #{constructiondesign,jdbcType=OTHER},
+      </if>
+      <if test="starttimeCon != null">
+        STARTTIME_CON = #{starttimeCon,jdbcType=OTHER},
+      </if>
+      <if test="projectprogress != null">
+        PROJECTPROGRESS = #{projectprogress,jdbcType=OTHER},
+      </if>
+      <if test="completedinvestment != null">
+        COMPLETEDINVESTMENT = #{completedinvestment,jdbcType=DECIMAL},
+      </if>
+      <if test="formedability != null">
+        FORMEDABILITY = #{formedability,jdbcType=OTHER},
+      </if>
+      <if test="designedability != null">
+        DESIGNEDABILITY = #{designedability,jdbcType=OTHER},
+      </if>
+      <if test="remarks != null">
+        REMARKS = #{remarks,jdbcType=OTHER},
+      </if>
+      <if test="timestamp != null">
+        TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projectid != null">
+        PROJECTID = #{projectid,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null">
+        USERID = #{userid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onps.model.Subproject">
+    update SUBPROJECT
+    set SUBNAME = #{subname,jdbcType=OTHER},
+      STARTTIME = #{starttime,jdbcType=TIMESTAMP},
+      SUBMITFILENAME = #{submitfilename,jdbcType=OTHER},
+      SUBMITDEPARTMENT = #{submitdepartment,jdbcType=OTHER},
+      SUBMITNUMBER = #{submitnumber,jdbcType=VARCHAR},
+      SUBMITDATE = #{submitdate,jdbcType=TIMESTAMP},
+      APPROVALNAME = #{approvalname,jdbcType=OTHER},
+      APPROVALDEPARTMENT = #{approvaldepartment,jdbcType=OTHER},
+      APPROVALNUMBER = #{approvalnumber,jdbcType=VARCHAR},
+      APPROVALDATE = #{approvaldate,jdbcType=TIMESTAMP},
+      SUBMITFILENAME_TA = #{submitfilenameTa,jdbcType=OTHER},
+      SUBMITDEPARTMENT_TA = #{submitdepartmentTa,jdbcType=OTHER},
+      SUBMITNUMBER_TA = #{submitnumberTa,jdbcType=VARCHAR},
+      SUBMITDATE_TA = #{submitdateTa,jdbcType=TIMESTAMP},
+      APPROVALNAME_TA = #{approvalnameTa,jdbcType=OTHER},
+      APPROVALDEPARTMENT_TA = #{approvaldepartmentTa,jdbcType=OTHER},
+      APPROVALNUMBER_TA = #{approvalnumberTa,jdbcType=VARCHAR},
+      APPROVALDATE_TA = #{approvaldateTa,jdbcType=TIMESTAMP},
+      REPLYDATE = #{replydate,jdbcType=TIMESTAMP},
+      APPROVALPROGRESS = #{approvalprogress,jdbcType=OTHER},
+      CONSTRUCTIONCONTENT = #{constructioncontent,jdbcType=OTHER},
+      PROJECTNUMBER = #{projectnumber,jdbcType=OTHER},
+      CONSTRUCTIONPLACE = #{constructionplace,jdbcType=OTHER},
+      CONSTRUCTIONCOMPANY = #{constructioncompany,jdbcType=OTHER},
+      ENDTIME = #{endtime,jdbcType=TIMESTAMP},
+      RELEASEINVESTMENT = #{releaseinvestment,jdbcType=DECIMAL},
+      CONSTRUCTIONPHASE = #{constructionphase,jdbcType=OTHER},
+      FIRSTDESIGN = #{firstdesign,jdbcType=OTHER},
+      BIDDING = #{bidding,jdbcType=OTHER},
+      CONSTRUCTIONDESIGN = #{constructiondesign,jdbcType=OTHER},
+      STARTTIME_CON = #{starttimeCon,jdbcType=OTHER},
+      PROJECTPROGRESS = #{projectprogress,jdbcType=OTHER},
+      COMPLETEDINVESTMENT = #{completedinvestment,jdbcType=DECIMAL},
+      FORMEDABILITY = #{formedability,jdbcType=OTHER},
+      DESIGNEDABILITY = #{designedability,jdbcType=OTHER},
+      REMARKS = #{remarks,jdbcType=OTHER},
+      TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
+      PROJECTID = #{projectid,jdbcType=VARCHAR},
+      USERID = #{userid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

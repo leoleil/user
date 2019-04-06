@@ -29,8 +29,8 @@ public interface PermissionDAO {
 
     /**
      * 通过 UUID 获取权限
-     * @param id 权限id
+     * @param  permissionName 权限名称
      * @return 权限对象
      */
-    PermissionPO getPermission(String id);
+    PermissionPO getPermission(String permissionName);
 }

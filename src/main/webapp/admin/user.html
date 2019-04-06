@@ -13,25 +13,40 @@
 <div data-options="region:'north',border:false" style="height:100px;padding:10px">
     <h2>光网络规划系统控制面板</h2>
 </div>
-<div data-options="region:'west',split:true,title:'功能面板'" style="width:120px;padding:10px;">
-    <a href="#" class="easyui-linkbutton c7">用户管理</a>
-    <p></p>
-    <a href="#" class="easyui-linkbutton">角色管理</a>
-    <p></p>
-    <a href="#" class="easyui-linkbutton">权限管理</a>
-    <p></p>
+<div id="user_message" data-options="region:'west',split:true,title:'用户信息'" style="width:120px;padding:10px;">
+
 </div>
-<div data-options="region:'east',split:true,title:'说明面板'" style="width:100px;padding:10px;">east region</div>
+<div id="user_list" data-options="region:'east',split:true,title:'用户列表'" id="user_list" style="width:100px;padding:10px;">
+
+</div>
 <div data-options="region:'south',border:false" style="height:100px;padding:10px;">
     <p>单位：<a href="https://www.bupt.edu.cn/">北京邮电大学</a></p>
     <p><a href="https://ipoc.bupt.edu.cn/index.do">北京邮电大学信息光子学与光通信研究院</a>研制</p>
 
 </div>
 <div data-options="region:'center',title:'用户管理'">
-    <form>
-        用户名：<input type="text"/>
-        密码：<input type="text"/>
-    </form>
+    <div>
+        用户名：<input type="text" id="username"/>
+        <a id="user_delete" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除用户</a>
+    </div>
+    <div>
+
+        密码：<input type="text" id="password"/>
+        战区：<input type="text" id="ZQ"/>
+        军兵种：<input type="text" />
+        <a id="user_submit" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加用户</a>
+
+    </div>
+    <div>
+        角色名：<input type="text" id="roleName"/>
+        <a id="role_submit" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加角色</a>
+        <a id="role_delete" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除角色</a>
+    </div>
+    <div>
+        权限名：<input type="text" id="permissionName">
+        <a id="permission_submit" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加权限</a>
+        <a id="permission_delete" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除权限</a>
+    </div>
 </div>
 </body>
 </html>

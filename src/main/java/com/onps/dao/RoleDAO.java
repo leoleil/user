@@ -9,5 +9,5 @@ public interface RoleDAO {
     void insertRole(RolePO rolePO);
     void deleteRole(RolePO rolePO);
     List<RolePO> getRoleList();
-    RolePO getRole(String id);
+    RolePO getRole(String roleName);
 }

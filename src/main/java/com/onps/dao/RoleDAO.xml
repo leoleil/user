@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.onps.dao.RoleDAO">
-    <resultMap id="roleList" type="com.onps.model.po.PermissionPO">
+    <resultMap id="roleList" type="com.onps.model.po.RolePO">
         <result column="id" property="id"/>
         <result column="name" property="name"/>
     </resultMap>
@@ -10,7 +10,7 @@
     </select>
     <select id="getRole" resultMap="roleList">
         select * from ONPS_ROLE
-        where id = #{id}
+        where name = #{roleName}
     </select>
     <insert id="insertPermission">
         insert into ONPS_ROLE (name)

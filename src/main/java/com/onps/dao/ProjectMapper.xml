@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onps.dao.ProjectMapper">
+  <resultMap id="BaseResultMap" type="com.onps.model.Project">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="SUBMITCOMPANY" jdbcType="OTHER" property="submitcompany" />
+    <result column="PROJECTNAME" jdbcType="OTHER" property="projectname" />
+    <result column="DOCUMENTNAME" jdbcType="OTHER" property="documentname" />
+    <result column="DOCUMENTNUMBER" jdbcType="OTHER" property="documentnumber" />
+    <result column="DOCUMENTDATE" jdbcType="TIMESTAMP" property="documentdate" />
+    <result column="INVESTMENTAMOUNT" jdbcType="DECIMAL" property="investmentamount" />
+    <result column="APPROVALAUTHORITY" jdbcType="OTHER" property="approvalauthority" />
+    <result column="CONSTRUCTIONPERIOD" jdbcType="OTHER" property="constructionperiod" />
+    <result column="ISIMPORTENT" jdbcType="DECIMAL" property="isimportent" />
+    <result column="LEVEL1" jdbcType="OTHER" property="level1" />
+    <result column="LEVEL2" jdbcType="OTHER" property="level2" />
+    <result column="LEVEL3" jdbcType="OTHER" property="level3" />
+    <result column="LEVEL4" jdbcType="OTHER" property="level4" />
+    <result column="LEVEL5" jdbcType="OTHER" property="level5" />
+    <result column="TIMESTAMP" jdbcType="TIMESTAMP" property="timestamp" />
+    <result column="USERID" jdbcType="VARCHAR" property="userid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, SUBMITCOMPANY, PROJECTNAME, DOCUMENTNAME, DOCUMENTNUMBER, DOCUMENTDATE, INVESTMENTAMOUNT, 
+    APPROVALAUTHORITY, CONSTRUCTIONPERIOD, ISIMPORTENT, LEVEL1, LEVEL2, LEVEL3, LEVEL4, 
+    LEVEL5, TIMESTAMP, USERID
+  </sql>
+  <select id="selectByExample" parameterType="com.onps.model.ProjectExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from PROJECT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PROJECT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from PROJECT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.onps.model.ProjectExample">
+    delete from PROJECT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.onps.model.Project">
+    insert into PROJECT (ID, SUBMITCOMPANY, PROJECTNAME, 
+      DOCUMENTNAME, DOCUMENTNUMBER, DOCUMENTDATE, 
+      INVESTMENTAMOUNT, APPROVALAUTHORITY, CONSTRUCTIONPERIOD, 
+      ISIMPORTENT, LEVEL1, LEVEL2, 
+      LEVEL3, LEVEL4, LEVEL5, TIMESTAMP, 
+      USERID)
+    values (#{id,jdbcType=VARCHAR}, #{submitcompany,jdbcType=OTHER}, #{projectname,jdbcType=OTHER}, 
+      #{documentname,jdbcType=OTHER}, #{documentnumber,jdbcType=OTHER}, #{documentdate,jdbcType=TIMESTAMP}, 
+      #{investmentamount,jdbcType=DECIMAL}, #{approvalauthority,jdbcType=OTHER}, #{constructionperiod,jdbcType=OTHER}, 
+      #{isimportent,jdbcType=DECIMAL}, #{level1,jdbcType=OTHER}, #{level2,jdbcType=OTHER}, 
+      #{level3,jdbcType=OTHER}, #{level4,jdbcType=OTHER}, #{level5,jdbcType=OTHER}, #{timestamp,jdbcType=TIMESTAMP}, 
+      #{userid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.onps.model.Project">
+    insert into PROJECT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="submitcompany != null">
+        SUBMITCOMPANY,
+      </if>
+      <if test="projectname != null">
+        PROJECTNAME,
+      </if>
+      <if test="documentname != null">
+        DOCUMENTNAME,
+      </if>
+      <if test="documentnumber != null">
+        DOCUMENTNUMBER,
+      </if>
+      <if test="documentdate != null">
+        DOCUMENTDATE,
+      </if>
+      <if test="investmentamount != null">
+        INVESTMENTAMOUNT,
+      </if>
+      <if test="approvalauthority != null">
+        APPROVALAUTHORITY,
+      </if>
+      <if test="constructionperiod != null">
+        CONSTRUCTIONPERIOD,
+      </if>
+      <if test="isimportent != null">
+        ISIMPORTENT,
+      </if>
+      <if test="level1 != null">
+        LEVEL1,
+      </if>
+      <if test="level2 != null">
+        LEVEL2,
+      </if>
+      <if test="level3 != null">
+        LEVEL3,
+      </if>
+      <if test="level4 != null">
+        LEVEL4,
+      </if>
+      <if test="level5 != null">
+        LEVEL5,
+      </if>
+      <if test="timestamp != null">
+        TIMESTAMP,
+      </if>
+      <if test="userid != null">
+        USERID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="submitcompany != null">
+        #{submitcompany,jdbcType=OTHER},
+      </if>
+      <if test="projectname != null">
+        #{projectname,jdbcType=OTHER},
+      </if>
+      <if test="documentname != null">
+        #{documentname,jdbcType=OTHER},
+      </if>
+      <if test="documentnumber != null">
+        #{documentnumber,jdbcType=OTHER},
+      </if>
+      <if test="documentdate != null">
+        #{documentdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="investmentamount != null">
+        #{investmentamount,jdbcType=DECIMAL},
+      </if>
+      <if test="approvalauthority != null">
+        #{approvalauthority,jdbcType=OTHER},
+      </if>
+      <if test="constructionperiod != null">
+        #{constructionperiod,jdbcType=OTHER},
+      </if>
+      <if test="isimportent != null">
+        #{isimportent,jdbcType=DECIMAL},
+      </if>
+      <if test="level1 != null">
+        #{level1,jdbcType=OTHER},
+      </if>
+      <if test="level2 != null">
+        #{level2,jdbcType=OTHER},
+      </if>
+      <if test="level3 != null">
+        #{level3,jdbcType=OTHER},
+      </if>
+      <if test="level4 != null">
+        #{level4,jdbcType=OTHER},
+      </if>
+      <if test="level5 != null">
+        #{level5,jdbcType=OTHER},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.onps.model.ProjectExample" resultType="java.lang.Integer">
+    select count(*) from PROJECT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update PROJECT
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.submitcompany != null">
+        SUBMITCOMPANY = #{record.submitcompany,jdbcType=OTHER},
+      </if>
+      <if test="record.projectname != null">
+        PROJECTNAME = #{record.projectname,jdbcType=OTHER},
+      </if>
+      <if test="record.documentname != null">
+        DOCUMENTNAME = #{record.documentname,jdbcType=OTHER},
+      </if>
+      <if test="record.documentnumber != null">
+        DOCUMENTNUMBER = #{record.documentnumber,jdbcType=OTHER},
+      </if>
+      <if test="record.documentdate != null">
+        DOCUMENTDATE = #{record.documentdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.investmentamount != null">
+        INVESTMENTAMOUNT = #{record.investmentamount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.approvalauthority != null">
+        APPROVALAUTHORITY = #{record.approvalauthority,jdbcType=OTHER},
+      </if>
+      <if test="record.constructionperiod != null">
+        CONSTRUCTIONPERIOD = #{record.constructionperiod,jdbcType=OTHER},
+      </if>
+      <if test="record.isimportent != null">
+        ISIMPORTENT = #{record.isimportent,jdbcType=DECIMAL},
+      </if>
+      <if test="record.level1 != null">
+        LEVEL1 = #{record.level1,jdbcType=OTHER},
+      </if>
+      <if test="record.level2 != null">
+        LEVEL2 = #{record.level2,jdbcType=OTHER},
+      </if>
+      <if test="record.level3 != null">
+        LEVEL3 = #{record.level3,jdbcType=OTHER},
+      </if>
+      <if test="record.level4 != null">
+        LEVEL4 = #{record.level4,jdbcType=OTHER},
+      </if>
+      <if test="record.level5 != null">
+        LEVEL5 = #{record.level5,jdbcType=OTHER},
+      </if>
+      <if test="record.timestamp != null">
+        TIMESTAMP = #{record.timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userid != null">
+        USERID = #{record.userid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update PROJECT
+    set ID = #{record.id,jdbcType=VARCHAR},
+      SUBMITCOMPANY = #{record.submitcompany,jdbcType=OTHER},
+      PROJECTNAME = #{record.projectname,jdbcType=OTHER},
+      DOCUMENTNAME = #{record.documentname,jdbcType=OTHER},
+      DOCUMENTNUMBER = #{record.documentnumber,jdbcType=OTHER},
+      DOCUMENTDATE = #{record.documentdate,jdbcType=TIMESTAMP},
+      INVESTMENTAMOUNT = #{record.investmentamount,jdbcType=DECIMAL},
+      APPROVALAUTHORITY = #{record.approvalauthority,jdbcType=OTHER},
+      CONSTRUCTIONPERIOD = #{record.constructionperiod,jdbcType=OTHER},
+      ISIMPORTENT = #{record.isimportent,jdbcType=DECIMAL},
+      LEVEL1 = #{record.level1,jdbcType=OTHER},
+      LEVEL2 = #{record.level2,jdbcType=OTHER},
+      LEVEL3 = #{record.level3,jdbcType=OTHER},
+      LEVEL4 = #{record.level4,jdbcType=OTHER},
+      LEVEL5 = #{record.level5,jdbcType=OTHER},
+      TIMESTAMP = #{record.timestamp,jdbcType=TIMESTAMP},
+      USERID = #{record.userid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onps.model.Project">
+    update PROJECT
+    <set>
+      <if test="submitcompany != null">
+        SUBMITCOMPANY = #{submitcompany,jdbcType=OTHER},
+      </if>
+      <if test="projectname != null">
+        PROJECTNAME = #{projectname,jdbcType=OTHER},
+      </if>
+      <if test="documentname != null">
+        DOCUMENTNAME = #{documentname,jdbcType=OTHER},
+      </if>
+      <if test="documentnumber != null">
+        DOCUMENTNUMBER = #{documentnumber,jdbcType=OTHER},
+      </if>
+      <if test="documentdate != null">
+        DOCUMENTDATE = #{documentdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="investmentamount != null">
+        INVESTMENTAMOUNT = #{investmentamount,jdbcType=DECIMAL},
+      </if>
+      <if test="approvalauthority != null">
+        APPROVALAUTHORITY = #{approvalauthority,jdbcType=OTHER},
+      </if>
+      <if test="constructionperiod != null">
+        CONSTRUCTIONPERIOD = #{constructionperiod,jdbcType=OTHER},
+      </if>
+      <if test="isimportent != null">
+        ISIMPORTENT = #{isimportent,jdbcType=DECIMAL},
+      </if>
+      <if test="level1 != null">
+        LEVEL1 = #{level1,jdbcType=OTHER},
+      </if>
+      <if test="level2 != null">
+        LEVEL2 = #{level2,jdbcType=OTHER},
+      </if>
+      <if test="level3 != null">
+        LEVEL3 = #{level3,jdbcType=OTHER},
+      </if>
+      <if test="level4 != null">
+        LEVEL4 = #{level4,jdbcType=OTHER},
+      </if>
+      <if test="level5 != null">
+        LEVEL5 = #{level5,jdbcType=OTHER},
+      </if>
+      <if test="timestamp != null">
+        TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null">
+        USERID = #{userid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onps.model.Project">
+    update PROJECT
+    set SUBMITCOMPANY = #{submitcompany,jdbcType=OTHER},
+      PROJECTNAME = #{projectname,jdbcType=OTHER},
+      DOCUMENTNAME = #{documentname,jdbcType=OTHER},
+      DOCUMENTNUMBER = #{documentnumber,jdbcType=OTHER},
+      DOCUMENTDATE = #{documentdate,jdbcType=TIMESTAMP},
+      INVESTMENTAMOUNT = #{investmentamount,jdbcType=DECIMAL},
+      APPROVALAUTHORITY = #{approvalauthority,jdbcType=OTHER},
+      CONSTRUCTIONPERIOD = #{constructionperiod,jdbcType=OTHER},
+      ISIMPORTENT = #{isimportent,jdbcType=DECIMAL},
+      LEVEL1 = #{level1,jdbcType=OTHER},
+      LEVEL2 = #{level2,jdbcType=OTHER},
+      LEVEL3 = #{level3,jdbcType=OTHER},
+      LEVEL4 = #{level4,jdbcType=OTHER},
+      LEVEL5 = #{level5,jdbcType=OTHER},
+      TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
+      USERID = #{userid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
