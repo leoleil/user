@@ -5,6 +5,7 @@ import com.onps.model.po.PermissionPO;
 import com.onps.model.po.RolePO;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserSessionService {
 
@@ -29,5 +30,29 @@ public interface UserSessionService {
      */
     List<String> getPermissionListByUsername(String username);
 
+    /**
+     * 判断角色
+     * @param role
+     * @return 是返回true
+     */
+    boolean isRole(String role);
 
+    /**
+     * 判断权限
+     * @param permission
+     * @return 有返回true
+     */
+    boolean hasPermission(String permission);
+
+    /**
+     * 添加角色
+     * @param role
+     */
+    void addRole(String role);
+
+    /**
+     * 添加权限
+     * @param permission
+     */
+    void addPermission(String permission);
 }

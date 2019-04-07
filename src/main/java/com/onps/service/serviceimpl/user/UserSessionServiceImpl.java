@@ -14,13 +14,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
 @Scope(value = WebApplicationContext.SCOPE_SESSION,
         proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserSessionServiceImpl implements UserSessionService {
+    private Set<String> roles = null;//角色集合
+    private Set<String> permissions = null;//权限集合
 
     @Autowired
     private UserDAO userDAO;
@@ -80,6 +84,54 @@ public class UserSessionServiceImpl implements UserSessionService {
             permissionStringList.add(permissionPO.getName());
         }
         return permissionStringList;
+    }
+
+    /**
+     * 判断角色
+     *
+     * @param role
+     * @return 是返回true
+     */
+    @Override
+    public boolean isRole(String role) {
+        return roles.contains(role);
+    }
+
+    /**
+     * 判断权限
+     *
+     * @param permission
+     * @return 有返回true
+     */
+    @Override
+    public boolean hasPermission(String permission) {
+        return permissions.contains(permission);
+    }
+
+    /**
+     * 添加角色
+     *
+     * @param role
+     */
+    @Override
+    public void addRole(String role) {
+        if(roles == null){
+            roles = new HashSet<String>();
+        }
+        roles.add(role);
+    }
+
+    /**
+     * 添加权限
+     *
+     * @param permission
+     */
+    @Override
+    public void addPermission(String permission) {
+        if(permissions == null){
+            permissions = new HashSet<String>();
+        }
+        permissions.add(permission);
     }
 
 }
