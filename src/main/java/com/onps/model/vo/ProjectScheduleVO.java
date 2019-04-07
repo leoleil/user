@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class ProjectScheduleVO {
     //表A目录
+    private String projectId;//表A的 id
+
     private String submitCompany;//填报单位
 
     private String projectName;//项目名称
@@ -36,6 +38,7 @@ public class ProjectScheduleVO {
     private Date timestamp;//时间戳
 
     //表B目录
+    private String subprojectId;//表B的ID
 
     private String subName;//子项目名
 
@@ -526,5 +529,21 @@ public class ProjectScheduleVO {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getSubprojectId() {
+        return subprojectId;
+    }
+
+    public void setSubprojectId(String subprojectId) {
+        this.subprojectId = subprojectId;
     }
 }
