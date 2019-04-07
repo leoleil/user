@@ -128,7 +128,6 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
         //获取用户信息
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         List<ProjectScheduleVO> projectScheduleVOList = new ArrayList<>();
-
         if(userSessionService.isRole(RoleString.USER_1)){
             //一级用户返回全部项目
             ProjectExample projectExample = new ProjectExample();

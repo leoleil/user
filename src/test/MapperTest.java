@@ -63,6 +63,7 @@ public class MapperTest {
         sp.setProjectid("97AA268170E34900800D10EB2DF74606");
         sp.setUserid("000154FC9C2F45C483AEA7E002070F0C");
         subprojectMapper.insertSelective(sp);
+
         subprojectMapper.selectByPrimaryKey("2323");
         subprojectMapper.deleteByPrimaryKey("2323");
 
