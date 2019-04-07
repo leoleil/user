@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProjectScheduleFormAServiceImpl implements ProjectScheduleFormAService {
-    @Autowired
-    private UserSessionService userSessionService;
+
     @Autowired
     private ProjectMapper projectMapper;
     @Override
