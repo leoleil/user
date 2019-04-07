@@ -50,7 +50,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
 
         //先查询表A 寻找是否有父项目
         ProjectExample projectExample = new ProjectExample();
-        projectExample.or()
+        projectExample.createCriteria()
                 .andProjectnameEqualTo(projectScheduleVO.getProjectName())
                 .andLevel1EqualTo(projectScheduleVO.getLevel1())
                 .andLevel2EqualTo(projectScheduleVO.getLevel2())
@@ -59,9 +59,9 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                 .andLevel5EqualTo(projectScheduleVO.getLevel5());
         List<Project> projectList = projectMapper.selectByExample(projectExample);
         //如果不是相同的父项目创建一个父项目
-        if(projectList == null){
+        if(projectList.size() == 0){
             project.setProjectname(projectScheduleVO.getProjectName());
-            project.setDocumentdate(projectScheduleVO.getDocumentDate());
+            project.setDocumentname(projectScheduleVO.getDocumentName());
             project.setDocumentnumber(projectScheduleVO.getDocumentNumber());
             project.setDocumentdate(projectScheduleVO.getDocumentDate());
             project.setInvestmentamount(projectScheduleVO.getInvestmentamount());
@@ -74,11 +74,11 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
             project.setLevel4(projectScheduleVO.getLevel4());
             project.setLevel5(projectScheduleVO.getLevel5());
             project.setUserid(user.getUserId());
-            projectMapper.insert(project);
+            projectMapper.insertSelective(project);
             //获取到各个创建的父项目
             projectList = projectMapper.selectByExample(projectExample);
         }
-        if(projectList == null){
+        if(projectList.size() != 0){
             subproject.setProjectid(projectList.get(0).getId());
             subproject.setSubname(projectScheduleVO.getSubName());
             subproject.setStarttime(projectScheduleVO.getStartTime());
@@ -118,7 +118,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
             subproject.setRemarks(projectScheduleVO.getRemarks());
             subproject.setDepartment(projectScheduleVO.getDepartment());
             subproject.setUserid(user.getUserId());
-            subprojectMapper.insert(subproject);
+            subprojectMapper.insertSelective(subproject);
         }
         else {
             throw new Exception("ProjectScheduleService：创建B表出错");
@@ -139,11 +139,14 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
         if(userSessionService.isRole(RoleString.USER_1)){
             //一级用户返回全部项目
             ProjectExample projectExample = new ProjectExample();
+            projectExample.createCriteria()
+                    .andIdIsNotNull();
             List<Project> projectList = projectMapper.selectByExample(projectExample);
             for (Project project:projectList
             ) {
                 SubprojectExample subprojectExample = new SubprojectExample();
-                subprojectExample.or().andProjectidEqualTo(project.getId());
+                subprojectExample.createCriteria()
+                        .andProjectidEqualTo(project.getId());
                 List<Subproject> subprojectList = subprojectMapper.selectByExample(subprojectExample);
                 for (Subproject subproject:subprojectList
                 ) {
