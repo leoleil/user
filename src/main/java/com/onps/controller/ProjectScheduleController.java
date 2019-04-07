@@ -15,18 +15,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 
 @Controller
 @RequestMapping("/schedule")
 public class ProjectScheduleController {
-    @Autowired
+    @Resource
     ProjectScheduleService projectScheduleService;
 
     @RequestMapping("/submitProjectSchedule")
     @ResponseBody
     public BaseResult<ProjectScheduleVO> submitProjectSchedule(ProjectScheduleVO projectScheduleVO){
+        System.out.println("进入submitProjectSchedule");
+        BaseResult<ProjectScheduleVO> info = new BaseResult<ProjectScheduleVO>();
+        try {
+            projectScheduleService.submitProjectSchedule(projectScheduleVO);
+            info.setEntity(projectScheduleVO);
+            info.setStatus(ConstantString.STATUS_SUCCESS);
+            info.setMessage("提交成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            info.setStatus(ConstantString.STATUS_FAIL);
+            info.setMessage("提交失败");
+        }
         return null;
     }
     @RequestMapping("/getProjectSchedule")

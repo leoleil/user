@@ -13,25 +13,31 @@ import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Service
+@Scope(value = WebApplicationContext.SCOPE_SESSION ,
+        proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ProjectScheduleServiceImpl implements ProjectScheduleService {
     private static Logger logger = LoggerFactory.getLogger(UserManageController.class);//日志
-    @Autowired
+    @Resource
     private UserSessionService userSessionService;
-    @Autowired
+    @Resource
     private ProjectMapper projectMapper;
-    @Autowired
+    @Resource
     private SubprojectMapper subprojectMapper;
     /**
      * 提交项目计划
-     *
+     * 一次性全部提交方式
      * @param projectScheduleVO
      * @throws Exception 提交失败抛出异常
      */
@@ -42,7 +48,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
         Project project = new Project();//表A
         Subproject subproject = new Subproject();//表B
 
-        //先查询表A
+        //先查询表A 寻找是否有父项目
         ProjectExample projectExample = new ProjectExample();
         projectExample.or()
                 .andProjectnameEqualTo(projectScheduleVO.getProjectName())
@@ -52,6 +58,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                 .andLevel4EqualTo(projectScheduleVO.getLevel4())
                 .andLevel5EqualTo(projectScheduleVO.getLevel5());
         List<Project> projectList = projectMapper.selectByExample(projectExample);
+        //如果不是相同的父项目创建一个父项目
         if(projectList == null){
             project.setProjectname(projectScheduleVO.getProjectName());
             project.setDocumentdate(projectScheduleVO.getDocumentDate());
@@ -68,8 +75,9 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
             project.setLevel5(projectScheduleVO.getLevel5());
             project.setUserid(user.getUserId());
             projectMapper.insert(project);
+            //获取到各个创建的父项目
+            projectList = projectMapper.selectByExample(projectExample);
         }
-        projectList = projectMapper.selectByExample(projectExample);
         if(projectList == null){
             subproject.setProjectid(projectList.get(0).getId());
             subproject.setSubname(projectScheduleVO.getSubName());
@@ -108,7 +116,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
             subproject.setFormedability(projectScheduleVO.getFormedAbility());
             subproject.setDesignedability(projectScheduleVO.getDesignedAbility());
             subproject.setRemarks(projectScheduleVO.getRemarks());
-
+            subproject.setDepartment(projectScheduleVO.getDepartment());
             subproject.setUserid(user.getUserId());
             subprojectMapper.insert(subproject);
         }
