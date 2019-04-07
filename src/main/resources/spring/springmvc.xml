@@ -15,7 +15,7 @@
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
 
 		<!-- 组件扫描,用来扫描base_package包下所有的@在spring中生成bean -->
-		<context:component-scan base-package="com.onps.controller"></context:component-scan>
+		<context:component-scan base-package="com.onps"></context:component-scan>
 		<!-- 不配置这个,shiro的授权方法不会自动调用 -->
 	   	<!--<aop:config proxy-target-class="true"></aop:config>-->
 		<!-- 开启shiro的注解支持 -->

@@ -10,8 +10,12 @@ import com.onps.model.po.RolePO;
 import com.onps.model.po.UserPO;
 import com.onps.service.AdminManageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -19,15 +23,17 @@ import java.util.List;
  * @since 2019/4/2
  */
 @Service
+@Scope(value = WebApplicationContext.SCOPE_SESSION ,
+        proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class AdminManageServiceImpl implements AdminManageService {
 
-    @Autowired
+    @Resource
     private UserDAO userDAO;
-    @Autowired
+    @Resource
     private PermissionDAO permissionDAO;
-    @Autowired
+    @Resource
     private RoleDAO roleDAO;
-    @Autowired
+    @Resource
     private UserManagementDAO userManagementDAO;
 
     @Override
