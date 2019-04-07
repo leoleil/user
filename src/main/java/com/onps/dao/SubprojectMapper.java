@@ -5,9 +5,7 @@ import java.util.List;
 import com.onps.model.Subproject;
 import com.onps.model.SubprojectExample;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface SubprojectMapper {
     int countByExample(SubprojectExample example);
 

@@ -2575,6 +2575,66 @@ public class SubprojectExample {
             addCriterion("USERID not between", value1, value2, "userid");
             return (Criteria) this;
         }
+
+        public Criteria andDepartmentIsNull() {
+            addCriterion("DEPARTMENT is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentIsNotNull() {
+            addCriterion("DEPARTMENT is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentEqualTo(Object value) {
+            addCriterion("DEPARTMENT =", value, "department");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentNotEqualTo(Object value) {
+            addCriterion("DEPARTMENT <>", value, "department");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentGreaterThan(Object value) {
+            addCriterion("DEPARTMENT >", value, "department");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentGreaterThanOrEqualTo(Object value) {
+            addCriterion("DEPARTMENT >=", value, "department");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentLessThan(Object value) {
+            addCriterion("DEPARTMENT <", value, "department");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentLessThanOrEqualTo(Object value) {
+            addCriterion("DEPARTMENT <=", value, "department");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentIn(List<Object> values) {
+            addCriterion("DEPARTMENT in", values, "department");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentNotIn(List<Object> values) {
+            addCriterion("DEPARTMENT not in", values, "department");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentBetween(Object value1, Object value2) {
+            addCriterion("DEPARTMENT between", value1, value2, "department");
+            return (Criteria) this;
+        }
+
+        public Criteria andDepartmentNotBetween(Object value1, Object value2) {
+            addCriterion("DEPARTMENT not between", value1, value2, "department");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

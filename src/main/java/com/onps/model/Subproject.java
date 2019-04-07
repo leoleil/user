@@ -84,6 +84,8 @@ public class Subproject {
 
     private String userid;
 
+    private Object department;
+
     public String getId() {
         return id;
     }
@@ -402,5 +404,13 @@ public class Subproject {
 
     public void setUserid(String userid) {
         this.userid = userid == null ? null : userid.trim();
+    }
+
+    public Object getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Object department) {
+        this.department = department;
     }
 }

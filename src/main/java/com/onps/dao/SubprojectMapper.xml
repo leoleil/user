@@ -42,6 +42,7 @@
     <result column="TIMESTAMP" jdbcType="TIMESTAMP" property="timestamp" />
     <result column="PROJECTID" jdbcType="VARCHAR" property="projectid" />
     <result column="USERID" jdbcType="VARCHAR" property="userid" />
+    <result column="DEPARTMENT" jdbcType="OTHER" property="department" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -109,7 +110,7 @@
     PROJECTNUMBER, CONSTRUCTIONPLACE, CONSTRUCTIONCOMPANY, ENDTIME, RELEASEINVESTMENT, 
     CONSTRUCTIONPHASE, FIRSTDESIGN, BIDDING, CONSTRUCTIONDESIGN, STARTTIME_CON, PROJECTPROGRESS, 
     COMPLETEDINVESTMENT, FORMEDABILITY, DESIGNEDABILITY, REMARKS, TIMESTAMP, PROJECTID, 
-    USERID
+    USERID, DEPARTMENT
   </sql>
   <select id="selectByExample" parameterType="com.onps.model.SubprojectExample" resultMap="BaseResultMap">
     select
@@ -155,7 +156,7 @@
       CONSTRUCTIONDESIGN, STARTTIME_CON, PROJECTPROGRESS, 
       COMPLETEDINVESTMENT, FORMEDABILITY, DESIGNEDABILITY, 
       REMARKS, TIMESTAMP, PROJECTID, 
-      USERID)
+      USERID, DEPARTMENT)
     values (#{id,jdbcType=VARCHAR}, #{subname,jdbcType=OTHER}, #{starttime,jdbcType=TIMESTAMP}, 
       #{submitfilename,jdbcType=OTHER}, #{submitdepartment,jdbcType=OTHER}, #{submitnumber,jdbcType=VARCHAR}, 
       #{submitdate,jdbcType=TIMESTAMP}, #{approvalname,jdbcType=OTHER}, #{approvaldepartment,jdbcType=OTHER}, 
@@ -169,7 +170,7 @@
       #{constructiondesign,jdbcType=OTHER}, #{starttimeCon,jdbcType=OTHER}, #{projectprogress,jdbcType=OTHER}, 
       #{completedinvestment,jdbcType=DECIMAL}, #{formedability,jdbcType=OTHER}, #{designedability,jdbcType=OTHER}, 
       #{remarks,jdbcType=OTHER}, #{timestamp,jdbcType=TIMESTAMP}, #{projectid,jdbcType=VARCHAR}, 
-      #{userid,jdbcType=VARCHAR})
+      #{userid,jdbcType=VARCHAR}, #{department,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.onps.model.Subproject">
     insert into SUBPROJECT
@@ -294,6 +295,9 @@
       <if test="userid != null">
         USERID,
       </if>
+      <if test="department != null">
+        DEPARTMENT,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -415,6 +419,9 @@
       </if>
       <if test="userid != null">
         #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -547,6 +554,9 @@
       <if test="record.userid != null">
         USERID = #{record.userid,jdbcType=VARCHAR},
       </if>
+      <if test="record.department != null">
+        DEPARTMENT = #{record.department,jdbcType=OTHER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -593,7 +603,8 @@
       REMARKS = #{record.remarks,jdbcType=OTHER},
       TIMESTAMP = #{record.timestamp,jdbcType=TIMESTAMP},
       PROJECTID = #{record.projectid,jdbcType=VARCHAR},
-      USERID = #{record.userid,jdbcType=VARCHAR}
+      USERID = #{record.userid,jdbcType=VARCHAR},
+      DEPARTMENT = #{record.department,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -718,6 +729,9 @@
       <if test="userid != null">
         USERID = #{userid,jdbcType=VARCHAR},
       </if>
+      <if test="department != null">
+        DEPARTMENT = #{department,jdbcType=OTHER},
+      </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
@@ -761,7 +775,8 @@
       REMARKS = #{remarks,jdbcType=OTHER},
       TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
       PROJECTID = #{projectid,jdbcType=VARCHAR},
-      USERID = #{userid,jdbcType=VARCHAR}
+      USERID = #{userid,jdbcType=VARCHAR},
+      DEPARTMENT = #{department,jdbcType=OTHER}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
