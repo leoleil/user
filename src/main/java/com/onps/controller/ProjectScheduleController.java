@@ -40,7 +40,7 @@ public class ProjectScheduleController {
             info.setStatus(ConstantString.STATUS_FAIL);
             info.setMessage("提交失败");
         }
-        return null;
+        return info;
     }
     @RequestMapping("/getProjectSchedule")
     @ResponseBody
