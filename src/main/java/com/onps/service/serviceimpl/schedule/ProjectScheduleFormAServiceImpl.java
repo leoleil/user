@@ -7,7 +7,11 @@ import com.onps.model.vo.ProjectScheduleVO;
 import com.onps.service.ProjectScheduleFormAService;
 import com.onps.service.UserSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 
 @Service
 public class ProjectScheduleFormAServiceImpl implements ProjectScheduleFormAService {
@@ -20,15 +24,14 @@ public class ProjectScheduleFormAServiceImpl implements ProjectScheduleFormAServ
         //从表A 中找出对应的project
         ProjectExample projectExp=new ProjectExample();
         ProjectExample.Criteria criteria1=projectExp.createCriteria();
-
-        criteria1.
-                andProjectnameEqualTo(projectScheduleVO.getProjectName())
+        //通过5个level和projectname唯一一条主项目
+        criteria1.andProjectnameEqualTo(projectScheduleVO.getProjectName())
                 .andLevel1EqualTo(projectScheduleVO.getLevel1())
                 .andLevel2EqualTo(projectScheduleVO.getLevel2())
                 .andLevel3EqualTo(projectScheduleVO.getLevel3())
                 .andLevel4EqualTo(projectScheduleVO.getLevel4())
                 .andLevel5EqualTo(projectScheduleVO.getLevel5());
-
+        //把传入的PO类每个字段进行判空，如果不为空，则写入project对象
         if(projectScheduleVO.getProjectName() != null){
         project.setProjectname(projectScheduleVO.getProjectName());
         }
@@ -72,6 +75,7 @@ public class ProjectScheduleFormAServiceImpl implements ProjectScheduleFormAServ
         }
 
         projectMapper.updateByExampleSelective(project,projectExp);
+
 
 
     }
