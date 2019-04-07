@@ -41,6 +41,7 @@ public class MyShrio extends AuthorizingRealm {
             for (String role: roleList
                  ) {
                 info.addRole(role);
+                userSessionService.addRole(role);
             }
         }
         List<String> permissionList = userSessionService.getPermissionListByUsername(user.getUserName());
@@ -48,6 +49,7 @@ public class MyShrio extends AuthorizingRealm {
             for (String permission: permissionList
                  ) {
                 info.addStringPermission(permission);
+                userSessionService.addPermission(permission);
             }
         }
         return info;

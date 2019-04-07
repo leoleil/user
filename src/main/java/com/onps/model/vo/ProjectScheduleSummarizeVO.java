@@ -13,5 +13,4 @@ public class ProjectScheduleSummarizeVO {
     private double progress;
     private int finishWorkingNumber;
     private double finishWorkingRatio;
-
 }

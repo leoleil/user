@@ -5,8 +5,11 @@ import com.onps.model.Project;
 import com.onps.model.User;
 import com.onps.model.vo.ProjectScheduleSummarizeVO;
 import com.onps.model.vo.ProjectScheduleVO;
+import com.onps.service.ProjectScheduleService;
+import com.onps.utils.ConstantString;
 import com.onps.utils.resultUtils.BaseResult;
 import org.apache.shiro.SecurityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.apache.shiro.subject.Subject;
@@ -18,6 +21,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/schedule")
 public class ProjectScheduleController {
+    @Autowired
+    ProjectScheduleService projectScheduleService;
 
     @RequestMapping("/submitProjectSchedule")
     @ResponseBody
@@ -27,7 +32,11 @@ public class ProjectScheduleController {
     @RequestMapping("/getProjectSchedule")
     @ResponseBody
     public BaseResult<ProjectScheduleVO> getProjectScheduleList(){
-        return null;
+        BaseResult<ProjectScheduleVO> info = new BaseResult<ProjectScheduleVO>();
+        info.setList(projectScheduleService.getProjectScheduleList());
+        info.setStatus(ConstantString.STATUS_SUCCESS);
+        info.setMessage("项目规划详细信息数据");
+        return info;
     }
 
     public BaseResult<ProjectScheduleSummarizeVO> getProjectScheduleSummarize(String projectName, String level1,

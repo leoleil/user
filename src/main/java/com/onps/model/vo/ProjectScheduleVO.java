@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class ProjectScheduleVO {
+    //表A目录
     private String submitCompany;//填报单位
 
     private String projectName;//项目名称
@@ -14,13 +15,13 @@ public class ProjectScheduleVO {
 
     private Date documentDate;//填报时间
 
-    private double investmentamount;//计划投资
+    private BigDecimal investmentamount;//计划投资
 
     private String approvalAuthority;//审批权限
 
     private String constructionPeriod;//建设周期
 
-    private boolean isimportent;//是否规划重点项目
+    private BigDecimal isimportent;//是否规划重点项目
 
     private String level1;//五个地理位置
 
@@ -33,6 +34,8 @@ public class ProjectScheduleVO {
     private String level5;//军区军兵种后勤
 
     private Date timestamp;//时间戳
+
+    //表B目录
 
     private String subName;//子项目名
 
@@ -84,7 +87,7 @@ public class ProjectScheduleVO {
 
     private Date endTime;//竣工时间
 
-    private double releaseInvestment;//下达投资（万元）
+    private BigDecimal releaseInvestment;//下达投资（万元）
 
     private String constructionPhase;//建设阶段
 
@@ -98,13 +101,15 @@ public class ProjectScheduleVO {
 
     private String projectProgress;//工程进度
 
-    private double completedInvestment;//已经完成投资
+    private BigDecimal completedInvestment;//已经完成投资
 
     private String formedAbility;//已经形成能力
 
     private String designedAbility;//完工后预期形成能力
 
     private String remarks;//备注
+
+    private String department;//提交部门
 
 
     public String getSubmitCompany() {
@@ -147,11 +152,11 @@ public class ProjectScheduleVO {
         this.documentDate = documentDate;
     }
 
-    public double getInvestmentamount() {
+    public BigDecimal getInvestmentamount() {
         return investmentamount;
     }
 
-    public void setInvestmentamount(double investmentamount) {
+    public void setInvestmentamount(BigDecimal investmentamount) {
         this.investmentamount = investmentamount;
     }
 
@@ -171,11 +176,11 @@ public class ProjectScheduleVO {
         this.constructionPeriod = constructionPeriod;
     }
 
-    public boolean isIsimportent() {
+    public BigDecimal getIsIsimportent() {
         return isimportent;
     }
 
-    public void setIsimportent(boolean isimportent) {
+    public void setIsimportent(BigDecimal isimportent) {
         this.isimportent = isimportent;
     }
 
@@ -427,11 +432,11 @@ public class ProjectScheduleVO {
         this.endTime = endTime;
     }
 
-    public double getReleaseInvestment() {
+    public BigDecimal getReleaseInvestment() {
         return releaseInvestment;
     }
 
-    public void setReleaseInvestment(double releaseInvestment) {
+    public void setReleaseInvestment(BigDecimal releaseInvestment) {
         this.releaseInvestment = releaseInvestment;
     }
 
@@ -483,11 +488,11 @@ public class ProjectScheduleVO {
         this.projectProgress = projectProgress;
     }
 
-    public double getCompletedInvestment() {
+    public BigDecimal getCompletedInvestment() {
         return completedInvestment;
     }
 
-    public void setCompletedInvestment(double completedInvestment) {
+    public void setCompletedInvestment(BigDecimal completedInvestment) {
         this.completedInvestment = completedInvestment;
     }
 
@@ -515,4 +520,11 @@ public class ProjectScheduleVO {
         this.remarks = remarks;
     }
 
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 }
