@@ -30,6 +30,19 @@ public class ProjectScheduleController {
     public BaseResult<ProjectScheduleVO> submitProjectSchedule(ProjectScheduleVO projectScheduleVO){
         System.out.println("进入submitProjectSchedule");
         BaseResult<ProjectScheduleVO> info = new BaseResult<ProjectScheduleVO>();
+        //对进入的变量进行判断
+        if(projectScheduleVO.getLevel1() == null || projectScheduleVO.getLevel1().equals("")||
+                projectScheduleVO.getLevel2() == null || projectScheduleVO.getLevel2().equals("")||
+                projectScheduleVO.getLevel3() == null || projectScheduleVO.getLevel3().equals("")||
+                projectScheduleVO.getLevel4() == null || projectScheduleVO.getLevel4().equals("")||
+                projectScheduleVO.getLevel5() == null || projectScheduleVO.getLevel5().equals("")||
+                projectScheduleVO.getProjectName() == null || projectScheduleVO.getProjectName().equals("")
+
+        ){
+            info.setStatus(ConstantString.STATUS_FAIL);
+            info.setMessage("提交参数有误");
+            return info;
+        }
         try {
             projectScheduleService.submitProjectSchedule(projectScheduleVO);
             info.setEntity(projectScheduleVO);

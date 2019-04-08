@@ -9,7 +9,6 @@ import com.onps.service.UserSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -18,6 +17,18 @@ public class ProjectScheduleFormAServiceImpl implements ProjectScheduleFormAServ
 
     @Autowired
     private ProjectMapper projectMapper;
+    /**
+     * 更新表A内容
+     *  通过            andProjectnameEqualTo(projectScheduleVO.getProjectName())
+     *                 .andLevel1EqualTo(projectScheduleVO.getLevel1())
+     *                 .andLevel2EqualTo(projectScheduleVO.getLevel2())
+     *                 .andLevel3EqualTo(projectScheduleVO.getLevel3())
+     *                 .andLevel4EqualTo(projectScheduleVO.getLevel4())
+     *                 .andLevel5EqualTo(projectScheduleVO.getLevel5());
+     *  定位表A
+     * @param projectScheduleVO
+     * @throws Exception 更新失败抛出异常
+     */
     @Override
     public void updataASchedule(ProjectScheduleVO projectScheduleVO) throws Exception {
         Project project=new Project();
@@ -32,9 +43,9 @@ public class ProjectScheduleFormAServiceImpl implements ProjectScheduleFormAServ
                 .andLevel4EqualTo(projectScheduleVO.getLevel4())
                 .andLevel5EqualTo(projectScheduleVO.getLevel5());
         //把传入的PO类每个字段进行判空，如果不为空，则写入project对象
-        if(projectScheduleVO.getProjectName() != null){
+        /*if(projectScheduleVO.getProjectName() != null){
         project.setProjectname(projectScheduleVO.getProjectName());
-        }
+        }*/
         if(projectScheduleVO.getDocumentName()!=null){
         project.setDocumentname(projectScheduleVO.getDocumentName());}
         if(projectScheduleVO.getDocumentNumber()!=null){
@@ -55,7 +66,7 @@ public class ProjectScheduleFormAServiceImpl implements ProjectScheduleFormAServ
         if(projectScheduleVO.getIsIsimportent()!=null){
             project.setIsimportent(projectScheduleVO.getIsIsimportent());
         }
-        if(projectScheduleVO.getLevel1()!=null){
+        /*if(projectScheduleVO.getLevel1()!=null){
             project.setLevel1(project.getLevel1());
         }
         if(projectScheduleVO.getLevel2()!=null){
@@ -69,14 +80,23 @@ public class ProjectScheduleFormAServiceImpl implements ProjectScheduleFormAServ
         }
         if(projectScheduleVO.getLevel5()!=null){
             project.setLevel5(project.getLevel5());
-        }
+        }*/
         if(projectScheduleVO.getSubmitCompany()!=null){
             project.setSubmitcompany(project.getSubmitcompany());
         }
 
         projectMapper.updateByExampleSelective(project,projectExp);
 
+    }
 
+    /**
+     * 删除表单A内容
+     * 需要做到级联删除，将A相关的子项目（如果有的话全部删除）
+     * @param projectScheduleVO
+     * @throws Exception 删除失败抛出异常
+     */
+    @Override
+    public void deleteASchedule(ProjectScheduleVO projectScheduleVO) throws Exception {
 
     }
 }

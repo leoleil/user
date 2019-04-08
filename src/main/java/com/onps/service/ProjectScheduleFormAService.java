@@ -9,4 +9,11 @@ public interface ProjectScheduleFormAService {
      * @throws Exception 更新失败抛出异常
      */
     void updataASchedule(ProjectScheduleVO projectScheduleVO) throws Exception;
+
+    /**
+     * 删除表单A内容
+     * @param projectScheduleVO
+     * @throws Exception
+     */
+    void deleteASchedule(ProjectScheduleVO projectScheduleVO) throws Exception;
 }
