@@ -134,6 +134,28 @@ public class ProjectScheduleFormBServiceImpl implements ProjectScheduleFormBServ
      */
     @Override
     public void deleteBSchedule(ProjectScheduleVO projectScheduleVO) throws Exception {
+            Subproject subproject=new Subproject();
+            Project project=new Project();
+            ProjectExample projectExample=new ProjectExample();
+            ProjectExample.Criteria criteria=projectExample.createCriteria();
+            SubprojectExample subprojectExample=new SubprojectExample();
+            SubprojectExample.Criteria subCriteria=subprojectExample.createCriteria();
+            //通过几个条件拿到projectID，查出对应的子项目列表
+            criteria.andProjectnameEqualTo(projectScheduleVO.getProjectName())
+                    .andLevel1EqualTo(projectScheduleVO.getLevel1())
+                    .andLevel3EqualTo(projectScheduleVO.getLevel3())
+                    .andLevel4EqualTo(projectScheduleVO.getLevel4())
+                    .andLevel5EqualTo(projectScheduleVO.getLevel5());
+            if(projectScheduleVO.getLevel2() !=null){
+                criteria.andLevel2EqualTo(projectScheduleVO.getLevel2()); }
+            String projectId=projectMapper.selectByExample(projectExample).get(0).getId();
+            //通过project ID和子项目名称唯一确定子项目，并取得子项目的主键
+             subCriteria.andSubnameEqualTo(projectScheduleVO.getSubName())
+                     .andProjectidEqualTo(projectId);
+             String subId=subprojectMapper.selectByExample(subprojectExample).get(0).getId();
+             //通过主键进行delete
+             subprojectMapper.deleteByPrimaryKey(subId);
+
 
     }
 }
