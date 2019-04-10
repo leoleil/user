@@ -1,8 +1,10 @@
 package com.onps.service.serviceimpl.schedule;
 
 import com.onps.dao.ProjectMapper;
+import com.onps.dao.SubprojectMapper;
 import com.onps.model.Project;
 import com.onps.model.ProjectExample;
+import com.onps.model.SubprojectExample;
 import com.onps.model.vo.ProjectScheduleVO;
 import com.onps.service.ProjectScheduleFormAService;
 import com.onps.service.UserSessionService;
@@ -46,10 +48,9 @@ public class ProjectScheduleFormAServiceImpl implements ProjectScheduleFormAServ
                 .andLevel3EqualTo(projectScheduleVO.getLevel3())
                 .andLevel4EqualTo(projectScheduleVO.getLevel4())
                 .andLevel5EqualTo(projectScheduleVO.getLevel5());
-        if (projectScheduleVO.getLevel2()!=null){
+        if (projectScheduleVO.getLevel2()!=null && !projectScheduleVO.getLevel2().equals("")){
             criteria1.andLevel2EqualTo(projectScheduleVO.getLevel2());
         }
-
         //把传入的PO类每个字段进行判空，如果不为空，则写入project对象
         if(projectScheduleVO.getDocumentName()!=null){
         project.setDocumentname(projectScheduleVO.getDocumentName());
@@ -101,7 +102,7 @@ public class ProjectScheduleFormAServiceImpl implements ProjectScheduleFormAServ
                 .andLevel3EqualTo(projectScheduleVO.getLevel3())
                 .andLevel4EqualTo(projectScheduleVO.getLevel4())
                 .andLevel5EqualTo(projectScheduleVO.getLevel5());
-        if (projectScheduleVO.getLevel2()!=null){
+        if (projectScheduleVO.getLevel2()!=null && !projectScheduleVO.getLevel2().equals("")){
             criteria2.andLevel2EqualTo(projectScheduleVO.getLevel2());
         }
 
@@ -109,6 +110,6 @@ public class ProjectScheduleFormAServiceImpl implements ProjectScheduleFormAServ
         String id=projectList.get(0).getId();//得到主项目id
         subcriteria.andProjectidEqualTo(id);
         subprojectMapper.deleteByExample(subprojectExp1);//删除projectId=主项目id的所有子项目
-
+        projectMapper.deleteByExample(projectExp1);//删除项目
     }
 }

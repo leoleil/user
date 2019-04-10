@@ -4,7 +4,6 @@ import com.onps.controller.UserManageController;
 import com.onps.dao.ProjectMapper;
 import com.onps.dao.SubprojectMapper;
 import com.onps.model.*;
-import com.onps.model.vo.ProjectScheduleHomeSummarizeVO;
 import com.onps.model.vo.ProjectScheduleSummarizeVO;
 import com.onps.model.vo.ProjectScheduleVO;
 import com.onps.service.ProjectScheduleService;
@@ -14,14 +13,12 @@ import com.onps.utils.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -176,7 +173,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                     projectScheduleVO.setLevel4((String) project.getLevel4());
                     projectScheduleVO.setLevel5((String) project.getLevel5());
                     projectScheduleVO.setTimestamp((Date) project.getTimestamp());
-                    //获取表内容
+                    //获取B表内容
                     projectScheduleVO.setSubName((String) subproject.getSubname());
                     projectScheduleVO.setStartTime(subproject.getStarttime());
                     projectScheduleVO.setSubmitFileName((String)subproject.getSubmitfilename());
@@ -213,6 +210,8 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                     projectScheduleVO.setFormedAbility((String)subproject.getFormedability());
                     projectScheduleVO.setDesignedAbility((String)subproject.getDesignedability());
                     projectScheduleVO.setRemarks((String)subproject.getRemarks());
+                    projectScheduleVO.setTestTime((String)subproject.getTesttime());
+                    projectScheduleVO.setEndTimeCon((String)subproject.getEndtimeCon());
                     projectScheduleVO.setTimestamp(subproject.getTimestamp());
                     //累死我啦
                     //那么多项
@@ -289,6 +288,8 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                     projectScheduleVO.setFormedAbility((String)subproject.getFormedability());
                     projectScheduleVO.setDesignedAbility((String)subproject.getDesignedability());
                     projectScheduleVO.setRemarks((String)subproject.getRemarks());
+                    projectScheduleVO.setTestTime((String)subproject.getTesttime());
+                    projectScheduleVO.setEndTimeCon((String)subproject.getEndtimeCon());
                     projectScheduleVO.setTimestamp(subproject.getTimestamp());
                     //累死我啦
                     //那么多项
@@ -365,6 +366,8 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                     projectScheduleVO.setFormedAbility((String)subproject.getFormedability());
                     projectScheduleVO.setDesignedAbility((String)subproject.getDesignedability());
                     projectScheduleVO.setRemarks((String)subproject.getRemarks());
+                    projectScheduleVO.setTestTime((String)subproject.getTesttime());
+                    projectScheduleVO.setEndTimeCon((String)subproject.getEndtimeCon());
                     projectScheduleVO.setTimestamp(subproject.getTimestamp());
                     //累死我啦
                     //那么多项
