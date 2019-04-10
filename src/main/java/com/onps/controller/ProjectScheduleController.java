@@ -59,17 +59,36 @@ public class ProjectScheduleController {
     @ResponseBody
     public BaseResult<ProjectScheduleVO> getProjectScheduleList(){
         BaseResult<ProjectScheduleVO> info = new BaseResult<ProjectScheduleVO>();
-        info.setList(projectScheduleService.getProjectScheduleList());
+        List<ProjectScheduleVO> projectScheduleVOList = projectScheduleService.getProjectScheduleList();
+        info.setList(projectScheduleVOList);
         info.setStatus(ConstantString.STATUS_SUCCESS);
         info.setMessage("项目规划详细信息数据");
         return info;
     }
 
+    @RequestMapping("/getProjectScheduleSummarize")
+    @ResponseBody
     public BaseResult<ProjectScheduleSummarizeVO> getProjectScheduleSummarize(String projectName, String level1,
                                                                               String level2, String level3,
                                                                               String level4, String level5){
-        return null;
-
+        if(projectName.equals(""))projectName = null;
+        if(level1.equals(""))level1 = null;
+        if(level2.equals(""))level2 = null;
+        if(level3.equals(""))level3 = null;
+        if(level4.equals(""))level4 = null;
+        if(level5.equals(""))level5 = null;
+        BaseResult<ProjectScheduleSummarizeVO> info = new BaseResult<ProjectScheduleSummarizeVO>();
+        ProjectScheduleSummarizeVO projectScheduleSummarizeVO = projectScheduleService.getProjectScheduleSummarize(projectName
+                ,level1,level2,level3,level4,level5);
+        if(projectScheduleSummarizeVO == null){
+            info.setMessage("选择的关系没有数据");
+            info.setStatus(ConstantString.STATUS_FAIL);
+        }else {
+            info.setStatus(ConstantString.STATUS_SUCCESS);
+            info.setEntity(projectScheduleSummarizeVO);
+            info.setMessage("获取成功");
+        }
+        return info;
     }
 
 }

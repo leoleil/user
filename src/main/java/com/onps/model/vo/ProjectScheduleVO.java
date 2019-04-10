@@ -42,7 +42,9 @@ public class ProjectScheduleVO {
 
     private String subName;//子项目名
 
-    private Date startTime;//开工时间
+    private String startTimeCon;//建设开工时间
+
+    private String endTimeCon;//建设竣工时间
 
     private String submitFileName;//计划书送审文件名
 
@@ -88,10 +90,9 @@ public class ProjectScheduleVO {
 
     private String constructionCompany;//建设单位
 
-    private Date endTime;//竣工时间
-
     private BigDecimal releaseInvestment;//下达投资（万元）
 
+    //C表
     private String constructionPhase;//建设阶段
 
     private String firstDesign;//初步设计
@@ -100,7 +101,11 @@ public class ProjectScheduleVO {
 
     private String constructionDesign;//施工图设计
 
-    private String startTimeCon;//建设开工时间
+    private Date startTime;//开工时间
+
+    private String testTime;//初验时间
+
+    private Date endTime;//竣工时间
 
     private String projectProgress;//工程进度
 
@@ -111,6 +116,8 @@ public class ProjectScheduleVO {
     private String designedAbility;//完工后预期形成能力
 
     private String remarks;//备注
+
+    private String reason;//未完成原因
 
     private String department;//提交部门
 
@@ -545,5 +552,33 @@ public class ProjectScheduleVO {
 
     public void setSubprojectId(String subprojectId) {
         this.subprojectId = subprojectId;
+    }
+
+    public BigDecimal getIsimportent() {
+        return isimportent;
+    }
+
+    public String getEndTimeCon() {
+        return endTimeCon;
+    }
+
+    public void setEndTimeCon(String endTimeCon) {
+        this.endTimeCon = endTimeCon;
+    }
+
+    public String getTestTime() {
+        return testTime;
+    }
+
+    public void setTestTime(String testTime) {
+        this.testTime = testTime;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }

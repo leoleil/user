@@ -1,0 +1,357 @@
+*{
+    margin: 0;
+    padding:0;
+    font-family: "Microsoft YaHei"
+}
+body{
+    width: 100%;
+    height: 100%;
+    background: #060c18;
+}
+/* 头部css样式 */
+.header{
+    color: #ffffff;
+    width: 100%;
+    height:100px;
+    background: #112951;
+}
+.header #logo{
+    float: left;
+}
+
+.header  #title{
+    float: left;
+    padding-top: 20px;
+    font-family: "KaiTi";
+    font-weight: bold;
+    font-size: 32px;
+}
+.header  #eng-title{
+    font-weight: lighter;
+    display: block;
+    margin-top: -5px;
+    font-family: "Arial";
+    font-size: 10px;
+    letter-spacing: -0.75px;
+}
+.header .divide{
+    float: left;
+    background: #255daa;
+    width:1px;
+    height:40px;
+    margin:  30px 10px;
+}
+.header #divide{
+    float: right;
+    background: #255daa;
+    width:1px;
+    height:40px;
+    margin:  30px 10px;
+}
+.header #sub-title{
+    float: left;
+    font-size: 24px;
+    font-weight: bold; 
+    line-height: 100px;
+}
+.header #right-wrap{
+    float:right;
+}
+.header #right-title{
+    padding-top:20px;
+    float:right;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.header #divTime{
+    float: right;
+    font-weight: lighter;
+    font-size: 14px;
+    
+}
+.header #duty{
+    padding-top: 20px;
+    float: right;
+    font-size: 18px;
+}
+.header #tduty{
+    padding:5px;
+    margin:20px 10px;
+    float: right;
+    font-size: 16px;
+    border: 1px solid #ffffff;
+    border-radius: 3px;
+}
+/* menu bar  */
+.menu-bar{
+    width: 100%;
+    height:40px;
+    color:#c8dbe9;
+    font-size: 16px;
+    line-height: 40px;
+    background: #1e3a69;
+}
+.menu-bar #back-bar{
+    position: relative;
+    float:left;
+    list-style: none;
+}
+.menu-bar #back-bar li {
+    float: left;
+    position:relative;
+    top:0px;
+    left:30px;
+}
+.menu-bar #back-bar li a{
+    text-decoration: none;
+    color:#c8dbe9;
+    font-size: 16px;
+    line-height: 40px;
+}
+.menu-bar #back-bar :last-child a{
+    text-decoration: underline;
+    color: #ffffff;
+}
+.menu-bar #icon-ul{
+    position: relative;
+    float:right;
+    list-style: none;
+}
+.menu-bar #icon-ul li{
+    float:right;
+    line-height: 40px;
+}
+.menu-bar #icon-ul li img{
+    width: 16px;
+    height: 16px;
+    margin:0 12px;
+    cursor: pointer;
+}
+.menu-bar #icon-ul li img:hover{
+    width: 20px;
+    height: 20px;
+}
+/* content  con-bar */
+.content{
+    width: 86%;
+    height: 1000px;
+    margin: 0 auto;
+}
+.con-bar{
+    width: 100%;
+    height:60px;
+    background:#060c18;
+}
+.con-bar p{
+    float: left;
+    line-height: 60px;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+}
+.con-bar .icons{
+    float: left;
+    line-height: 36px;
+    position: relative;
+    z-index: 11;
+    top: 2px;
+    left:14px;
+}
+.con-bar #sumbtn{
+    position: relative;
+    top:-36px;
+    padding: 0 0 0 25px;
+    border: 1px solid #112951;
+    border-radius: 5px;
+    width: 108px;
+    height: 30px;
+    float: left;
+    font-size: 14px;
+    background: #112951;
+    color:#ffffff;
+    text-align:center;
+    line-height: 32px;
+    cursor:pointer;
+}
+.con-bar .summary{
+    float: right;
+    width: 100px;
+    height: 30px;
+    font-size: 14px;
+    margin: 15px auto;
+}
+.con-bar .box{
+    position: relative;
+    right: 10px;
+    float: right;
+    width: 280px;
+    height: 30px;
+    margin: 15px auto;
+    font-size: 14px;
+}
+.con-bar .box input{
+    border: 1px solid #112951;
+    border-radius: 5px 0px 0px 5px;
+    width: 202px;
+    height: 30px;   
+    float: left;
+    color: #ffffff;   
+    background:#111d2b  url(../img/查询.png) no-repeat;
+    background-position: 5px center;
+    background-size: contain;
+    padding: 0 0 0 40px;
+}
+.con-bar .box #search{
+    border: 1px solid #112951;
+    border-radius: 0px 5px 5px 0px;
+    width: 78px;
+    height: 30px;
+    float: right;
+    background: #112951;
+    color:#ffffff;
+    text-align:center;
+    line-height: 32px;
+    cursor:pointer;
+}
+/* content table */
+.content table {
+    width: 100%;
+    color: #ffffff;
+    font-size: 16px;
+    vertical-align: middle;
+    text-align: center;
+    margin: 0 auto;
+    border: #ffffff solid 1px;
+    border-collapse: collapse;
+}
+.content table th,td{
+    height: 46px;
+}
+.content table td img{
+    width: 18px;
+    height: 18px;
+    margin: 5px;
+    background: #0b2637;
+}
+/* 编辑与删除 按钮样式 */
+.content table button{
+    cursor: pointer;
+    width: 70px;
+    height: 36px;
+    color: #ffffff;
+    line-height: 36px;
+    background: #0b2637;
+    border: 1px solid #1e3a69;
+    border-radius: 3px;
+}
+.content table button img{
+    width: 13px;
+    height: 13px;
+    margin: 4px 3px -2px 0;
+}
+.content table th{
+    border: #060c18 solid 1px;
+}
+.content table td{
+    border: #1e3a69 solid 1px;
+}
+content table .fix{
+    width: 180px;
+}
+.content table thead{
+    background: #1e3a69;
+}
+.content tbody tr:nth-child(even){
+    background:#060606;
+}
+.content table tbody tr td div{
+    float: left;
+}
+/*  table pagination  样式*/
+.pagination{
+    margin:15px auto;
+    height:36px;
+} 
+.pagination input,a,select,option{
+    line-height: 36px;
+    float: right;
+    font-size: 16px;
+    color: #ffffff;
+}
+.pagination a {
+    text-decoration: none;
+}
+.pagination select{
+    width:46px;
+    height:36px;
+    font-size: 16px;
+    line-height:36px;
+}
+.pagination #changePage{
+    width:36px;
+    height:36px;
+    font-size: 16px;
+    line-height:36px;
+}
+.pagination #btn1,#btn2,#btn3,#btn4,#btn5,#changePage{
+    margin: 0 4px;
+}
+.pagination #pageSize,#changePage{
+    background: #060606;
+    border: 1px solid #1e3a69;
+} 
+
+/* 遮罩层 */
+#mask{
+    z-index: 1000;
+    background-color: #000000;
+    opacity: 0.5;
+    filter:alpha(opacity=50);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.maskCon{
+    z-index: 1001;
+    display:none ;
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%); 
+    width: 70%;
+    height: 80%;
+    background: #1e3a69;
+}
+.maskCon .conHeader{
+    color: #fff;
+    height: 40px;
+    line-height: 40px;
+    background: #112951;
+}
+.maskCon .conHeader .mTitle{
+    margin:  0 0 0 20px;
+}
+.maskCon #mclose{
+    width: 20px;
+    height: 20px;
+    background: url("../img/关闭.png") no-repeat ;
+    -webkit-background-size: 100% auto;
+    -moz-background-size: 100% auto;
+    background-size: 100% auto;
+    position: absolute;
+    cursor: pointer;
+    right: 10px;
+    top:10px;
+}
+.mCon{
+    max-height: 80%;
+    min-height: 80%;
+    width: 90%;
+    margin: 50px auto;
+    color: #fff;
+    overflow: scroll;
+
+}
+.easyui-combobox{
+}

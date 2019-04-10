@@ -34,7 +34,7 @@ public class MapperTest {
         project.setApprovalauthority("军区");
         project.setConstructionperiod("1年");
         project.setIsimportent(A);
-        project.setLevel1("东部");
+        project.setLevel1("");
         project.setLevel2("东海");
         project.setLevel3("战场建设计划");
         project.setLevel4("十二五规划");
@@ -42,12 +42,12 @@ public class MapperTest {
         project.setTimestamp(date);
        //project.setUserid(" ");
         projectMapper.insertSelective(project);
-        projectMapper.selectByPrimaryKey("213423");//
-        projectMapper.deleteByPrimaryKey("342");//根据主键删除
-        System.out.println(projectMapper.selectByPrimaryKey("213423").getId());
+        //projectMapper.selectByPrimaryKey("213423");//
+        //projectMapper.deleteByPrimaryKey("342");//根据主键删除
+        //System.out.println(projectMapper.selectByPrimaryKey("213423").getId());
         ProjectExample projectExample = new ProjectExample();
-        ProjectExample.Criteria c1=projectExample.createCriteria();
-        c1.andIdEqualTo("213423");
+        projectExample.createCriteria()
+                .andLevel1IsNull();
         List<Project> projects = projectMapper.selectByExample(projectExample);
         projectMapper.deleteByExample(projectExample);
     }

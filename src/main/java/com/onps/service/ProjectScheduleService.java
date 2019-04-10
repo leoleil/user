@@ -1,6 +1,7 @@
 package com.onps.service;
 
 import com.onps.model.Project;
+import com.onps.model.vo.ProjectScheduleHomeSummarizeVO;
 import com.onps.model.vo.ProjectScheduleSummarizeVO;
 import com.onps.model.vo.ProjectScheduleVO;
 
@@ -13,6 +14,7 @@ public interface ProjectScheduleService {
      * @throws Exception 提交失败抛出异常
      */
     void submitProjectSchedule(ProjectScheduleVO projectScheduleVO) throws Exception;
+
 
     /**
      * 获取项目数据
@@ -30,8 +32,9 @@ public interface ProjectScheduleService {
      * @param level5 附加备注
      * @return
      */
-    List<ProjectScheduleSummarizeVO> getProjectScheduleSummarize(String projectName, String level1,
-                                                                 String level2, String level3,
-                                                                 String level4, String level5);
+    ProjectScheduleSummarizeVO getProjectScheduleSummarize(String projectName, String level1,
+                                                           String level2, String level3,
+                                                           String level4, String level5);
+
 
 }

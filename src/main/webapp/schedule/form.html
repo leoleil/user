@@ -2,195 +2,301 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>form 测试</title>
-    <script src="js/jquery-3.3.1.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>form</title>
+    <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="easyui/themes/default/easyui.css">
+    <link rel="stylesheet" href="easyui/themes/icon.css">
 </head>
-<script type="text/javascript">
-    $(function () {
-        $('#submit').click(function () {
-            var d =  {
-                    //表A目录
-                    "projectName": $("#projectName").val(),//项目名称
-                    "documentName": $("#documentName").val(),
-                    "documentNumber": $("#documentNumber").val(),
-                    "documentDate": new Date(),//$("#documentDate").val(),
-                    "investmentamount": $("#investmentamount").val(),
-                    "approvalAuthority": $("#approvalAuthority").val(),
-                    "constructionPeriod": $("#constructionPeriod").val(),
-                    "isimportent": $("#isimportent").val(),
-                    "level1": $("#level1").val(),
-                    "level2": $("#level2").val(),
-                    "level3": $("#level3").val(),
-                    "level4": $("#level4").val(),
-                    "level5": $("#level5").val(),
-                    "subprojectId": $("#subprojectId").val(),
-                    "subName": $("#subName").val(),
-                    "startTime": new Date(),//$("#startTime").val(),
-                    "submitFileName": $("#submitFileName").val(),
-                    "submitDepartment": $("#submitDepartment").val(),
-                    "submitNumber": $("#submitNumber").val(),
-                    "submitDate": new Date(),//$("#submitDate").val(),
-                    "approvalName": $("#approvalName").val(),
-                    "approvalDepartment": $("#approvalDepartment").val(),
-                    "approvalNumber": $("#approvalNumber").val(),
-                    "approvalDate": new Date(),//$("#approvalDate").val(),
-                    "submitFileNameTa": $("#submitFileNameTa").val(),
-                    "submitDepartmentTa": $("#submitDepartmentTa").val(),
-                    "submitNumberTa": $("#submitNumberTa").val(),
-                    "submitDateTa": new Date(),//$("#submitDateTa").val(),
-                    "approvalNameTa": $("#approvalNameTa").val(),
-                    "approvalDepartmentTa": $("#approvalDepartmentTa").val(),
-                    "approvalNumberTa": $("#approvalNumberTa").val(),
-                    "approvalDateTa": new Date(),//$("#approvalDateTa").val(),
-                    "replyDate": new Date(),//$("#replyDate").val(),
-                    "approvalProgress": $("#approvalProgress").val(),
-                    "constructionContent": $("#constructionContent").val(),
-                    "projectNumber": $("#projectNumber").val(),
-                    "constructionPlace": $("#constructionPlace").val(),
-                    "constructionCompany": $("#constructionCompany").val(),
-                    "endTime": new Date(),//$("#endTime").val(),
-                    "releaseInvestment": $("#releaseInvestment").val(),
-                    "constructionPhase": $("#constructionPhase").val(),
-                    "firstDesign": $("#firstDesign").val(),
-                    "bidding": $("#bidding").val(),
-                    "constructionDesign": $("#constructionDesign").val(),
-                    "startTimeCon": new Date(),//$("#startTimeCon").val(),
-                    "projectProgress": $("#projectProgress").val(),
-                    "completedInvestment": $("#completedInvestment").val(),
-                    "formedAbility": $("#formedAbility").val(),
-                    "designedAbility": $("#designedAbility").val(),
-                    "remarks": $("#remarks").val(),
-                    "department": $("#department").val()
-                };
-            console.log(d);
-            $.ajax({
-                url: "/onps/schedule/submitProjectSchedule.do",
-                type: "post",
-                async: false,
-                data: {
-                    //表A目录
-                    "projectName": $("#projectName").val(),//项目名称
-                    "documentName": $("#documentName").val(),//文件名
-                    "documentNumber": $("#documentNumber").val(),//文件号
-                    "documentDate": new Date(),//$("#documentDate").val(),//填报时间
-                    "investmentamount": $("#investmentamount").val(),//计划投资
-                    "approvalAuthority": $("#approvalAuthority").val(),//审批权限
-                    "constructionPeriod": $("#constructionPeriod").val(),//建设周期
-                    "isimportent": $("#isimportent").val(),//是否规划重点项目
-                    "level1": $("#level1").val(),//五个地理位置
-                    "level2": $("#level2").val(),//二级地理位置
-                    "level3": $("#level3").val(),//建设计划
-                    "level4": $("#level4").val(),//十几五建设计划
-                    "level5": $("#level5").val(),//军区军兵种后勤
-                    //"subprojectId": $("#subprojectId").val(),
-                    "subName": $("#subName").val(),//子项目名
-                    "startTime": new Date(),//$("#startTime").val(),//开工时间
-                    "submitFileName": $("#submitFileName").val(),//计划书送审文件名
-                    "submitDepartment": $("#submitDepartment").val(),//计划书送审单位
-                    "submitNumber": $("#submitNumber").val(),//计划书送审文号
-                    "submitDate": new Date(),//$("#submitDate").val(),//计划书送审时间
-                    "approvalName": $("#approvalName").val(),//计划书批复文件名
-                    "approvalDepartment": $("#approvalDepartment").val(),//计划书批复单位
-                    "approvalNumber": $("#approvalNumber").val(),//计划书批复文号
-                    "approvalDate": new Date(),//$("#approvalDate").val(),//计划书批复时间
-                    "submitFileNameTa": $("#submitFileNameTa").val(),//任务书送审文件名
-                    "submitDepartmentTa": $("#submitDepartmentTa").val(),//任务书送审单位
-                    "submitNumberTa": $("#submitNumberTa").val(),//任务书送审文号
-                    "submitDateTa": new Date(),//$("#submitDateTa").val(),//任务书送审时间
-                    "approvalNameTa": $("#approvalNameTa").val(),//任务书批复文件名
-                    "approvalDepartmentTa": $("#approvalDepartmentTa").val(),//任务书批复单位
-                    "approvalNumberTa": $("#approvalNumberTa").val(),//任务书批复文号
-                    "approvalDateTa": new Date(),//$("#approvalDateTa").val(),//任务书批复时间
-                    "replyDate": new Date(),//$("#replyDate").val(),//军委机关回复时间
-                    "approvalProgress": $("#approvalProgress").val(),//审批进展
-                    "constructionContent": $("#constructionContent").val(),//主要建设内容以及发展
-                    "projectNumber": $("#projectNumber").val(),//工程代号
-                    "constructionPlace": $("#constructionPlace").val(),//建设地点
-                    "constructionCompany": $("#constructionCompany").val(),//建设单位
-                    "endTime": new Date(),//$("#endTime").val(),//竣工时间
-                    "releaseInvestment": $("#releaseInvestment").val(),//下达投资（万元）
-                    "constructionPhase": $("#constructionPhase").val(),//建设阶段
-                    "firstDesign": $("#firstDesign").val(),//初步设计
-                    "bidding": $("#bidding").val(),//招标采购
-                    "constructionDesign": $("#constructionDesign").val(),//施工图设计
-                    "startTimeCon": new Date(),//$("#startTimeCon").val(),//建设开工时间
-                    "projectProgress": $("#projectProgress").val(),//工程进度
-                    "completedInvestment": $("#completedInvestment").val(),//已经完成投资
-                    "formedAbility": $("#formedAbility").val(),//已经形成能力
-                    "designedAbility": $("#designedAbility").val(),//完工后预期形成能力
-                    "remarks": $("#remarks").val(),//备注
-                    "department": $("#department").val()//提交部门
-                },
-                success: function (data) {
-                    console.log(data);
-                    if (data.status == 'S00001') {
-                        alert(data.message);
-                    } else {
-                        alert(data.message);
-                    }
-
-                },
-                error: function (data) {
-                    console.log(data);
-                    alert("请求失败!");
-                }
-            });
-        });
-    })
-</script>
 <body>
-<input type="text" name="projectName" id="projectName" placeholder="项目名称"><br>
-<input type="text" name="documentName" id="documentName" placeholder="文件名"><br>
-<input type="text" name="documentNumber" id="documentNumber" placeholder="文件号"><br>
-<input type="text" name="documentDate" id="documentDate" placeholder="填报时间"><br>
-<input type="text" name="investmentamount" id="investmentamount" placeholder="计划投资"><br>
-<input type="text" name="approvalAuthority" id="approvalAuthority" placeholder="审批权限"><br>
-<input type="text" name="constructionPeriod" id="constructionPeriod" placeholder="建设周期"><br>
-<input type="text" name="isimportent" id="isimportent" placeholder="是否规划重点项目"><br>
-<input type="text" name="level1" id="level1" placeholder="五个地理位置"><br>
-<input type="text" name="level2" id="level2" placeholder="二级地理位置"><br>
-<input type="text" name="level3" id="level3" placeholder="建设计划"><br>
-<input type="text" name="level4" id="level4" placeholder="十几五建设计划"><br>
-<input type="text" name="level5" id="level5" placeholder="军区军兵种后勤"><br>
-<input type="text" name="subName" id="subName" placeholder="子项目名"><br>
-<input type="text" name="startTime" id="startTime" placeholder="开工时间"><br>
-<input type="text" name="submitFileName" id="submitFileName" placeholder="计划书送审文件名"><br>
-<input type="text" name="submitDepartment" id="submitDepartment" placeholder="计划书送审单位"><br>
-<input type="text" name="submitNumber" id="submitNumber" placeholder="计划书送审文号"><br>
-<input type="text" name="submitDate" id="submitDate" placeholder="计划书送审时间"><br>
-<input type="text" name="approvalName" id="approvalName" placeholder="计划书批复文件名"><br>
-<input type="text" name="approvalDepartment" id="approvalDepartment" placeholder="计划书批复单位"><br>
-<input type="text" name="approvalNumber" id="approvalNumber" placeholder="计划书批复文号"><br>
-<input type="text" name="approvalDate" id="approvalDate" placeholder="计划书批复时间"><br>
-<input type="text" name="submitFileNameTa" id="submitFileNameTa" placeholder="任务书送审文件名"><br>
-<input type="text" name="submitDepartmentTa" id="submitDepartmentTa" placeholder="任务书送审单位"><br>
-<input type="text" name="submitNumberTa" id="submitNumberTa" placeholder="任务书送审文号"><br>
-<input type="text" name="submitDateTa" id="submitDateTa" placeholder="任务书送审时间"><br>
-<input type="text" name="approvalNameTa" id="approvalNameTa" placeholder="任务书批复文件名"><br>
-<input type="text" name="approvalDepartmentTa" id="approvalDepartmentTa" placeholder="任务书批复单位"><br>
-<input type="text" name="approvalNumberTa" id="approvalNumberTa" placeholder="任务书批复文号"><br>
-<input type="text" name="approvalDateTa" id="approvalDateTa" placeholder="任务书批复时间"><br>
-<input type="text" name="replyDate" id="replyDate" placeholder="军委机关回复时间"><br>
-<input type="text" name="approvalProgress" id="approvalProgress" placeholder="审批进展"><br>
-<input type="text" name="constructionContent" id="constructionContent" placeholder="主要建设内容以及发展"><br>
-<input type="text" name="projectNumber" id="projectNumber" placeholder="工程代号"><br>
-<input type="text" name="constructionPlace" id="constructionPlace" placeholder="建设地点"><br>
-<input type="text" name="constructionCompany" id="constructionCompany" placeholder="建设单位"><br>
-<input type="text" name="endTime" id="endTime" placeholder="竣工时间"><br>
-<input type="text" name="releaseInvestment" id="releaseInvestment" placeholder="下达投资"><br>
-<input type="text" name="constructionPhase" id="constructionPhase" placeholder="建设阶段"><br>
-<input type="text" name="firstDesign" id="firstDesign" placeholder="初步设计"><br>
-<input type="text" name="bidding" id="bidding" placeholder="招标采购"><br>
-<input type="text" name="constructionDesign" id="constructionDesign" placeholder="施工图设计"><br>
-<input type="text" name="startTimeCon" id="startTimeCon" placeholder="建设开工时间"><br>
-<input type="text" name="projectProgress" id="projectProgress" placeholder="工程进度"><br>
-<input type="text" name="completedInvestment" id="completedInvestment" placeholder="已经完成投资"><br>
-<input type="text" name="formedAbility" id="formedAbility" placeholder="已经形成能力"><br>
-<input type="text" name="designedAbility" id="designedAbility" placeholder="完工后预期形成能力"><br>
-<input type="text" name="remarks" id="remarks" placeholder="备注"><br>
-<input type="text" name="department" id="department" placeholder="提交部门"><br>
-<button id="submit">提交</button>
+    <div class="header">
+        <img id="logo" src="img/logo.png" alt="logo">
+        <p id="title">全军十十十十十十十十十十系统<br/><span id="eng-title">THE PLA'S INFORMATION SUPPORT AND ASSURANCE COMBAT READINESS DUTY MANAGEMENT SYSTEM</span></p>
+        <div class="divide"></div>
+        <p id="sub-title">测试用的测试用的测试</p>
+        <div class="divide"></div>
+        <div class="right-wrap">
+            <div id="divide"></div>
+            <div id="duty">测试测试 名称一<br/>测试测试 名称二</div>
+            <div id="tduty">今日<br/>值班</div>    
+            <div id="divide"></div>
+            <div id="right-title">测试用的测试用的测试<br/><span id="divTime"></span></div>    
+        </div>
+    </div>    
+    <div class="menu-bar">
+        <ul id="back-bar">
+            <li><a href="index.html">查看已提报项目></a></li>
+            <li><a href="view.html">全军项目提报情况></a></li>
+            <li><a href="new.html"></a></li>
+            <li><a href="form.html">填报项目</a></li>
+        </ul>
+        <ul id="icon-ul">
+            <li><img src="img/关闭.png" alt="close"></li>
+            <li><img src="img/全屏.png" alt="fullScreen"></li>
+            <li><img src="img/刷新.png" alt="refresh"></li>
+        </ul>
+    </div>
+    <div id="box">
+        <div title="A-规划/计划安排情况">
+            <div style="margin:20px 50px;">
+                <input  id="a_1" class="a_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input  id="a_2" class="a_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <select name="项目名称" id="a_3" class="a_input" style="width:250px">
+                </select>
+            </div>
+            <div style="margin:20px 50px">
+                规划/计划文件&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" id="a_4" class="a_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" id="a_5" class="a_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;    
+                <input type="text" id="a_6" class="a_input">
+            </div>
+            <div style="margin:20px 50px">
+                <input type="text" id="a_7" class="a_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" id="a_8" class="a_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;    
+                <input type="text" id="a_9" class="a_input">
+            </div>
+            <div style="margin:20px 50px">
+                <input type="text" id="a_10" class="a_input">
+            </div>
+        </div>
+        <div title="B-项目审批情况">
+            <div style="margin:20px 50px;">
+                <input  id="b_1" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input  id="b_2" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <hr class="hr">
+                <span><b>立项送审</b></span><br>
+                <input  id="b_3" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input  id="b_4" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input  id="b_5" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input  id="b_6" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <hr class="hr">
+                <span><b>立项批复</b></span><br>
+                <input  id="b_7" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input  id="b_8" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input  id="b_9" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input  id="b_10" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <hr class="hr">
+                <span><b>设计任务书送审</b></span><br>
+                <input  id="b_11" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input  id="b_12" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input  id="b_13" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input  id="b_14" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <hr class="hr">
+                <span><b>下达设计任务书、建设计划（批复）</b></span><br>
+                <input  id="b_15" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input  id="b_16" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input  id="b_17" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input  id="b_18" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <hr class="hr">
+                <span><b>建设周期</b></span><br>
+                <input id="b_25" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="b_26" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <hr class="hr">
+                <input  id="b_19" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input  id="b_20" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;<br><br>
+                <input id="b_21" class="b_input"><br><br>
+                <input id="b_22" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="b_23" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="b_24" class="b_input"><br><br>
+                <input id="b_27" class="b_input">
+                <br><br>
+            </div>
+        </div>
+        <div title="C-建设进展情况">
+            <div style="margin:20px 50px;">
+                <input  id="c_1" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <hr class="hr">
+                <span><b>建设周期</b></span><br>
+                <input id="c_2" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="c_3" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="c_4" class="b_input"><br><br>
+                <input id="c_5" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="c_6" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="c_7" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="c_8" class="b_input">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <hr class="hr">
+                <input id="c_9" class="b_input"><br><br>
+                <input id="c_10" class="b_input"><br><br>
+                <input id="c_11" class="b_input"><br><br>
+                <input id="c_12" class="b_input">
 
+            </div>
+            
+        </div>
+    </div>
+    <!-- <div class="content">
+        <div class="con-header">
+            填报项目
+        </div>
+        <div class="a-content row">
+            <div class="title col-sm-2">
+                <h4>规划/计划安排情况</h4>
+            </div>
+            <div class="a-form col-sm-10 ">
+                <span>项目名称：</span> <input type="text" name="proj_name" placeholder="应严格按照XX填写"><br/>
+                <span>规划/计划文件：</span>
+                <span class="h6">文件名：</span> <input type="text" name="file">
+                <span class="h6">文号：</span> <input type="text" name="file">
+                <span class="h6">时间：</span>  <input type="text" name="file"><br/>
+                <span>规划计划投资（万元）：</span> <input type="text" name="plan_invest"><br/>
+                <span>审批权限：</span> <select name="authority" id="authority">
+                                            <option value="">军委</option>
+                                            <option value="">军种</option>
+                                            <option value="">/</option>
+                                        </select>
+                <span>审批时间：</span>  <input type="text" name="process_time"><br>
+                <span>建设周期：</span>  <input type="text" name="construction_period"><br/>
+                <span>规划纲要重点项目：</span><br/> <textarea name="key_proj" id="" cols="200" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="b-content row">
+            <div class="title col-sm-2">
+                <h4>项目审批情况</h4>
+            </div>
+            <div class="b-form col-sm-10">
+                <span>立项、设计任务书送审时间：</span> <input type="text" name="submit_time">
+                <span>军委机关审核意见回复时间：</span> <input type="text" name="reply_time">
+                <span>审批进展：</span><select name="approval" id="approval">
+                                    <option value="">全部完成</option>
+                                    <option value="">部分完成</option>
+                                    <option value="">待审批</option>
+                                </select>
+                <div class="subProj" id="b_1">
+                    <span>项目名称：</span> <input type="text" name="subProj_name" placeholder="应严格按照XX填写"><br/>
+                    <span>审批形式：</span><select name="approval_form" id="approval_form">
+                            <option value="">任务书</option>
+                            <option value="">方案</option>
+                            <option value="">计划</option>
+                        </select><br/>
+                    <span>审核文件：</span>
+                    <span class="h6">文件名：</span> <input type="text" name="file">
+                    <span class="h6">文号：</span> <input type="text" name="file">
+                    <span class="h6">时间：</span>  <input type="text" name="file"><br/>
+                    <span>主要建设内容：</span><br/> <textarea name="main_content" id="" cols="200" rows="5"></textarea><br/>
+                    <span>工程代号：</span> <input type="text" name="code">
+                    <span>建设地点：</span> <input type="text" name="location"><br/>
+                    <span>建设规模：</span>
+                    <span>单位：</span> <input type="text" name="company">         
+                    <span>工程量：</span> <input type="text" name="work_sum"><br/>
+                    <span>建设周期：</span>
+                    <span>开工时间：</span> <input type="text" name="start">         
+                    <span>竣工时间：</span> <input type="text" name="end"><br/>  
+                    <span>总投资（万元）：</span>   <input type="text" name="sum">  
+                    <button class="mybtn" id="delete"><span id="icon-delete"></span>删除</button>
+                    <button class="mybtn" id="add"><span id="icon-add"></span>添加</button>
+                </div>
+            </div>
+        </div>
+        <div class="c-content row">
+            <div class="title col-sm-2">
+                <h4>计划下达情况</h4>
+            </div>
+            <div class="c-form col-sm-10">
+                <span>计划进展：</span><select name="plan_progress" id="">
+                        <option value="">全部下达</option>
+                        <option value="">部分下达</option>
+                        <option value="">未下达</option>
+                        </select><br/>
+                <div class="subProj" id="c_1">
+                    <span>计划文件：</span>
+                    <span class="h6">文件名：</span> <input type="text" name="file">
+                    <span class="h6">文号：</span> <input type="text" name="file">
+                    <span class="h6">时间：</span>  <input type="text" name="file"><br/>
+                    <span>已下达投资：</span> <input type="text" name="released_invest">
+                    <button class="mybtn" id="delete"><span id="icon-delete"></span>删除</button>
+                    <button class="mybtn" id="add"><span id="icon-add"></span>添加</button>
+                </div> 
+            </div>
+        </div>
+        <div class="d-content row">
+            <div class="title col-sm-2">
+                <h4>建设进展情况</h4>
+            </div>
+            <div class="d-form col-sm-10">
+                <span>建设阶段：</span> <select name="construction_stage" id="">
+                    <option value="">未开工</option>
+                    <option value="">在建</option>
+                    <option value="">竣工</option>
+                </select><br/>
+                <div class="subProj" id="d_1">
+                    <span>建设周期：</span>
+                    <span>初步设计：</span><select name="initial_design" id="">
+                            <option value="">未开展</option>
+                            <option value="">正在进行</option>
+                            <option value="">已完成</option>
+                        </select>
+                    <span>招标采购：</span><select name="bid" id="">
+                            <option value="">未启动</option>
+                            <option value="">正在拟制招标采购方案</option>
+                            <option value="">正在进行招标采购</option>
+                            <option value="">已完成</option>
 
+                        </select>
+                    <span>施工图设计：</span><select name="drawing_design" id="">
+                            <option value="">未开展</option>
+                            <option value="">正在进行</option>
+                            <option value="">已完成</option>
+                        </select><br/>
+                    <span>开工时间：</span> <input type="text" name="start">
+                    <span>工程完成：</span> <input type="text" name="rate"><br>
+                    <span>初验时间：</span> <input type="text" name="accept_time">
+                    <span>竣工时间：</span> <input type="text" name="complete_time"><br/>
+                    <span>完成投资：</span> <input type="text" name="investment"><br/>
+                    <span>形象进度：</span><br/> 
+                    <textarea name="schedule" id="" cols="200" rows="5"></textarea><br/>
+                    <span>备注：</span> <input type="text" name="remark">
+                    <button class="mybtn" id="delete"><span id="icon-delete"></span>删除</button>
+                    <button class="mybtn" id="add"><span id="icon-add"></span>添加</button>
+                </div>
+                <button type="submit" class="mybtn" id="save"><span id="icon-save"></span>保存</button>
+            </div>
+        </div>
+    </div> -->
 </body>
+<script src="js/table.js"></script>
+<script src="js/jquery3.3.1.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="easyui/jquery.easyui.min.js"></script>
+<script src="easyui/easyui-lang-zh_CN.js"></script>
+<script src="js/form.js"></script>
+
 </html>

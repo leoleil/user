@@ -1,10 +1,8 @@
 package com.onps.service.serviceimpl.schedule;
 
 import com.onps.dao.ProjectMapper;
-import com.onps.dao.SubprojectMapper;
 import com.onps.model.Project;
 import com.onps.model.ProjectExample;
-import com.onps.model.SubprojectExample;
 import com.onps.model.vo.ProjectScheduleVO;
 import com.onps.service.ProjectScheduleFormAService;
 import com.onps.service.UserSessionService;
@@ -18,6 +16,7 @@ import java.util.List;
 
 @Service
 public class ProjectScheduleFormAServiceImpl implements ProjectScheduleFormAService {
+
     @Autowired
     private ProjectMapper projectMapper;
     @Autowired
@@ -111,7 +110,5 @@ public class ProjectScheduleFormAServiceImpl implements ProjectScheduleFormAServ
         subcriteria.andProjectidEqualTo(id);
         subprojectMapper.deleteByExample(subprojectExp1);//删除projectId=主项目id的所有子项目
 
-
-        projectMapper.deleteByPrimaryKey(id);
     }
 }

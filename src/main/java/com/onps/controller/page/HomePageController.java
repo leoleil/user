@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomePageController {
 
     @RequestMapping(value = "/toHome")
-    @RequiresRoles(value = "user")
+    @RequiresRoles(value = "user1")
     public String toHome(){
         return "index";
     }

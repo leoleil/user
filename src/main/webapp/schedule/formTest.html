@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form 测试</title>
+    <script src="js/jquery-3.3.1.js"></script>
+</head>
+<script type="text/javascript">
+    $(function () {
+        $('#submit').click(function () {
+            var d =  {
+                    //表A目录
+                    "projectName": $("#projectName").val(),//项目名称
+                    "documentName": $("#documentName").val(),
+                    "documentNumber": $("#documentNumber").val(),
+                    "documentDate": new Date(),//$("#documentDate").val(),
+                    "investmentamount": $("#investmentamount").val(),
+                    "approvalAuthority": $("#approvalAuthority").val(),
+                    "constructionPeriod": $("#constructionPeriod").val(),
+                    "isimportent": $("#isimportent").val(),
+                    "level1": $("#level1").val(),
+                    "level2": $("#level2").val(),
+                    "level3": $("#level3").val(),
+                    "level4": $("#level4").val(),
+                    "level5": $("#level5").val(),
+                    "subprojectId": $("#subprojectId").val(),
+                    "subName": $("#subName").val(),
+                    "startTime": new Date(),//$("#startTime").val(),
+                    "submitFileName": $("#submitFileName").val(),
+                    "submitDepartment": $("#submitDepartment").val(),
+                    "submitNumber": $("#submitNumber").val(),
+                    "submitDate": new Date(),//$("#submitDate").val(),
+                    "approvalName": $("#approvalName").val(),
+                    "approvalDepartment": $("#approvalDepartment").val(),
+                    "approvalNumber": $("#approvalNumber").val(),
+                    "approvalDate": new Date(),//$("#approvalDate").val(),
+                    "submitFileNameTa": $("#submitFileNameTa").val(),
+                    "submitDepartmentTa": $("#submitDepartmentTa").val(),
+                    "submitNumberTa": $("#submitNumberTa").val(),
+                    "submitDateTa": new Date(),//$("#submitDateTa").val(),
+                    "approvalNameTa": $("#approvalNameTa").val(),
+                    "approvalDepartmentTa": $("#approvalDepartmentTa").val(),
+                    "approvalNumberTa": $("#approvalNumberTa").val(),
+                    "approvalDateTa": new Date(),//$("#approvalDateTa").val(),
+                    "replyDate": new Date(),//$("#replyDate").val(),
+                    "approvalProgress": $("#approvalProgress").val(),
+                    "constructionContent": $("#constructionContent").val(),
+                    "projectNumber": $("#projectNumber").val(),
+                    "constructionPlace": $("#constructionPlace").val(),
+                    "constructionCompany": $("#constructionCompany").val(),
+                    "endTime": new Date(),//$("#endTime").val(),
+                    "releaseInvestment": $("#releaseInvestment").val(),
+                    "constructionPhase": $("#constructionPhase").val(),
+                    "firstDesign": $("#firstDesign").val(),
+                    "bidding": $("#bidding").val(),
+                    "constructionDesign": $("#constructionDesign").val(),
+                    "startTimeCon": new Date(),//$("#startTimeCon").val(),
+                    "projectProgress": $("#projectProgress").val(),
+                    "completedInvestment": $("#completedInvestment").val(),
+                    "formedAbility": $("#formedAbility").val(),
+                    "designedAbility": $("#designedAbility").val(),
+                    "remarks": $("#remarks").val(),
+                    "department": $("#department").val()
+                };
+            console.log(d);
+            $.ajax({
+                url: "/onps/schedule/submitProjectSchedule.do",
+                type: "post",
+                async: false,
+                data: {
+                    //表A目录
+                    "projectName": $("#projectName").val(),//项目名称
+                    "documentName": $("#documentName").val(),//文件名
+                    "documentNumber": $("#documentNumber").val(),//文件号
+                    "documentDate": new Date(),//$("#documentDate").val(),//填报时间
+                    "investmentamount": $("#investmentamount").val(),//计划投资
+                    "approvalAuthority": $("#approvalAuthority").val(),//审批权限
+                    "constructionPeriod": $("#constructionPeriod").val(),//建设周期
+                    "isimportent": $("#isimportent").val(),//是否规划重点项目
+                    "level1": $("#level1").val(),//五个地理位置
+                    "level2": $("#level2").val(),//二级地理位置
+                    "level3": $("#level3").val(),//建设计划
+                    "level4": $("#level4").val(),//十几五建设计划
+                    "level5": $("#level5").val(),//军区军兵种后勤
+                    //"subprojectId": $("#subprojectId").val(),
+                    "subName": $("#subName").val(),//子项目名
+                    "startTime": new Date(),//$("#startTime").val(),//开工时间
+                    "submitFileName": $("#submitFileName").val(),//计划书送审文件名
+                    "submitDepartment": $("#submitDepartment").val(),//计划书送审单位
+                    "submitNumber": $("#submitNumber").val(),//计划书送审文号
+                    "submitDate": new Date(),//$("#submitDate").val(),//计划书送审时间
+                    "approvalName": $("#approvalName").val(),//计划书批复文件名
+                    "approvalDepartment": $("#approvalDepartment").val(),//计划书批复单位
+                    "approvalNumber": $("#approvalNumber").val(),//计划书批复文号
+                    "approvalDate": new Date(),//$("#approvalDate").val(),//计划书批复时间
+                    "submitFileNameTa": $("#submitFileNameTa").val(),//任务书送审文件名
+                    "submitDepartmentTa": $("#submitDepartmentTa").val(),//任务书送审单位
+                    "submitNumberTa": $("#submitNumberTa").val(),//任务书送审文号
+                    "submitDateTa": new Date(),//$("#submitDateTa").val(),//任务书送审时间
+                    "approvalNameTa": $("#approvalNameTa").val(),//任务书批复文件名
+                    "approvalDepartmentTa": $("#approvalDepartmentTa").val(),//任务书批复单位
+                    "approvalNumberTa": $("#approvalNumberTa").val(),//任务书批复文号
+                    "approvalDateTa": new Date(),//$("#approvalDateTa").val(),//任务书批复时间
+                    "replyDate": new Date(),//$("#replyDate").val(),//军委机关回复时间
+                    "approvalProgress": $("#approvalProgress").val(),//审批进展
+                    "constructionContent": $("#constructionContent").val(),//主要建设内容以及发展
+                    "projectNumber": $("#projectNumber").val(),//工程代号
+                    "constructionPlace": $("#constructionPlace").val(),//建设地点
+                    "constructionCompany": $("#constructionCompany").val(),//建设单位
+                    "endTime": new Date(),//$("#endTime").val(),//竣工时间
+                    "releaseInvestment": $("#releaseInvestment").val(),//下达投资（万元）
+                    "constructionPhase": $("#constructionPhase").val(),//建设阶段
+                    "firstDesign": $("#firstDesign").val(),//初步设计
+                    "bidding": $("#bidding").val(),//招标采购
+                    "constructionDesign": $("#constructionDesign").val(),//施工图设计
+                    "startTimeCon": new Date(),//$("#startTimeCon").val(),//建设开工时间
+                    "projectProgress": $("#projectProgress").val(),//工程进度
+                    "completedInvestment": $("#completedInvestment").val(),//已经完成投资
+                    "formedAbility": $("#formedAbility").val(),//已经形成能力
+                    "designedAbility": $("#designedAbility").val(),//完工后预期形成能力
+                    "remarks": $("#remarks").val(),//备注
+                    "department": $("#department").val()//提交部门
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data.status == 'S00001') {
+                        alert(data.message);
+                    } else {
+                        alert(data.message);
+                    }
+
+                },
+                error: function (data) {
+                    console.log(data);
+                    alert("请求失败!");
+                }
+            });
+        });
+    })
+</script>
+<body>
+<input type="text" name="projectName" id="projectName" placeholder="项目名称"><br>
+<input type="text" name="documentName" id="documentName" placeholder="文件名"><br>
+<input type="text" name="documentNumber" id="documentNumber" placeholder="文件号"><br>
+<input type="text" name="documentDate" id="documentDate" placeholder="填报时间"><br>
+<input type="text" name="investmentamount" id="investmentamount" placeholder="计划投资"><br>
+<input type="text" name="approvalAuthority" id="approvalAuthority" placeholder="审批权限"><br>
+<input type="text" name="constructionPeriod" id="constructionPeriod" placeholder="建设周期"><br>
+<input type="text" name="isimportent" id="isimportent" placeholder="是否规划重点项目"><br>
+<input type="text" name="level1" id="level1" placeholder="五个地理位置"><br>
+<input type="text" name="level2" id="level2" placeholder="二级地理位置"><br>
+<input type="text" name="level3" id="level3" placeholder="建设计划"><br>
+<input type="text" name="level4" id="level4" placeholder="十几五建设计划"><br>
+<input type="text" name="level5" id="level5" placeholder="军区军兵种后勤"><br>
+<input type="text" name="subName" id="subName" placeholder="子项目名"><br>
+<input type="text" name="startTime" id="startTime" placeholder="开工时间"><br>
+<input type="text" name="submitFileName" id="submitFileName" placeholder="计划书送审文件名"><br>
+<input type="text" name="submitDepartment" id="submitDepartment" placeholder="计划书送审单位"><br>
+<input type="text" name="submitNumber" id="submitNumber" placeholder="计划书送审文号"><br>
+<input type="text" name="submitDate" id="submitDate" placeholder="计划书送审时间"><br>
+<input type="text" name="approvalName" id="approvalName" placeholder="计划书批复文件名"><br>
+<input type="text" name="approvalDepartment" id="approvalDepartment" placeholder="计划书批复单位"><br>
+<input type="text" name="approvalNumber" id="approvalNumber" placeholder="计划书批复文号"><br>
+<input type="text" name="approvalDate" id="approvalDate" placeholder="计划书批复时间"><br>
+<input type="text" name="submitFileNameTa" id="submitFileNameTa" placeholder="任务书送审文件名"><br>
+<input type="text" name="submitDepartmentTa" id="submitDepartmentTa" placeholder="任务书送审单位"><br>
+<input type="text" name="submitNumberTa" id="submitNumberTa" placeholder="任务书送审文号"><br>
+<input type="text" name="submitDateTa" id="submitDateTa" placeholder="任务书送审时间"><br>
+<input type="text" name="approvalNameTa" id="approvalNameTa" placeholder="任务书批复文件名"><br>
+<input type="text" name="approvalDepartmentTa" id="approvalDepartmentTa" placeholder="任务书批复单位"><br>
+<input type="text" name="approvalNumberTa" id="approvalNumberTa" placeholder="任务书批复文号"><br>
+<input type="text" name="approvalDateTa" id="approvalDateTa" placeholder="任务书批复时间"><br>
+<input type="text" name="replyDate" id="replyDate" placeholder="军委机关回复时间"><br>
+<input type="text" name="approvalProgress" id="approvalProgress" placeholder="审批进展"><br>
+<input type="text" name="constructionContent" id="constructionContent" placeholder="主要建设内容以及发展"><br>
+<input type="text" name="projectNumber" id="projectNumber" placeholder="工程代号"><br>
+<input type="text" name="constructionPlace" id="constructionPlace" placeholder="建设地点"><br>
+<input type="text" name="constructionCompany" id="constructionCompany" placeholder="建设单位"><br>
+<input type="text" name="endTime" id="endTime" placeholder="竣工时间"><br>
+<input type="text" name="releaseInvestment" id="releaseInvestment" placeholder="下达投资"><br>
+<input type="text" name="constructionPhase" id="constructionPhase" placeholder="建设阶段"><br>
+<input type="text" name="firstDesign" id="firstDesign" placeholder="初步设计"><br>
+<input type="text" name="bidding" id="bidding" placeholder="招标采购"><br>
+<input type="text" name="constructionDesign" id="constructionDesign" placeholder="施工图设计"><br>
+<input type="text" name="startTimeCon" id="startTimeCon" placeholder="建设开工时间"><br>
+<input type="text" name="projectProgress" id="projectProgress" placeholder="工程进度"><br>
+<input type="text" name="completedInvestment" id="completedInvestment" placeholder="已经完成投资"><br>
+<input type="text" name="formedAbility" id="formedAbility" placeholder="已经形成能力"><br>
+<input type="text" name="designedAbility" id="designedAbility" placeholder="完工后预期形成能力"><br>
+<input type="text" name="remarks" id="remarks" placeholder="备注"><br>
+<input type="text" name="department" id="department" placeholder="提交部门"><br>
+<button id="submit">提交</button>
+
+
+</body>
+</html>

@@ -4,11 +4,13 @@ import com.onps.controller.UserManageController;
 import com.onps.dao.ProjectMapper;
 import com.onps.dao.SubprojectMapper;
 import com.onps.model.*;
+import com.onps.model.vo.ProjectScheduleHomeSummarizeVO;
 import com.onps.model.vo.ProjectScheduleSummarizeVO;
 import com.onps.model.vo.ProjectScheduleVO;
 import com.onps.service.ProjectScheduleService;
 import com.onps.service.UserSessionService;
 import com.onps.utils.RoleString;
+import com.onps.utils.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,53 +80,59 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
             //获取到各个创建的父项目
             projectList = projectMapper.selectByExample(projectExample);
         }
+        if(projectList.size() == 0)throw new Exception("表A创建异常");
         //如果子项目的名字为空或者没有则不对子项目进行创建
         if(projectScheduleVO.getSubName() != null && !projectScheduleVO.getSubName().equals("")){
-            if(projectList.size() != 0 ){
-                subproject.setProjectid(projectList.get(0).getId());
-                subproject.setSubname(projectScheduleVO.getSubName());
-                subproject.setStarttime(projectScheduleVO.getStartTime());
-                subproject.setSubmitfilename(projectScheduleVO.getSubmitFileName());
-                subproject.setSubmitdepartment(projectScheduleVO.getSubmitDepartment());
-                subproject.setSubmitnumber(projectScheduleVO.getSubmitNumber());
-                subproject.setSubmitdate(projectScheduleVO.getSubmitDate());
-                subproject.setApprovalname(projectScheduleVO.getApprovalName());
-                subproject.setApprovaldepartment(projectScheduleVO.getApprovalDepartment());
-                subproject.setApprovalnumber(projectScheduleVO.getApprovalNumber());
-                subproject.setApprovaldate(projectScheduleVO.getApprovalDate());
-                subproject.setSubmitfilenameTa(projectScheduleVO.getSubmitFileNameTa());
-                subproject.setSubmitdepartmentTa(projectScheduleVO.getSubmitDepartmentTa());
-                subproject.setSubmitnumberTa(projectScheduleVO.getSubmitNumberTa());
-                subproject.setSubmitdateTa(projectScheduleVO.getSubmitDateTa());
-                subproject.setApprovaldateTa(projectScheduleVO.getApprovalDateTa());
-                subproject.setApprovaldepartmentTa(projectScheduleVO.getApprovalDepartmentTa());
-                subproject.setApprovalnumberTa(projectScheduleVO.getApprovalNumberTa());
-                subproject.setApprovaldateTa(projectScheduleVO.getApprovalDateTa());
-                subproject.setReplydate(projectScheduleVO.getReplyDate());
-                subproject.setApprovalprogress(projectScheduleVO.getApprovalProgress());
-                subproject.setConstructioncontent(projectScheduleVO.getConstructionContent());
-                subproject.setProjectnumber(projectScheduleVO.getProjectNumber());
-                subproject.setConstructionplace(projectScheduleVO.getConstructionPlace());
-                subproject.setConstructioncompany(projectScheduleVO.getConstructionCompany());
-                subproject.setEndtime(projectScheduleVO.getEndTime());
-                subproject.setReleaseinvestment(projectScheduleVO.getReleaseInvestment());
-                subproject.setConstructionphase(projectScheduleVO.getConstructionPhase());
-                subproject.setFirstdesign(projectScheduleVO.getFirstDesign());
-                subproject.setBidding(projectScheduleVO.getBidding());
-                subproject.setConstructiondesign(projectScheduleVO.getConstructionDesign());
-                subproject.setStarttimeCon(projectScheduleVO.getStartTimeCon());
-                subproject.setProjectprogress(projectScheduleVO.getProjectProgress());
-                subproject.setCompletedinvestment(projectScheduleVO.getCompletedInvestment());
-                subproject.setFormedability(projectScheduleVO.getFormedAbility());
-                subproject.setDesignedability(projectScheduleVO.getDesignedAbility());
-                subproject.setRemarks(projectScheduleVO.getRemarks());
-                subproject.setDepartment(projectScheduleVO.getDepartment());
-                subproject.setUserid(user.getUserId());
-                subprojectMapper.insertSelective(subproject);
+            SubprojectExample subprojectExample = new SubprojectExample();
+            subprojectExample.createCriteria()
+                    .andProjectidEqualTo(projectList.get(0).getId())
+                    .andSubnameEqualTo(projectScheduleVO.getSubName());
+            if(subprojectMapper.selectByExample(subprojectExample).size() != 0){
+                throw new Exception("表B重命名");
             }
-            else {
-                throw new Exception("ProjectScheduleService：创建B表出错");
-            }
+            subproject.setProjectid(projectList.get(0).getId());
+            subproject.setSubname(projectScheduleVO.getSubName());
+            subproject.setStarttime(projectScheduleVO.getStartTime());
+            subproject.setSubmitfilename(projectScheduleVO.getSubmitFileName());
+            subproject.setSubmitdepartment(projectScheduleVO.getSubmitDepartment());
+            subproject.setSubmitnumber(projectScheduleVO.getSubmitNumber());
+            subproject.setSubmitdate(projectScheduleVO.getSubmitDate());
+            subproject.setApprovalname(projectScheduleVO.getApprovalName());
+            subproject.setApprovaldepartment(projectScheduleVO.getApprovalDepartment());
+            subproject.setApprovalnumber(projectScheduleVO.getApprovalNumber());
+            subproject.setApprovaldate(projectScheduleVO.getApprovalDate());
+            subproject.setSubmitfilenameTa(projectScheduleVO.getSubmitFileNameTa());
+            subproject.setSubmitdepartmentTa(projectScheduleVO.getSubmitDepartmentTa());
+            subproject.setSubmitnumberTa(projectScheduleVO.getSubmitNumberTa());
+            subproject.setSubmitdateTa(projectScheduleVO.getSubmitDateTa());
+            subproject.setApprovaldateTa(projectScheduleVO.getApprovalDateTa());
+            subproject.setApprovaldepartmentTa(projectScheduleVO.getApprovalDepartmentTa());
+            subproject.setApprovalnumberTa(projectScheduleVO.getApprovalNumberTa());
+            subproject.setApprovaldateTa(projectScheduleVO.getApprovalDateTa());
+            subproject.setReplydate(projectScheduleVO.getReplyDate());
+            subproject.setApprovalprogress(projectScheduleVO.getApprovalProgress());
+            subproject.setConstructioncontent(projectScheduleVO.getConstructionContent());
+            subproject.setProjectnumber(projectScheduleVO.getProjectNumber());
+            subproject.setConstructionplace(projectScheduleVO.getConstructionPlace());
+            subproject.setConstructioncompany(projectScheduleVO.getConstructionCompany());
+            subproject.setEndtime(projectScheduleVO.getEndTime());
+            subproject.setReleaseinvestment(projectScheduleVO.getReleaseInvestment());
+            subproject.setConstructionphase(projectScheduleVO.getConstructionPhase());
+            subproject.setFirstdesign(projectScheduleVO.getFirstDesign());
+            subproject.setBidding(projectScheduleVO.getBidding());
+            subproject.setConstructiondesign(projectScheduleVO.getConstructionDesign());
+            subproject.setStarttimeCon(projectScheduleVO.getStartTimeCon());
+            subproject.setProjectprogress(projectScheduleVO.getProjectProgress());
+            subproject.setCompletedinvestment(projectScheduleVO.getCompletedInvestment());
+            subproject.setFormedability(projectScheduleVO.getFormedAbility());
+            subproject.setDesignedability(projectScheduleVO.getDesignedAbility());
+            subproject.setRemarks(projectScheduleVO.getRemarks());
+            subproject.setDepartment(projectScheduleVO.getDepartment());
+            subproject.setTesttime(projectScheduleVO.getTestTime());
+            subproject.setEndtimeCon(projectScheduleVO.getEndTimeCon());
+            subproject.setReason(projectScheduleVO.getReason());
+            subproject.setUserid(user.getUserId());
+            subprojectMapper.insertSelective(subproject);
         }
     }
 
@@ -137,7 +145,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
     public List<ProjectScheduleVO> getProjectScheduleList() {
         //获取用户信息
         User user = (User) SecurityUtils.getSubject().getPrincipal();
-        List<ProjectScheduleVO> projectScheduleVOList = new ArrayList<>();
+        List<ProjectScheduleVO> projectScheduleVOList = new ArrayList<ProjectScheduleVO>();
         if(userSessionService.isRole(RoleString.USER_1)){
             //一级用户返回全部项目
             ProjectExample projectExample = new ProjectExample();
@@ -320,7 +328,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                     projectScheduleVO.setLevel4((String) project.getLevel4());
                     projectScheduleVO.setLevel5((String) project.getLevel5());
                     projectScheduleVO.setTimestamp((Date) project.getTimestamp());
-                    //获取表内容
+                    //获取表B内容
                     projectScheduleVO.setSubName((String) subproject.getSubname());
                     projectScheduleVO.setStartTime(subproject.getStarttime());
                     projectScheduleVO.setSubmitFileName((String)subproject.getSubmitfilename());
@@ -378,13 +386,110 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
      * @param level3      建设计划
      * @param level4      建设计划附属信息
      * @param level5      附加备注
-     * @return
+     * @return 返回统计信息，如果返回为null为没有
      */
     @Override
-    public List<ProjectScheduleSummarizeVO> getProjectScheduleSummarize(String projectName, String level1,
+    public ProjectScheduleSummarizeVO getProjectScheduleSummarize(String projectName, String level1,
                                                                         String level2, String level3,
                                                                         String level4, String level5) {
+        int subProjectNumber;//子项目数量
 
-        return null;
+        int startWorkingNumber;//开工数量
+
+        double starWorkingRatio;//开工率
+
+        double progress = 0;//总体进度
+
+        int finishWorkingNumber;//完工数量
+
+        double finishWorkingRatio;//完工率
+
+        int approvalProgressNumber;//正在审批数
+
+        ProjectExample projectExample = new ProjectExample();
+        ProjectExample.Criteria criteria = projectExample.createCriteria();
+        if(projectName != null && !projectName.equals("")){
+            criteria.andProjectnameEqualTo(projectName);
+        }
+        if(level1 != null && !level1.equals("")){
+            criteria.andLevel1EqualTo(level1);
+        }
+        if(level2 != null && !level1.equals("")){
+            criteria.andLevel2EqualTo(level2);
+        }
+        if(level3 != null && !level3.equals("")){
+            criteria.andLevel3EqualTo(level3);
+        }
+        if(level4 != null && !level4.equals("")){
+            criteria.andLevel4EqualTo(level4);
+        }
+        if(level5 != null && !level5.equals("")){
+            criteria.andLevel5EqualTo(level5);
+        }
+        List<Project> projectList = projectMapper.selectByExample(projectExample);
+
+        if(projectList.size() == 0)return null;
+
+        List<String> projectIdList = new ArrayList<>();
+        for (Project project:projectList
+             ) {
+            projectIdList.add(project.getId());
+        }
+        //查子项目数量
+        SubprojectExample subprojectExampleSubNum = new SubprojectExample();
+        subprojectExampleSubNum.createCriteria()
+                .andProjectidIn(projectIdList);
+        subProjectNumber = subprojectMapper.countByExample(subprojectExampleSubNum);
+        //查开工数量
+        SubprojectExample subprojectExampleStartWorkingNumber = new SubprojectExample();
+        subprojectExampleStartWorkingNumber.createCriteria()
+                .andProjectidIn(projectIdList)
+                .andConstructionphaseEqualTo("在建");
+        startWorkingNumber = subprojectMapper.countByExample(subprojectExampleStartWorkingNumber);
+        //查完工数量
+        SubprojectExample subprojectExampleFinishWorkingNumber = new SubprojectExample();
+        subprojectExampleFinishWorkingNumber.createCriteria()
+                .andProjectidIn(projectIdList)
+                .andConstructionphaseEqualTo("竣工");
+        finishWorkingNumber = subprojectMapper.countByExample(subprojectExampleFinishWorkingNumber);
+        SubprojectExample subprojectExampleApprovalProgressNumber = new SubprojectExample();
+        subprojectExampleApprovalProgressNumber.createCriteria()
+                .andProjectidIn(projectIdList)
+                .andApprovalprogressEqualTo("待审批");
+        approvalProgressNumber = subprojectMapper.countByExample(subprojectExampleApprovalProgressNumber);
+        //开工率
+        starWorkingRatio = (startWorkingNumber + finishWorkingNumber) / subProjectNumber * 100;
+        //完工率
+        finishWorkingRatio = finishWorkingNumber / subProjectNumber * 100;
+
+        //计算整体工程进度
+        SubprojectExample subprojectExampleForProgress = new SubprojectExample();
+        subprojectExampleForProgress.createCriteria()
+                .andProjectidIn(projectIdList);
+        List<Subproject> subprojectListForProgress = subprojectMapper.selectByExample(subprojectExampleForProgress);
+        for (Subproject s:subprojectListForProgress
+             ) {
+            String subprogress = (String)s.getProjectprogress();
+            //判断是否为数字
+            if(StringUtils.msIsNumeric(subprogress)){
+                progress = Double.valueOf(subprogress) + progress;
+            }
+        }
+        progress = progress / subProjectNumber;//总体比例
+        ProjectScheduleSummarizeVO projectScheduleSummarizeVO = new ProjectScheduleSummarizeVO();
+        projectScheduleSummarizeVO.setApprovalProgressNumber(approvalProgressNumber);
+        projectScheduleSummarizeVO.setFinishWorkingNumber(finishWorkingNumber);
+        projectScheduleSummarizeVO.setFinishWorkingRatio(finishWorkingRatio);
+        projectScheduleSummarizeVO.setStartWorkingNumber(startWorkingNumber);
+        projectScheduleSummarizeVO.setStarWorkingRatio(starWorkingRatio);
+        projectScheduleSummarizeVO.setProgress(progress);
+        projectScheduleSummarizeVO.setProjectName(projectName);
+        projectScheduleSummarizeVO.setLevel1(level1);
+        projectScheduleSummarizeVO.setLevel2(level2);
+        projectScheduleSummarizeVO.setLevel3(level3);
+        projectScheduleSummarizeVO.setLevel4(level4);
+        projectScheduleSummarizeVO.setLevel5(level5);
+        return projectScheduleSummarizeVO;
     }
+
 }

@@ -115,10 +115,10 @@ public class UserSessionServiceImpl implements UserSessionService {
      */
     @Override
     public void addRole(String role) {
-        if(roles == null){
-            roles = new HashSet<String>();
+        if(this.roles == null){
+            this.roles = new HashSet<String>();
         }
-        roles.add(role);
+        this.roles.add(role);
     }
 
     /**
