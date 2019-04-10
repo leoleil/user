@@ -86,6 +86,12 @@ public class Subproject {
 
     private Object department;
 
+    private Object testtime;
+
+    private Object endtimeCon;
+
+    private Object reason;
+
     public String getId() {
         return id;
     }
@@ -412,5 +418,29 @@ public class Subproject {
 
     public void setDepartment(Object department) {
         this.department = department;
+    }
+
+    public Object getTesttime() {
+        return testtime;
+    }
+
+    public void setTesttime(Object testtime) {
+        this.testtime = testtime;
+    }
+
+    public Object getEndtimeCon() {
+        return endtimeCon;
+    }
+
+    public void setEndtimeCon(Object endtimeCon) {
+        this.endtimeCon = endtimeCon;
+    }
+
+    public Object getReason() {
+        return reason;
+    }
+
+    public void setReason(Object reason) {
+        this.reason = reason;
     }
 }

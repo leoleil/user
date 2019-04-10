@@ -43,6 +43,9 @@
     <result column="PROJECTID" jdbcType="VARCHAR" property="projectid" />
     <result column="USERID" jdbcType="VARCHAR" property="userid" />
     <result column="DEPARTMENT" jdbcType="OTHER" property="department" />
+    <result column="TESTTIME" jdbcType="OTHER" property="testtime" />
+    <result column="ENDTIME_CON" jdbcType="OTHER" property="endtimeCon" />
+    <result column="REASON" jdbcType="OTHER" property="reason" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -110,7 +113,7 @@
     PROJECTNUMBER, CONSTRUCTIONPLACE, CONSTRUCTIONCOMPANY, ENDTIME, RELEASEINVESTMENT, 
     CONSTRUCTIONPHASE, FIRSTDESIGN, BIDDING, CONSTRUCTIONDESIGN, STARTTIME_CON, PROJECTPROGRESS, 
     COMPLETEDINVESTMENT, FORMEDABILITY, DESIGNEDABILITY, REMARKS, TIMESTAMP, PROJECTID, 
-    USERID, DEPARTMENT
+    USERID, DEPARTMENT, TESTTIME, ENDTIME_CON, REASON
   </sql>
   <select id="selectByExample" parameterType="com.onps.model.SubprojectExample" resultMap="BaseResultMap">
     select
@@ -156,7 +159,8 @@
       CONSTRUCTIONDESIGN, STARTTIME_CON, PROJECTPROGRESS, 
       COMPLETEDINVESTMENT, FORMEDABILITY, DESIGNEDABILITY, 
       REMARKS, TIMESTAMP, PROJECTID, 
-      USERID, DEPARTMENT)
+      USERID, DEPARTMENT, TESTTIME, 
+      ENDTIME_CON, REASON)
     values (#{id,jdbcType=VARCHAR}, #{subname,jdbcType=OTHER}, #{starttime,jdbcType=TIMESTAMP}, 
       #{submitfilename,jdbcType=OTHER}, #{submitdepartment,jdbcType=OTHER}, #{submitnumber,jdbcType=VARCHAR}, 
       #{submitdate,jdbcType=TIMESTAMP}, #{approvalname,jdbcType=OTHER}, #{approvaldepartment,jdbcType=OTHER}, 
@@ -170,7 +174,8 @@
       #{constructiondesign,jdbcType=OTHER}, #{starttimeCon,jdbcType=OTHER}, #{projectprogress,jdbcType=OTHER}, 
       #{completedinvestment,jdbcType=DECIMAL}, #{formedability,jdbcType=OTHER}, #{designedability,jdbcType=OTHER}, 
       #{remarks,jdbcType=OTHER}, #{timestamp,jdbcType=TIMESTAMP}, #{projectid,jdbcType=VARCHAR}, 
-      #{userid,jdbcType=VARCHAR}, #{department,jdbcType=OTHER})
+      #{userid,jdbcType=VARCHAR}, #{department,jdbcType=OTHER}, #{testtime,jdbcType=OTHER}, 
+      #{endtimeCon,jdbcType=OTHER}, #{reason,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.onps.model.Subproject">
     insert into SUBPROJECT
@@ -298,6 +303,15 @@
       <if test="department != null">
         DEPARTMENT,
       </if>
+      <if test="testtime != null">
+        TESTTIME,
+      </if>
+      <if test="endtimeCon != null">
+        ENDTIME_CON,
+      </if>
+      <if test="reason != null">
+        REASON,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -422,6 +436,15 @@
       </if>
       <if test="department != null">
         #{department,jdbcType=OTHER},
+      </if>
+      <if test="testtime != null">
+        #{testtime,jdbcType=OTHER},
+      </if>
+      <if test="endtimeCon != null">
+        #{endtimeCon,jdbcType=OTHER},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -557,6 +580,15 @@
       <if test="record.department != null">
         DEPARTMENT = #{record.department,jdbcType=OTHER},
       </if>
+      <if test="record.testtime != null">
+        TESTTIME = #{record.testtime,jdbcType=OTHER},
+      </if>
+      <if test="record.endtimeCon != null">
+        ENDTIME_CON = #{record.endtimeCon,jdbcType=OTHER},
+      </if>
+      <if test="record.reason != null">
+        REASON = #{record.reason,jdbcType=OTHER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -604,7 +636,10 @@
       TIMESTAMP = #{record.timestamp,jdbcType=TIMESTAMP},
       PROJECTID = #{record.projectid,jdbcType=VARCHAR},
       USERID = #{record.userid,jdbcType=VARCHAR},
-      DEPARTMENT = #{record.department,jdbcType=OTHER}
+      DEPARTMENT = #{record.department,jdbcType=OTHER},
+      TESTTIME = #{record.testtime,jdbcType=OTHER},
+      ENDTIME_CON = #{record.endtimeCon,jdbcType=OTHER},
+      REASON = #{record.reason,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -732,6 +767,15 @@
       <if test="department != null">
         DEPARTMENT = #{department,jdbcType=OTHER},
       </if>
+      <if test="testtime != null">
+        TESTTIME = #{testtime,jdbcType=OTHER},
+      </if>
+      <if test="endtimeCon != null">
+        ENDTIME_CON = #{endtimeCon,jdbcType=OTHER},
+      </if>
+      <if test="reason != null">
+        REASON = #{reason,jdbcType=OTHER},
+      </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
@@ -776,7 +820,11 @@
       TIMESTAMP = #{timestamp,jdbcType=TIMESTAMP},
       PROJECTID = #{projectid,jdbcType=VARCHAR},
       USERID = #{userid,jdbcType=VARCHAR},
-      DEPARTMENT = #{department,jdbcType=OTHER}
+      DEPARTMENT = #{department,jdbcType=OTHER},
+      TESTTIME = #{testtime,jdbcType=OTHER},
+      ENDTIME_CON = #{endtimeCon,jdbcType=OTHER},
+      REASON = #{reason,jdbcType=OTHER}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+
 </mapper>

@@ -2635,6 +2635,186 @@ public class SubprojectExample {
             addCriterion("DEPARTMENT not between", value1, value2, "department");
             return (Criteria) this;
         }
+
+        public Criteria andTesttimeIsNull() {
+            addCriterion("TESTTIME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTesttimeIsNotNull() {
+            addCriterion("TESTTIME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTesttimeEqualTo(Object value) {
+            addCriterion("TESTTIME =", value, "testtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTesttimeNotEqualTo(Object value) {
+            addCriterion("TESTTIME <>", value, "testtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTesttimeGreaterThan(Object value) {
+            addCriterion("TESTTIME >", value, "testtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTesttimeGreaterThanOrEqualTo(Object value) {
+            addCriterion("TESTTIME >=", value, "testtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTesttimeLessThan(Object value) {
+            addCriterion("TESTTIME <", value, "testtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTesttimeLessThanOrEqualTo(Object value) {
+            addCriterion("TESTTIME <=", value, "testtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTesttimeIn(List<Object> values) {
+            addCriterion("TESTTIME in", values, "testtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTesttimeNotIn(List<Object> values) {
+            addCriterion("TESTTIME not in", values, "testtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTesttimeBetween(Object value1, Object value2) {
+            addCriterion("TESTTIME between", value1, value2, "testtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andTesttimeNotBetween(Object value1, Object value2) {
+            addCriterion("TESTTIME not between", value1, value2, "testtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeConIsNull() {
+            addCriterion("ENDTIME_CON is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeConIsNotNull() {
+            addCriterion("ENDTIME_CON is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeConEqualTo(Object value) {
+            addCriterion("ENDTIME_CON =", value, "endtimeCon");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeConNotEqualTo(Object value) {
+            addCriterion("ENDTIME_CON <>", value, "endtimeCon");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeConGreaterThan(Object value) {
+            addCriterion("ENDTIME_CON >", value, "endtimeCon");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeConGreaterThanOrEqualTo(Object value) {
+            addCriterion("ENDTIME_CON >=", value, "endtimeCon");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeConLessThan(Object value) {
+            addCriterion("ENDTIME_CON <", value, "endtimeCon");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeConLessThanOrEqualTo(Object value) {
+            addCriterion("ENDTIME_CON <=", value, "endtimeCon");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeConIn(List<Object> values) {
+            addCriterion("ENDTIME_CON in", values, "endtimeCon");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeConNotIn(List<Object> values) {
+            addCriterion("ENDTIME_CON not in", values, "endtimeCon");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeConBetween(Object value1, Object value2) {
+            addCriterion("ENDTIME_CON between", value1, value2, "endtimeCon");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeConNotBetween(Object value1, Object value2) {
+            addCriterion("ENDTIME_CON not between", value1, value2, "endtimeCon");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonIsNull() {
+            addCriterion("REASON is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonIsNotNull() {
+            addCriterion("REASON is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonEqualTo(Object value) {
+            addCriterion("REASON =", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonNotEqualTo(Object value) {
+            addCriterion("REASON <>", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonGreaterThan(Object value) {
+            addCriterion("REASON >", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonGreaterThanOrEqualTo(Object value) {
+            addCriterion("REASON >=", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonLessThan(Object value) {
+            addCriterion("REASON <", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonLessThanOrEqualTo(Object value) {
+            addCriterion("REASON <=", value, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonIn(List<Object> values) {
+            addCriterion("REASON in", values, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonNotIn(List<Object> values) {
+            addCriterion("REASON not in", values, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonBetween(Object value1, Object value2) {
+            addCriterion("REASON between", value1, value2, "reason");
+            return (Criteria) this;
+        }
+
+        public Criteria andReasonNotBetween(Object value1, Object value2) {
+            addCriterion("REASON not between", value1, value2, "reason");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
