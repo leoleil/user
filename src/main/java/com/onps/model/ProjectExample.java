@@ -176,66 +176,6 @@ public class ProjectExample {
             return (Criteria) this;
         }
 
-        public Criteria andSubmitcompanyIsNull() {
-            addCriterion("SUBMITCOMPANY is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubmitcompanyIsNotNull() {
-            addCriterion("SUBMITCOMPANY is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubmitcompanyEqualTo(Object value) {
-            addCriterion("SUBMITCOMPANY =", value, "submitcompany");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubmitcompanyNotEqualTo(Object value) {
-            addCriterion("SUBMITCOMPANY <>", value, "submitcompany");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubmitcompanyGreaterThan(Object value) {
-            addCriterion("SUBMITCOMPANY >", value, "submitcompany");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubmitcompanyGreaterThanOrEqualTo(Object value) {
-            addCriterion("SUBMITCOMPANY >=", value, "submitcompany");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubmitcompanyLessThan(Object value) {
-            addCriterion("SUBMITCOMPANY <", value, "submitcompany");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubmitcompanyLessThanOrEqualTo(Object value) {
-            addCriterion("SUBMITCOMPANY <=", value, "submitcompany");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubmitcompanyIn(List<Object> values) {
-            addCriterion("SUBMITCOMPANY in", values, "submitcompany");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubmitcompanyNotIn(List<Object> values) {
-            addCriterion("SUBMITCOMPANY not in", values, "submitcompany");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubmitcompanyBetween(Object value1, Object value2) {
-            addCriterion("SUBMITCOMPANY between", value1, value2, "submitcompany");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubmitcompanyNotBetween(Object value1, Object value2) {
-            addCriterion("SUBMITCOMPANY not between", value1, value2, "submitcompany");
-            return (Criteria) this;
-        }
-
         public Criteria andProjectnameIsNull() {
             addCriterion("PROJECTNAME is null");
             return (Criteria) this;
@@ -1143,6 +1083,76 @@ public class ProjectExample {
 
         public Criteria andUseridNotBetween(String value1, String value2) {
             addCriterion("USERID not between", value1, value2, "userid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubmitcompanyIsNull() {
+            addCriterion("SUBMITCOMPANY is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubmitcompanyIsNotNull() {
+            addCriterion("SUBMITCOMPANY is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubmitcompanyEqualTo(String value) {
+            addCriterion("SUBMITCOMPANY =", value, "submitcompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubmitcompanyNotEqualTo(String value) {
+            addCriterion("SUBMITCOMPANY <>", value, "submitcompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubmitcompanyGreaterThan(String value) {
+            addCriterion("SUBMITCOMPANY >", value, "submitcompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubmitcompanyGreaterThanOrEqualTo(String value) {
+            addCriterion("SUBMITCOMPANY >=", value, "submitcompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubmitcompanyLessThan(String value) {
+            addCriterion("SUBMITCOMPANY <", value, "submitcompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubmitcompanyLessThanOrEqualTo(String value) {
+            addCriterion("SUBMITCOMPANY <=", value, "submitcompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubmitcompanyLike(String value) {
+            addCriterion("SUBMITCOMPANY like", value, "submitcompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubmitcompanyNotLike(String value) {
+            addCriterion("SUBMITCOMPANY not like", value, "submitcompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubmitcompanyIn(List<String> values) {
+            addCriterion("SUBMITCOMPANY in", values, "submitcompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubmitcompanyNotIn(List<String> values) {
+            addCriterion("SUBMITCOMPANY not in", values, "submitcompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubmitcompanyBetween(String value1, String value2) {
+            addCriterion("SUBMITCOMPANY between", value1, value2, "submitcompany");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubmitcompanyNotBetween(String value1, String value2) {
+            addCriterion("SUBMITCOMPANY not between", value1, value2, "submitcompany");
             return (Criteria) this;
         }
     }

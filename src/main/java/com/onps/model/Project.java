@@ -6,8 +6,6 @@ import java.util.Date;
 public class Project {
     private String id;
 
-    private Object submitcompany;
-
     private Object projectname;
 
     private Object documentname;
@@ -38,20 +36,14 @@ public class Project {
 
     private String userid;
 
+    private String submitcompany;
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
-    }
-
-    public Object getSubmitcompany() {
-        return submitcompany;
-    }
-
-    public void setSubmitcompany(Object submitcompany) {
-        this.submitcompany = submitcompany;
     }
 
     public Object getProjectname() {
@@ -172,5 +164,13 @@ public class Project {
 
     public void setUserid(String userid) {
         this.userid = userid == null ? null : userid.trim();
+    }
+
+    public String getSubmitcompany() {
+        return submitcompany;
+    }
+
+    public void setSubmitcompany(String submitcompany) {
+        this.submitcompany = submitcompany == null ? null : submitcompany.trim();
     }
 }
