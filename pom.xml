@@ -107,6 +107,17 @@
       <artifactId>spring-test</artifactId>
       <version>${spring.version}</version>
     </dependency>
+    <!-- POI-->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>4.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>4.0.0</version>
+    </dependency>
     <!-- 第二部分：Servlet web -->
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -199,7 +210,6 @@
       <version>5.3.2</version>
       <scope>compile</scope>
     </dependency>
-
   </dependencies>
   <!-- 构建配置 -->
   <build>

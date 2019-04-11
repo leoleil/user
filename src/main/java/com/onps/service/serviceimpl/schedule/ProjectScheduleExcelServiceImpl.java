@@ -15,40 +15,34 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
-
-public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelService{
+@Service
+public class ProjectScheduleExcelServiceImpl {
+   // implements ProjectScheduleExcelService
     @Autowired
     private ProjectMapper projectMapper;
     @Autowired
     private SubprojectMapper subprojectMapper;
 
-    public static void main(String[] args){
-//        ProjectScheduleExcelServiceImpl out1=new ProjectScheduleExcelServiceImpl();
-//        try{
-//            HttpServletResponse response=new HttpServletResponse
-//            try {
-//                out1.makeProjectExcel(response);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        catch(FileNotFoundException e){
-//            e.printStackTrace();
-//        }
-    }
 
-    @Override
-    public void makeProjectExcel(List<ProjectScheduleVO> projectScheduleVOList, HttpServletResponse response) throws Exception {
+//
+//    @Override
+//    public void makeProjectExcel(List<ProjectScheduleVO> projectScheduleVOList, HttpServletResponse response) throws Exception {
+//
+//    }
+//
+//    @Override
+//    public void makeProjectExcel(HttpServletResponse response) throws Exception {
+//
+//    }
 
-    }
-
-    @Override
-    public void makeProjectExcel(HttpServletResponse response) throws Exception {
+    public void makeProjectExcel(OutputStream out) throws Exception {
         HSSFWorkbook workbook =new HSSFWorkbook();//创建文件对象
         HSSFSheet sheet =workbook.createSheet();//创建sheet
         //表格标题字体
@@ -212,15 +206,17 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
         ProjectExample projectExample=new ProjectExample();
         List<Project> projects=projectMapper.selectByExample(projectExample);//数据库中projects列表
         List<Subproject> subprojects;
-        SubprojectExample subprojectExample=new SubprojectExample();
-        SubprojectExample.Criteria criteria=subprojectExample.createCriteria();
+
         for(int projectNumber=0;projectNumber<projects.size();projectNumber++){
             //通过projectId,查出project对应的subproject列表subprojects
+            SubprojectExample subprojectExample=new SubprojectExample();
+            SubprojectExample.Criteria criteria=subprojectExample.createCriteria();
             criteria.andProjectidEqualTo(projects.get(projectNumber).getId());
             subprojects=subprojectMapper.selectByExample(subprojectExample);
+            System.out.println(subprojects.size());
            //如果子项目为空，则只填入project数据
             if(subprojects.size()==0){
-                HSSFRow row=sheet.createRow(rowNum);
+                HSSFRow row=sheet.createRow(rowNum++);
                 HSSFCell cell0=row.createCell(0);
                 cell0.setCellValue(projectNumber+1);
                 cell0.setCellStyle(contextStyle);
@@ -240,7 +236,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                 cell5.setCellValue( projects.get(projectNumber).getDocumentdate().toString());
                 cell5.setCellStyle(contextStyle);
                 HSSFCell cell6=row.createCell(6);
-                cell6.setCellValue(projects.get(projectNumber).getInvestmentamount().toString());
+                cell6.setCellValue(projects.get(projectNumber).getInvestmentamount().doubleValue());
                 cell6.setCellStyle(contextStyle);
                 HSSFCell cell7=row.createCell(7);
                 cell7.setCellValue((String)projects.get(projectNumber).getApprovalauthority());
@@ -249,16 +245,17 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                 cell8.setCellValue((String)projects.get(projectNumber).getConstructionperiod());
                 cell8.setCellStyle(contextStyle);
                 HSSFCell cell9=row.createCell(9);
-                cell9.setCellValue(projects.get(projectNumber).getIsimportent().toString());
+                cell9.setCellValue(projects.get(projectNumber).getIsimportent().doubleValue());
                 cell9.setCellStyle(contextStyle);
+                System.out.println("空");
             }
             //如果子项目只有一条，则不用合并单元格，依次写入
             else if(subprojects.size()==1){
                 //主项目
-                HSSFRow row=sheet.createRow(rowNum);
-                HSSFCell cell0=row.createCell(0);
-                cell0.setCellValue(projectNumber+1);
-                cell0.setCellStyle(contextStyle);
+                HSSFRow row=sheet.createRow(rowNum++);
+                 HSSFCell cell0=row.createCell(0);
+                 cell0.setCellValue(projectNumber+1);
+                 cell0.setCellStyle(contextStyle);
                 HSSFCell cell1=row.createCell(1);
                 cell1.setCellValue( (String)projects.get(projectNumber).getLevel1());
                 cell1.setCellStyle(contextStyle);
@@ -275,7 +272,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                 cell5.setCellValue( projects.get(projectNumber).getDocumentdate().toString());
                 cell5.setCellStyle(contextStyle);
                 HSSFCell cell6=row.createCell(6);
-                cell6.setCellValue(projects.get(projectNumber).getInvestmentamount().toString());
+                cell6.setCellValue(projects.get(projectNumber).getInvestmentamount().doubleValue());
                 cell6.setCellStyle(contextStyle);
                 HSSFCell cell7=row.createCell(7);
                 cell7.setCellValue((String)projects.get(projectNumber).getApprovalauthority());
@@ -284,7 +281,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                 cell8.setCellValue((String)projects.get(projectNumber).getConstructionperiod());
                 cell8.setCellStyle(contextStyle);
                 HSSFCell cell9=row.createCell(9);
-                cell9.setCellValue(projects.get(projectNumber).getIsimportent().toString());
+                cell9.setCellValue(projects.get(projectNumber).getIsimportent().doubleValue());
                 cell9.setCellStyle(contextStyle);
 
                 //子项目
@@ -296,28 +293,27 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                     HSSFCell cell11=row.createCell(11);
                     cell11.setCellValue((String)subprojects.get(0).getDepartment());
                     cell11.setCellStyle(contextStyle);}
-                if(subprojects.get(0).getDepartment()!=null){
+                if(subprojects.get(0).getSubmitfilename()!=null){
                     HSSFCell cell12=row.createCell(12);
                     cell12.setCellValue((String)subprojects.get(0).getSubmitfilename());
                     cell12.setCellStyle(contextStyle);}
-                if(subprojects.get(0).getDepartment()!=null){
+                if(subprojects.get(0).getSubmitdepartment()!=null){
                     HSSFCell cell13=row.createCell(13);
                     cell13.setCellValue((String)subprojects.get(0).getSubmitdepartment());
                     cell13.setCellStyle(contextStyle);}
-                if(subprojects.get(0).getDepartment()!=null){
+                if(subprojects.get(0).getSubmitnumber()!=null){
                     HSSFCell cell14=row.createCell(14);
                     cell14.setCellValue((String)subprojects.get(0).getSubmitnumber());
                     cell14.setCellStyle(contextStyle);}
-                if(subprojects.get(0).getDepartment()!=null){
+                if(subprojects.get(0).getSubmitdate()!=null){
                     HSSFCell cell15=row.createCell(15);
                     cell15.setCellValue(subprojects.get(0).getSubmitdate());
                     cell15.setCellStyle(contextStyle);}
-                if(subprojects.get(0).getDepartment()!=null){
+                if(subprojects.get(0).getApprovalname()!=null){
                     HSSFCell cell16=row.createCell(16);
                     cell16.setCellValue((String)subprojects.get(0).getApprovalname());
-                    cell16.setCellStyle(contextStyle);
-                }
-                if(subprojects.get(0).getDepartment()!=null){
+                    cell16.setCellStyle(contextStyle); }
+                if(subprojects.get(0).getApprovaldepartment()!=null){
                     HSSFCell cell17=row.createCell(17);
                     cell17.setCellValue((String)subprojects.get(0).getApprovaldepartment());
                     cell17.setCellStyle(contextStyle);}
@@ -325,101 +321,132 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                     HSSFCell cell18=row.createCell(18);
                     cell18.setCellValue((String)subprojects.get(0).getApprovalnumber());
                     cell18.setCellStyle(contextStyle);}
-
-                HSSFCell cell19=row.createCell(19);
-                cell19.setCellValue(subprojects.get(0).getApprovaldate());
-                cell19.setCellStyle(contextStyle);
-                HSSFCell cell20=row.createCell(20);
+                if(subprojects.get(0).getApprovaldate()!=null){
+                    HSSFCell cell19=row.createCell(19);
+                    cell19.setCellValue(subprojects.get(0).getApprovaldate());
+                    cell19.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getSubmitfilenameTa()!=null){
+                    HSSFCell cell20=row.createCell(20);
                 cell20.setCellValue((String)subprojects.get(0).getSubmitfilenameTa());
-                cell20.setCellStyle(contextStyle);
-                HSSFCell cell21=row.createCell(21);
-                cell21.setCellValue((String)subprojects.get(0).getSubmitdepartmentTa());
-                cell21.setCellStyle(contextStyle);
-                HSSFCell cell22=row.createCell(22);
-                cell22.setCellValue((String)subprojects.get(0).getSubmitnumberTa());
-                cell22.setCellStyle(contextStyle);
-                HSSFCell cell23=row.createCell(23);
-                cell23.setCellValue(subprojects.get(0).getSubmitdateTa());
-                cell23.setCellStyle(contextStyle);
-                HSSFCell cell24=row.createCell(24);
-                cell24.setCellValue((String)subprojects.get(0).getApprovalnameTa());
-                cell24.setCellStyle(contextStyle);
-                HSSFCell cell25=row.createCell(25);
-                cell25.setCellValue((String)subprojects.get(0).getApprovaldepartmentTa());
-                cell25.setCellStyle(contextStyle);
-                HSSFCell cell26=row.createCell(26);
-                cell26.setCellValue((String)subprojects.get(0).getApprovalnumberTa());
-                cell26.setCellStyle(contextStyle);
-                HSSFCell cell27=row.createCell(27);
-                cell27.setCellValue(subprojects.get(0).getApprovaldateTa());
-                cell27.setCellStyle(contextStyle);
-                HSSFCell cell28=row.createCell(28);
-                cell28.setCellValue(subprojects.get(0).getReplydate());
-                cell28.setCellStyle(contextStyle);
-                HSSFCell cell29=row.createCell(29);
-                cell29.setCellValue((String)subprojects.get(0).getApprovalprogress());
-                cell29.setCellStyle(contextStyle);
-                HSSFCell cell30=row.createCell(30);
-                cell30.setCellValue((String)subprojects.get(0).getConstructioncontent());
-                cell30.setCellStyle(contextStyle);
-                HSSFCell cell31=row.createCell(31);
-                cell31.setCellValue((String)subprojects.get(0).getProjectnumber());
-                cell31.setCellStyle(contextStyle);
-                HSSFCell cell32=row.createCell(32);
-                cell32.setCellValue((String)subprojects.get(0).getConstructionplace());
-                cell32.setCellStyle(contextStyle);
-                HSSFCell cell33=row.createCell(33);
-                cell33.setCellValue((String)subprojects.get(0).getConstructioncompany());
-                cell33.setCellStyle(contextStyle);
-                HSSFCell cell34=row.createCell(34);
-                cell34.setCellValue((String)subprojects.get(0).getStarttimeCon());
-                cell34.setCellStyle(contextStyle);
-                HSSFCell cell35=row.createCell(35);
-                cell35.setCellValue((String)subprojects.get(0).getEndtimeCon());
-                cell35.setCellStyle(contextStyle);
-                HSSFCell cell36=row.createCell(36);
-                cell36.setCellValue(subprojects.get(0).getReleaseinvestment().toString());
-                cell36.setCellStyle(contextStyle);
-                HSSFCell cell37=row.createCell(37);
-                cell37.setCellValue((String)subprojects.get(0).getConstructionphase());
-                cell37.setCellStyle(contextStyle);
+                cell20.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getSubmitdepartmentTa()!=null){
+                    HSSFCell cell21=row.createCell(21);
+                    cell21.setCellValue((String)subprojects.get(0).getSubmitdepartmentTa());
+                    cell21.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getSubmitnumberTa()!=null){
+                    HSSFCell cell22=row.createCell(22);
+                    cell22.setCellValue((String)subprojects.get(0).getSubmitnumberTa());
+                    cell22.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getSubmitdateTa()!=null){
+                    HSSFCell cell23=row.createCell(23);
+                    cell23.setCellValue(subprojects.get(0).getSubmitdateTa());
+                    cell23.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getApprovalnameTa()!=null){
+                    HSSFCell cell24=row.createCell(24);
+                    cell24.setCellValue((String)subprojects.get(0).getApprovalnameTa());
+                    cell24.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getApprovaldepartmentTa()!=null){
+                    HSSFCell cell25=row.createCell(25);
+                    cell25.setCellValue((String)subprojects.get(0).getApprovaldepartmentTa());
+                    cell25.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getApprovalnumberTa()!=null){
+                    HSSFCell cell26=row.createCell(26);
+                    cell26.setCellValue((String)subprojects.get(0).getApprovalnumberTa());
+                    cell26.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getApprovaldateTa()!=null){
+                    HSSFCell cell27=row.createCell(27);
+                    cell27.setCellValue(subprojects.get(0).getApprovaldateTa());
+                    cell27.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getReplydate()!=null){
+                   HSSFCell cell28=row.createCell(28);
+                   cell28.setCellValue(subprojects.get(0).getReplydate());
+                   cell28.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getApprovalprogress()!=null){
+                   HSSFCell cell29=row.createCell(29);
+                   cell29.setCellValue((String)subprojects.get(0).getApprovalprogress());
+                   cell29.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getConstructioncontent()!=null){
+                   HSSFCell cell30=row.createCell(30);
+                   cell30.setCellValue((String)subprojects.get(0).getConstructioncontent());
+                   cell30.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getProjectnumber()!=null){
+                   HSSFCell cell31=row.createCell(31);
+                   cell31.setCellValue((String)subprojects.get(0).getProjectnumber());
+                   cell31.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getConstructionplace()!=null){
+                   HSSFCell cell32=row.createCell(32);
+                   cell32.setCellValue((String)subprojects.get(0).getConstructionplace());
+                   cell32.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getConstructioncompany()!=null){
+                   HSSFCell cell33=row.createCell(33);
+                   cell33.setCellValue((String)subprojects.get(0).getConstructioncompany());
+                   cell33.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getStarttimeCon()!=null){
+                   HSSFCell cell34=row.createCell(34);
+                   cell34.setCellValue((String)subprojects.get(0).getStarttimeCon());
+                   cell34.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getEndtimeCon()!=null){
+                   HSSFCell cell35=row.createCell(35);
+                   cell35.setCellValue((String)subprojects.get(0).getEndtimeCon());
+                   cell35.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getReleaseinvestment()!=null){
+                   HSSFCell cell36=row.createCell(36);
+                   cell36.setCellValue(subprojects.get(0).getReleaseinvestment().toString());
+                   cell36.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getConstructionphase()!=null){
+                   HSSFCell cell37=row.createCell(37);
+                   cell37.setCellValue((String)subprojects.get(0).getConstructionphase());
+                   cell37.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getFirstdesign()!=null){
                 HSSFCell cell38=row.createCell(38);
                 cell38.setCellValue((String)subprojects.get(0).getFirstdesign());
-                cell38.setCellStyle(contextStyle);
+                cell38.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getBidding()!=null){
                 HSSFCell cell39=row.createCell(39);
                 cell39.setCellValue((String)subprojects.get(0).getBidding());
-                cell39.setCellStyle(contextStyle);
+                cell39.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getConstructiondesign()!=null){
                 HSSFCell cell40=row.createCell(40);
                 cell40.setCellValue((String)subprojects.get(0).getConstructiondesign());
-                cell40.setCellStyle(contextStyle);
+                cell40.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getStarttime()!=null){
                 HSSFCell cell41=row.createCell(41);
-                cell41.setCellValue(subprojects.get(0).getStarttime());
-                cell41.setCellStyle(contextStyle);
+                cell41.setCellValue(subprojects.get(0).getStarttime().toString());
+                cell41.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getTesttime()!=null){
                 HSSFCell cell42=row.createCell(42);
                 cell42.setCellValue((String)subprojects.get(0).getTesttime());
-                cell42.setCellStyle(contextStyle);
+                cell42.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getEndtime()!=null){
                 HSSFCell cell43=row.createCell(43);
                 cell43.setCellValue(subprojects.get(0).getEndtime());
-                cell43.setCellStyle(contextStyle);
+                cell43.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getProjectprogress()!=null){
                 HSSFCell cell44=row.createCell(44);
                 cell44.setCellValue((String)subprojects.get(0).getProjectprogress());
-                cell44.setCellStyle(contextStyle);
+                cell44.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getCompletedinvestment()!=null){
                 HSSFCell cell45=row.createCell(45);
                 cell45.setCellValue(subprojects.get(0).getCompletedinvestment().toString());
-                cell45.setCellStyle(contextStyle);
+                cell45.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getFormedability()!=null){
                 HSSFCell cell46=row.createCell(46);
                 cell46.setCellValue((String)subprojects.get(0).getFormedability());
-                cell46.setCellStyle(contextStyle);
+                cell46.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getDesignedability()!=null){
                 HSSFCell cell47=row.createCell(47);
                 cell47.setCellValue((String)subprojects.get(0).getDesignedability());
-                cell47.setCellStyle(contextStyle);
+                cell47.setCellStyle(contextStyle);}
+                if(subprojects.get(0).getRemarks()!=null){
                 HSSFCell cell48=row.createCell(48);
                 cell48.setCellValue((String)subprojects.get(0).getRemarks());
-                cell48.setCellStyle(contextStyle);
+                cell48.setCellStyle(contextStyle);}
+                System.out.println("1");
             }
-            else {
+            //如果有多条子项目，在子项目那里需要添加一行小计
+            else{
               int subprojectRows=subprojects.size()+1;
-
+              System.out.println(subprojectRows);
                //开始合并 第一个参数是需要合并的第一行行号，第二个参数是需要合并的最后一行行号
             sheet.addMergedRegion(new CellRangeAddress(rowNum,rowNum+subprojectRows-1,0,0));
             sheet.addMergedRegion(new CellRangeAddress(rowNum,rowNum+subprojectRows-1,1,1));
@@ -431,26 +458,230 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
             sheet.addMergedRegion(new CellRangeAddress(rowNum,rowNum+subprojectRows-1,7,7));
             sheet.addMergedRegion(new CellRangeAddress(rowNum,rowNum+subprojectRows-1,8,8));
             sheet.addMergedRegion(new CellRangeAddress(rowNum,rowNum+subprojectRows-1,9,9));
+                //先填入A表数据
+                HSSFRow row=sheet.createRow(rowNum++);
+                HSSFCell cell0=row.createCell(0);
+                cell0.setCellValue(projectNumber+1);
+                cell0.setCellStyle(contextStyle);
+                HSSFCell cell1=row.createCell(1);
+                cell1.setCellValue( (String)projects.get(projectNumber).getLevel1());
+                cell1.setCellStyle(contextStyle);
+                HSSFCell cell2=row.createCell(2);
+                cell2.setCellValue( (String)projects.get(projectNumber).getProjectname());
+                cell2.setCellStyle(contextStyle);
+                HSSFCell cell3=row.createCell(3);
+                cell3.setCellValue( (String)projects.get(projectNumber).getDocumentname());
+                cell3.setCellStyle(contextStyle);
+                HSSFCell cell4=row.createCell(4);
+                cell4.setCellValue( (String)projects.get(projectNumber).getDocumentnumber());
+                cell4.setCellStyle(contextStyle);
+                HSSFCell cell5=row.createCell(5);
+                cell5.setCellValue( projects.get(projectNumber).getDocumentdate().toString());
+                cell5.setCellStyle(contextStyle);
+                HSSFCell cell6=row.createCell(6);
+                double dou = projects.get(projectNumber).getInvestmentamount().doubleValue();
+                cell6.setCellValue(dou);
+                cell6.setCellStyle(contextStyle);
+                HSSFCell cell7=row.createCell(7);
+                cell7.setCellValue((String)projects.get(projectNumber).getApprovalauthority());
+                cell7.setCellStyle(contextStyle);
+                HSSFCell cell8=row.createCell(8);
+                cell8.setCellValue((String)projects.get(projectNumber).getConstructionperiod());
+                cell8.setCellStyle(contextStyle);
+                HSSFCell cell9=row.createCell(9);
+                double isimportant=projects.get(projectNumber).getIsimportent().doubleValue();
+                cell9.setCellValue(isimportant);
+                cell9.setCellStyle(contextStyle);
+
+                double releaseInvesment=0;//小计中的下达投资
+                double finishedInvesment=0;//小计中的完成投资
+
+                //填入subproject数据(包括小计)
+                for(int i=0;i<subprojects.size();i++){
+                    HSSFRow rowX=sheet.createRow(rowNum++);
+                    if(subprojects.get(i).getSubname()!=null){
+                        HSSFCell cell10=rowX.createCell(10);
+                        cell10.setCellValue((String)subprojects.get(i).getSubname());
+                        cell10.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getDepartment()!=null){
+                        HSSFCell cell11=rowX.createCell(11);
+                        cell11.setCellValue((String)subprojects.get(i).getDepartment());
+                        cell11.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getSubmitfilename()!=null){
+                        HSSFCell cell12=rowX.createCell(12);
+                        cell12.setCellValue((String)subprojects.get(i).getSubmitfilename());
+                        cell12.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getSubmitdepartment()!=null){
+                        HSSFCell cell13=rowX.createCell(13);
+                        cell13.setCellValue((String)subprojects.get(i).getSubmitdepartment());
+                        cell13.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getSubmitnumber()!=null){
+                        HSSFCell cell14=rowX.createCell(14);
+                        cell14.setCellValue((String)subprojects.get(i).getSubmitnumber());
+                        cell14.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getSubmitdate()!=null){
+                        HSSFCell cell15=rowX.createCell(15);
+                        cell15.setCellValue(subprojects.get(i).getSubmitdate());
+                        cell15.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getApprovalname()!=null){
+                        HSSFCell cell16=rowX.createCell(16);
+                        cell16.setCellValue((String)subprojects.get(i).getApprovalname());
+                        cell16.setCellStyle(contextStyle); }
+                    if(subprojects.get(i).getApprovaldepartment()!=null){
+                        HSSFCell cell17=rowX.createCell(17);
+                        cell17.setCellValue((String)subprojects.get(i).getApprovaldepartment());
+                        cell17.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getApprovalnumber()!=null){
+                        HSSFCell cell18=rowX.createCell(18);
+                        cell18.setCellValue((String)subprojects.get(i).getApprovalnumber());
+                        cell18.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getApprovaldate()!=null){
+                        HSSFCell cell19=rowX.createCell(19);
+                        cell19.setCellValue(subprojects.get(i).getApprovaldate());
+                        cell19.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getSubmitfilenameTa()!=null){
+                        HSSFCell cell20=rowX.createCell(20);
+                        cell20.setCellValue((String)subprojects.get(i).getSubmitfilenameTa());
+                        cell20.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getSubmitdepartmentTa()!=null){
+                        HSSFCell cell21=rowX.createCell(21);
+                        cell21.setCellValue((String)subprojects.get(i).getSubmitdepartmentTa());
+                        cell21.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getSubmitnumberTa()!=null){
+                        HSSFCell cell22=rowX.createCell(22);
+                        cell22.setCellValue((String)subprojects.get(i).getSubmitnumberTa());
+                        cell22.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getSubmitdateTa()!=null){
+                        HSSFCell cell23=rowX.createCell(23);
+                        cell23.setCellValue(subprojects.get(i).getSubmitdateTa());
+                        cell23.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getApprovalnameTa()!=null){
+                        HSSFCell cell24=rowX.createCell(24);
+                        cell24.setCellValue((String)subprojects.get(i).getApprovalnameTa());
+                        cell24.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getApprovaldepartmentTa()!=null){
+                        HSSFCell cell25=rowX.createCell(25);
+                        cell25.setCellValue((String)subprojects.get(i).getApprovaldepartmentTa());
+                        cell25.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getApprovalnumberTa()!=null){
+                        HSSFCell cell26=rowX.createCell(26);
+                        cell26.setCellValue((String)subprojects.get(i).getApprovalnumberTa());
+                        cell26.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getApprovaldateTa()!=null){
+                        HSSFCell cell27=rowX.createCell(27);
+                        cell27.setCellValue(subprojects.get(i).getApprovaldateTa());
+                        cell27.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getReplydate()!=null){
+                        HSSFCell cell28=rowX.createCell(28);
+                        cell28.setCellValue(subprojects.get(i).getReplydate());
+                        cell28.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getApprovalprogress()!=null){
+                        HSSFCell cell29=rowX.createCell(29);
+                        cell29.setCellValue((String)subprojects.get(i).getApprovalprogress());
+                        cell29.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getConstructioncontent()!=null){
+                        HSSFCell cell30=rowX.createCell(30);
+                        cell30.setCellValue((String)subprojects.get(i).getConstructioncontent());
+                        cell30.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getProjectnumber()!=null){
+                        HSSFCell cell31=rowX.createCell(31);
+                        cell31.setCellValue((String)subprojects.get(i).getProjectnumber());
+                        cell31.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getConstructionplace()!=null){
+                        HSSFCell cell32=rowX.createCell(32);
+                        cell32.setCellValue((String)subprojects.get(i).getConstructionplace());
+                        cell32.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getConstructioncompany()!=null){
+                        HSSFCell cell33=rowX.createCell(33);
+                        cell33.setCellValue((String)subprojects.get(i).getConstructioncompany());
+                        cell33.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getStarttimeCon()!=null){
+                        HSSFCell cell34=rowX.createCell(34);
+                        cell34.setCellValue((String)subprojects.get(i).getStarttimeCon());
+                        cell34.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getEndtimeCon()!=null){
+                        HSSFCell cell35=rowX.createCell(35);
+                        cell35.setCellValue((String)subprojects.get(i).getEndtimeCon());
+                        cell35.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getReleaseinvestment()!=null){
+                        HSSFCell cell36=rowX.createCell(36);
+                        cell36.setCellValue(subprojects.get(i).getReleaseinvestment().doubleValue());
+                        releaseInvesment=releaseInvesment+subprojects.get(i).getReleaseinvestment().doubleValue();
+                        cell36.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getConstructionphase()!=null){
+                        HSSFCell cell37=rowX.createCell(37);
+                        cell37.setCellValue((String)subprojects.get(i).getConstructionphase());
+                        cell37.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getFirstdesign()!=null){
+                        HSSFCell cell38=rowX.createCell(38);
+                        cell38.setCellValue((String)subprojects.get(i).getFirstdesign());
+                        cell38.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getBidding()!=null){
+                        HSSFCell cell39=rowX.createCell(39);
+                        cell39.setCellValue((String)subprojects.get(i).getBidding());
+                        cell39.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getConstructiondesign()!=null){
+                        HSSFCell cell40=rowX.createCell(40);
+                        cell40.setCellValue((String)subprojects.get(i).getConstructiondesign());
+                        cell40.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getStarttime()!=null){
+                        HSSFCell cell41=rowX.createCell(41);
+                        cell41.setCellValue(subprojects.get(i).getStarttime().toString());
+                        cell41.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getTesttime()!=null){
+                        HSSFCell cell42=rowX.createCell(42);
+                        cell42.setCellValue((String)subprojects.get(i).getTesttime());
+                        cell42.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getEndtime()!=null){
+                        HSSFCell cell43=rowX.createCell(43);
+                        cell43.setCellValue(subprojects.get(i).getEndtime());
+                        cell43.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getProjectprogress()!=null){
+                        HSSFCell cell44=rowX.createCell(44);
+                        cell44.setCellValue((String)subprojects.get(i).getProjectprogress());
+                        cell44.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getCompletedinvestment()!=null){
+                        HSSFCell cell45=rowX.createCell(45);
+                        cell45.setCellValue(subprojects.get(i).getCompletedinvestment().doubleValue());
+                        finishedInvesment=finishedInvesment+subprojects.get(i).getCompletedinvestment().doubleValue();
+                        cell45.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getFormedability()!=null){
+                        HSSFCell cell46=rowX.createCell(46);
+                        cell46.setCellValue((String)subprojects.get(i).getFormedability());
+                        cell46.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getDesignedability()!=null){
+                        HSSFCell cell47=rowX.createCell(47);
+                        cell47.setCellValue((String)subprojects.get(i).getDesignedability());
+                        cell47.setCellStyle(contextStyle);}
+                    if(subprojects.get(i).getRemarks()!=null){
+                        HSSFCell cell48=rowX.createCell(48);
+                        cell48.setCellValue((String)subprojects.get(i).getRemarks());
+                        cell48.setCellStyle(contextStyle);}
+                    if(i==subprojects.size()-1){
+                        //根据子项目填入的投资额，计算小计，并填入
+                        HSSFCell xcell10=row.createCell(10);
+                        xcell10.setCellValue("小计");
+                        xcell10.setCellStyle(contextStyle);
+                        HSSFCell xcell36=row.createCell(36);
+                        xcell36.setCellValue(releaseInvesment);
+                        xcell36.setCellStyle(contextStyle);
+                        HSSFCell xcell45=row.createCell(45);
+                        xcell45.setCellValue(finishedInvesment);
+                        xcell45.setCellStyle(contextStyle);
+                    }
+                }
 
         }
             }
-        response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-disposition", "attachment;filename=ResultOutput.xls");
-        OutputStream out =response.getOutputStream();
+//        response.setContentType("application/vnd.ms-excel");
+//        response.setHeader("Content-disposition", "attachment;filename=ResultOutput.xls");
+//        OutputStream out =response.getOutputStream();
 
         try{
             workbook.write(out);
         }catch(IOException e){
             e.printStackTrace();
         }
-        catch(SecurityException e)
-        {
-            e.printStackTrace();
         }
-            
-        }
-
-
-
 }
 
