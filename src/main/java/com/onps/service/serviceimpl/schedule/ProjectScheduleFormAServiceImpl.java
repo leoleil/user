@@ -17,6 +17,8 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.List;
 
 @Service
+@Scope(value = WebApplicationContext.SCOPE_SESSION ,
+        proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ProjectScheduleFormAServiceImpl implements ProjectScheduleFormAService {
 
     @Autowired
