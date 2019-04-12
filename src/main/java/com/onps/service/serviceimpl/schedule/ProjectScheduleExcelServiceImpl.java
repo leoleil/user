@@ -16,7 +16,6 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -60,24 +59,24 @@ public class ProjectScheduleExcelServiceImpl {
         //表格标题格式 左右上下居中
         CellStyle titleStyle=workbook.createCellStyle();
         titleStyle.setFont(titleFont);
-        titleStyle.setAlignment((short)2);//左右居中
-        titleStyle.setVerticalAlignment((short)1);
+        titleStyle.setAlignment(CellStyle.ALIGN_CENTER);//左右居中
+        titleStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
         //表头格式 左右上下居中
         CellStyle headerStyle=workbook.createCellStyle();
         headerStyle.setFont(headerFont);
-        headerStyle.setAlignment((short)2);//左右居中
-        headerStyle.setVerticalAlignment((short)1);//上下居中
+        headerStyle.setAlignment(CellStyle.ALIGN_CENTER);//左右居中
+        headerStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);//上下居中
         headerStyle.setWrapText(true);//自动换行
         //正文格式 左右上下居中
         CellStyle contextStyle=workbook.createCellStyle();
         contextStyle.setFont(contextFont);
-        contextStyle.setVerticalAlignment((short)1);//上下居中
-        contextStyle.setAlignment((short)2);//左右居中
+        contextStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);//上下居中
+        contextStyle.setAlignment(CellStyle.ALIGN_CENTER);//左右居中
         contextStyle.setWrapText(true);//自动换行
         //正文格式 左对齐
         CellStyle contextStyle1=workbook.createCellStyle();
         contextStyle1.setFont(contextFont);
-        contextStyle1.setAlignment((short)1);
+        contextStyle1.setAlignment(CellStyle.ALIGN_LEFT);
         contextStyle1.setWrapText(true);//自动换行
         //设置列宽
         for(int i=0;i<=48;i++){
@@ -232,21 +231,24 @@ public class ProjectScheduleExcelServiceImpl {
                 HSSFCell cell4=row.createCell(4);
                 cell4.setCellValue( (String)projects.get(projectNumber).getDocumentnumber());
                 cell4.setCellStyle(contextStyle);
+                if(projects.get(projectNumber).getDocumentdate()!=null){
                 HSSFCell cell5=row.createCell(5);
                 cell5.setCellValue( projects.get(projectNumber).getDocumentdate().toString());
-                cell5.setCellStyle(contextStyle);
+                cell5.setCellStyle(contextStyle);}
+                if(projects.get(projectNumber).getInvestmentamount()!=null){
                 HSSFCell cell6=row.createCell(6);
                 cell6.setCellValue(projects.get(projectNumber).getInvestmentamount().doubleValue());
-                cell6.setCellStyle(contextStyle);
+                cell6.setCellStyle(contextStyle);}
                 HSSFCell cell7=row.createCell(7);
                 cell7.setCellValue((String)projects.get(projectNumber).getApprovalauthority());
                 cell7.setCellStyle(contextStyle);
                 HSSFCell cell8=row.createCell(8);
                 cell8.setCellValue((String)projects.get(projectNumber).getConstructionperiod());
                 cell8.setCellStyle(contextStyle);
-                HSSFCell cell9=row.createCell(9);
-                cell9.setCellValue(projects.get(projectNumber).getIsimportent().doubleValue());
-                cell9.setCellStyle(contextStyle);
+                if(projects.get(projectNumber).getIsimportent()!=null){
+                    HSSFCell cell9=row.createCell(9);
+                    cell9.setCellValue(projects.get(projectNumber).getIsimportent().doubleValue());
+                    cell9.setCellStyle(contextStyle);}
                 System.out.println("空");
             }
             //如果子项目只有一条，则不用合并单元格，依次写入
@@ -268,21 +270,24 @@ public class ProjectScheduleExcelServiceImpl {
                 HSSFCell cell4=row.createCell(4);
                 cell4.setCellValue( (String)projects.get(projectNumber).getDocumentnumber());
                 cell4.setCellStyle(contextStyle);
-                HSSFCell cell5=row.createCell(5);
-                cell5.setCellValue( projects.get(projectNumber).getDocumentdate().toString());
-                cell5.setCellStyle(contextStyle);
-                HSSFCell cell6=row.createCell(6);
-                cell6.setCellValue(projects.get(projectNumber).getInvestmentamount().doubleValue());
-                cell6.setCellStyle(contextStyle);
+                if(projects.get(projectNumber).getDocumentdate()!=null){
+                    HSSFCell cell5=row.createCell(5);
+                    cell5.setCellValue( projects.get(projectNumber).getDocumentdate().toString());
+                    cell5.setCellStyle(contextStyle);}
+                if(projects.get(projectNumber).getInvestmentamount()!=null){
+                    HSSFCell cell6=row.createCell(6);
+                    cell6.setCellValue(projects.get(projectNumber).getInvestmentamount().doubleValue());
+                    cell6.setCellStyle(contextStyle);}
                 HSSFCell cell7=row.createCell(7);
                 cell7.setCellValue((String)projects.get(projectNumber).getApprovalauthority());
                 cell7.setCellStyle(contextStyle);
                 HSSFCell cell8=row.createCell(8);
                 cell8.setCellValue((String)projects.get(projectNumber).getConstructionperiod());
                 cell8.setCellStyle(contextStyle);
-                HSSFCell cell9=row.createCell(9);
-                cell9.setCellValue(projects.get(projectNumber).getIsimportent().doubleValue());
-                cell9.setCellStyle(contextStyle);
+                if(projects.get(projectNumber).getIsimportent()!=null){
+                    HSSFCell cell9=row.createCell(9);
+                    cell9.setCellValue(projects.get(projectNumber).getIsimportent().doubleValue());
+                    cell9.setCellStyle(contextStyle);}
 
                 //子项目
                 if(subprojects.get(0).getSubname()!=null){
@@ -475,24 +480,24 @@ public class ProjectScheduleExcelServiceImpl {
                 HSSFCell cell4=row.createCell(4);
                 cell4.setCellValue( (String)projects.get(projectNumber).getDocumentnumber());
                 cell4.setCellStyle(contextStyle);
-                HSSFCell cell5=row.createCell(5);
-                cell5.setCellValue( projects.get(projectNumber).getDocumentdate().toString());
-                cell5.setCellStyle(contextStyle);
-                HSSFCell cell6=row.createCell(6);
-                double dou = projects.get(projectNumber).getInvestmentamount().doubleValue();
-                cell6.setCellValue(dou);
-                cell6.setCellStyle(contextStyle);
+                if(projects.get(projectNumber).getDocumentdate()!=null){
+                    HSSFCell cell5=row.createCell(5);
+                    cell5.setCellValue( projects.get(projectNumber).getDocumentdate().toString());
+                    cell5.setCellStyle(contextStyle);}
+                if(projects.get(projectNumber).getInvestmentamount()!=null){
+                    HSSFCell cell6=row.createCell(6);
+                    cell6.setCellValue(projects.get(projectNumber).getInvestmentamount().doubleValue());
+                    cell6.setCellStyle(contextStyle);}
                 HSSFCell cell7=row.createCell(7);
                 cell7.setCellValue((String)projects.get(projectNumber).getApprovalauthority());
                 cell7.setCellStyle(contextStyle);
                 HSSFCell cell8=row.createCell(8);
                 cell8.setCellValue((String)projects.get(projectNumber).getConstructionperiod());
                 cell8.setCellStyle(contextStyle);
-                HSSFCell cell9=row.createCell(9);
-                double isimportant=projects.get(projectNumber).getIsimportent().doubleValue();
-                cell9.setCellValue(isimportant);
-                cell9.setCellStyle(contextStyle);
-
+                if(projects.get(projectNumber).getIsimportent()!=null){
+                    HSSFCell cell9=row.createCell(9);
+                    cell9.setCellValue(projects.get(projectNumber).getIsimportent().doubleValue());
+                    cell9.setCellStyle(contextStyle);}
                 double releaseInvesment=0;//小计中的下达投资
                 double finishedInvesment=0;//小计中的完成投资
 
