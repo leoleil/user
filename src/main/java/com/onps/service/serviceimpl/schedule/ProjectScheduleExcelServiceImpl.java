@@ -64,7 +64,6 @@ public class ProjectScheduleExcelServiceImpl {
         //表头格式 左右上下居中
         CellStyle headerStyle=workbook.createCellStyle();
         headerStyle.setFont(headerFont);
-
         headerStyle.setAlignment(CellStyle.ALIGN_CENTER);//左右居中
         headerStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);//上下居中
         headerStyle.setWrapText(true);//自动换行
