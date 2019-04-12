@@ -102,7 +102,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
             subproject.setSubmitdepartmentTa(projectScheduleVO.getSubmitDepartmentTa());
             subproject.setSubmitnumberTa(projectScheduleVO.getSubmitNumberTa());
             subproject.setSubmitdateTa(projectScheduleVO.getSubmitDateTa());
-            subproject.setApprovaldateTa(projectScheduleVO.getApprovalDateTa());
+            subproject.setApprovalnameTa(projectScheduleVO.getApprovalNameTa());
             subproject.setApprovaldepartmentTa(projectScheduleVO.getApprovalDepartmentTa());
             subproject.setApprovalnumberTa(projectScheduleVO.getApprovalNumberTa());
             subproject.setApprovaldateTa(projectScheduleVO.getApprovalDateTa());
@@ -190,7 +190,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                     projectScheduleVO.setSubmitDate(subproject.getSubmitdate());
                     projectScheduleVO.setApprovalNameTa((String)subproject.getApprovalnameTa());
                     projectScheduleVO.setApprovalDepartmentTa((String)subproject.getApprovaldepartmentTa());
-                    projectScheduleVO.setApprovalNameTa((String)subproject.getApprovalnumberTa());
+                    projectScheduleVO.setApprovalNumberTa((String)subproject.getApprovalnumberTa());
                     projectScheduleVO.setApprovalDateTa(subproject.getApprovaldateTa());
                     projectScheduleVO.setReplyDate(subproject.getReplydate());
                     projectScheduleVO.setApprovalProgress((String)subproject.getApprovalprogress());
@@ -213,6 +213,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                     projectScheduleVO.setTestTime((String)subproject.getTesttime());
                     projectScheduleVO.setEndTimeCon((String)subproject.getEndtimeCon());
                     projectScheduleVO.setTimestamp(subproject.getTimestamp());
+                    projectScheduleVO.setDepartment((String)subproject.getDepartment());
                     //累死我啦
                     //那么多项
                     //->_->??

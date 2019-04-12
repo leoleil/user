@@ -231,14 +231,12 @@ public class ProjectScheduleExcelServiceImpl {
                 HSSFCell cell4=row.createCell(4);
                 cell4.setCellValue( (String)projects.get(projectNumber).getDocumentnumber());
                 cell4.setCellStyle(contextStyle);
-                if(projects.get(projectNumber).getDocumentdate()!=null){
                 HSSFCell cell5=row.createCell(5);
                 cell5.setCellValue( projects.get(projectNumber).getDocumentdate().toString());
-                cell5.setCellStyle(contextStyle);}
-                if(projects.get(projectNumber).getInvestmentamount()!=null){
+                cell5.setCellStyle(contextStyle);
                 HSSFCell cell6=row.createCell(6);
                 cell6.setCellValue(projects.get(projectNumber).getInvestmentamount().doubleValue());
-                cell6.setCellStyle(contextStyle);}
+                cell6.setCellStyle(contextStyle);
                 HSSFCell cell7=row.createCell(7);
                 cell7.setCellValue((String)projects.get(projectNumber).getApprovalauthority());
                 cell7.setCellStyle(contextStyle);
