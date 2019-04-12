@@ -82,4 +82,12 @@ public class MapperTest {
         myuserMapper.deleteByPrimaryKey("9FD2EC0C74A941708B8BCBCBF76EE2E5");
 
     }
+    @Test
+    public void big(){
+        BigDecimal bigDecimal = new BigDecimal(1);
+        System.out.println(bigDecimal);
+        BigDecimal bigDecimal2 = new BigDecimal(1.0);
+        System.out.println(bigDecimal2);
+
+    }
 }

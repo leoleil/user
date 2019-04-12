@@ -21,7 +21,7 @@ data =  {
     "projectName": "111222",//项目名称
     "documentName": "",
     "documentNumber": "",
-    "documentDate": "",//$("#documentDate").val(),
+    "documentDate": new Date(),//$("#documentDate").val(),
     "investmentamount": "",
     "approvalAuthority":"",
     "constructionPeriod": "",
@@ -33,36 +33,39 @@ data =  {
     "level5": "",
     //"subprojectId": "",
     "subName": $("#subName").val(),
-    "startTime": "",//$("#startTime").val(),
+    "startTimeCon": new Date(),//$("#startTime").val(),
     "submitFileName":"",
     "submitDepartment": "",
     "submitNumber": "",
-    "submitDate": "",//$("#submitDate").val(),
+    "submitDate": new Date(),//$("#submitDate").val(),
     "approvalName": "",
     "approvalDepartment": "",
     "approvalNumber": "",
-    "approvalDate": "",//$("#approvalDate").val(),
+    "approvalDate": new Date(),//$("#approvalDate").val(),
     "submitFileNameTa": "",
     "submitDepartmentTa": "",
     "submitNumberTa": "",
-    "submitDateTa": "",//$("#submitDateTa").val(),
+    "submitDateTa": new Date(),//$("#submitDateTa").val(),
     "approvalNameTa": "",
     "approvalDepartmentTa": "",
     "approvalNumberTa": "",
-    "approvalDateTa": "",//$("#approvalDateTa").val(),
-    "replyDate": "",//$("#replyDate").val(),
+    "approvalDateTa": new Date(),//$("#approvalDateTa").val(),
+    "replyDate": new Date(),//$("#replyDate").val(),
     "approvalProgress": "",
     "constructionContent": "",
     "projectNumber": "",
     "constructionPlace": "",
     "constructionCompany": "",
-    "endTime": "",//$("#endTime").val(),
+    "endTimeCon": new Date(),//$("#endTime").val(),
     "releaseInvestment": "",
     "constructionPhase": "",
     "firstDesign": "",
     "bidding": "",
     "constructionDesign": "",
-    "startTimeCon": "",//$("#startTimeCon").val(),
+    "reason":"",
+    "testTime":new Date(),
+    "endTime": new Date(),
+    "startTime": new Date(),//$("#startTimeCon").val(),
     "projectProgress":"",
     "completedInvestment": "",
     "formedAbility": "",
@@ -80,61 +83,6 @@ $(function(){
             text:'提交',
             handler:function(){
                 alert('add');
-                var d = {
-                    //表A目录
-                    "projectName": data.projectName,//项目名称
-                    "documentName": data.documentName,//文件名
-                    "documentNumber":data.documentNumber,//文件号
-                    "documentDate": data.documentDate,//$("#documentDate").val(),//填报时间
-                    "investmentamount": data.investmentamount,//计划投资
-                    "approvalAuthority": data.approvalAuthority,//审批权限
-                    "constructionPeriod": data.constructionPeriod,//建设周期
-                    "isimportent": data.isimportent,//是否规划重点项目
-                    "level1": data.level1,//五个地理位置
-                    "level2": data.level2,//二级地理位置
-                    "level3": data.level3,//建设计划
-                    "level4": data.level4,//十几五建设计划
-                    "level5": data.level5,//军区军兵种后勤
-                    //"subprojectId": $("#subprojectId").val(),
-                    "subName": data.subName,//子项目名
-                    "startTime":data.startTime,//$("#startTime").val(),//开工时间
-                    "submitFileName": data.submitFileName,//计划书送审文件名
-                    "submitDepartment": data.submitDepartment,//计划书送审单位
-                    "submitNumber": data.submitNumber,//计划书送审文号
-                    "submitDate": data.submitDate,//$("#submitDate").val(),//计划书送审时间
-                    "approvalName": data.approvalName,//计划书批复文件名
-                    "approvalDepartment": data.approvalDepartment,//计划书批复单位
-                    "approvalNumber": data.approvalNumber,//计划书批复文号
-                    "approvalDate": data.approvalDate,//$("#approvalDate").val(),//计划书批复时间
-                    "submitFileNameTa": data.submitFileNameTa,//任务书送审文件名
-                    "submitDepartmentTa": data.submitDepartmentTa,//任务书送审单位
-                    "submitNumberTa": data.submitNumberTa,//任务书送审文号
-                    "submitDateTa": data.submitDateTa,//$("#submitDateTa").val(),//任务书送审时间
-                    "approvalNameTa": data.approvalNameTa,//任务书批复文件名
-                    "approvalDepartmentTa": data.approvalDepartmentTa,//任务书批复单位
-                    "approvalNumberTa": data.approvalNumberTa,//任务书批复文号
-                    "approvalDateTa": data.approvalDateTa,//$("#approvalDateTa").val(),//任务书批复时间
-                    "replyDate": data.replyDate,//$("#replyDate").val(),//军委机关回复时间
-                    "approvalProgress": data.approvalProgress,//审批进展
-                    "constructionContent": data.constructionContent,//主要建设内容以及发展
-                    "projectNumber": data.projectNumber,//工程代号
-                    "constructionPlace": data.constructionPlace,//建设地点
-                    "constructionCompany": data.constructionCompany,//建设单位
-                    "endTime": data.endTime,//$("#endTime").val(),//竣工时间
-                    "releaseInvestment": data.releaseInvestment,//下达投资（万元）
-                    "constructionPhase": data.constructionPhase,//建设阶段
-                    "firstDesign": data.firstDesign,//初步设计
-                    "bidding": data.bidding,//招标采购
-                    "constructionDesign": data.constructionDesign,//施工图设计
-                    //"startTimeCon": data.startTimeCon,//$("#startTimeCon").val(),//建设开工时间
-                    "projectProgress": data.projectProgress,//工程进度
-                    "completedInvestment": data.completedInvestment,//已经完成投资
-                    "formedAbility": data.formedAbility,//已经形成能力
-                    "designedAbility": data.designedAbility,//完工后预期形成能力
-                    "remarks": data.remarks,//备注
-                    "department": data.department//提交部门
-                };
-                console.log(d);
                 $.ajax({
                     url: "/onps/schedule/submitProjectSchedule.do",
                     type: "post",
@@ -155,8 +103,10 @@ $(function(){
                         "level4": data.level4,//十几五建设计划
                         "level5": data.level5,//军区军兵种后勤
                         //"subprojectId": $("#subprojectId").val(),
+                        //b 表
                         "subName": data.subName,//子项目名
-                        "startTime":data.startTime,//$("#startTime").val(),//开工时间
+                        "startTimeCon":data.startTimeCon,//$("#startTime").val(),//开工时间
+                        "endTimeCon": data.endTimeCon,//$("#endTime").val(),//竣工时间
                         "submitFileName": data.submitFileName,//计划书送审文件名
                         "submitDepartment": data.submitDepartment,//计划书送审单位
                         "submitNumber": data.submitNumber,//计划书送审文号
@@ -179,14 +129,17 @@ $(function(){
                         "projectNumber": data.projectNumber,//工程代号
                         "constructionPlace": data.constructionPlace,//建设地点
                         "constructionCompany": data.constructionCompany,//建设单位
-                        "endTime": data.endTime,//$("#endTime").val(),//竣工时间
                         "releaseInvestment": data.releaseInvestment,//下达投资（万元）
+                        //c 表
                         "constructionPhase": data.constructionPhase,//建设阶段
                         "firstDesign": data.firstDesign,//初步设计
                         "bidding": data.bidding,//招标采购
                         "constructionDesign": data.constructionDesign,//施工图设计
-                        //"startTimeCon": data.startTimeCon,//$("#startTimeCon").val(),//建设开工时间
+                        "startTime": data.startTime,//$("#startTimeCon").val(),//建设开工时间
+                        "testTime":data.testTime,//初验时间
+                        "endTime":data.endTime,//竣工时间
                         "projectProgress": data.projectProgress,//工程进度
+                        "reason":data.reason,
                         "completedInvestment": data.completedInvestment,//已经完成投资
                         "formedAbility": data.formedAbility,//已经形成能力
                         "designedAbility": data.designedAbility,//完工后预期形成能力
@@ -226,7 +179,7 @@ $(function(){
                 $('#a_5').combotree('setText',null);
                 data.documentNumber="";
                 $('#a_6').datebox('setValue',null);
-                data.documentDate="";
+                data.documentDate=new Date();
                 $('#a_7').textbox('setText',null);
                 data.investmentamount="";
                 $('#a_8').combotree('setText',null);
@@ -247,7 +200,7 @@ $(function(){
                 $('#b_5').textbox('setText',null);
                 data.submitNumber="";
                 $('#b_6').datebox('setValue',null);
-                data.submitDate="";
+                data.submitDate=new Date();
                 $('#b_7').textbox('setText',null);
                 data.approvalName="";
                 $('#b_8').textbox('setText',null);
@@ -255,7 +208,7 @@ $(function(){
                 $('#b_9').textbox('setText',null);
                 data.approvalNumber="";
                 $('#b_10').datebox('setValue',null);
-                data.approvalDate="";
+                data.approvalDate=new Date();
                 $('#b_11').textbox('setText',null);
                 data.submitFileNameTa="";
                 $('#b_12').textbox('setText',null);
@@ -263,7 +216,7 @@ $(function(){
                 $('#b_13').textbox('setText',null);
                 data.submitNumberTa="";
                 $('#b_14').datebox('setValue',null);
-                data.submitDateTa="";
+                data.submitDateTa=new Date();
                 $('#b_15').textbox('setText',null);
                 data.approvalNameTa="";
                 $('#b_16').textbox('setText',null);
@@ -271,13 +224,13 @@ $(function(){
                 $('#b_17').textbox('setText',null);
                 data.approvalNumberTa="";
                 $('#b_18').datebox('setValue',null);
-                data.approvalDateTa="";
+                data.approvalDateTa=new Date();
                 $('#b_25').datebox('setValue',null);
-                data.startTime="";
+                data.startTimeCon=new Date();
                 $('#b_26').datebox('setValue',null);
-                data.endTime="";
+                data.endTimeCon=new Date();
                 $('#b_19').datebox('setValue',null);
-                data.replyDate="";
+                data.replyDate=new Date();
                 $('#b_20').combotree('setText',null);
                 data.approvalProgress="";
                 $('#b_21').textbox('setText',null);
@@ -299,6 +252,14 @@ $(function(){
                 data.bidding="";
                 $('#c_4').combotree('setText',null);
                 data.constructionDesign="";
+                $('#c_5').datebox('setValue',null);
+                data.startTime = new Date();
+                $('#c_6').datebox('setValue',null);
+                data.testTime = new Date();
+                $('#c_7').datebox('setValue',null);
+                data.endTime = new Date();
+                $('#reason').textbox('setText',null);
+                data.reason="";
                 $('#c_8').textbox('setText',null);
                 data.projectProgress="";
                 $('#c_9').textbox('setText',null);
@@ -593,8 +554,8 @@ $(function(){
         labelPosition:'left',
         labelWidth:60,
         onSelect:function(date){
-            data.documentDate = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
-            alert(data.documentDate);
+            data.documentDate = new Date(date);
+            console.log(data.documentDate);
         }
     })
     $('#a_7').textbox({
@@ -651,20 +612,27 @@ $(function(){
             alert(data.constructionPeriod);
         }
     });
-    $('#a_10').textbox({
-        multiline:true,
+    $('#a_10').combotree({
+        width:330,
+        labelWidth:280,
         required:true,
-        width:800,
-        height:70,
-        editable:true,
         label:'规划纲要重点项目：',
         labelPosition:'left',
         labelWidth:150,
         onChange:function(){
-            data.isimportent  = $(this).textbox('getText');
-            alert(data.isimportent)
-        }
+            data.isimportent = $('#a_10').combotree('getValue');
+            alert(data.isimportent);
+        } 
     });
+    $('#a_10').combotree('loadData',[{
+        "id":"1",
+        "text":"是",
+        "iconCls":'icon-blank'
+    },{
+        "id":"0",
+        "text":"否",
+        "iconCls":'icon-blank'
+    }])
     // div titleB
     $('#b_1').textbox({
         required:true,
@@ -728,7 +696,7 @@ $(function(){
         labelPosition:'left',
         labelWidth:80,
         onSelect:function(date){
-            data.submitDate = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+            data.submitDate =  new Date(date);
             alert(data.submitDate);
         }
     });
@@ -772,7 +740,7 @@ $(function(){
         labelPosition:'left',
         labelWidth:80,
         onSelect:function(date){
-            data.approvalDate = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+            data.approvalDate = new Date(date);
             alert(data.approvalDate);
         }
     });
@@ -816,7 +784,7 @@ $(function(){
         labelPosition:'left',
         labelWidth:80,
         onSelect:function(date){
-            data.submitDateTa = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+            data.submitDateTa =new Date(date);
             alert(data.submitDateTa);
         }
     });
@@ -860,7 +828,7 @@ $(function(){
         labelPosition:'left',
         labelWidth:80,
         onSelect:function(date){
-            data.approvalDateTa = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+            data.approvalDateTa = new Date(date);
             alert(data.approvalDateTa);
         }
     });
@@ -871,7 +839,7 @@ $(function(){
         labelPosition:'left',
         labelWidth:200,
         onSelect:function(date){
-            data.replyDate = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+            data.replyDate = new Date(date);
             alert(data.replyDate);
         }
     });
@@ -954,8 +922,8 @@ $(function(){
         labelPosition:'left',
         labelWidth:80,
         onSelect:function(date){
-            data.startTime = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
-            alert(data.startTime);
+            data.startTimeCon = new Date(date);
+            alert(data.startTimeCon);
         }
     });
     $('#b_26').datebox({
@@ -965,8 +933,8 @@ $(function(){
         labelPosition:'left',
         labelWidth:80,
         onSelect:function(date){
-            data.endTime = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
-            alert(data.endTime);
+            data.endTimeCon = new Date(date);
+            alert(data.endTimeCon);
         }
     });
     $('#b_27').textbox({
@@ -1099,8 +1067,8 @@ $(function(){
         labelPosition:'left',
         labelWidth:100,
         onSelect:function(date){
-            data.startTimeCon = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
-            alert(data.startTimeCon);
+            data.startTime = new Date(date);
+            alert(data.startTime);
         }
 
     });
@@ -1109,17 +1077,38 @@ $(function(){
         required:true,
         label:'初验时间:',
         labelPosition:'left',
-        labelWidth:100
+        labelWidth:100,
+        onSelect:function(date){
+            data.testTime = new Date(date);
+            alert(data.testTime);
+        }
     });
     $('#c_7').datebox({
         width:200,
         required:true,
         label:'竣工时间:',
         labelPosition:'left',
-        labelWidth:100
+        labelWidth:100,
+        onSelect:function(date){
+            data.endTime = new Date(date);
+            alert(data.endTime);
+        }
+    });
+    $('#reason').textbox({
+        width:1000,
+        multiline:true,
+        height:70,
+        required:true,
+        label:'未开工原因:',
+        labelPosition:'left',
+        labelWidth:120,
+        onChange:function(){
+            data.reason = $('#reason').textbox('getText');
+            alert(data.reason);
+        } 
     });
     $('#c_8').textbox({
-        width:340,
+        width:240,
         required:true,
         label:'工程进度（工程完成率%）:',
         labelPosition:'left',

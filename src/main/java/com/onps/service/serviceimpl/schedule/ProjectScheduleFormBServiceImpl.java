@@ -9,9 +9,14 @@ import com.onps.model.SubprojectExample;
 import com.onps.model.vo.ProjectScheduleVO;
 import com.onps.service.ProjectScheduleFormBService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 
 @Service
+@Scope(value = WebApplicationContext.SCOPE_SESSION ,
+        proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ProjectScheduleFormBServiceImpl implements ProjectScheduleFormBService {
     @Autowired
     private ProjectMapper projectMapper;
