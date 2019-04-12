@@ -59,24 +59,24 @@ public class ProjectScheduleExcelServiceImpl {
         //表格标题格式 左右上下居中
         CellStyle titleStyle=workbook.createCellStyle();
         titleStyle.setFont(titleFont);
-        titleStyle.setAlignment(CellStyle.ALIGN_CENTER);//左右居中
-        titleStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+        titleStyle.setAlignment(HorizontalAlignment.CENTER);//左右居中
+        titleStyle.setVerticalAlignment(VerticalAlignment.CENTER);
         //表头格式 左右上下居中
         CellStyle headerStyle=workbook.createCellStyle();
         headerStyle.setFont(headerFont);
-        headerStyle.setAlignment(CellStyle.ALIGN_CENTER);//左右居中
-        headerStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);//上下居中
+        headerStyle.setAlignment(HorizontalAlignment.CENTER);//左右居中
+        headerStyle.setVerticalAlignment(VerticalAlignment.CENTER);//上下居中
         headerStyle.setWrapText(true);//自动换行
         //正文格式 左右上下居中
         CellStyle contextStyle=workbook.createCellStyle();
         contextStyle.setFont(contextFont);
-        contextStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);//上下居中
-        contextStyle.setAlignment(CellStyle.ALIGN_CENTER);//左右居中
+        contextStyle.setVerticalAlignment(VerticalAlignment.CENTER);//上下居中
+        contextStyle.setAlignment(HorizontalAlignment.CENTER);//左右居中
         contextStyle.setWrapText(true);//自动换行
         //正文格式 左对齐
         CellStyle contextStyle1=workbook.createCellStyle();
         contextStyle1.setFont(contextFont);
-        contextStyle1.setAlignment(CellStyle.ALIGN_LEFT);
+        contextStyle1.setAlignment(HorizontalAlignment.LEFT);
         contextStyle1.setWrapText(true);//自动换行
         //设置列宽
         for(int i=0;i<=48;i++){
