@@ -73,14 +73,15 @@ public class ServiceTest {
         applicationContext = new ClassPathXmlApplicationContext(configLocation);
         ProjectScheduleExcelServiceImpl excel= (ProjectScheduleExcelServiceImpl) applicationContext.getBean("projectScheduleExcelServiceImpl");
         ProjectScheduleExcelServiceImpl out1=new ProjectScheduleExcelServiceImpl();
-        OutputStream os= null;
+        OutputStream out= null;
         try {
-            os = new FileOutputStream("D://表格导出.xls");
+
+            out = new FileOutputStream("D://表格导出.xls");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         try {
-            excel.makeProjectExcel(os);
+            excel.makeProjectExcel(out);
         } catch (Exception e) {
             e.printStackTrace();
         }
