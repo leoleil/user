@@ -67,17 +67,19 @@ public class ProjectScheduleExcelServiceImpl {
         headerStyle.setAlignment(HorizontalAlignment.CENTER);//左右居中
         headerStyle.setVerticalAlignment(VerticalAlignment.CENTER);//上下居中
         headerStyle.setWrapText(true);//自动换行
+        //正文格式 左对齐
+        CellStyle contextStyle1=workbook.createCellStyle();
+
+        contextStyle1.setFont(contextFont);
+        contextStyle1.setAlignment(HorizontalAlignment.LEFT);
+        contextStyle1.setWrapText(true);//自动换行
         //正文格式 左右上下居中
         CellStyle contextStyle=workbook.createCellStyle();
         contextStyle.setFont(contextFont);
         contextStyle.setVerticalAlignment(VerticalAlignment.CENTER);//上下居中
         contextStyle.setAlignment(HorizontalAlignment.CENTER);//左右居中
         contextStyle.setWrapText(true);//自动换行
-        //正文格式 左对齐
-        CellStyle contextStyle1=workbook.createCellStyle();
-        contextStyle1.setFont(contextFont);
-        contextStyle1.setAlignment(HorizontalAlignment.LEFT);
-        contextStyle1.setWrapText(true);//自动换行
+
         //设置列宽
         for(int i=0;i<=48;i++){
             if(i==0){
