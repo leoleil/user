@@ -41,7 +41,7 @@ public class ProjectScheduleFormBServiceImpl implements ProjectScheduleFormBServ
                 .andLevel4EqualTo(projectScheduleVO.getLevel4())
                 .andLevel5EqualTo(projectScheduleVO.getLevel5());
         //对Level2需要进行判空，如果不为空，再进行筛选
-                if(projectScheduleVO.getLevel2() !=null){
+                if(projectScheduleVO.getLevel2() !=null && !projectScheduleVO.getLevel2().equals("")){
                     criteria1.andLevel2EqualTo(projectScheduleVO.getLevel2());
                 }
         String projectId=projectMapper.selectByExample(projectExample).get(0).getId();

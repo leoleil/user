@@ -187,7 +187,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                     projectScheduleVO.setSubmitFileNameTa((String)subproject.getSubmitfilenameTa());
                     projectScheduleVO.setSubmitDepartmentTa((String)subproject.getSubmitdepartmentTa());
                     projectScheduleVO.setSubmitNumberTa((String)subproject.getSubmitnumberTa());
-                    projectScheduleVO.setSubmitDate(subproject.getSubmitdate());
+                    projectScheduleVO.setSubmitDateTa(subproject.getSubmitdateTa());
                     projectScheduleVO.setApprovalNameTa((String)subproject.getApprovalnameTa());
                     projectScheduleVO.setApprovalDepartmentTa((String)subproject.getApprovaldepartmentTa());
                     projectScheduleVO.setApprovalNumberTa((String)subproject.getApprovalnumberTa());
@@ -214,6 +214,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                     projectScheduleVO.setEndTimeCon((String)subproject.getEndtimeCon());
                     projectScheduleVO.setTimestamp(subproject.getTimestamp());
                     projectScheduleVO.setDepartment((String)subproject.getDepartment());
+                    projectScheduleVO.setReason((String)subproject.getReason());
                     //累死我啦
                     //那么多项
                     //->_->??
@@ -252,7 +253,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                     projectScheduleVO.setLevel4((String) project.getLevel4());
                     projectScheduleVO.setLevel5((String) project.getLevel5());
                     projectScheduleVO.setTimestamp((Date) project.getTimestamp());
-                    //获取表内容
+                    //获取B表内容
                     projectScheduleVO.setSubName((String) subproject.getSubname());
                     projectScheduleVO.setStartTime(subproject.getStarttime());
                     projectScheduleVO.setSubmitFileName((String)subproject.getSubmitfilename());
@@ -266,10 +267,10 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                     projectScheduleVO.setSubmitFileNameTa((String)subproject.getSubmitfilenameTa());
                     projectScheduleVO.setSubmitDepartmentTa((String)subproject.getSubmitdepartmentTa());
                     projectScheduleVO.setSubmitNumberTa((String)subproject.getSubmitnumberTa());
-                    projectScheduleVO.setSubmitDate(subproject.getSubmitdate());
+                    projectScheduleVO.setSubmitDateTa(subproject.getSubmitdateTa());
                     projectScheduleVO.setApprovalNameTa((String)subproject.getApprovalnameTa());
                     projectScheduleVO.setApprovalDepartmentTa((String)subproject.getApprovaldepartmentTa());
-                    projectScheduleVO.setApprovalNameTa((String)subproject.getApprovalnumberTa());
+                    projectScheduleVO.setApprovalNumberTa((String)subproject.getApprovalnumberTa());
                     projectScheduleVO.setApprovalDateTa(subproject.getApprovaldateTa());
                     projectScheduleVO.setReplyDate(subproject.getReplydate());
                     projectScheduleVO.setApprovalProgress((String)subproject.getApprovalprogress());
@@ -292,6 +293,8 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                     projectScheduleVO.setTestTime((String)subproject.getTesttime());
                     projectScheduleVO.setEndTimeCon((String)subproject.getEndtimeCon());
                     projectScheduleVO.setTimestamp(subproject.getTimestamp());
+                    projectScheduleVO.setDepartment((String)subproject.getDepartment());
+                    projectScheduleVO.setReason((String)subproject.getReason());
                     //累死我啦
                     //那么多项
                     //->_->??
@@ -330,7 +333,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                     projectScheduleVO.setLevel4((String) project.getLevel4());
                     projectScheduleVO.setLevel5((String) project.getLevel5());
                     projectScheduleVO.setTimestamp((Date) project.getTimestamp());
-                    //获取表B内容
+                    //获取B表内容
                     projectScheduleVO.setSubName((String) subproject.getSubname());
                     projectScheduleVO.setStartTime(subproject.getStarttime());
                     projectScheduleVO.setSubmitFileName((String)subproject.getSubmitfilename());
@@ -344,10 +347,10 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                     projectScheduleVO.setSubmitFileNameTa((String)subproject.getSubmitfilenameTa());
                     projectScheduleVO.setSubmitDepartmentTa((String)subproject.getSubmitdepartmentTa());
                     projectScheduleVO.setSubmitNumberTa((String)subproject.getSubmitnumberTa());
-                    projectScheduleVO.setSubmitDate(subproject.getSubmitdate());
+                    projectScheduleVO.setSubmitDateTa(subproject.getSubmitdateTa());
                     projectScheduleVO.setApprovalNameTa((String)subproject.getApprovalnameTa());
                     projectScheduleVO.setApprovalDepartmentTa((String)subproject.getApprovaldepartmentTa());
-                    projectScheduleVO.setApprovalNameTa((String)subproject.getApprovalnumberTa());
+                    projectScheduleVO.setApprovalNumberTa((String)subproject.getApprovalnumberTa());
                     projectScheduleVO.setApprovalDateTa(subproject.getApprovaldateTa());
                     projectScheduleVO.setReplyDate(subproject.getReplydate());
                     projectScheduleVO.setApprovalProgress((String)subproject.getApprovalprogress());
@@ -370,6 +373,8 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                     projectScheduleVO.setTestTime((String)subproject.getTesttime());
                     projectScheduleVO.setEndTimeCon((String)subproject.getEndtimeCon());
                     projectScheduleVO.setTimestamp(subproject.getTimestamp());
+                    projectScheduleVO.setDepartment((String)subproject.getDepartment());
+                    projectScheduleVO.setReason((String)subproject.getReason());
                     //累死我啦
                     //那么多项
                     //->_->??

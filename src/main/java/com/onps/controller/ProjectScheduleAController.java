@@ -16,7 +16,7 @@ public class ProjectScheduleAController {
 
     @Resource
     ProjectScheduleFormAService projectScheduleFormAService;
-
+    @RequestMapping("/updateA")
     public BaseResult<ProjectScheduleVO> update(ProjectScheduleVO projectScheduleVO){
         BaseResult<ProjectScheduleVO> info = new BaseResult<ProjectScheduleVO>();
         if((!projectScheduleVO.getProjectName().equals("")) && projectScheduleVO.getProjectName() != null
@@ -41,7 +41,7 @@ public class ProjectScheduleAController {
             return info;
         }
     }
-
+    @RequestMapping("/deleteA")
     public BaseResult<ProjectScheduleVO> delete(ProjectScheduleVO projectScheduleVO){
         BaseResult<ProjectScheduleVO> info = new BaseResult<ProjectScheduleVO>();
         if((!projectScheduleVO.getProjectName().equals("")) && projectScheduleVO.getProjectName() != null
