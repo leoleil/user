@@ -2,101 +2,234 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>view 测试</title>
-    <script src="js/jquery-3.3.1.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>View</title>
+    <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
+    <link rel="stylesheet" href="easyui/themes/default/easyui.css">
+    <link rel="stylesheet" href="easyui/themes/icon.css">
+    <link rel="stylesheet" href="css/view.css">
+
+
 </head>
-<script type="text/javascript">
-    $(function () {
-        $('#submit').click(function () {
-            $.ajax({
-                url: "/onps/schedule/getProjectScheduleSummarize.do",
-                type: "post",
-                async: false,
-                data: {
-                    "projectName": $("#projectName").val(),//项目名称
-                    "level1": $("#level1").val(),//五个地理位置
-                    "level2": $("#level2").val(),//二级地理位置
-                    "level3": $("#level3").val(),//建设计划
-                    "level4": $("#level4").val(),//十几五建设计划
-                    "level5": $("#level5").val()//军区军兵种后勤
-                },
-                success: function (data) {
-                    console.log(data);
-                    if (data.status == 'S00001') {
-                        alert(data.message);
-                        /*data.entity={
-                            projectName: //项目名
-
-                            level1: //五个地理位置
-
-                            level2: //二级地理位置
-
-                            level3: //建设计划
-
-                            level4: //十几五建设计划
-
-                            level5: //军区军兵种后勤
-
-                            subProjectNumber: //子项目数量
-
-                            startWorkingNumber: //开工数量
-
-                            starWorkingRatio: //开工率
-
-                            progress: //总体进度
-
-                            finishWorkingNumber: //完工数量
-
-                            finishWorkingRatio: //完工率
-
-                            approvalProgressNumber: //审批进展
-                        }*/
-                    } else {
-                        alert(data.message);
-                    }
-
-                },
-                error: function (data) {
-                    console.log(data);
-                    alert("请求失败!");
-                }
-            });
-        });
-    })
-    $(function () {
-        $("#getList").click(function () {
-            $.ajax({
-                url: "/onps/schedule/getProjectSchedule.do",
-                type: "post",
-                async: false,
-                success: function (data) {
-                    console.log(data);
-                    if (data.status == 'S00001') {
-                        alert(data.message);
-
-                    } else {
-                        alert(data.message);
-                    }
-
-                },
-                error: function (data) {
-                    console.log(data);
-                    alert("请求失败!");
-                }
-            });
-        });
-    })
-</script>
-
 <body>
-<input type="text" name="projectName" id="projectName" placeholder="项目名称"><br>
-<input type="text" name="level1" id="level1" placeholder="五个地理位置"><br>
-<input type="text" name="level2" id="level2" placeholder="二级地理位置"><br>
-<input type="text" name="level3" id="level3" placeholder="建设计划"><br>
-<input type="text" name="level4" id="level4" placeholder="十几五建设计划"><br>
-<input type="text" name="level5" id="level5" placeholder="军区军兵种后勤"><br>
-<button id="submit">提交</button>
-<br>
-<button id="getList">获取</button>
+    <div class="header">
+        <img id="logo" src="img/logo.png" alt="logo">
+        <p id="title">全军十十十十十十十十十十系统<br/><span id="eng-title">THE PLA'S INFORMATION SUPPORT AND ASSURANCE COMBAT READINESS DUTY MANAGEMENT SYSTEM</span></p>
+        <div class="divide"></div>
+        <p id="sub-title">测试用的测试用的测试</p>
+        <div class="divide"></div>
+        <div class="right-wrap">
+            <div id="divide"></div>
+            <div id="duty">测试测试 名称一<br/>测试测试 名称二</div>
+            <div id="tduty">今日<br/>值班</div>    
+            <div id="divide"></div>
+            <div id="right-title">测试用的测试用的测试<br/><span id="divTime"></span></div>    
+        </div>
+    </div>    
+    <div class="menu-bar">
+        <ul id="back-bar">
+            <li><a href="index.html">填报系统></a></li>
+            <li><a href="view.html">工程进度></a></li>
+            <li><a href="form.html">填报界面</a></li>
+        </ul>
+        <ul id="icon-ul">
+            <li><img src="img/关闭.png" alt="close"></li>
+            <li><img src="img/全屏.png" alt="fullScreen"></li>
+            <li><img src="img/刷新.png" alt="refresh"></li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="con-bar">
+            <p>全军项目提报情况</p>
+            <div class="summary">
+                <span class="icons"><img src="img/summary.png"></span>
+                <input type="button" value="总体进度"  id="sumbtn">
+            </div>
+            <div class="box">
+                <input type="text" name="search" placeholder="|关键字">
+                <button id="search">查询</button>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th class="fix">序号</th><th>日期</th><th>项目名称</th><th>单位</th><th class="fix">填报进度</th><th class="fix">操作</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+        <div class="pagination">
+                
+                <a  href="#" id="btn5">跳转</a>
+                <a>页&nbsp;</a>
+                <input id="changePage" type="text" size="1" maxlength="4"/>
+                <a>转到&nbsp;</a>
+                <a  href="#" id="btn4">尾页</a>&nbsp;
+                <a  href="#" id="btn3">下一页</a>
+                <a  href="#" id="btn2">上一页</a>
+                <a  href="#" id="btn1">首页</a>
+                <a id="sum"></a>
+                <!-- <a href="#" id="pageSizeSet">设置</a>&nbsp; -->
+                <a> 条，</a>
+                <!-- <input type="text" id="pageSize" size="1" maxlength="2" value="getDefaultValue()"> -->
+                <select name="" id="pageSize">
+                    <option value="10" selected>10</option>
+                    <option value="20">20</option>
+                </select>
+                <a id="btn0"></a>
+
+            </div>
+    </div>
+    <div class="maskCon">
+        <div class="conHeader">
+            <p class="mTitle">总体进度</p>
+        </div>
+        <div class="mCon">
+            <input id="state1"> <br><br>
+            <input id="state2">
+            <div id="sumdiv"></div>
+        </div>        
+        <div id="mclose"></div>
+    </div>
+    <div class="formCon">
+        <div class="conHeader">
+            <p class="formTitle">&nbsp;&nbsp;编辑</p>
+        </div>
+        <div id="box">
+            <div title="A-规划/计划安排情况">
+                <div style="margin:20px 50px;">
+                    <input  id="a_1" class="a_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  id="a_2" class="a_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <select name="项目名称" id="a_3" class="a_input" style="width:250px">
+                    </select>
+                </div>
+                <div style="margin:20px 50px">
+                    规划/计划文件&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" id="a_4" class="a_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" id="a_5" class="a_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;    
+                    <input type="text" id="a_6" class="a_input">
+                </div>
+                <div style="margin:20px 50px">
+                    <input type="text" id="a_7" class="a_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" id="a_8" class="a_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;    
+                    <input type="text" id="a_9" class="a_input">
+                </div>
+                <div style="margin:20px 50px">
+                    <input type="text" id="a_10" class="a_input">
+                </div>
+            </div>
+            <div title="B-项目审批情况">
+                <div style="margin:20px 50px;">
+                    <input  id="b_1" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  id="b_2" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <hr class="hr">
+                    <span><b>立项送审</b></span><br>
+                    <input  id="b_3" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  id="b_4" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  id="b_5" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  id="b_6" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <hr class="hr">
+                    <span><b>立项批复</b></span><br>
+                    <input  id="b_7" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  id="b_8" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  id="b_9" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  id="b_10" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <hr class="hr">
+                    <span><b>设计任务书送审</b></span><br>
+                    <input  id="b_11" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  id="b_12" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  id="b_13" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  id="b_14" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <hr class="hr">
+                    <span><b>下达设计任务书、建设计划（批复）</b></span><br>
+                    <input  id="b_15" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  id="b_16" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  id="b_17" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  id="b_18" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <hr class="hr">
+                    <span><b>建设周期</b></span><br>
+                    <input id="b_25" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="b_26" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <hr class="hr">
+                    <input  id="b_19" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input  id="b_20" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;<br><br>
+                    <input id="b_21" class="b_input"><br><br>
+                    <input id="b_22" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="b_23" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="b_24" class="b_input"><br><br>
+                    <input id="b_27" class="b_input">
+                    <br><br>
+                </div>
+            </div>
+            <div title="C-建设进展情况">
+                <div style="margin:20px 50px;">
+                    <input  id="c_1" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <hr class="hr">
+                    <span><b>建设周期</b></span><br>
+                    <input id="c_2" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="c_3" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="c_4" class="b_input"><br><br>
+                    <input id="c_5" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="c_6" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="c_7" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="c_8" class="b_input"><br><br>
+                    <input id="reason" class="b_input">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <hr class="hr">
+                    <input id="c_9" class="b_input"><br><br>
+                    <input id="c_10" class="b_input"><br><br>
+                    <input id="c_11" class="b_input"><br><br>
+                    <input id="c_12" class="b_input">
+    
+                </div>
+                
+            </div>
+        </div>      
+        <div id="fclose"></div>
+    </div>
 </body>
+<script src="js/table.js"></script>
+<script src="js/jquery3.3.1.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="easyui/jquery.easyui.min.js"></script>
+<script src="easyui/easyui-lang-zh_CN.js"></script>
+<script src="js/view.js"></script>
+
 </html>

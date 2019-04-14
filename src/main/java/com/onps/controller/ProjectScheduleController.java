@@ -5,6 +5,7 @@ import com.onps.model.Project;
 import com.onps.model.User;
 import com.onps.model.vo.ProjectScheduleSummarizeVO;
 import com.onps.model.vo.ProjectScheduleVO;
+import com.onps.service.ProjectScheduleExcelService;
 import com.onps.service.ProjectScheduleService;
 import com.onps.utils.ConstantString;
 import com.onps.utils.resultUtils.BaseResult;
@@ -16,6 +17,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -24,6 +26,9 @@ import java.util.List;
 public class ProjectScheduleController {
     @Resource
     ProjectScheduleService projectScheduleService;
+
+    @Resource
+    ProjectScheduleExcelService projectScheduleExcelService;
 
     @RequestMapping("/submitProjectSchedule")
     @ResponseBody
@@ -89,6 +94,14 @@ public class ProjectScheduleController {
             info.setMessage("获取成功");
         }
         return info;
+    }
+    @RequestMapping("/excel")
+    public void excelOut(HttpServletResponse response){
+        try {
+            projectScheduleExcelService.makeProjectExcel(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -401,19 +401,19 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
     public ProjectScheduleSummarizeVO getProjectScheduleSummarize(String projectName, String level1,
                                                                         String level2, String level3,
                                                                         String level4, String level5) {
-        int subProjectNumber;//子项目数量
+        int subProjectNumber = 0;//子项目数量
 
-        int startWorkingNumber;//开工数量
+        int startWorkingNumber = 0;//开工数量
 
-        double starWorkingRatio;//开工率
+        double starWorkingRatio =0;//开工率
 
         double progress = 0;//总体进度
 
-        int finishWorkingNumber;//完工数量
+        int finishWorkingNumber = 0;//完工数量
 
-        double finishWorkingRatio;//完工率
+        double finishWorkingRatio = 0;//完工率
 
-        int approvalProgressNumber;//正在审批数
+        int approvalProgressNumber = 0;//正在审批数
 
         ProjectExample projectExample = new ProjectExample();
         ProjectExample.Criteria criteria = projectExample.createCriteria();
@@ -449,6 +449,10 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
         subprojectExampleSubNum.createCriteria()
                 .andProjectidIn(projectIdList);
         subProjectNumber = subprojectMapper.countByExample(subprojectExampleSubNum);
+        //没有子项目返回空
+        if(subProjectNumber == 0){
+            return null;
+        }
         //查开工数量
         SubprojectExample subprojectExampleStartWorkingNumber = new SubprojectExample();
         subprojectExampleStartWorkingNumber.createCriteria()
@@ -461,10 +465,14 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                 .andProjectidIn(projectIdList)
                 .andConstructionphaseEqualTo("竣工");
         finishWorkingNumber = subprojectMapper.countByExample(subprojectExampleFinishWorkingNumber);
+        //查审批进度
         SubprojectExample subprojectExampleApprovalProgressNumber = new SubprojectExample();
+        List<Object> progresses = new ArrayList<>();
+        progresses.add("待审批");
+        progresses.add("部分完成");
         subprojectExampleApprovalProgressNumber.createCriteria()
                 .andProjectidIn(projectIdList)
-                .andApprovalprogressEqualTo("待审批");
+                .andApprovalprogressIn(progresses);
         approvalProgressNumber = subprojectMapper.countByExample(subprojectExampleApprovalProgressNumber);
         //开工率
         starWorkingRatio = (startWorkingNumber + finishWorkingNumber) / subProjectNumber * 100;
