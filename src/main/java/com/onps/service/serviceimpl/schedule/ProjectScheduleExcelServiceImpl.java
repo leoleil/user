@@ -201,6 +201,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
         sheet.addMergedRegion(new CellRangeAddress(4,4,2,48)); //合并单元格
         //项目内容
         ProjectExample projectExample=new ProjectExample();
+        projectExample.setOrderByClause(" Level1 ASC,Level2 ASC");
         List<Project> projects=projectMapper.selectByExample(projectExample);//数据库中projects列表
         List<Subproject> subprojects;
 
@@ -310,7 +311,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                     cell14.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getSubmitdate()!=null){
                     HSSFCell cell15=row.createCell(15);
-                    cell15.setCellValue(subprojects.get(0).getSubmitdate());
+                    cell15.setCellValue(subprojects.get(0).getSubmitdate().toString());
                     cell15.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getApprovalname()!=null){
                     HSSFCell cell16=row.createCell(16);
@@ -326,7 +327,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                     cell18.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getApprovaldate()!=null){
                     HSSFCell cell19=row.createCell(19);
-                    cell19.setCellValue(subprojects.get(0).getApprovaldate());
+                    cell19.setCellValue(subprojects.get(0).getApprovaldate().toString());
                     cell19.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getSubmitfilenameTa()!=null){
                     HSSFCell cell20=row.createCell(20);
@@ -342,7 +343,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                     cell22.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getSubmitdateTa()!=null){
                     HSSFCell cell23=row.createCell(23);
-                    cell23.setCellValue(subprojects.get(0).getSubmitdateTa());
+                    cell23.setCellValue(subprojects.get(0).getSubmitdateTa().toString());
                     cell23.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getApprovalnameTa()!=null){
                     HSSFCell cell24=row.createCell(24);
@@ -358,11 +359,11 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                     cell26.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getApprovaldateTa()!=null){
                     HSSFCell cell27=row.createCell(27);
-                    cell27.setCellValue(subprojects.get(0).getApprovaldateTa());
+                    cell27.setCellValue(subprojects.get(0).getApprovaldateTa().toString());
                     cell27.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getReplydate()!=null){
                    HSSFCell cell28=row.createCell(28);
-                   cell28.setCellValue(subprojects.get(0).getReplydate());
+                   cell28.setCellValue(subprojects.get(0).getReplydate().toString());
                    cell28.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getApprovalprogress()!=null){
                    HSSFCell cell29=row.createCell(29);
@@ -386,11 +387,11 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                    cell33.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getStarttimeCon()!=null){
                    HSSFCell cell34=row.createCell(34);
-                   cell34.setCellValue((String)subprojects.get(0).getStarttimeCon());
+                   cell34.setCellValue(subprojects.get(0).getStarttimeCon().toString());
                    cell34.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getEndtimeCon()!=null){
                    HSSFCell cell35=row.createCell(35);
-                   cell35.setCellValue((String)subprojects.get(0).getEndtimeCon());
+                   cell35.setCellValue(subprojects.get(0).getEndtimeCon().toString());
                    cell35.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getReleaseinvestment()!=null){
                    HSSFCell cell36=row.createCell(36);
@@ -418,11 +419,11 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                 cell41.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getTesttime()!=null){
                 HSSFCell cell42=row.createCell(42);
-                cell42.setCellValue((String)subprojects.get(0).getTesttime());
+                cell42.setCellValue(subprojects.get(0).getTesttime().toString());
                 cell42.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getEndtime()!=null){
                 HSSFCell cell43=row.createCell(43);
-                cell43.setCellValue(subprojects.get(0).getEndtime());
+                cell43.setCellValue(subprojects.get(0).getEndtime().toString());
                 cell43.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getProjectprogress()!=null){
                 HSSFCell cell44=row.createCell(44);
@@ -480,7 +481,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                 cell4.setCellStyle(contextStyle);
                 if(projects.get(projectNumber).getDocumentdate()!=null){
                     HSSFCell cell5=row.createCell(5);
-                    cell5.setCellValue( projects.get(projectNumber).getDocumentdate().toString());
+                    cell5.setCellValue(123 );//projects.get(projectNumber).getDocumentdate().toString()
                     cell5.setCellStyle(contextStyle);}
                 if(projects.get(projectNumber).getInvestmentamount()!=null){
                     HSSFCell cell6=row.createCell(6);
@@ -524,7 +525,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                         cell14.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getSubmitdate()!=null){
                         HSSFCell cell15=rowX.createCell(15);
-                        cell15.setCellValue(subprojects.get(i).getSubmitdate());
+                        cell15.setCellValue(subprojects.get(i).getSubmitdate().toString());
                         cell15.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getApprovalname()!=null){
                         HSSFCell cell16=rowX.createCell(16);
@@ -540,7 +541,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                         cell18.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getApprovaldate()!=null){
                         HSSFCell cell19=rowX.createCell(19);
-                        cell19.setCellValue(subprojects.get(i).getApprovaldate());
+                        cell19.setCellValue(subprojects.get(i).getApprovaldate().toString());
                         cell19.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getSubmitfilenameTa()!=null){
                         HSSFCell cell20=rowX.createCell(20);
@@ -556,7 +557,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                         cell22.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getSubmitdateTa()!=null){
                         HSSFCell cell23=rowX.createCell(23);
-                        cell23.setCellValue(subprojects.get(i).getSubmitdateTa());
+                        cell23.setCellValue(subprojects.get(i).getSubmitdateTa().toString());
                         cell23.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getApprovalnameTa()!=null){
                         HSSFCell cell24=rowX.createCell(24);
@@ -572,11 +573,11 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                         cell26.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getApprovaldateTa()!=null){
                         HSSFCell cell27=rowX.createCell(27);
-                        cell27.setCellValue(subprojects.get(i).getApprovaldateTa());
+                        cell27.setCellValue(subprojects.get(i).getApprovaldateTa().toString());
                         cell27.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getReplydate()!=null){
                         HSSFCell cell28=rowX.createCell(28);
-                        cell28.setCellValue(subprojects.get(i).getReplydate());
+                        cell28.setCellValue(subprojects.get(i).getReplydate().toString());
                         cell28.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getApprovalprogress()!=null){
                         HSSFCell cell29=rowX.createCell(29);
@@ -600,11 +601,11 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                         cell33.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getStarttimeCon()!=null){
                         HSSFCell cell34=rowX.createCell(34);
-                        cell34.setCellValue((String)subprojects.get(i).getStarttimeCon());
+                        cell34.setCellValue(subprojects.get(i).getStarttimeCon().toString());
                         cell34.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getEndtimeCon()!=null){
                         HSSFCell cell35=rowX.createCell(35);
-                        cell35.setCellValue((String)subprojects.get(i).getEndtimeCon());
+                        cell35.setCellValue(subprojects.get(i).getEndtimeCon().toString());
                         cell35.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getReleaseinvestment()!=null){
                         HSSFCell cell36=rowX.createCell(36);
@@ -631,13 +632,14 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                         HSSFCell cell41=rowX.createCell(41);
                         cell41.setCellValue(subprojects.get(i).getStarttime().toString());
                         cell41.setCellStyle(contextStyle);}
+                    System.out.println(subprojects.get(i).getStarttime().toString());
                     if(subprojects.get(i).getTesttime()!=null){
                         HSSFCell cell42=rowX.createCell(42);
-                        cell42.setCellValue((String)subprojects.get(i).getTesttime());
+                        cell42.setCellValue(subprojects.get(i).getTesttime().toString());
                         cell42.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getEndtime()!=null){
                         HSSFCell cell43=rowX.createCell(43);
-                        cell43.setCellValue(subprojects.get(i).getEndtime());
+                        cell43.setCellValue(subprojects.get(i).getEndtime().toString());
                         cell43.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getProjectprogress()!=null){
                         HSSFCell cell44=rowX.createCell(44);
@@ -660,10 +662,11 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                         HSSFCell cell48=rowX.createCell(48);
                         cell48.setCellValue((String)subprojects.get(i).getRemarks());
                         cell48.setCellStyle(contextStyle);}
+
                     if(i==subprojects.size()-1){
                         //根据子项目填入的投资额，计算小计，并填入
                         HSSFCell xcell10=row.createCell(10);
-                        xcell10.setCellValue("小计");
+                        xcell10.setCellValue("小计算啦");
                         xcell10.setCellStyle(contextStyle);
                         HSSFCell xcell36=row.createCell(36);
                         xcell36.setCellValue(releaseInvesment);
@@ -873,6 +876,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
         sheet.addMergedRegion(new CellRangeAddress(4,4,2,48)); //合并单元格
         //项目内容
         ProjectExample projectExample=new ProjectExample();
+        projectExample.setOrderByClause("LEVEL1 ASC,PROJECTNAME ASC");
         List<Project> projects=projectMapper.selectByExample(projectExample);//数据库中projects列表
         List<Subproject> subprojects;
 
@@ -982,7 +986,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                     cell14.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getSubmitdate()!=null){
                     HSSFCell cell15=row.createCell(15);
-                    cell15.setCellValue(subprojects.get(0).getSubmitdate());
+                    cell15.setCellValue(subprojects.get(0).getSubmitdate().toString());
                     cell15.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getApprovalname()!=null){
                     HSSFCell cell16=row.createCell(16);
@@ -998,7 +1002,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                     cell18.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getApprovaldate()!=null){
                     HSSFCell cell19=row.createCell(19);
-                    cell19.setCellValue(subprojects.get(0).getApprovaldate());
+                    cell19.setCellValue(subprojects.get(0).getApprovaldate().toString());
                     cell19.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getSubmitfilenameTa()!=null){
                     HSSFCell cell20=row.createCell(20);
@@ -1014,7 +1018,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                     cell22.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getSubmitdateTa()!=null){
                     HSSFCell cell23=row.createCell(23);
-                    cell23.setCellValue(subprojects.get(0).getSubmitdateTa());
+                    cell23.setCellValue(subprojects.get(0).getSubmitdateTa().toString());
                     cell23.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getApprovalnameTa()!=null){
                     HSSFCell cell24=row.createCell(24);
@@ -1030,11 +1034,11 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                     cell26.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getApprovaldateTa()!=null){
                     HSSFCell cell27=row.createCell(27);
-                    cell27.setCellValue(subprojects.get(0).getApprovaldateTa());
+                    cell27.setCellValue(subprojects.get(0).getApprovaldateTa().toString());
                     cell27.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getReplydate()!=null){
                     HSSFCell cell28=row.createCell(28);
-                    cell28.setCellValue(subprojects.get(0).getReplydate());
+                    cell28.setCellValue(subprojects.get(0).getReplydate().toString());
                     cell28.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getApprovalprogress()!=null){
                     HSSFCell cell29=row.createCell(29);
@@ -1058,15 +1062,15 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                     cell33.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getStarttimeCon()!=null){
                     HSSFCell cell34=row.createCell(34);
-                    cell34.setCellValue((String)subprojects.get(0).getStarttimeCon());
+                    cell34.setCellValue(subprojects.get(0).getStarttimeCon().toString());
                     cell34.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getEndtimeCon()!=null){
                     HSSFCell cell35=row.createCell(35);
-                    cell35.setCellValue((String)subprojects.get(0).getEndtimeCon());
+                    cell35.setCellValue(subprojects.get(0).getEndtimeCon().toString());
                     cell35.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getReleaseinvestment()!=null){
                     HSSFCell cell36=row.createCell(36);
-                    cell36.setCellValue(subprojects.get(0).getReleaseinvestment().toString());
+                    cell36.setCellValue(subprojects.get(0).getReleaseinvestment().doubleValue());
                     cell36.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getConstructionphase()!=null){
                     HSSFCell cell37=row.createCell(37);
@@ -1090,11 +1094,11 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                     cell41.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getTesttime()!=null){
                     HSSFCell cell42=row.createCell(42);
-                    cell42.setCellValue((String)subprojects.get(0).getTesttime());
+                    cell42.setCellValue(subprojects.get(0).getTesttime().toString());
                     cell42.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getEndtime()!=null){
                     HSSFCell cell43=row.createCell(43);
-                    cell43.setCellValue(subprojects.get(0).getEndtime());
+                    cell43.setCellValue(subprojects.get(0).getEndtime().toString());
                     cell43.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getProjectprogress()!=null){
                     HSSFCell cell44=row.createCell(44);
@@ -1102,7 +1106,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                     cell44.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getCompletedinvestment()!=null){
                     HSSFCell cell45=row.createCell(45);
-                    cell45.setCellValue(subprojects.get(0).getCompletedinvestment().toString());
+                    cell45.setCellValue(subprojects.get(0).getCompletedinvestment().doubleValue());
                     cell45.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getFormedability()!=null){
                     HSSFCell cell46=row.createCell(46);
@@ -1196,7 +1200,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                         cell14.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getSubmitdate()!=null){
                         HSSFCell cell15=rowX.createCell(15);
-                        cell15.setCellValue(subprojects.get(i).getSubmitdate());
+                        cell15.setCellValue(subprojects.get(i).getSubmitdate().toString());
                         cell15.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getApprovalname()!=null){
                         HSSFCell cell16=rowX.createCell(16);
@@ -1212,7 +1216,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                         cell18.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getApprovaldate()!=null){
                         HSSFCell cell19=rowX.createCell(19);
-                        cell19.setCellValue(subprojects.get(i).getApprovaldate());
+                        cell19.setCellValue(subprojects.get(i).getApprovaldate().toString());
                         cell19.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getSubmitfilenameTa()!=null){
                         HSSFCell cell20=rowX.createCell(20);
@@ -1228,7 +1232,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                         cell22.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getSubmitdateTa()!=null){
                         HSSFCell cell23=rowX.createCell(23);
-                        cell23.setCellValue(subprojects.get(i).getSubmitdateTa());
+                        cell23.setCellValue(subprojects.get(i).getSubmitdateTa().toString());
                         cell23.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getApprovalnameTa()!=null){
                         HSSFCell cell24=rowX.createCell(24);
@@ -1244,11 +1248,11 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                         cell26.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getApprovaldateTa()!=null){
                         HSSFCell cell27=rowX.createCell(27);
-                        cell27.setCellValue(subprojects.get(i).getApprovaldateTa());
+                        cell27.setCellValue(subprojects.get(i).getApprovaldateTa().toString());
                         cell27.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getReplydate()!=null){
                         HSSFCell cell28=rowX.createCell(28);
-                        cell28.setCellValue(subprojects.get(i).getReplydate());
+                        cell28.setCellValue(subprojects.get(i).getReplydate().toString());
                         cell28.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getApprovalprogress()!=null){
                         HSSFCell cell29=rowX.createCell(29);
@@ -1272,11 +1276,11 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                         cell33.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getStarttimeCon()!=null){
                         HSSFCell cell34=rowX.createCell(34);
-                        cell34.setCellValue((String)subprojects.get(i).getStarttimeCon());
+                        cell34.setCellValue(subprojects.get(i).getStarttimeCon().toString());
                         cell34.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getEndtimeCon()!=null){
                         HSSFCell cell35=rowX.createCell(35);
-                        cell35.setCellValue((String)subprojects.get(i).getEndtimeCon());
+                        cell35.setCellValue(subprojects.get(i).getEndtimeCon().toString());
                         cell35.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getReleaseinvestment()!=null){
                         HSSFCell cell36=rowX.createCell(36);
@@ -1293,7 +1297,7 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                         cell38.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getBidding()!=null){
                         HSSFCell cell39=rowX.createCell(39);
-                        cell39.setCellValue((String)subprojects.get(i).getBidding());
+                        cell39.setCellValue(subprojects.get(i).getBidding().toString());
                         cell39.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getConstructiondesign()!=null){
                         HSSFCell cell40=rowX.createCell(40);
@@ -1305,11 +1309,11 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                         cell41.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getTesttime()!=null){
                         HSSFCell cell42=rowX.createCell(42);
-                        cell42.setCellValue((String)subprojects.get(i).getTesttime());
+                        cell42.setCellValue(subprojects.get(i).getTesttime().toString());
                         cell42.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getEndtime()!=null){
                         HSSFCell cell43=rowX.createCell(43);
-                        cell43.setCellValue(subprojects.get(i).getEndtime());
+                        cell43.setCellValue(subprojects.get(i).getEndtime().toString());
                         cell43.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getProjectprogress()!=null){
                         HSSFCell cell44=rowX.createCell(44);
