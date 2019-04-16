@@ -31,17 +31,17 @@ Vue.component('z-pie', {
                 title: {
                     text: 100*this.percent+'%',
                     x: 'center',
-                    y: '65',
+                    y: 'center',
                     textStyle: {
                         fontWeight: 'normal',
                         color: this.color[1],
-                        fontSize: '62'
+                        fontSize: '45'
                     },
                     subtext: this.subtitle,
                     subtextStyle: {
                         color: '#cccccc',
-                        fontSize: '25',
-
+                        fontSize: '20',
+                        
                     }
                 },
                 color: ['#A7A7A7'],
@@ -102,10 +102,16 @@ Vue.component('z-pie', {
         initPieOne: function () {
             this.charts = echarts.init(document.getElementById(this.identify));
             this.charts.setOption(this.option);
-        }
+            var _this = this;
+            window.addEventListener('resize', function(){
+                _this.charts.resize();
+            });
+        },
+
     },
     mounted: function () {
         this.initPieOne();
+        
     },
     watch: {
         percent: {
@@ -189,7 +195,7 @@ Vue.component('z-rect', {
                     },
                     itemWidth: 10,
 
-                    text: ['低', '高'],
+                    text: ['高', '低'],
                     // Map the score column to color
                     dimension: 0,
                     inRange: {
@@ -224,8 +230,14 @@ Vue.component('z-rect', {
     methods: {
         initRect: function(){
             this.chart = echarts.init(document.getElementById(this.identify));
-
+            
             this.chart.setOption(this.option);
+
+            let _this = this;
+
+            window.addEventListener('resize', function(){
+                _this.chart.resize();
+            });
         }
     },
     mounted: function(){
@@ -413,7 +425,7 @@ Vue.component('z-selects', {
         handleJSON: function(dataList, item, name){
             let fwr = Math.round(item.finishWorkingRatio);
             let swr = Math.round(item.starWorkingRatio);
-            let pro = Math.round(item.progress*100);
+            let pro = item.progress*100;
 
             dataList.src_1.push([pro, pro, name]);
             dataList.src_2.push([fwr, fwr, name]);
@@ -421,8 +433,6 @@ Vue.component('z-selects', {
 
         },
         status: function(){
-            const _this = this;
-
             const ajaxPromise = param => {
                 return new Promise((resolve, reject) => {
                     $.ajax({
@@ -437,15 +447,17 @@ Vue.component('z-selects', {
                             reject(err);
                         }
                     });
-            });
+                });
             }
+
+            const _this = this;
 
             if( this.model2!='allD' && this.model3=='allT' ){
 
                 this.initDataList()
 
                 // 总体
-                var step1 = function(){
+                let step1 = function(){
                     ajaxPromise({
                         projectName: '',
                         level1: '',
@@ -455,13 +467,11 @@ Vue.component('z-selects', {
                         level5: ''
                     }).then(function(res){
                         _this.dataList.per_1 = res.entity.progress;
-                        _this.dataList.per_2 = Math.round(res.entity.finishWorkingRatio)/100;
-                        _this.dataList.per_3 = Math.round(res.entity.starWorkingRatio)/100;
+                        _this.dataList.per_2 = (Math.round(res.entity.finishWorkingRatio))/100;
+                        _this.dataList.per_3 = (Math.round(res.entity.starWorkingRatio))/100;
                         step2();
-                        console.log(res);
-                        console.log(_this.dataList);
                     }).catch( err => {
-                        console.log(err);
+                        console.log('第一个请求失败');
                     })
                 };
 
@@ -515,7 +525,7 @@ Vue.component('z-selects', {
                         }
                         step5();
                     }).catch( err => {
-                        console.log(第四个请求失败);
+                        console.log('第四个请求失败');
                     })
                 };
 
@@ -612,13 +622,17 @@ Vue.component('z-selects', {
                         level4: '',
                         level5: ''
                     }).then(function(res){
+                        console.log(res.entity.progress);
+                        console.log(res.entity);
+                        console.log(res.entity.starWorkingRatio);
                         _this.dataList.per_1 = res.entity.progress;
                         _this.dataList.per_2 = (Math.round(res.entity.finishWorkingRatio))/100;
                         _this.dataList.per_3 = (Math.round(res.entity.starWorkingRatio))/100;
                         step2();
                     }).catch( err => {
+                        console.log(err);
                         console.log('第一个请求失败');
-                })
+                    })
                 };
 
                 let step2 = function(){
@@ -636,7 +650,7 @@ Vue.component('z-selects', {
                         step3();
                     }).catch( err => {
                         console.log('第二个请求失败');
-                })
+                    })
                 };
 
                 let step3 = function(){
@@ -654,7 +668,7 @@ Vue.component('z-selects', {
                         step4();
                     }).catch( err => {
                         console.log('第三个请求失败');
-                })
+                    })
                 };
 
                 let step4 = function(){
@@ -672,7 +686,7 @@ Vue.component('z-selects', {
                         step5();
                     }).catch( err => {
                         console.log('第四个请求失败');
-                })
+                    })
                 };
 
                 let step5 = function(){
@@ -690,7 +704,7 @@ Vue.component('z-selects', {
                         step6();
                     }).catch( err => {
                         console.log('第五个请求失败');
-                })
+                    })
                 };
 
                 let step6 = function(){
@@ -713,7 +727,7 @@ Vue.component('z-selects', {
                         _this.$emit('hper3', _this.dataList.per_3);
                     }).catch( err => {
                         console.log('第六个请求失败');
-                })
+                    })
                 };
 
                 step1();
@@ -732,7 +746,7 @@ Vue.component('z-selects', {
                         _this.dataList.per_1 = res.entity.progress;
                         _this.dataList.per_2 = (Math.round(res.entity.finishWorkingRatio))/100;
                         _this.dataList.per_3 = (Math.round(res.entity.starWorkingRatio))/100;
-
+                        
                         _this.$emit('hsrc1', _this.dataList.src_1);
                         _this.$emit('hsrc2', _this.dataList.src_2);
                         _this.$emit('hsrc3', _this.dataList.src_3);
@@ -742,10 +756,7 @@ Vue.component('z-selects', {
                     }).catch( err => {
                         console.log('第一个请求失败');
                     })
-
                 };
-
-                step();
             }
 
             /*if( this.model2!='allD' && this.model3=='allT' ){
@@ -765,7 +776,7 @@ Vue.component('z-selects', {
                     this.$emit('hper2', this.dataList.per_2);
                     this.$emit('hper3', this.dataList.per_3);
 
-                });
+                });    
             }else if( this.model2=='allD' && this.model3!='allT' ){
                 axios
                   .post('http://localhost:3000/allDirect')
@@ -781,7 +792,7 @@ Vue.component('z-selects', {
                     this.$emit('hper2', this.dataList.per_2);
                     this.$emit('hper3', this.dataList.per_3);
 
-                });
+                }); 
             }else{
 
             }*/
@@ -857,5 +868,5 @@ var app = new Vue({
             console.log(this.per_3);
         }
     },
-
+    
 });

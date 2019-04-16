@@ -113,20 +113,28 @@ body{
     text-decoration: underline;
     color: #ffffff;
 }
-.menu-bar #icon-ul{
+/* 跳转到index 的数据分析按钮 */
+#indexicon{
+    float:right;
     position: relative;
-    float:right;
-    list-style: none;
+    left:20px;
+    top:3px;
 }
-.menu-bar #icon-ul li{
-    float:right;
-    line-height: 40px;
-}
-.menu-bar #icon-ul li img{
-    width: 16px;
-    height: 16px;
-    margin:0 12px;
-    cursor: pointer;
+#indexbtn{
+    text-decoration: none;
+    float: right;
+    width: 120px;
+    height: 30px;
+    padding: 0px 0 0 40px;
+    line-height: 30px;
+    color:#fff;
+    background: #112951;
+    border:#060c18 1px solid;
+    border-radius: 3px ;
+    position: relative;
+    right: 10px;
+    top:5px;
+    font-size: 14px;
 }
 .menu-bar #icon-ul li img:hover{
     width: 20px;
@@ -407,8 +415,8 @@ content table th.fix{
     margin:  0 0 0 20px;
 }
 .formCon #fclose{
-    width: 20px;
-    height: 20px;
+    width: 14px;
+    height: 14px;
     background: url("../img/关闭.png") no-repeat ;
     -webkit-background-size: 100% auto;
     -moz-background-size: 100% auto;

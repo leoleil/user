@@ -17,7 +17,7 @@
         <img id="logo" src="img/logo.png" alt="logo">
         <p id="title">全军十十十十十十十十十十系统<br/><span id="eng-title">THE PLA'S INFORMATION SUPPORT AND ASSURANCE COMBAT READINESS DUTY MANAGEMENT SYSTEM</span></p>
         <div class="divide"></div>
-        <p id="sub-title">项目总览</p>
+        <p id="sub-title">项目列表</p>
         <div class="divide"></div>
         <div class="right-wrap">
             <div id="divide"></div>
@@ -30,31 +30,40 @@
     <div class="menu-bar">
         <ul id="back-bar">
             <li><a href="index.html">填报系统></a></li>
-            <li><a href="view.html">项目总览</a></li>
+            <li><a href="view.html">项目列表</a></li>
         </ul>
-        <ul id="icon-ul">
-            <li><img src="img/关闭.png" alt="close"></li>
-            <li><img src="img/全屏.png" alt="fullScreen"></li>
-            <li><img src="img/刷新.png" alt="refresh"></li>
-        </ul>
+        
+        <a id="indexbtn" href="index.html">数据分析</a>
+        <span id="indexicon"><img src="img/数据分析.png" ></span>
+        
+        <!-- <div class="position" style="position:relative;left:28px;">
+            <div class="data-analysis" style="position:relative;left:-30px;">
+                <span  ><img style="width:14px;height:14px;position:relative;top:-2px;right:-25px;"  src="img/导出.png"></span>
+                <a  id="data-analysis" href="index.html">数据分析</a>
+            </div>
+        </div> -->
     </div>
     <div class="content">
         <div class="con-bar">
             <p>项目总览</p>
-            <div class="excel">      
-            </div>
-            <div class="excel" style="position:relative;left:110px;">
-                    <span class="icons" ><img style="width:14px;height:14px;position:relative;top:-2px;right:-25px;"  src="img/导出.png"></span>
-                    <a id="excel" href="/onps/schedule/excel.do">导出</a>
-            </div>
-            <div class="summary" style="position:relative;left:120px;">
-                <span class="icons"><img src="img/summary.png"></span>
-                <input type="button" value="总体进度"  id="sumbtn">
-            </div>
-            <div class="box" style="position:relative;left:100px;">
-                <input type="text" name="search" placeholder="|关键字">
-                <button id="search">查询</button>
-            </div>
+            <div class="position" style="position:relative;left:28px;">
+                <div class="excel" style="position:relative;left:-30px;">
+                        <span class="icons" ><img style="width:14px;height:14px;position:relative;top:-2px;right:-25px;"  src="img/导出.png"></span>
+                        <a  id="excel" href="/onps/schedule/excel.do">导出</a>
+                </div>
+                <div class="excel" style="position:relative;left:-20px;">
+                        <span class="icons" ><img style="width:17px;height:17px;position:relative;right:-25px;"  src="img/new.png"></span>
+                        <a id="excel" href="form.html">新建</a>
+                </div>
+                <div class="summary" >
+                    <span class="icons"><img src="img/summary.png"></span>
+                    <input type="button" value="总体进度"  id="sumbtn">
+                </div>
+                <div class="box" >
+                    <input type="text" name="search" placeholder="|关键字">
+                    <button id="search">查询</button>
+                </div>
+            </div>        
         </div>
         <table>
             <thead>
@@ -265,7 +274,7 @@
         <div id="fclose"></div>
     </div>
 </body>
-<script src="js/table.js"></script>
+
 <script src="js/jquery3.3.1.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="easyui/jquery.easyui.min.js"></script>

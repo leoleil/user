@@ -21,6 +21,8 @@ body, html{
     width: 100%;
     height: 75%;
     background: #112951;
+    position: absolute;
+    top: 0;
     /* position: fixed; */
 }
 .header #logo{
@@ -97,7 +99,8 @@ body, html{
 }
 /* menu bar  */
 .menu-bar{
-    position: relative;
+    position: absolute;
+    top: 75%;
     width: 100%;
     height: 25%;
     color:#c8dbe9;
@@ -112,9 +115,26 @@ body, html{
 .menu-bar #back-bar li {
     float: left;
     position:relative;
-    top:-4px;
+    // top:-4px;
     left:35px;
 }
+.menu-bar #right-bar{
+    float: right;
+    list-style: none;
+}
+.menu-bar #right-bar li {
+    float: right;
+    position:relative;
+    // top:-4px;
+    right:35px;
+}
+.menu-bar #right-bar li a{
+    text-decoration: none;
+    color:#c8dbe9;
+    font-size: 16px;
+    line-height: 40px;
+}
+
 .menu-bar #back-bar li a{
     text-decoration: none;
     color:#c8dbe9;

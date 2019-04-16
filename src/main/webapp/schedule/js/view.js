@@ -325,9 +325,30 @@ $(function () {
                 async: false,
                 success: function (data) {
                     console.log(data);
+                    dList = data.list;
                     if (data.status == 'S00001') {
                         alert(data.message);
+                        dList.forEach((item, index) => {
+                            var documentDate =  format(item.documentDate);
+                        var num  = index;
+                        var tr = `
+                                  <tr>
+                                    <td>${index+1}</td><td>${documentDate}</td><td>${item.projectName}</td><td>${item.submitCompany}</td>
+                                    <td>
+                                        <div class="easyui-progressbar" data-options="value:'${item.projectProgress}'" style="width:250px;margin-left:25px;"></div>
+                                    </td>
+                                    <td >
+                                        <button class="btn" id="edit__${index}"><img src="img/编辑.png" /><span>编辑</span></button>
+                                        <button><img src="img/删除.png" /><span>删除</span></button>
+                                    </td>
+                                </tr>
+                                `;
+                        $("#tbody").append(tr);
 
+
+
+                    });
+                        createClickEdit();
                     } else {
                         alert(data.message);
                     }
@@ -343,38 +364,26 @@ $(function () {
 
  
 //列表数据json
-var datalist = {"status":"S00001","message":"项目规划详细信息数据","entity":null,"list":[{"projectId":null,"submitCompany":null,"projectName":"11项目","documentName":"东海1号","documentNumber":"东海1号","documentDate":1554912000000,"investmentamount":1,"approvalAuthority":"军委","constructionPeriod":"1","isimportent":1,"level1":"东部战区","level2":"东海","level3":"战场设施建设计划","level4":"“十二五”战场建设计划","level5":"东部战区","timestamp":1554991989006,"subprojectId":null,"subName":"1","startTimeCon":"Thu Apr 11 2019 00:00:00 GMT+0800 (中国标准时间)","endTimeCon":"Thu Apr 11 2019 00:00:00 GMT+0800 (中国标准时间)","submitFileName":"1","submitDepartment":"1","submitNumber":"1","submitDate":1554912000000,"approvalName":"1","approvalDepartment":"1","approvalNumber":"1","approvalDate":1554912000000,"submitFileNameTa":"1","submitDepartmentTa":"1","submitNumberTa":"1","submitDateTa":null,"approvalNameTa":null,"approvalDepartmentTa":"1","approvalNumberTa":"1","approvalDateTa":1554912000000,"replyDate":1554912000000,"approvalProgress":"部分完成","constructionContent":"1","projectNumber":"1","constructionPlace":"1","constructionCompany":"1","releaseInvestment":1,"constructionPhase":"未开工","firstDesign":"未开展","bidding":"未启动","constructionDesign":"未开展","startTime":1554912000000,"testTime":null,"endTime":1554912000000,"projectProgress":63,"completedInvestment":1,"formedAbility":"1","designedAbility":"1","remarks":"1","reason":null,"department":"1","isIsimportent":1},{"projectId":null,"submitCompany":null,"projectName":"11项目","documentName":"东海1号","documentNumber":"东海1号","documentDate":1554912000000,"investmentamount":1,"approvalAuthority":"军委","constructionPeriod":"1","isimportent":1,"level1":"东部战区","level2":"东海","level3":"战场设施建设计划","level4":"“十二五”战场建设计划","level5":"东部战区","timestamp":1555036742174,"subprojectId":null,"subName":"3","startTimeCon":"Fri Apr 12 2019 10:27:45 GMT+0800 (中国标准时间)","endTimeCon":"Fri Apr 12 2019 10:27:45 GMT+0800 (中国标准时间)","submitFileName":"1","submitDepartment":"1","submitNumber":"1","submitDate":1554998400000,"approvalName":"1","approvalDepartment":"1","approvalNumber":"1","approvalDate":1554998400000,"submitFileNameTa":"1","submitDepartmentTa":"1","submitNumberTa":"1","submitDateTa":null,"approvalNameTa":"1","approvalDepartmentTa":"1","approvalNumberTa":"1","approvalDateTa":1554912000000,"replyDate":1554998400000,"approvalProgress":"全部完成","constructionContent":"1","projectNumber":"1","constructionPlace":"1","constructionCompany":"1","releaseInvestment":1,"constructionPhase":"未开工","firstDesign":"未开展","bidding":"未启动","constructionDesign":"未开展","startTime":1554998400000,"testTime":"Fri Apr 12 2019 00:00:00 GMT+0800 (中国标准时间)","endTime":1554998400000,"projectProgress":79,"completedInvestment":1,"formedAbility":"1","designedAbility":"1","remarks":"1","reason":null,"department":"1","isIsimportent":1},{"projectId":null,"submitCompany":null,"projectName":"11项目","documentName":"东海1号","documentNumber":"东海1号","documentDate":1554912000000,"investmentamount":1,"approvalAuthority":"军委","constructionPeriod":"1","isimportent":1,"level1":"东部战区","level2":"东海","level3":"战场设施建设计划","level4":"“十二五”战场建设计划","level5":"东部战区","timestamp":1555036250013,"subprojectId":null,"subName":"2","startTimeCon":"Fri Apr 12 2019 10:27:45 GMT+0800 (中国标准时间)","endTimeCon":"Fri Apr 12 2019 10:27:45 GMT+0800 (中国标准时间)","submitFileName":"1","submitDepartment":"1","submitNumber":"1","submitDate":1554998400000,"approvalName":"1","approvalDepartment":"1","approvalNumber":"1","approvalDate":1554998400000,"submitFileNameTa":"1","submitDepartmentTa":"1","submitNumberTa":"1","submitDateTa":null,"approvalNameTa":null,"approvalDepartmentTa":"1","approvalNumberTa":"1","approvalDateTa":1554912000000,"replyDate":1554998400000,"approvalProgress":"全部完成","constructionContent":"1","projectNumber":"1","constructionPlace":"1","constructionCompany":"1","releaseInvestment":1,"constructionPhase":"未开工","firstDesign":"未开展","bidding":"未启动","constructionDesign":"未开展","startTime":1554998400000,"testTime":"Fri Apr 12 2019 00:00:00 GMT+0800 (中国标准时间)","endTime":1554998400000,"projectProgress":66,"completedInvestment":1,"formedAbility":"1","designedAbility":"1","remarks":"1","reason":null,"department":"1","isIsimportent":1}]}
-var dList = [{"projectId":null,"submitCompany":null,"projectName":"11项目","documentName":"东海1号","documentNumber":"东海1号","documentDate":1554912000000,"investmentamount":1,"approvalAuthority":"军委","constructionPeriod":"1","isimportent":1,"level1":"东部战区","level2":"东海","level3":"战场设施建设计划","level4":"“十二五”战场建设计划","level5":"东部战区","timestamp":1554991989006,"subprojectId":null,"subName":"1","startTimeCon":"Thu Apr 11 2019 00:00:00 GMT+0800 (中国标准时间)","endTimeCon":"Thu Apr 11 2019 00:00:00 GMT+0800 (中国标准时间)","submitFileName":"1","submitDepartment":"1","submitNumber":"1","submitDate":1554912000000,"approvalName":"1","approvalDepartment":"1","approvalNumber":"1","approvalDate":1554912000000,"submitFileNameTa":"1","submitDepartmentTa":"1","submitNumberTa":"1","submitDateTa":null,"approvalNameTa":null,"approvalDepartmentTa":"1","approvalNumberTa":"1","approvalDateTa":1554912000000,"replyDate":1554912000000,"approvalProgress":"部分完成","constructionContent":"1","projectNumber":"1","constructionPlace":"1","constructionCompany":"1","releaseInvestment":1,"constructionPhase":"未开工","firstDesign":"未开展","bidding":"未启动","constructionDesign":"未开展","startTime":1554912000000,"testTime":null,"endTime":1554912000000,"projectProgress":76,"completedInvestment":1,"formedAbility":"1","designedAbility":"1","remarks":"1","reason":null,"department":"1","isIsimportent":1},{"projectId":null,"submitCompany":null,"projectName":"11项目","documentName":"东海1号","documentNumber":"东海1号","documentDate":1554912000000,"investmentamount":1,"approvalAuthority":"军委","constructionPeriod":"1","isimportent":1,"level1":"东部战区","level2":"东海","level3":"战场设施建设计划","level4":"“十二五”战场建设计划","level5":"东部战区","timestamp":1555036742174,"subprojectId":null,"subName":"3","startTimeCon":"Fri Apr 12 2019 10:27:45 GMT+0800 (中国标准时间)","endTimeCon":"Fri Apr 12 2019 10:27:45 GMT+0800 (中国标准时间)","submitFileName":"1","submitDepartment":"1","submitNumber":"1","submitDate":1554998400000,"approvalName":"1","approvalDepartment":"1","approvalNumber":"1","approvalDate":1554998400000,"submitFileNameTa":"1","submitDepartmentTa":"1","submitNumberTa":"1","submitDateTa":null,"approvalNameTa":"1","approvalDepartmentTa":"1","approvalNumberTa":"1","approvalDateTa":1554912000000,"replyDate":1554998400000,"approvalProgress":"全部完成","constructionContent":"1","projectNumber":"1","constructionPlace":"1","constructionCompany":"1","releaseInvestment":1,"constructionPhase":"未开工","firstDesign":"未开展","bidding":"未启动","constructionDesign":"未开展","startTime":1554998400000,"testTime":"Fri Apr 12 2019 00:00:00 GMT+0800 (中国标准时间)","endTime":1554998400000,"projectProgress":88,"completedInvestment":1,"formedAbility":"1","designedAbility":"1","remarks":"1","reason":null,"department":"1","isIsimportent":1},{"projectId":null,"submitCompany":null,"projectName":"11项目","documentName":"东海1号","documentNumber":"东海1号","documentDate":1554912000000,"investmentamount":1,"approvalAuthority":"军委","constructionPeriod":"1","isimportent":1,"level1":"东部战区","level2":"东海","level3":"战场设施建设计划","level4":"“十二五”战场建设计划","level5":"东部战区","timestamp":1555036250013,"subprojectId":null,"subName":"2","startTimeCon":"Fri Apr 12 2019 10:27:45 GMT+0800 (中国标准时间)","endTimeCon":"Fri Apr 12 2019 10:27:45 GMT+0800 (中国标准时间)","submitFileName":"1","submitDepartment":"1","submitNumber":"1","submitDate":1554998400000,"approvalName":"1","approvalDepartment":"1","approvalNumber":"1","approvalDate":1554998400000,"submitFileNameTa":"1","submitDepartmentTa":"1","submitNumberTa":"1","submitDateTa":null,"approvalNameTa":null,"approvalDepartmentTa":"1","approvalNumberTa":"1","approvalDateTa":1554912000000,"replyDate":1554998400000,"approvalProgress":"全部完成","constructionContent":"1","projectNumber":"1","constructionPlace":"1","constructionCompany":"1","releaseInvestment":1,"constructionPhase":"未开工","firstDesign":"未开展","bidding":"未启动","constructionDesign":"未开展","startTime":1554998400000,"testTime":"Fri Apr 12 2019 00:00:00 GMT+0800 (中国标准时间)","endTime":1554998400000,"projectProgress":97,"completedInvestment":1,"formedAbility":"1","designedAbility":"1","remarks":"1","reason":null,"department":"1","isIsimportent":1}];
-var editbtn = [];
+// var datalist = {"status":"S00001","message":"项目规划详细信息数据","entity":null,"list":[{"projectId":null,"submitCompany":null,"projectName":"11项目","documentName":"东海1号","documentNumber":"东海1号","documentDate":1554912000000,"investmentamount":1,"approvalAuthority":"军委","constructionPeriod":"1","isimportent":1,"level1":"东部战区","level2":"东海","level3":"战场设施建设计划","level4":"“十二五”战场建设计划","level5":"东部战区","timestamp":1554991989006,"subprojectId":null,"subName":"1","startTimeCon":"Thu Apr 11 2019 00:00:00 GMT+0800 (中国标准时间)","endTimeCon":"Thu Apr 11 2019 00:00:00 GMT+0800 (中国标准时间)","submitFileName":"1","submitDepartment":"1","submitNumber":"1","submitDate":1554912000000,"approvalName":"1","approvalDepartment":"1","approvalNumber":"1","approvalDate":1554912000000,"submitFileNameTa":"1","submitDepartmentTa":"1","submitNumberTa":"1","submitDateTa":null,"approvalNameTa":null,"approvalDepartmentTa":"1","approvalNumberTa":"1","approvalDateTa":1554912000000,"replyDate":1554912000000,"approvalProgress":"部分完成","constructionContent":"1","projectNumber":"1","constructionPlace":"1","constructionCompany":"1","releaseInvestment":1,"constructionPhase":"未开工","firstDesign":"未开展","bidding":"未启动","constructionDesign":"未开展","startTime":1554912000000,"testTime":null,"endTime":1554912000000,"projectProgress":63,"completedInvestment":1,"formedAbility":"1","designedAbility":"1","remarks":"1","reason":null,"department":"1","isIsimportent":1},{"projectId":null,"submitCompany":null,"projectName":"11项目","documentName":"东海1号","documentNumber":"东海1号","documentDate":1554912000000,"investmentamount":1,"approvalAuthority":"军委","constructionPeriod":"1","isimportent":1,"level1":"东部战区","level2":"东海","level3":"战场设施建设计划","level4":"“十二五”战场建设计划","level5":"东部战区","timestamp":1555036742174,"subprojectId":null,"subName":"3","startTimeCon":"Fri Apr 12 2019 10:27:45 GMT+0800 (中国标准时间)","endTimeCon":"Fri Apr 12 2019 10:27:45 GMT+0800 (中国标准时间)","submitFileName":"1","submitDepartment":"1","submitNumber":"1","submitDate":1554998400000,"approvalName":"1","approvalDepartment":"1","approvalNumber":"1","approvalDate":1554998400000,"submitFileNameTa":"1","submitDepartmentTa":"1","submitNumberTa":"1","submitDateTa":null,"approvalNameTa":"1","approvalDepartmentTa":"1","approvalNumberTa":"1","approvalDateTa":1554912000000,"replyDate":1554998400000,"approvalProgress":"全部完成","constructionContent":"1","projectNumber":"1","constructionPlace":"1","constructionCompany":"1","releaseInvestment":1,"constructionPhase":"未开工","firstDesign":"未开展","bidding":"未启动","constructionDesign":"未开展","startTime":1554998400000,"testTime":"Fri Apr 12 2019 00:00:00 GMT+0800 (中国标准时间)","endTime":1554998400000,"projectProgress":79,"completedInvestment":1,"formedAbility":"1","designedAbility":"1","remarks":"1","reason":null,"department":"1","isIsimportent":1},{"projectId":null,"submitCompany":null,"projectName":"11项目","documentName":"东海1号","documentNumber":"东海1号","documentDate":1554912000000,"investmentamount":1,"approvalAuthority":"军委","constructionPeriod":"1","isimportent":1,"level1":"东部战区","level2":"东海","level3":"战场设施建设计划","level4":"“十二五”战场建设计划","level5":"东部战区","timestamp":1555036250013,"subprojectId":null,"subName":"2","startTimeCon":"Fri Apr 12 2019 10:27:45 GMT+0800 (中国标准时间)","endTimeCon":"Fri Apr 12 2019 10:27:45 GMT+0800 (中国标准时间)","submitFileName":"1","submitDepartment":"1","submitNumber":"1","submitDate":1554998400000,"approvalName":"1","approvalDepartment":"1","approvalNumber":"1","approvalDate":1554998400000,"submitFileNameTa":"1","submitDepartmentTa":"1","submitNumberTa":"1","submitDateTa":null,"approvalNameTa":null,"approvalDepartmentTa":"1","approvalNumberTa":"1","approvalDateTa":1554912000000,"replyDate":1554998400000,"approvalProgress":"全部完成","constructionContent":"1","projectNumber":"1","constructionPlace":"1","constructionCompany":"1","releaseInvestment":1,"constructionPhase":"未开工","firstDesign":"未开展","bidding":"未启动","constructionDesign":"未开展","startTime":1554998400000,"testTime":"Fri Apr 12 2019 00:00:00 GMT+0800 (中国标准时间)","endTime":1554998400000,"projectProgress":66,"completedInvestment":1,"formedAbility":"1","designedAbility":"1","remarks":"1","reason":null,"department":"1","isIsimportent":1}]}
+// var dList = [{"projectId":null,"submitCompany":null,"projectName":"11项目","documentName":"东海1号","documentNumber":"东海1号","documentDate":1554912000000,"investmentamount":1,"approvalAuthority":"军委","constructionPeriod":"1","isimportent":1,"level1":"东部战区","level2":"东海","level3":"战场设施建设计划","level4":"“十二五”战场建设计划","level5":"东部战区","timestamp":1554991989006,"subprojectId":null,"subName":"1","startTimeCon":"Thu Apr 11 2019 00:00:00 GMT+0800 (中国标准时间)","endTimeCon":"Thu Apr 11 2019 00:00:00 GMT+0800 (中国标准时间)","submitFileName":"1","submitDepartment":"1","submitNumber":"1","submitDate":1554912000000,"approvalName":"1","approvalDepartment":"1","approvalNumber":"1","approvalDate":1554912000000,"submitFileNameTa":"1","submitDepartmentTa":"1","submitNumberTa":"1","submitDateTa":null,"approvalNameTa":null,"approvalDepartmentTa":"1","approvalNumberTa":"1","approvalDateTa":1554912000000,"replyDate":1554912000000,"approvalProgress":"部分完成","constructionContent":"1","projectNumber":"1","constructionPlace":"1","constructionCompany":"1","releaseInvestment":1,"constructionPhase":"未开工","firstDesign":"未开展","bidding":"未启动","constructionDesign":"未开展","startTime":1554912000000,"testTime":null,"endTime":1554912000000,"projectProgress":76,"completedInvestment":1,"formedAbility":"1","designedAbility":"1","remarks":"1","reason":null,"department":"1","isIsimportent":1},{"projectId":null,"submitCompany":null,"projectName":"11项目","documentName":"东海1号","documentNumber":"东海1号","documentDate":1554912000000,"investmentamount":1,"approvalAuthority":"军委","constructionPeriod":"1","isimportent":1,"level1":"东部战区","level2":"东海","level3":"战场设施建设计划","level4":"“十二五”战场建设计划","level5":"东部战区","timestamp":1555036742174,"subprojectId":null,"subName":"3","startTimeCon":"Fri Apr 12 2019 10:27:45 GMT+0800 (中国标准时间)","endTimeCon":"Fri Apr 12 2019 10:27:45 GMT+0800 (中国标准时间)","submitFileName":"1","submitDepartment":"1","submitNumber":"1","submitDate":1554998400000,"approvalName":"1","approvalDepartment":"1","approvalNumber":"1","approvalDate":1554998400000,"submitFileNameTa":"1","submitDepartmentTa":"1","submitNumberTa":"1","submitDateTa":null,"approvalNameTa":"1","approvalDepartmentTa":"1","approvalNumberTa":"1","approvalDateTa":1554912000000,"replyDate":1554998400000,"approvalProgress":"全部完成","constructionContent":"1","projectNumber":"1","constructionPlace":"1","constructionCompany":"1","releaseInvestment":1,"constructionPhase":"未开工","firstDesign":"未开展","bidding":"未启动","constructionDesign":"未开展","startTime":1554998400000,"testTime":"Fri Apr 12 2019 00:00:00 GMT+0800 (中国标准时间)","endTime":1554998400000,"projectProgress":88,"completedInvestment":1,"formedAbility":"1","designedAbility":"1","remarks":"1","reason":null,"department":"1","isIsimportent":1},{"projectId":null,"submitCompany":null,"projectName":"11项目","documentName":"东海1号","documentNumber":"东海1号","documentDate":1554912000000,"investmentamount":1,"approvalAuthority":"军委","constructionPeriod":"1","isimportent":1,"level1":"东部战区","level2":"东海","level3":"战场设施建设计划","level4":"“十二五”战场建设计划","level5":"东部战区","timestamp":1555036250013,"subprojectId":null,"subName":"2","startTimeCon":"Fri Apr 12 2019 10:27:45 GMT+0800 (中国标准时间)","endTimeCon":"Fri Apr 12 2019 10:27:45 GMT+0800 (中国标准时间)","submitFileName":"1","submitDepartment":"1","submitNumber":"1","submitDate":1554998400000,"approvalName":"1","approvalDepartment":"1","approvalNumber":"1","approvalDate":1554998400000,"submitFileNameTa":"1","submitDepartmentTa":"1","submitNumberTa":"1","submitDateTa":null,"approvalNameTa":null,"approvalDepartmentTa":"1","approvalNumberTa":"1","approvalDateTa":1554912000000,"replyDate":1554998400000,"approvalProgress":"全部完成","constructionContent":"1","projectNumber":"1","constructionPlace":"1","constructionCompany":"1","releaseInvestment":1,"constructionPhase":"未开工","firstDesign":"未开展","bidding":"未启动","constructionDesign":"未开展","startTime":1554998400000,"testTime":"Fri Apr 12 2019 00:00:00 GMT+0800 (中国标准时间)","endTime":1554998400000,"projectProgress":97,"completedInvestment":1,"formedAbility":"1","designedAbility":"1","remarks":"1","reason":null,"department":"1","isIsimportent":1}];
 
 
-dList.forEach((item, index) => {
-    var num  = index;
-    var tr = `
-    <tr>
-        <td>${index+1}</td><td>${item.documentDate}</td><td>${item.projectName}</td><td>${item.submitCompany}</td>
-        <td>
-            <div class="easyui-progressbar" data-options="value:'${item.projectProgress}'" style="width:250px;margin-left:25px;"></div>
-        </td>
-        <td >
-            <button class="btn" id="edit__${index}"><img src="img/编辑.png" /><span>编辑</span></button>
-            <button><img src="img/删除.png" /><span>删除</span></button>
-        </td>
-    </tr>
-    `;
-    $("#tbody").append(tr); 
-     
-});
+
+
+
+
+
 
 
 
 //编辑btn 点击事件
-$( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的Button
+function createClickEdit(){
+    $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的Button
     $(this).bind("click" , function(){//绑定当前点击的按钮
         var ids = $(this).attr("id");//获取它的id属性值
         var arr = ids.split("__" );
         var listNumber = arr[1];
-        console.log(dList[listNumber]);        
+        console.log(dList[listNumber]);
         var sHeight = document.documentElement.scrollHeight;
         var sWidth = document.documentElement.scrollWidth;
         var wHeight=document.documentElement.clientHeight;
@@ -385,13 +394,13 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
         mask.style.width = sWidth+"px";
         document.body.appendChild(mask);
         var con = document.getElementsByClassName('formCon');
-        con[0].style.display = 'block'; 
+        con[0].style.display = 'block';
         var close = document.getElementById("fclose");
         mask.onclick=close.onclick=function () {
             document.body.removeChild(mask);
             con[0].style.display='none';
         }
-        
+
         $(function(){
             $('#box').tabs({
                 height:600,
@@ -400,83 +409,104 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                     text:'提交',
                     handler:function(){
                         console.log('开始提交请求');
-                    //     $.ajax({
-                    //         url: "/onps/schedule/submitProjectSchedule.do",
-                    //         type: "post",
-                    //         async: false,
-                    //         data: {
-                    //             //表A目录
-                    //             "projectName": data.projectName,//项目名称
-                    //             "documentName": data.documentName,//文件名
-                    //             "documentNumber":data.documentNumber,//文件号
-                    //             "documentDate": data.documentDate,//$("#documentDate").val(),//填报时间
-                    //             "investmentamount": data.investmentamount,//计划投资
-                    //             "approvalAuthority": data.approvalAuthority,//审批权限
-                    //             "constructionPeriod": data.constructionPeriod,//建设周期
-                    //             "isimportent": data.isimportent,//是否规划重点项目
-                    //             "level1": data.level1,//五个地理位置
-                    //             "level2": data.level2,//二级地理位置
-                    //             "level3": data.level3,//建设计划
-                    //             "level4": data.level4,//十几五建设计划
-                    //             "level5": data.level5,//军区军兵种后勤
-                    //             //"subprojectId": $("#subprojectId").val(),
-                    //             //b 表
-                    //             "subName": data.subName,//子项目名
-                    //             "startTime":data.startTime,//$("#startTime").val(),//开工时间
-                    //             "endTime": data.endTime,//$("#endTime").val(),//竣工时间
-                    //             "submitFileName": data.submitFileName,//计划书送审文件名
-                    //             "submitDepartment": data.submitDepartment,//计划书送审单位
-                    //             "submitNumber": data.submitNumber,//计划书送审文号
-                    //             "submitDate": data.submitDate,//$("#submitDate").val(),//计划书送审时间
-                    //             "approvalName": data.approvalName,//计划书批复文件名
-                    //             "approvalDepartment": data.approvalDepartment,//计划书批复单位
-                    //             "approvalNumber": data.approvalNumber,//计划书批复文号
-                    //             "approvalDate": data.approvalDate,//$("#approvalDate").val(),//计划书批复时间
-                    //             "submitFileNameTa": data.submitFileNameTa,//任务书送审文件名
-                    //             "submitDepartmentTa": data.submitDepartmentTa,//任务书送审单位
-                    //             "submitNumberTa": data.submitNumberTa,//任务书送审文号
-                    //             "submitDateTa": data.submitDateTa,//$("#submitDateTa").val(),//任务书送审时间
-                    //             "approvalNameTa": data.approvalNameTa,//任务书批复文件名
-                    //             "approvalDepartmentTa": data.approvalDepartmentTa,//任务书批复单位
-                    //             "approvalNumberTa": data.approvalNumberTa,//任务书批复文号
-                    //             "approvalDateTa": data.approvalDateTa,//$("#approvalDateTa").val(),//任务书批复时间
-                    //             "replyDate": data.replyDate,//$("#replyDate").val(),//军委机关回复时间
-                    //             "approvalProgress": data.approvalProgress,//审批进展
-                    //             "constructionContent": data.constructionContent,//主要建设内容以及发展
-                    //             "projectNumber": data.projectNumber,//工程代号
-                    //             "constructionPlace": data.constructionPlace,//建设地点
-                    //             "constructionCompany": data.constructionCompany,//建设单位
-                    //             "releaseInvestment": data.releaseInvestment,//下达投资（万元）
-                    //             //c 表
-                    //             "constructionPhase": data.constructionPhase,//建设阶段
-                    //             "firstDesign": data.firstDesign,//初步设计
-                    //             "bidding": data.bidding,//招标采购
-                    //             "constructionDesign": data.constructionDesign,//施工图设计
-                    //             "startTimeCon": data.startTimeCon,//$("#startTimeCon").val(),//建设开工时间
-                    //             "testTimeCon":data.testTimeCon,//初验时间
-                    //             "endTimeCon":data.endTimeCon,//竣工时间
-                    //             "projectProgress": data.projectProgress,//工程进度
-                    //             "reason":data.reason,
-                    //             "completedInvestment": data.completedInvestment,//已经完成投资
-                    //             "formedAbility": data.formedAbility,//已经形成能力
-                    //             "designedAbility": data.designedAbility,//完工后预期形成能力
-                    //             "remarks": data.remarks,//备注
-                    //             "department": data.department//提交部门
-                    //         },
-                    //         success: function (data) {
-                    //             console.log(data);
-                    //             if (data.status == 'S00001') {
-                    //                 alert(data.message);
-                    //             } else {
-                    //                 alert(data.message);
-                    //             }
-            
-                    //         },
-                    //         error: function (data) {
-                    //             console.log(data);
-                    //             alert("请求失败!");
-                    //         }
-                    //     });
+                        //     $.ajax({
+                        //         url: "/onps/schedule/submitProjectSchedule.do",
+                        //         type: "post",
+                        //         async: false,
+                        //         data: {
+                        //             //表A目录
+                        //             "projectName": data.projectName,//项目名称
+                        //             "documentName": data.documentName,//文件名
+                        //             "documentNumber":data.documentNumber,//文件号
+                        //             "documentDate": data.documentDate,//$("#documentDate").val(),//填报时间
+                        //             "investmentamount": data.investmentamount,//计划投资
+                        //             "approvalAuthority": data.approvalAuthority,//审批权限
+                        //             "constructionPeriod": data.constructionPeriod,//建设周期
+                        //             "isimportent": data.isimportent,//是否规划重点项目
+                        //             "level1": data.level1,//五个地理位置
+                        //             "level2": data.level2,//二级地理位置
+                        //             "level3": data.level3,//建设计划
+                        //             "level4": data.level4,//十几五建设计划
+                        //             "level5": data.level5,//军区军兵种后勤
+                        //             //"subprojectId": $("#subprojectId").val(),
+                        //             //b 表
+                        //             "subName": data.subName,//子项目名
+                        //             "startTime":data.startTime,//$("#startTime").val(),//开工时间
+                        //             "endTime": data.endTime,//$("#endTime").val(),//竣工时间
+                        //             "submitFileName": data.submitFileName,//计划书送审文件名
+                        //             "submitDepartment": data.submitDepartment,//计划书送审单位
+                        //             "submitNumber": data.submitNumber,//计划书送审文号
+                        //             "submitDate": data.submitDate,//$("#submitDate").val(),//计划书送审时间
+                        //             "approvalName": data.approvalName,//计划书批复文件名
+                        //             "approvalDepartment": data.approvalDepartment,//计划书批复单位
+                        //             "approvalNumber": data.approvalNumber,//计划书批复文号
+                        //             "approvalDate": data.approvalDate,//$("#approvalDate").val(),//计划书批复时间
+                        //             "submitFileNameTa": data.submitFileNameTa,//任务书送审文件名
+                        //             "submitDepartmentTa": data.submitDepartmentTa,//任务书送审单位
+                        //             "submitNumberTa": data.submitNumberTa,//任务书送审文号
+                        //             "submitDateTa": data.submitDateTa,//$("#submitDateTa").val(),//任务书送审时间
+                        //             "approvalNameTa": data.approvalNameTa,//任务书批复文件名
+                        //             "approvalDepartmentTa": data.approvalDepartmentTa,//任务书批复单位
+                        //             "approvalNumberTa": data.approvalNumberTa,//任务书批复文号
+                        //             "approvalDateTa": data.approvalDateTa,//$("#approvalDateTa").val(),//任务书批复时间
+                        //             "replyDate": data.replyDate,//$("#replyDate").val(),//军委机关回复时间
+                        //             "approvalProgress": data.approvalProgress,//审批进展
+                        //             "constructionContent": data.constructionContent,//主要建设内容以及发展
+                        //             "projectNumber": data.projectNumber,//工程代号
+                        //             "constructionPlace": data.constructionPlace,//建设地点
+                        //             "constructionCompany": data.constructionCompany,//建设单位
+                        //             "releaseInvestment": data.releaseInvestment,//下达投资（万元）
+                        //             //c 表
+                        //             "constructionPhase": data.constructionPhase,//建设阶段
+                        //             "firstDesign": data.firstDesign,//初步设计
+                        //             "bidding": data.bidding,//招标采购
+                        //             "constructionDesign": data.constructionDesign,//施工图设计
+                        //             "startTimeCon": data.startTimeCon,//$("#startTimeCon").val(),//建设开工时间
+                        //             "testTimeCon":data.testTimeCon,//初验时间
+                        //             "endTimeCon":data.endTimeCon,//竣工时间
+                        //             "projectProgress": data.projectProgress,//工程进度
+                        //             "reason":data.reason,
+                        //             "completedInvestment": data.completedInvestment,//已经完成投资
+                        //             "formedAbility": data.formedAbility,//已经形成能力
+                        //             "designedAbility": data.designedAbility,//完工后预期形成能力
+                        //             "remarks": data.remarks,//备注
+                        //             "department": data.department//提交部门
+                        //         },
+                        //         success: function (data) {
+
+                        // var dList = data.list;
+
+                        // dList.forEach((item, index) => {
+                        //       var documentDate =  format(item.documentDate);
+                        //     var num  = index;
+                        //     var tr = `
+                        //     <tr>
+                        //         <td>${index+1}</td><td>${documentDate}</td><td>${item.projectName}</td><td>${item.submitCompany}</td>
+                        //         <td>
+                        //             <div class="easyui-progressbar" data-options="value:'${item.projectProgress}'" style="width:250px;margin-left:25px;"></div>
+                        //         </td>
+                        //         <td >
+                        //             <button class="btn" id="edit__${index}"><img src="img/编辑.png" /><span>编辑</span></button>
+                        //             <button><img src="img/删除.png" /><span>删除</span></button>
+                        //         </td>
+                        //     </tr>
+                        //     `;
+                        //     $("#tbody").append(tr);
+
+                        // });
+                        //                  console.log(data);
+                        //             if (data.status == 'S00001') {
+                        //                 alert(data.message);
+                        //             } else {
+                        //                 alert(data.message);
+                        //             }
+
+                        //         },
+                        //         error: function (data) {
+                        //             console.log(data);
+                        //             alert("请求失败!");
+                        //         }
+                        //     });
                     }
                 },{
                     iconCls:'icon-clear',
@@ -598,7 +628,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 label:'战略方向：',
                 onChange:function(){
                     data.level1 = $('#a_1').combotree('getText');
-                } 
+                }
             });
             $('#a_1').combotree('loadData',[{
                 "id":"e",
@@ -630,7 +660,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 label:'二级战略方向：',
                 onChange:function(){
                     data.level2 = $('#a_2').combotree('getText');
-                } 
+                }
             });
             $('#a_2').combotree('loadData',[{
                 "id":"dh",
@@ -684,173 +714,189 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                     var grandpa =  $(this).tree('getParent',father.target);
                     //获取选中项的顶级节点
                     var topfather = $(this).tree("getRoot", node.target);
-        
+
                     data.level5 = father.text;
                     data.level4 = grandpa.text;
                     data.level3 = topfather.text;
                     data.projectName = node.text;
-                   
+
                 }
             });
-           $('#a_3').combotree('loadData',[
-        {
-            "id":'build',
-            "text":"战场设施建设计划",
-            "state":"closed",
-            "iconCls":"icon-blank",
-            "children":[{
-                "id":"plan_a",
-                "state":"closed",
-                "iconCls":"icon-blank",
-                "text":"“十二五”战场建设计划",
-                "children":[{
-                    "id":"east",
-                    "text":"东部战区",
+            $('#a_3').combotree('loadData',[
+                {
+                    "id":'build',
+                    "text":"战场设施建设计划",
                     "state":"closed",
                     "iconCls":"icon-blank",
                     "children":[{
-                        "id":"3",
-                        "text":'11项目'}]
-                },{
-                    "id":'west',
-                    "text":"西部战区",
-                    "state":"closed",
-                    "iconCls":"icon-blank",
-                    "children":[{
-                        "id":"4",
-                        "text":'XXX项目'}]
-                },{
-                    "id":'south',
-                    "text":"南部战区",
-                    "state":"closed",
-                    "iconCls":"icon-blank",
-                    "children":[{
-                        "id":"3",
-                        "text":'XXX项目'}]
-                },{
-                    "id":'north',
-                    "text":"北部战区",
-                    "state":"closed",
-                    "iconCls":"icon-blank",
-                    "children":[{
-                        "id":"3",
-                        "text":'XXX项目'}]
-                },{
-                    "id":'middle',
-                    "text":"中部战区",
-                    "state":"closed",
-                    "iconCls":"icon-blank",
-                    "children":[{
-                        "id":"3",
-                        "text":'XXX项目'}]
-                },{
-                    "id":'land',
-                    "text":"陆军",
-                    "state":"closed",
-                    "iconCls":"icon-blank",
-                    "children":[{
-                        "id":"3",
-                        "text":'XXX项目'}]
-                },{
-                    "id":'navy',
-                    "text":"海军",
-                    "state":"closed",
-                    "iconCls":"icon-blank",
-                    "children":[{
-                        "id":"3",
-                        "text":'XXX项目'}]
-                },{
-                    "id":'air',
-                    "text":"空军",
-                    "state":"closed",
-                    "iconCls":"icon-blank",
-                    "children":[{
-                        "id":"3",
-                        "text":'XXX项目'}]
-                },{
-                    "id":'rocket',
-                    "text":"火箭军",
-                    "state":"closed",
-                    "iconCls":"icon-blank",
-                    "children":[{
-                        "id":"3",
-                        "text":'XXX项目'}]
-                },{
-                    "id":'strategic_support',
-                    "text":"战略支援部队",
-                    "state":"closed",
-                    "iconCls":"icon-blank",
-                    "children":[{
-                        "id":"3",
-                        "text":'XXX项目'}]
-                },{
-                    "id":'space',
-                    "text":"军事航天部队",
-                    "state":"closed",
-                    "iconCls":"icon-blank",
-                    "children":[{
-                        "id":"3",
-                        "text":'XXX项目'}]
-                },{
-                    "id":'network',
-                    "text":"网络空间部队",
-                    "state":"closed",
-                    "iconCls":"icon-blank",
-                    "children":[{
-                        "id":"3",
-                        "text":'XXX项目'}]
-                },{
-                    "id":'info',
-                    "text":"信息通信基地",
-                    "state":"closed",
-                    "iconCls":"icon-blank",
-                    "children":[{
-                        "id":"3",
-                        "text":'XXX项目'}]
-                },{
-                    "id":'service',
-                    "text":"联勤保障部队",
-                    "state":"closed",
-                    "iconCls":"icon-blank",
-                    "children":[{
-                        "id":"3",
-                        "text":'XXX项目'}]
-                },{
-                    "id":'military_commission',
-                    "text":"军委国防动员部",
-                    "state":"closed",
-                    "iconCls":"icon-blank",
-                    "children":[{
-                        "id":"3",
-                        "text":'XXX项目'}]
-                }]
-            },{
-                "id":"plan_b",
-                "text":"“十二五”第四批立项调整项目",
-                "state":"closed",
-                "iconCls":"icon-blank"
+                        "id":"plan_a",
+                        "state":"closed",
+                        "iconCls":"icon-blank",
+                        "text":"“十二五”战场建设计划",
+                        "children":[{
+                            "id":"east",
+                            "text":"东部战区",
+                            "state":"closed",
+                            "iconCls":"icon-blank",
+                            "children":[{
+                                "id":"3",
+                                "iconCls":"icon-blank",
+                                "text":'11项目'}]
+                        },{
+                            "id":'west',
+                            "text":"西部战区",
+                            "state":"closed",
+                            "iconCls":"icon-blank",
+                            "children":[{
+                                "id":"4",
+                                "iconCls":"icon-blank",
+                                "text":'XXX项目'}]
+                        },{
+                            "id":'south',
+                            "text":"南部战区",
+                            "state":"closed",
+                            "iconCls":"icon-blank",
+                            "children":[{
+                                "id":"3",
+                                "iconCls":"icon-blank",
+                                "text":'XXX项目'}]
+                        },{
+                            "id":'north',
+                            "text":"北部战区",
+                            "state":"closed",
+                            "iconCls":"icon-blank",
+                            "children":[{
+                                "id":"3",
+                                "iconCls":"icon-blank",
+                                "text":'XXX项目'}]
+                        },{
+                            "id":'middle',
+                            "text":"中部战区",
+                            "state":"closed",
+                            "iconCls":"icon-blank",
+                            "children":[{
+                                "id":"3",
+                                "iconCls":"icon-blank",
+                                "text":'XXX项目'}]
+                        },{
+                            "id":'land',
+                            "text":"陆军",
+                            "state":"closed",
+                            "iconCls":"icon-blank",
+                            "children":[{
+                                "id":"3",
+                                "iconCls":"icon-blank",
+                                "text":'XXX项目'}]
+                        },{
+                            "id":'navy',
+                            "text":"海军",
+                            "state":"closed",
+                            "iconCls":"icon-blank",
+                            "children":[{
+                                "id":"3",
+                                "iconCls":"icon-blank",
+                                "text":'XXX项目'}]
+                        },{
+                            "id":'air',
+                            "text":"空军",
+                            "state":"closed",
+                            "iconCls":"icon-blank",
+                            "children":[{
+                                "id":"3",
+                                "iconCls":"icon-blank",
+                                "text":'XXX项目'}]
+                        },{
+                            "id":'rocket',
+                            "text":"火箭军",
+                            "state":"closed",
+                            "iconCls":"icon-blank",
+                            "children":[{
+                                "id":"3",
+                                "iconCls":"icon-blank",
+                                "text":'XXX项目'}]
+                        },{
+                            "id":'strategic_support',
+                            "text":"战略支援部队",
+                            "state":"closed",
+                            "iconCls":"icon-blank",
+                            "children":[{
+                                "id":"3",
+                                "iconCls":"icon-blank",
+                                "text":'XXX项目'}]
+                        },{
+                            "id":'space',
+                            "text":"军事航天部队",
+                            "state":"closed",
+                            "iconCls":"icon-blank",
+                            "children":[{
+                                "id":"3",
+                                "iconCls":"icon-blank",
+                                "text":'XXX项目'}]
+                        },{
+                            "id":'network',
+                            "text":"网络空间部队",
+                            "state":"closed",
+                            "iconCls":"icon-blank",
+                            "children":[{
+                                "id":"3",
+                                "iconCls":"icon-blank",
+                                "text":'XXX项目'}]
+                        },{
+                            "id":'info',
+                            "text":"信息通信基地",
+                            "state":"closed",
+                            "iconCls":"icon-blank",
+                            "children":[{
+                                "id":"3",
+                                "iconCls":"icon-blank",
+                                "text":'XXX项目'}]
+                        },{
+                            "id":'service',
+                            "text":"联勤保障部队",
+                            "state":"closed",
+                            "iconCls":"icon-blank",
+                            "children":[{
+                                "id":"3",
+                                "iconCls":"icon-blank",
+                                "text":'XXX项目'}]
+                        },{
+                            "id":'military_commission',
+                            "text":"军委国防动员部",
+                            "state":"closed",
+                            "iconCls":"icon-blank",
+                            "children":[{
+                                "id":"3",
+                                "iconCls":"icon-blank",
+                                "text":'XXX项目'}]
+                        }]
+                    },{
+                        "id":"plan_b",
+                        "text":"“十二五”第四批立项调整项目",
+                        "state":"closed",
 
-            },{
-                "id":"plan_c",
-                "text":"“十三五”战场建设计划",
-                "state":"closed",
-                "iconCls":"icon-blank",
-            }]
-        },{
-            "id":"210",
-            "text":"210工程",
-            "state":"closed",
-            "iconCls":"icon-blank"
-        },{
-            "id":"zx",
-            "state":"closed",
-            "text":"专项工程",
-            "iconCls":"icon-blank"
-        }
-    ]);
+                        "iconCls":"icon-blank"
+
+                    },{
+                        "id":"plan_c",
+                        "text":"“十三五”战场建设计划",
+                        "state":"closed",
+                        "iconCls":"icon-blank",
+                    }]
+                },{
+                    "id":"210",
+                    "text":"210工程",
+                    "state":"closed",
+                    "iconCls":"icon-blank"
+                },{
+                    "id":"zx",
+                    "state":"closed",
+                    "text":"专项工程",
+                    "iconCls":"icon-blank"
+                }
+            ]);
             $('#a_3').combotree('setText',dList[listNumber].level5);
 
-            /*文件名需要回显options*/ 
+            /*文件名需要回显options*/
             $('#a_4').combotree({
                 width:250,
                 labelWidth:180,
@@ -859,7 +905,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 label:'规划/计划文件文件名：',
                 onChange:function(){
                     data.documentName = $('#a_4').combotree('getText');
-                } 
+                }
             })
             $('#a_4').combotree('loadData',[
                 {
@@ -893,8 +939,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 }
             ]);
             $('#a_4').combotree('setText',dList[listNumber].documentName);
-           /*文号需要回显options*/ 
-           $('#a_5').combotree({
+            /*文号需要回显options*/
+            $('#a_5').combotree({
                 width:250,
                 labelWidth:180,
                 labelPosition:"top",
@@ -902,7 +948,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 label:'规划/计划文件文号：',
                 onChange:function(){
                     data.documentNumber = $('#a_5').combotree('getText');
-                } 
+                }
             })
             $('#a_5').combotree('loadData',[
                 {
@@ -935,7 +981,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                     "iconCls":"icon-blank"
                 }
             ]);
-            
+
             $('#a_5').combotree('setText',dList[listNumber].documentNumber);
 
             $('#a_6').datebox({
@@ -973,24 +1019,24 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelPosition:'top',
                 onChange:function(){
                     data.approvalAuthority = $('#a_8').combotree('getText');
-                } 
+                }
             })
             $('#a_8').combotree('loadData',[
                 {
                     "id":"jw",
                     "text":"军委",
                     "iconCls":"icon-blank"
-        
+
                 },{
                     "id":"jz",
                     "text":"军种",
                     "iconCls":"icon-blank"
-        
+
                 },{
                     "id":"210",
                     "text":"210工程",
                     "iconCls":"icon-blank"
-        
+
                 }
             ]);
             $('#a_8').combotree('setText',dList[listNumber].approvalAuthority);
@@ -1005,7 +1051,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:130,
                 onChange:function(){
                     data.constructionPeriod = $(this).textbox('getText');
-                   
+
                 }
             });
             $('#a_9').textbox('setText',dList[listNumber].constructionPeriod);
@@ -1018,8 +1064,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelPosition:'top',
                 onChange:function(){
                     data.isimportent = $('#a_10').combotree('getValue');
-                   
-                } 
+
+                }
             });
             $('#a_10').combotree('loadData',[{
                 "id":"1",
@@ -1041,7 +1087,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:120,
                 onChange:function(){
                     data.subName  = $(this).textbox('getText');
-                   
+
                 }
             });
             $('#b_1').textbox('setText',dList[listNumber].subName);
@@ -1054,7 +1100,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:120,
                 onChange:function(){
                     data.department  = $(this).textbox('getText');
-                   
+
                 }
             });
             $('#b_2').textbox('setText',dList[listNumber].department);
@@ -1067,7 +1113,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onChange:function(){
                     data.submitFileName  = $(this).textbox('getText');
-                 
+
                 }
             });
             $('#b_3').textbox('setText',dList[listNumber].submitFileName);
@@ -1080,7 +1126,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onChange:function(){
                     data.submitDepartment  = $(this).textbox('getText');
-                  
+
                 }
             });
             $('#b_4').textbox('setText',dList[listNumber].submitDepartment);
@@ -1093,7 +1139,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onChange:function(){
                     data.submitNumber  = $(this).textbox('getText');
-                   
+
                 }
             });
             $('#b_5').textbox('setText',dList[listNumber].submitNumber);
@@ -1106,7 +1152,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onSelect:function(date){
                     data.submitDate =  new Date(date);
-                  
+
                 }
             });
             var submitDate =  format(dList[listNumber].submitDate);
@@ -1120,7 +1166,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onChange:function(){
                     data.approvalName  = $(this).textbox('getText');
-                 
+
                 }
             });
             $('#b_7').textbox('setText',dList[listNumber].approvalName);
@@ -1133,7 +1179,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onChange:function(){
                     data.approvalDepartment  = $(this).textbox('getText');
-                    
+
                 }
             });
             $('#b_8').textbox('setText',dList[listNumber].approvalDepartment);
@@ -1146,7 +1192,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onChange:function(){
                     data.approvalNumber  = $(this).textbox('getText');
-                   
+
                 }
             });
             $('#b_9').textbox('setText',dList[listNumber].approvalNumber);
@@ -1159,12 +1205,12 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onSelect:function(date){
                     data.approvalDate = new Date(date);
-                  
+
                 }
             });
             var approvalDate =  format(dList[listNumber].approvalDate);
             $('#b_10').datebox('setValue',approvalDate);
-            
+
             $('#b_11').textbox({
                 width:350,
                 required:true,
@@ -1173,7 +1219,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onChange:function(){
                     data.submitFileNameTa  = $(this).textbox('getText');
-                    
+
                 }
             });
             $('#b_11').textbox('setText',dList[listNumber].submitFileNameTa);
@@ -1186,7 +1232,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onChange:function(){
                     data.submitDepartmentTa  = $(this).textbox('getText');
-                   
+
                 }
             });
             $('#b_12').textbox('setText',dList[listNumber].submitDepartmentTa);
@@ -1199,7 +1245,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onChange:function(){
                     data.submitNumberTa  = $(this).textbox('getText');
-                   
+
                 }
             });
             $('#b_13').textbox('setText',dList[listNumber].submitNumberTa);
@@ -1212,7 +1258,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:380,
                 onSelect:function(date){
                     data.submitDateTa =new Date(date);
-                    
+
                 }
             });
             var submitDateTa =  format(dList[listNumber].submitDateTa);
@@ -1226,7 +1272,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:380,
                 onChange:function(){
                     data.approvalNameTa  = $(this).textbox('getText');
-                   
+
                 }
             });
             $('#b_15').textbox('setText',dList[listNumber].approvalNameTa);
@@ -1239,7 +1285,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:380,
                 onChange:function(){
                     data.approvalDepartmentTa  = $(this).textbox('getText');
-                   
+
                 }
             });
             $('#b_16').textbox('setText',dList[listNumber].approvalDepartmentTa);
@@ -1252,7 +1298,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:380,
                 onChange:function(){
                     data.approvalNumberTa  = $(this).textbox('getText');
-                   
+
                 }
             });
             $('#b_17').textbox('setText',dList[listNumber].approvalNumberTa);
@@ -1265,7 +1311,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:380,
                 onSelect:function(date){
                     data.approvalDateTa = new Date(date);
-                   
+
                 }
             });
             var approvalDateTa =  format(dList[listNumber].approvalDateTa);
@@ -1279,7 +1325,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:200,
                 onSelect:function(date){
                     data.replyDate = new Date(date);
-                   
+
                 }
             });
             var replyDate =  format(dList[listNumber].replyDate);
@@ -1293,8 +1339,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 label:'审批进展：',
                 onChange:function(){
                     data.approvalProgress = $('#b_20').combotree('getText');
-                  
-                } 
+
+                }
             })
             $('#b_20').combotree('loadData',[
                 {
@@ -1323,7 +1369,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:200,
                 onChange:function(){
                     data.constructionContent  = $(this).textbox('getText');
-                   
+
                 }
             });
             $('#b_21').textbox('setText',dList[listNumber].constructionContent);
@@ -1336,7 +1382,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onChange:function(){
                     data.projectNumber  = $(this).textbox('getText');
-                   
+
                 }
             });
             $('#b_22').textbox('setText',dList[listNumber].projectNumber);
@@ -1349,7 +1395,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onChange:function(){
                     data.constructionPlace  = $(this).textbox('getText');
-                 
+
                 }
             });
             $('#b_23').textbox('setText',dList[listNumber].constructionPlace);
@@ -1362,7 +1408,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onChange:function(){
                     data.constructionCompany  = $(this).textbox('getText');
-                    
+
                 }
             });
             $('#b_24').textbox('setText',dList[listNumber].constructionCompany);
@@ -1375,7 +1421,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onSelect:function(date){
                     data.startTime = new Date(date);
-                   
+
                 }
             });
             var startTime =  format(dList[listNumber].startTime);
@@ -1389,7 +1435,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onSelect:function(date){
                     data.endTime = new Date(date);
-                    
+
                 }
             });
             var endTime =  format(dList[listNumber].endTime);
@@ -1403,12 +1449,12 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onChange:function(){
                     data.releaseInvestment  = $(this).textbox('getText');
-                   
+
                 }
             });
             $('#b_27').textbox('setText',dList[listNumber].releaseInvestment);
 
-            // div title c  
+            // div title c
             $('#c_1').combotree({
                 width:350,
                 labelWidth:280,
@@ -1417,8 +1463,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 label:'审批进展：',
                 onChange:function(){
                     data.constructionPhase = $('#c_1').combotree('getText');
-                 
-                } 
+
+                }
             })
             $('#c_1').combotree('loadData',[
                 {
@@ -1445,8 +1491,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 label:'初步设计',
                 onChange:function(){
                     data.firstDesign = $('#c_2').combotree('getText');
-                   
-                } 
+
+                }
             })
             $('#c_2').combotree('loadData',[
                 {
@@ -1465,7 +1511,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             ]);
             $('#c_2').combotree('setText',dList[listNumber].firstDesign);
 
-        
+
             $('#c_3').combotree({
                 width:350,
                 labelWidth:280,
@@ -1474,8 +1520,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 label:'招标采购：',
                 onChange:function(){
                     data.bidding = $('#c_3').combotree('getText');
-                  
-                } 
+
+                }
             })
             $('#c_3').combotree('loadData',[
                 {
@@ -1498,7 +1544,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             ]);
             $('#c_3').combotree('setText',dList[listNumber].bidding);
 
-        
+
             $('#c_4').combotree({
                 width:350,
                 labelWidth:280,
@@ -1506,8 +1552,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 label:'施工图设计：',
                 onChange:function(){
                     data.constructionDesign = $('#c_4').combotree('getText');
-                   
-                } 
+
+                }
             })
             $('#c_4').combotree('loadData',[
                 {
@@ -1533,7 +1579,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 labelPosition:'top',
                 onSelect:function(date){
-                    data.startTimeCon = new Date(date);   
+                    data.startTimeCon = new Date(date);
                 }
             });
             var startTimeCon =  format(dList[listNumber].startTimeCon);
@@ -1547,7 +1593,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelPosition:'top',
                 onSelect:function(date){
                     data.testTimeCon = new Date(date);
-                 
+
                 }
             });
             var testTimeCon =  format(dList[listNumber].testTimeCon);
@@ -1561,7 +1607,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 label:'竣工时间:',
                 onSelect:function(date){
                     data.endTimeCon = new Date(date);
-                 
+
                 }
             });
             var endTimeCon =  format(dList[listNumber].endTimeCon);
@@ -1575,8 +1621,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 label:'未开工原因:',
                 onChange:function(){
                     data.reason = $('#reason').textbox('getText');
-                    
-                } 
+
+                }
             });
             $('#reason').textbox('setText',dList[listNumber].reason);
 
@@ -1588,7 +1634,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelPosition:'top',
                 onChange:function(){
                     data.projectProgress = $('#c_8').textbox('getText');
-                } 
+                }
             });
             $('#c_8').textbox('setText',dList[listNumber].projectProgress);
 
@@ -1600,8 +1646,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 label:'完成投资（万元）:',
                 onChange:function(){
                     data.completedInvestment = $('#c_9').textbox('getText');
-                    
-                } 
+
+                }
             });
             $('#c_9').textbox('setText',dList[listNumber].completedInvestment);
 
@@ -1615,8 +1661,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:100,
                 onChange:function(){
                     data.formedAbility = $('#c_10').textbox('getText');
-                   
-                } 
+
+                }
             });
             $('#c_10').textbox('setText',dList[listNumber].formedAbility);
 
@@ -1630,8 +1676,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:280,
                 onChange:function(){
                     data.designedAbility = $('#c_11').textbox('getText');
-                   
-                } 
+
+                }
             });
             $('#c_11').textbox('setText',dList[listNumber].designedAbility);
 
@@ -1645,8 +1691,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 labelWidth:100,
                 onChange:function(){
                     data.remarks = $('#c_12').textbox('getText');
-                   
-                } 
+
+                }
             });
             $('#c_12').textbox('setText',dList[listNumber].remarks);
 
@@ -1654,3 +1700,4 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
     });
 
 });
+}

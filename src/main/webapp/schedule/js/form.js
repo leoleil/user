@@ -391,6 +391,7 @@ $(function(){
                     "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
+                        "iconCls":"icon-blank",
                         "text":'11项目'}]
                 },{
                     "id":'west',
@@ -399,6 +400,7 @@ $(function(){
                     "iconCls":"icon-blank",
                     "children":[{
                         "id":"4",
+                        "iconCls":"icon-blank",
                         "text":'XXX项目'}]
                 },{
                     "id":'south',
@@ -407,6 +409,7 @@ $(function(){
                     "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
+                        "iconCls":"icon-blank",
                         "text":'XXX项目'}]
                 },{
                     "id":'north',
@@ -415,6 +418,7 @@ $(function(){
                     "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
+                        "iconCls":"icon-blank",
                         "text":'XXX项目'}]
                 },{
                     "id":'middle',
@@ -423,6 +427,7 @@ $(function(){
                     "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
+                        "iconCls":"icon-blank",
                         "text":'XXX项目'}]
                 },{
                     "id":'land',
@@ -431,6 +436,7 @@ $(function(){
                     "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
+                        "iconCls":"icon-blank",
                         "text":'XXX项目'}]
                 },{
                     "id":'navy',
@@ -439,6 +445,7 @@ $(function(){
                     "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
+                        "iconCls":"icon-blank",
                         "text":'XXX项目'}]
                 },{
                     "id":'air',
@@ -447,6 +454,7 @@ $(function(){
                     "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
+                        "iconCls":"icon-blank",
                         "text":'XXX项目'}]
                 },{
                     "id":'rocket',
@@ -455,6 +463,7 @@ $(function(){
                     "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
+                        "iconCls":"icon-blank",
                         "text":'XXX项目'}]
                 },{
                     "id":'strategic_support',
@@ -463,6 +472,7 @@ $(function(){
                     "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
+                        "iconCls":"icon-blank",
                         "text":'XXX项目'}]
                 },{
                     "id":'space',
@@ -471,6 +481,7 @@ $(function(){
                     "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
+                        "iconCls":"icon-blank",
                         "text":'XXX项目'}]
                 },{
                     "id":'network',
@@ -479,6 +490,7 @@ $(function(){
                     "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
+                        "iconCls":"icon-blank",
                         "text":'XXX项目'}]
                 },{
                     "id":'info',
@@ -487,6 +499,7 @@ $(function(){
                     "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
+                        "iconCls":"icon-blank",
                         "text":'XXX项目'}]
                 },{
                     "id":'service',
@@ -495,6 +508,7 @@ $(function(){
                     "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
+                        "iconCls":"icon-blank",
                         "text":'XXX项目'}]
                 },{
                     "id":'military_commission',
@@ -503,6 +517,7 @@ $(function(){
                     "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
+                        "iconCls":"icon-blank",
                         "text":'XXX项目'}]
                 }]
             },{

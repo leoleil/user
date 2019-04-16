@@ -8,20 +8,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(value = "/schedule")
 public class ProjectSchedulePageController {
-    @RequestMapping(value = "/home")
-    @RequiresRoles("user")
+    @RequestMapping(value = "/index")
+    @RequiresRoles("user1")
     public String toScheduleIndexPage(){
         String returnUrl = "schedule/index";
         return returnUrl;
     }
     @RequestMapping(value = "/view")
-    @RequiresRoles("user")
+    @RequiresRoles("user1")
     public String toScheduleViewPage(){
         String returnUrl = "schedule/view";
         return returnUrl;
     }
     @RequestMapping(value = "/form")
-    @RequiresRoles("user")
+    @RequiresRoles("user1")
     public String toScheduleFormPage(){
         String returnUrl = "schedule/form";
         return returnUrl;
