@@ -6,16 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>form</title>
     <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
-    <link rel="stylesheet" href="css/form.css">
-    <link rel="stylesheet" href="easyui/themes/default/easyui.css">
+    
+    <link rel="stylesheet" href="easyui/themes/metro/easyui.css">
     <link rel="stylesheet" href="easyui/themes/icon.css">
+    <link rel="stylesheet" href="css/form.css">
 </head>
 <body>
     <div class="header">
         <img id="logo" src="img/logo.png" alt="logo">
         <p id="title">全军十十十十十十十十十十系统<br/><span id="eng-title">THE PLA'S INFORMATION SUPPORT AND ASSURANCE COMBAT READINESS DUTY MANAGEMENT SYSTEM</span></p>
         <div class="divide"></div>
-        <p id="sub-title">测试用的测试用的测试</p>
+        <p id="sub-title">新建项目</p>
         <div class="divide"></div>
         <div class="right-wrap">
             <div id="divide"></div>
@@ -28,9 +29,8 @@
     <div class="menu-bar">
         <ul id="back-bar">
             <li><a href="index.html">查看已提报项目></a></li>
-            <li><a href="view.html">全军项目提报情况></a></li>
-            <li><a href="new.html"></a></li>
-            <li><a href="form.html">填报项目</a></li>
+            <li><a href="view.html">项目总览></a></li>
+            <li><a href="form.html">新建项目</a></li>
         </ul>
         <ul id="icon-ul">
             <li><img src="img/关闭.png" alt="close"></li>
@@ -40,258 +40,149 @@
     </div>
     <div id="box">
         <div title="A-规划/计划安排情况">
-            <div style="margin:20px 50px;">
-                <input  id="a_1" class="a_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input  id="a_2" class="a_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <select name="项目名称" id="a_3" class="a_input" style="width:250px">
-                </select>
-            </div>
-            <div style="margin:20px 50px">
-                规划/计划文件&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" id="a_4" class="a_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" id="a_5" class="a_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;    
-                <input type="text" id="a_6" class="a_input">
-            </div>
-            <div style="margin:20px 50px">
-                <input type="text" id="a_7" class="a_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="text" id="a_8" class="a_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;    
-                <input type="text" id="a_9" class="a_input">
-            </div>
-            <div style="margin:20px 50px">
-                <input type="text" id="a_10" class="a_input">
-            </div>
+            <table id="a_input" >
+                <tr>
+                    <td><input  id="a_1"></td>
+                    <td><input  id="a_2"></td>
+                    <td><select name="项目名称" id="a_3" style="width:250px"></select></td>
+                </tr>
+                <tr>
+                    <td>规划/计划文件<br><input type="text" id="a_4"></td>
+                    <td>规划/计划文件<br><input type="text" id="a_5"></td>
+                    <td>规划/计划文件<br><input type="text" id="a_6"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="a_7"></td>
+                    <td><input type="text" id="a_8"></td>
+                    <td><input type="text" id="a_9"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="a_10"></td>
+                </tr>
+            </table>
         </div>
         <div title="B-项目审批情况">
-            <div style="margin:20px 50px;">
-                <input  id="b_1" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input  id="b_2" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <hr class="hr">
-                <span><b>立项送审</b></span><br>
-                <input  id="b_3" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input  id="b_4" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input  id="b_5" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input  id="b_6" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <hr class="hr">
-                <span><b>立项批复</b></span><br>
-                <input  id="b_7" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input  id="b_8" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input  id="b_9" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input  id="b_10" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <hr class="hr">
-                <span><b>设计任务书送审</b></span><br>
-                <input  id="b_11" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input  id="b_12" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input  id="b_13" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input  id="b_14" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <hr class="hr">
-                <span><b>下达设计任务书、建设计划（批复）</b></span><br>
-                <input  id="b_15" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input  id="b_16" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input  id="b_17" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input  id="b_18" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <hr class="hr">
-                <span><b>建设周期</b></span><br>
-                <input id="b_25" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input id="b_26" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <hr class="hr">
-                <input  id="b_19" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input  id="b_20" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;<br><br>
-                <input id="b_21" class="b_input"><br><br>
-                <input id="b_22" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input id="b_23" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input id="b_24" class="b_input"><br><br>
-                <input id="b_27" class="b_input">
-                <br><br>
-            </div>
+            <table id="b_input">
+                <tr>
+                    <td><input  id="b_1"></td>
+                    <td class="separate"></td>
+                    <td><input  id="b_2"></td>
+                    
+                </tr>
+    
+                <tr>
+                    <td>立项送审<input  id="b_3"></td>
+                    <td class="separate"></td>
+                    <td>立项送审<input  id="b_4"></td>
+                </tr>
+                <tr>
+                    <td>立项送审<input  id="b_5"></td>
+                    <td class="separate"></td>
+                    <td>立项送审<input  id="b_6"></td>
+                </tr>
+                
+                <tr>
+                    <td>立项批复<input  id="b_7"></td>
+                    <td class="separate"></td>
+                    <td>立项批复<input  id="b_8"></td>
+                </tr>
+                <tr>
+                    <td>立项批复<input  id="b_9"></td>
+                    <td class="separate"></td>
+                    <td>立项批复<input  id="b_10"></td>
+                </tr>
+              
+                <tr>
+                    <td>设计任务书送审<br><input  id="b_11"></td>
+                    <td class="separate"></td>
+                    <td>设计任务书送审<br><input  id="b_12"></td>
+                </tr>
+                <tr>    
+                    <td>设计任务书送审<br><input  id="b_13"></td>
+                    <td class="separate"></td>
+                    <td>设计任务书送审<br><input  id="b_14"></td>
+                </tr>
+        
+                <tr>
+                    <td>下达设计任务书、建设计划（批复）<br><input  id="b_15"></td>
+                    <td class="separate"></td>
+                    <td>下达设计任务书、建设计划（批复）<br><input  id="b_16"></td>
+                </tr>
+                <tr>       
+                    <td>下达设计任务书、建设计划（批复）<br><input  id="b_17"></td>
+                    <td class="separate"></td>
+                    <td>下达设计任务书、建设计划（批复）<br><input  id="b_18"></td>
+                </tr>
+          
+                <tr>
+                    <td>建设周期<br><input  id="b_25"></td>
+                    <td class="separate"></td>
+                    <td>建设周期<br><input  id="b_26"></td>
+                </tr>
+               
+                <tr>
+                    <td><input  id="b_22"></td>
+                    <td class="separate"></td>
+                    <td><input  id="b_23"></td>
+                </tr>
+                <tr>   
+                    <td><input  id="b_24"></td>
+                    <td class="separate"></td>
+                    <td><input  id="b_27"></td>
+                </tr>
+                <tr>
+                    <td><input  id="b_19"></td>
+                    <td class="separate"></td>
+                    <td><input  id="b_20"></td>
+                 
+                </tr>
+                <tr>
+                    <td colspan="3"><input  id="b_21"></td>
+                </tr>
+            </table>
+           
         </div>
         <div title="C-建设进展情况">
-            <div style="margin:20px 50px;">
-                <input  id="c_1" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <hr class="hr">
-                <span><b>建设周期</b></span><br>
-                <input id="c_2" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input id="c_3" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input id="c_4" class="b_input"><br><br>
-                <input id="c_5" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input id="c_6" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input id="c_7" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input id="c_8" class="b_input"><br><br>
-                <input id="reason" class="b_input">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <hr class="hr">
-                <input id="c_9" class="b_input"><br><br>
-                <input id="c_10" class="b_input"><br><br>
-                <input id="c_11" class="b_input"><br><br>
-                <input id="c_12" class="b_input">
 
-            </div>
-            
+            <table id="c_input">
+                <tr>
+                    <td><input  id="c_1"></td>
+                    <td class="separate"></td>
+                    <td><input id="c_9"></td>
+                </tr>
+                <tr>
+                    <td><input  id="c_2"></td>
+                    <td class="separate"></td>
+                    <td><input id="c_3"></td>
+                </tr>
+                <tr>
+                    <td><input  id="c_4"></td>
+                    <td class="separate"></td>
+                    <td><input id="c_5"></td>
+                </tr>
+                <tr>
+                    <td><input  id="c_6"></td>
+                    <td class="separate"></td>
+                    <td><input id="c_7"></td>
+                </tr>
+                <tr>
+                    <td><input  id="c_8"></td>
+                    <td class="separate"></td>
+                    <td><input id="reason"></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input  id="c_10"></td>       
+                </tr>
+                <tr>
+                    <td colspan="3"><input  id="c_11"></td>               
+                </tr>
+                <tr>
+                    <td colspan="3"><input  id="c_12"></td>
+                </tr>
+            </table>
         </div>
     </div>
-    <!-- <div class="content">
-        <div class="con-header">
-            填报项目
-        </div>
-        <div class="a-content row">
-            <div class="title col-sm-2">
-                <h4>规划/计划安排情况</h4>
-            </div>
-            <div class="a-form col-sm-10 ">
-                <span>项目名称：</span> <input type="text" name="proj_name" placeholder="应严格按照XX填写"><br/>
-                <span>规划/计划文件：</span>
-                <span class="h6">文件名：</span> <input type="text" name="file">
-                <span class="h6">文号：</span> <input type="text" name="file">
-                <span class="h6">时间：</span>  <input type="text" name="file"><br/>
-                <span>规划计划投资（万元）：</span> <input type="text" name="plan_invest"><br/>
-                <span>审批权限：</span> <select name="authority" id="authority">
-                                            <option value="">军委</option>
-                                            <option value="">军种</option>
-                                            <option value="">/</option>
-                                        </select>
-                <span>审批时间：</span>  <input type="text" name="process_time"><br>
-                <span>建设周期：</span>  <input type="text" name="construction_period"><br/>
-                <span>规划纲要重点项目：</span><br/> <textarea name="key_proj" id="" cols="200" rows="5"></textarea>
-            </div>
-        </div>
-        <div class="b-content row">
-            <div class="title col-sm-2">
-                <h4>项目审批情况</h4>
-            </div>
-            <div class="b-form col-sm-10">
-                <span>立项、设计任务书送审时间：</span> <input type="text" name="submit_time">
-                <span>军委机关审核意见回复时间：</span> <input type="text" name="reply_time">
-                <span>审批进展：</span><select name="approval" id="approval">
-                                    <option value="">全部完成</option>
-                                    <option value="">部分完成</option>
-                                    <option value="">待审批</option>
-                                </select>
-                <div class="subProj" id="b_1">
-                    <span>项目名称：</span> <input type="text" name="subProj_name" placeholder="应严格按照XX填写"><br/>
-                    <span>审批形式：</span><select name="approval_form" id="approval_form">
-                            <option value="">任务书</option>
-                            <option value="">方案</option>
-                            <option value="">计划</option>
-                        </select><br/>
-                    <span>审核文件：</span>
-                    <span class="h6">文件名：</span> <input type="text" name="file">
-                    <span class="h6">文号：</span> <input type="text" name="file">
-                    <span class="h6">时间：</span>  <input type="text" name="file"><br/>
-                    <span>主要建设内容：</span><br/> <textarea name="main_content" id="" cols="200" rows="5"></textarea><br/>
-                    <span>工程代号：</span> <input type="text" name="code">
-                    <span>建设地点：</span> <input type="text" name="location"><br/>
-                    <span>建设规模：</span>
-                    <span>单位：</span> <input type="text" name="company">         
-                    <span>工程量：</span> <input type="text" name="work_sum"><br/>
-                    <span>建设周期：</span>
-                    <span>开工时间：</span> <input type="text" name="start">         
-                    <span>竣工时间：</span> <input type="text" name="end"><br/>  
-                    <span>总投资（万元）：</span>   <input type="text" name="sum">  
-                    <button class="mybtn" id="delete"><span id="icon-delete"></span>删除</button>
-                    <button class="mybtn" id="add"><span id="icon-add"></span>添加</button>
-                </div>
-            </div>
-        </div>
-        <div class="c-content row">
-            <div class="title col-sm-2">
-                <h4>计划下达情况</h4>
-            </div>
-            <div class="c-form col-sm-10">
-                <span>计划进展：</span><select name="plan_progress" id="">
-                        <option value="">全部下达</option>
-                        <option value="">部分下达</option>
-                        <option value="">未下达</option>
-                        </select><br/>
-                <div class="subProj" id="c_1">
-                    <span>计划文件：</span>
-                    <span class="h6">文件名：</span> <input type="text" name="file">
-                    <span class="h6">文号：</span> <input type="text" name="file">
-                    <span class="h6">时间：</span>  <input type="text" name="file"><br/>
-                    <span>已下达投资：</span> <input type="text" name="released_invest">
-                    <button class="mybtn" id="delete"><span id="icon-delete"></span>删除</button>
-                    <button class="mybtn" id="add"><span id="icon-add"></span>添加</button>
-                </div> 
-            </div>
-        </div>
-        <div class="d-content row">
-            <div class="title col-sm-2">
-                <h4>建设进展情况</h4>
-            </div>
-            <div class="d-form col-sm-10">
-                <span>建设阶段：</span> <select name="construction_stage" id="">
-                    <option value="">未开工</option>
-                    <option value="">在建</option>
-                    <option value="">竣工</option>
-                </select><br/>
-                <div class="subProj" id="d_1">
-                    <span>建设周期：</span>
-                    <span>初步设计：</span><select name="initial_design" id="">
-                            <option value="">未开展</option>
-                            <option value="">正在进行</option>
-                            <option value="">已完成</option>
-                        </select>
-                    <span>招标采购：</span><select name="bid" id="">
-                            <option value="">未启动</option>
-                            <option value="">正在拟制招标采购方案</option>
-                            <option value="">正在进行招标采购</option>
-                            <option value="">已完成</option>
-
-                        </select>
-                    <span>施工图设计：</span><select name="drawing_design" id="">
-                            <option value="">未开展</option>
-                            <option value="">正在进行</option>
-                            <option value="">已完成</option>
-                        </select><br/>
-                    <span>开工时间：</span> <input type="text" name="start">
-                    <span>工程完成：</span> <input type="text" name="rate"><br>
-                    <span>初验时间：</span> <input type="text" name="accept_time">
-                    <span>竣工时间：</span> <input type="text" name="complete_time"><br/>
-                    <span>完成投资：</span> <input type="text" name="investment"><br/>
-                    <span>形象进度：</span><br/> 
-                    <textarea name="schedule" id="" cols="200" rows="5"></textarea><br/>
-                    <span>备注：</span> <input type="text" name="remark">
-                    <button class="mybtn" id="delete"><span id="icon-delete"></span>删除</button>
-                    <button class="mybtn" id="add"><span id="icon-add"></span>添加</button>
-                </div>
-                <button type="submit" class="mybtn" id="save"><span id="icon-save"></span>保存</button>
-            </div>
-        </div>
-    </div> -->
+   
 </body>
 <script src="js/table.js"></script>
 <script src="js/jquery3.3.1.js"></script>

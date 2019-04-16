@@ -30,7 +30,7 @@
     <div class="menu-bar">
         <ul id="back-bar">
             <li><a href="index.html">填报系统></a></li>
-            <li><a href="form.html">项目总览</a></li>
+            <li><a href="view.html">项目总览</a></li>
         </ul>
         <ul id="icon-ul">
             <li><img src="img/关闭.png" alt="close"></li>
@@ -40,7 +40,7 @@
     </div>
     <div class="content">
         <div class="con-bar">
-            <p>全军项目提报情况</p>
+            <p>项目总览</p>
             <div class="excel">      
             </div>
             <div class="excel" style="position:relative;left:110px;">
@@ -59,7 +59,7 @@
         <table>
             <thead>
                 <tr>
-                    <th class="fix">序号</th><th>日期</th><th>项目名称</th><th>单位</th><th class="fix" style="max-width:100px">填报进度</th><th class="fix">操作</th>
+                    <th style="width:80px">序号</th><th style="width:200px">日期</th><th>项目名称</th><th>单位</th><th  style="width:300px">填报进度</th><th style="width:300px">操作</th>
                 </tr>
             </thead>
             <tbody id="tbody"></tbody>
@@ -78,153 +78,187 @@
                 <!-- <a href="#" id="pageSizeSet">设置</a>&nbsp; -->
                 <a> 条，</a>
                 <!-- <input type="text" id="pageSize" size="1" maxlength="2" value="getDefaultValue()"> -->
-                <select name="" id="pageSize">
+                <select name="" id="pageSize" style="margin-right:10px;">
                     <option value="10" selected>10</option>
                     <option value="20">20</option>
                 </select>
-                <a id="btn0"></a>
+                <a id="btn0" style="margin-right:10px;"></a>
 
             </div>
     </div>
     <div class="maskCon">
-        <div class="conHeader">
+       <div class="conHeader">
             <p class="mTitle">总体进度</p>
-        </div>
+        </div>    
         <div class="mCon">
-            <p>请选择战略方向以及计划名称：<br><br></p>
-            <input id="state1"> <br><br>
-            <input id="state2">
-            <div id="sumdiv"></div>
-        </div>        
-        <div id="mclose"></div>
+            
+                <input id="state1"> <br><br>
+                <input id="state2">
+            <div id="sumdiv">
+
+            </div>
+        </div>
+        <div id="mclose"></div> 
     </div>
+
+    <!-- <div id="cc" class="easyui-layout" style="width:1200px;height:800px;margin: 0 auto;">
+            <div data-options="region:'north',title:'请选择战略方向以及计划名称：',split:false" style="width: 100%;height:200px;">
+                
+            </div>
+            <div data-options="region:'center',title:'预览'" style="width: 100%;height:200px;z-index: 1007;padding:5px;background:#112951;" >
+                <div class="mCon" >
+                    <div id="sumdiv"></div>
+                </div>   
+            </div>
+        </div>
+     -->
+
+
     <div class="formCon">
         <div class="conHeader">
             <p class="formTitle">&nbsp;&nbsp;编辑</p>
         </div>
+
         <div id="box">
             <div title="A-规划/计划安排情况">
-                <div style="margin:20px 50px;">
-                    <input  id="a_1" class="a_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input  id="a_2" class="a_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <select name="项目名称" id="a_3" class="a_input" style="width:250px">
-                    </select>
-                </div>
-                <div style="margin:20px 50px">
-                    规划/计划文件&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" id="a_4" class="a_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" id="a_5" class="a_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;    
-                    <input type="text" id="a_6" class="a_input">
-                </div>
-                <div style="margin:20px 50px">
-                    <input type="text" id="a_7" class="a_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" id="a_8" class="a_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;    
-                    <input type="text" id="a_9" class="a_input">
-                </div>
-                <div style="margin:20px 50px">
-                    <input type="text" id="a_10" class="a_input">
-                </div>
+                <table id="a_input" >
+                <tr>
+                    <td><input  id="a_1"></td>
+                    <td><input  id="a_2"></td>
+                    <td><select name="项目名称" id="a_3" style="width:250px"></select></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="a_4"></td>
+                    <td><input type="text" id="a_5"></td>
+                    <td><input type="text" id="a_6"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="a_7"></td>
+                    <td><input type="text" id="a_8"></td>
+                    <td><input type="text" id="a_9"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="a_10"></td>
+                </tr>
+            </table>
             </div>
             <div title="B-项目审批情况">
-                <div style="margin:20px 50px;">
-                    <input  id="b_1" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input  id="b_2" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <hr class="hr">
-                    <span><b>立项送审</b></span><br>
-                    <input  id="b_3" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input  id="b_4" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input  id="b_5" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input  id="b_6" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <hr class="hr">
-                    <span><b>立项批复</b></span><br>
-                    <input  id="b_7" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input  id="b_8" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input  id="b_9" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input  id="b_10" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <hr class="hr">
-                    <span><b>设计任务书送审</b></span><br>
-                    <input  id="b_11" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input  id="b_12" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input  id="b_13" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input  id="b_14" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <hr class="hr">
-                    <span><b>下达设计任务书、建设计划（批复）</b></span><br>
-                    <input  id="b_15" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input  id="b_16" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input  id="b_17" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input  id="b_18" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <hr class="hr">
-                    <span><b>建设周期</b></span><br>
-                    <input id="b_25" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="b_26" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <hr class="hr">
-                    <input  id="b_19" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input  id="b_20" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;<br><br>
-                    <input id="b_21" class="b_input"><br><br>
-                    <input id="b_22" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="b_23" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="b_24" class="b_input"><br><br>
-                    <input id="b_27" class="b_input">
-                    <br><br>
-                </div>
+                <table id="b_input">
+                <tr>
+                    <td><input  id="b_1"></td>
+                    <td class="separate"></td>
+                    <td><input  id="b_2"></td>
+                    
+                </tr>
+    
+                <tr>
+                    <td><input  id="b_3"></td>
+                    <td class="separate"></td>
+                    <td><input  id="b_4"></td>
+                </tr>
+                <tr>
+                    <td><input  id="b_5"></td>
+                    <td class="separate"></td>
+                    <td><input  id="b_6"></td>
+                </tr>
+                
+                <tr>
+                    <td><input  id="b_7"></td>
+                    <td class="separate"></td>
+                    <td><input  id="b_8"></td>
+                </tr>
+                <tr>
+                    <td><input  id="b_9"></td>
+                    <td class="separate"></td>
+                    <td><input  id="b_10"></td>
+                </tr>
+              
+                <tr>
+                    <td><br><input  id="b_11"></td>
+                    <td class="separate"></td>
+                    <td><br><input  id="b_12"></td>
+                </tr>
+                <tr>    
+                    <td><br><input  id="b_13"></td>
+                    <td class="separate"></td>
+                    <td><br><input  id="b_14"></td>
+                </tr>
+        
+                <tr>
+                    <td><input  id="b_15"></td>
+                    <td class="separate"></td>
+                    <td><input  id="b_16"></td>
+                </tr>
+                <tr>       
+                    <td><input  id="b_17"></td>
+                    <td class="separate"></td>
+                    <td><input  id="b_18"></td>
+                </tr>
+          
+                <tr>
+                    <td><input  id="b_25"></td>
+                    <td class="separate"></td>
+                    <td><input  id="b_26"></td>
+                </tr>
+               
+                <tr>
+                    <td><input  id="b_22"></td>
+                    <td class="separate"></td>
+                    <td><input  id="b_23"></td>
+                </tr>
+                <tr>   
+                    <td><input  id="b_24"></td>
+                    <td class="separate"></td>
+                    <td><input  id="b_27"></td>
+                </tr>
+                <tr>
+                    <td><input  id="b_19"></td>
+                    <td class="separate"></td>
+                    <td><input  id="b_20"></td>
+                 
+                </tr>
+                <tr>
+                    <td colspan="3"><input  id="b_21"></td>
+                </tr>
+            </table>
             </div>
             <div title="C-建设进展情况">
-                <div style="margin:20px 50px;">
-                    <input  id="c_1" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <hr class="hr">
-                    <span><b>建设周期</b></span><br>
-                    <input id="c_2" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="c_3" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="c_4" class="b_input"><br><br>
-                    <input id="c_5" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="c_6" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="c_7" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input id="c_8" class="b_input"><br><br>
-                    <input id="reason" class="b_input">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <hr class="hr">
-                    <input id="c_9" class="b_input"><br><br>
-                    <input id="c_10" class="b_input"><br><br>
-                    <input id="c_11" class="b_input"><br><br>
-                    <input id="c_12" class="b_input">
-    
-                </div>
+                 <table id="c_input">
+                <tr>
+                    <td><input  id="c_1"></td>
+                    <td class="separate"></td>
+                    <td><input id="c_9"></td>
+                </tr>
+                <tr>
+                    <td><input  id="c_2"></td>
+                    <td class="separate"></td>
+                    <td><input id="c_3"></td>
+                </tr>
+                <tr>
+                    <td><input  id="c_4"></td>
+                    <td class="separate"></td>
+                    <td><input id="c_5"></td>
+                </tr>
+                <tr>
+                    <td><input  id="c_6"></td>
+                    <td class="separate"></td>
+                    <td><input id="c_7"></td>
+                </tr>
+                <tr>
+                    <td><input  id="c_8"></td>
+                    <td class="separate"></td>
+                    <td><input id="reason"></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><input  id="c_10"></td>       
+                </tr>
+                <tr>
+                    <td colspan="3"><input  id="c_11"></td>               
+                </tr>
+                <tr>
+                    <td colspan="3"><input  id="c_12"></td>
+                </tr>
+            </table>
                 
             </div>
         </div>      

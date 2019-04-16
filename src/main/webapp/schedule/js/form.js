@@ -15,6 +15,10 @@ function add_zero(temp){
     else return temp;
 }
 setInterval(getCurDate,1000);
+/*
+    移除tree-icon
+*/
+
 // data
 data =  {
     //表A目录
@@ -33,7 +37,7 @@ data =  {
     "level5": "",
     //"subprojectId": "",
     "subName": $("#subName").val(),
-    "startTimeCon": new Date(),//$("#startTime").val(),
+    "startTime": new Date(),//$("#startTime").val(),
     "submitFileName":"",
     "submitDepartment": "",
     "submitNumber": "",
@@ -56,16 +60,16 @@ data =  {
     "projectNumber": "",
     "constructionPlace": "",
     "constructionCompany": "",
-    "endTimeCon": new Date(),//$("#endTime").val(),
+    "endTime": new Date(),//$("#endTime").val(),
     "releaseInvestment": "",
     "constructionPhase": "",
     "firstDesign": "",
     "bidding": "",
     "constructionDesign": "",
     "reason":"",
-    "testTime":new Date(),
-    "endTime": new Date(),
-    "startTime": new Date(),//$("#startTimeCon").val(),
+    "testTimeCon":new Date(),
+    "endTimeCon": new Date(),
+    "startTimeCon": new Date(),//$("#startTimeCon").val(),
     "projectProgress":"",
     "completedInvestment": "",
     "formedAbility": "",
@@ -78,11 +82,11 @@ $(function(){
     $('#box').tabs({
         // width:1400,
         height:600,
+        border:true,
         tools:[{
             iconCls:'icon-save',
             text:'提交',
             handler:function(){
-                alert('add');
                 $.ajax({
                     url: "/onps/schedule/submitProjectSchedule.do",
                     type: "post",
@@ -105,8 +109,8 @@ $(function(){
                         //"subprojectId": $("#subprojectId").val(),
                         //b 表
                         "subName": data.subName,//子项目名
-                        "startTimeCon":data.startTimeCon,//$("#startTime").val(),//开工时间
-                        "endTimeCon": data.endTimeCon,//$("#endTime").val(),//竣工时间
+                        "startTime":data.startTime,//$("#startTime").val(),//开工时间
+                        "endTime": data.endTime,//$("#endTime").val(),//竣工时间
                         "submitFileName": data.submitFileName,//计划书送审文件名
                         "submitDepartment": data.submitDepartment,//计划书送审单位
                         "submitNumber": data.submitNumber,//计划书送审文号
@@ -135,9 +139,9 @@ $(function(){
                         "firstDesign": data.firstDesign,//初步设计
                         "bidding": data.bidding,//招标采购
                         "constructionDesign": data.constructionDesign,//施工图设计
-                        "startTime": data.startTime,//$("#startTimeCon").val(),//建设开工时间
-                        "testTime":data.testTime,//初验时间
-                        "endTime":data.endTime,//竣工时间
+                        "startTimeCon": data.startTimeCon,//$("#startTimeCon").val(),//建设开工时间
+                        "testTimeCon":data.testTimeCon,//初验时间
+                        "endTimeCon":data.endTimeCon,//竣工时间
                         "projectProgress": data.projectProgress,//工程进度
                         "reason":data.reason,
                         "completedInvestment": data.completedInvestment,//已经完成投资
@@ -226,9 +230,9 @@ $(function(){
                 $('#b_18').datebox('setValue',null);
                 data.approvalDateTa=new Date();
                 $('#b_25').datebox('setValue',null);
-                data.startTimeCon=new Date();
+                data.startTime=new Date();
                 $('#b_26').datebox('setValue',null);
-                data.endTimeCon=new Date();
+                data.endTime=new Date();
                 $('#b_19').datebox('setValue',null);
                 data.replyDate=new Date();
                 $('#b_20').combotree('setText',null);
@@ -253,11 +257,11 @@ $(function(){
                 $('#c_4').combotree('setText',null);
                 data.constructionDesign="";
                 $('#c_5').datebox('setValue',null);
-                data.startTime = new Date();
+                data.startTimeCon = new Date();
                 $('#c_6').datebox('setValue',null);
-                data.testTime = new Date();
+                data.testTimeCon = new Date();
                 $('#c_7').datebox('setValue',null);
-                data.endTime = new Date();
+                data.endTimeCon = new Date();
                 $('#reason').textbox('setText',null);
                 data.reason="";
                 $('#c_8').textbox('setText',null);
@@ -274,12 +278,13 @@ $(function(){
             }
         }]
     });
+    
     $('#a_1').combotree({
+        width:300,
         required:true,
         label:'战略方向：',
         onChange:function(){
             data.level1 = $('#a_1').combotree('getText');
-            alert(data.level1);
         } 
     });
     $('#a_1').combotree('loadData',[{
@@ -310,7 +315,6 @@ $(function(){
         label:'二级战略方向：',
         onChange:function(){
             data.level2 = $('#a_2').combotree('getText');
-            alert(data.level2);
         } 
     });
     $('#a_2').combotree('loadData',[{
@@ -352,7 +356,7 @@ $(function(){
     }]);
     $('#a_3').combotree({
         required:true,
-        width:350,
+        width:300,
         label:'项目名称：',
         onSelect: function (node) {
             //获取选中项的父节点
@@ -366,10 +370,7 @@ $(function(){
             data.level4 = grandpa.text;
             data.level3 = topfather.text;
             data.projectName = node.text;
-            alert(data.projectName);
-            alert(data.level3);
-            alert(data.level4);
-            alert(data.level5);
+           
         }
     });
     $('#a_3').combotree('loadData',[
@@ -377,138 +378,196 @@ $(function(){
             "id":'build',
             "text":"战场设施建设计划",
             "state":"closed",
+            "iconCls":"icon-blank",
             "children":[{
                 "id":"plan_a",
                 "state":"closed",
+                "iconCls":"icon-blank",
                 "text":"“十二五”战场建设计划",
                 "children":[{
-                    "id":"spe",
+                    "id":"east",
                     "text":"东部战区",
                     "state":"closed",
+                    "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
                         "text":'11项目'}]
                 },{
+                    "id":'west',
                     "text":"西部战区",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
                     "children":[{
-                        "id":"3",
+                        "id":"4",
                         "text":'XXX项目'}]
                 },{
+                    "id":'south',
                     "text":"南部战区",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
                         "text":'XXX项目'}]
                 },{
+                    "id":'north',
                     "text":"北部战区",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
                         "text":'XXX项目'}]
                 },{
+                    "id":'middle',
                     "text":"中部战区",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
                         "text":'XXX项目'}]
                 },{
+                    "id":'land',
                     "text":"陆军",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
                         "text":'XXX项目'}]
                 },{
+                    "id":'navy',
                     "text":"海军",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
                         "text":'XXX项目'}]
                 },{
+                    "id":'air',
                     "text":"空军",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
                         "text":'XXX项目'}]
                 },{
+                    "id":'rocket',
                     "text":"火箭军",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
                         "text":'XXX项目'}]
                 },{
+                    "id":'strategic_support',
                     "text":"战略支援部队",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
                         "text":'XXX项目'}]
                 },{
+                    "id":'space',
                     "text":"军事航天部队",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
                         "text":'XXX项目'}]
                 },{
+                    "id":'network',
                     "text":"网络空间部队",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
                         "text":'XXX项目'}]
                 },{
+                    "id":'info',
                     "text":"信息通信基地",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
                         "text":'XXX项目'}]
                 },{
+                    "id":'service',
                     "text":"联勤保障部队",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
                         "text":'XXX项目'}]
                 },{
+                    "id":'military_commission',
                     "text":"军委国防动员部",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
                     "children":[{
                         "id":"3",
                         "text":'XXX项目'}]
                 }]
             },{
                 "id":"plan_b",
-                "text":"“十二五”第四批立项调整项目"
+                "text":"“十二五”第四批立项调整项目",
+                "state":"closed",
+                "iconCls":"icon-blank"
+
             },{
                 "id":"plan_c",
-                "text":"“十三五”战场建设计划"
+                "text":"“十三五”战场建设计划",
+                "state":"closed",
+                "iconCls":"icon-blank",
             }]
         },{
             "id":"210",
             "text":"210工程",
-            "state":"closed"
+            "state":"closed",
+            "iconCls":"icon-blank"
         },{
             "id":"zx",
             "state":"closed",
-            "text":"专项工程"
+            "text":"专项工程",
+            "iconCls":"icon-blank"
         }
     ]);
     /*文件名需要回显options*/ 
     $('#a_4').combotree({
-        width:220,
-        labelWidth:80,
+        width:300,
+        labelWidth:85,
         required:true,
         label:'文件名：',
         onChange:function(){
             data.documentName = $('#a_4').combotree('getText');
-            alert(data.documentName);
         } 
     })
     $('#a_4').combotree('loadData',[
         {
             "id":"dh",
             "text":"东海1号",
+            "iconCls":"icon-blank"
         },{
             "id":"th",
             "text":"台海1号",
+            "iconCls":"icon-blank"
         },{
             "id":"nh",
             "text":"南海1号",
+            "iconCls":"icon-blank"
         },{
             "id":"zy",
             "text":"中越1号",
+            "iconCls":"icon-blank"
         },{
             "id":"zm",
             "text":"中缅1号",
+            "iconCls":"icon-blank"
         },{
             "id":"zyin",
             "text":"中印1号",
+            "iconCls":"icon-blank"
         },{
             "id":"zc",
             "text":"中朝1号",
+            "iconCls":"icon-blank"
         }
     ]);
    /*文号需要回显options*/ 
@@ -519,48 +578,53 @@ $(function(){
         label:'文号：',
         onChange:function(){
             data.documentNumber = $('#a_5').combotree('getText');
-            alert(data.documentNumber);
         } 
     })
     $('#a_5').combotree('loadData',[
         {
             "id":"dh",
             "text":"东海1号下的00号文件",
+            "iconCls":"icon-blank"
         },{
             "id":"th",
             "text":"台海1号下的00号文件",
+            "iconCls":"icon-blank"
         },{
             "id":"nh",
             "text":"南海1号下的00号文件",
+            "iconCls":"icon-blank"
         },{
             "id":"zy",
             "text":"中越1号下的00号文件",
+            "iconCls":"icon-blank"
         },{
             "id":"zm",
             "text":"中缅1号下的00号文件",
+            "iconCls":"icon-blank"
         },{
             "id":"zyin",
             "text":"中印1号下的00号文件",
+            "iconCls":"icon-blank"
         },{
             "id":"zc",
             "text":"中朝1号下的00号文件",
+            "iconCls":"icon-blank"
         }
     ]);
     
     $('#a_6').datebox({
         required:true,
-        width:200,
+        width:300,
         label:'时间：',
         labelPosition:'left',
-        labelWidth:60,
+        labelWidth:85,
         onSelect:function(date){
             data.documentDate = new Date(date);
-            console.log(data.documentDate);
         }
     })
     $('#a_7').textbox({
         required:true,
-        width:250,
+        width:300,
         editable:true,
         hasDownArrow:false,
         label:'规划/计划投资（万元）：',
@@ -568,7 +632,6 @@ $(function(){
         labelWidth:180,
         onChange:function(){
             data.investmentamount = $('#a_7').textbox('getText');
-            alert(data.investmentamount)
         }
     });
     $('#a_8').combotree({
@@ -578,7 +641,6 @@ $(function(){
         label:'审批权限：',
         onChange:function(){
             data.approvalAuthority = $('#a_8').combotree('getText');
-            alert(data.approvalAuthority);
         } 
     })
     $('#a_8').combotree('loadData',[
@@ -602,18 +664,18 @@ $(function(){
   
     $('#a_9').textbox({
         required:true,
-        width:220,
+        width:300,
         editable:true,
-        label:'建设周期（年）：',
+        label:'建设周期：',
         labelPosition:'left',
-        labelWidth:130,
+        labelWidth:85,
         onChange:function(){
             data.constructionPeriod = $(this).textbox('getText');
-            alert(data.constructionPeriod);
+           
         }
     });
     $('#a_10').combotree({
-        width:330,
+        width:300,
         labelWidth:280,
         required:true,
         label:'规划纲要重点项目：',
@@ -621,7 +683,7 @@ $(function(){
         labelWidth:150,
         onChange:function(){
             data.isimportent = $('#a_10').combotree('getValue');
-            alert(data.isimportent);
+           
         } 
     });
     $('#a_10').combotree('loadData',[{
@@ -636,24 +698,24 @@ $(function(){
     // div titleB
     $('#b_1').textbox({
         required:true,
-        width:350,
+        width:355,
         label:"子项目名称：",
         labelPosition:'left',
-        labelWidth:120,
+        labelWidth:135,
         onChange:function(){
             data.subName  = $(this).textbox('getText');
-            alert(data.subName);
+           
         }
     });
     $('#b_2').textbox({
-        width:350,
+        width:355,
         required:true,
         label:'填报单位:',
         labelPosition:'left',
-        labelWidth:120,
+        labelWidth:135,
         onChange:function(){
             data.department  = $(this).textbox('getText');
-            console.log(data.department);
+           
         }
     });
     $('#b_3').textbox({
@@ -664,7 +726,7 @@ $(function(){
         labelWidth:80,
         onChange:function(){
             data.submitFileName  = $(this).textbox('getText');
-            console.log(data.submitFileName);
+         
         }
     });
     $('#b_4').textbox({
@@ -675,29 +737,29 @@ $(function(){
         labelWidth:80,
         onChange:function(){
             data.submitDepartment  = $(this).textbox('getText');
-            console.log(data.submitDepartment);
+          
         }
     });
     $('#b_5').textbox({
-        width:200,
+        width:300,
         required:true,
         label:'文号:',
         labelPosition:'left',
         labelWidth:80,
         onChange:function(){
             data.submitNumber  = $(this).textbox('getText');
-            console.log(data.submitNumber);
+           
         }
     });
     $('#b_6').datebox({
-        width:200,
+        width:300,
         required:true,
         label:'时间:',
         labelPosition:'left',
         labelWidth:80,
         onSelect:function(date){
             data.submitDate =  new Date(date);
-            alert(data.submitDate);
+          
         }
     });
     $('#b_7').textbox({
@@ -708,7 +770,7 @@ $(function(){
         labelWidth:80,
         onChange:function(){
             data.approvalName  = $(this).textbox('getText');
-            console.log(data.approvalName);
+         
         }
     });
     $('#b_8').textbox({
@@ -719,29 +781,29 @@ $(function(){
         labelWidth:80,
         onChange:function(){
             data.approvalDepartment  = $(this).textbox('getText');
-            console.log(data.approvalDepartment);
+            
         }
     });
     $('#b_9').textbox({
-        width:200,
+        width:300,
         required:true,
         label:'文号:',
         labelPosition:'left',
         labelWidth:80,
         onChange:function(){
             data.approvalNumber  = $(this).textbox('getText');
-            console.log(data.approvalNumber);
+           
         }
     });
     $('#b_10').datebox({
-        width:200,
+        width:300,
         required:true,
         label:'时间:',
         labelPosition:'left',
         labelWidth:80,
         onSelect:function(date){
             data.approvalDate = new Date(date);
-            alert(data.approvalDate);
+          
         }
     });
     $('#b_11').textbox({
@@ -752,7 +814,7 @@ $(function(){
         labelWidth:80,
         onChange:function(){
             data.submitFileNameTa  = $(this).textbox('getText');
-            console.log(data.submitFileNameTa);
+            
         }
     });
     $('#b_12').textbox({
@@ -763,29 +825,29 @@ $(function(){
         labelWidth:80,
         onChange:function(){
             data.submitDepartmentTa  = $(this).textbox('getText');
-            console.log(data.submitDepartmentTa);
+           
         }
     });
     $('#b_13').textbox({
-        width:200,
+        width:300,
         required:true,
         label:'文号:',
         labelPosition:'left',
         labelWidth:80,
         onChange:function(){
             data.submitNumberTa  = $(this).textbox('getText');
-            console.log(data.submitNumberTa);
+           
         }
     });
     $('#b_14').datebox({
-        width:200,
+        width:300,
         required:true,
         label:'时间:',
         labelPosition:'left',
         labelWidth:80,
         onSelect:function(date){
             data.submitDateTa =new Date(date);
-            alert(data.submitDateTa);
+            
         }
     });
     $('#b_15').textbox({
@@ -796,7 +858,7 @@ $(function(){
         labelWidth:80,
         onChange:function(){
             data.approvalNameTa  = $(this).textbox('getText');
-            console.log(data.approvalNameTa);
+           
         }
     });
     $('#b_16').textbox({
@@ -807,29 +869,29 @@ $(function(){
         labelWidth:80,
         onChange:function(){
             data.approvalDepartmentTa  = $(this).textbox('getText');
-            console.log(data.approvalDepartmentTa);
+           
         }
     });
     $('#b_17').textbox({
-        width:200,
+        width:300,
         required:true,
         label:'文号:',
         labelPosition:'left',
         labelWidth:80,
         onChange:function(){
             data.approvalNumberTa  = $(this).textbox('getText');
-            console.log(data.approvalNumberTa);
+           
         }
     });
     $('#b_18').datebox({
-        width:200,
+        width:300,
         required:true,
         label:'时间:',
         labelPosition:'left',
         labelWidth:80,
         onSelect:function(date){
             data.approvalDateTa = new Date(date);
-            alert(data.approvalDateTa);
+           
         }
     });
     $('#b_19').datebox({
@@ -840,7 +902,7 @@ $(function(){
         labelWidth:200,
         onSelect:function(date){
             data.replyDate = new Date(date);
-            alert(data.replyDate);
+           
         }
     });
     $('#b_20').combotree({
@@ -850,7 +912,7 @@ $(function(){
         label:'审批进展：',
         onChange:function(){
             data.approvalProgress = $('#b_20').combotree('getText');
-            alert(data.approvalProgress);
+          
         } 
     })
     $('#b_20').combotree('loadData',[
@@ -870,8 +932,8 @@ $(function(){
     ]);
     
     $('#b_21').textbox({
-        width:1000,
-        height:200,
+        width:1100,
+        height:100,
         multiline:true,
         required:true,
         label:'主要建设内容和工程量：',
@@ -879,7 +941,7 @@ $(function(){
         labelWidth:200,
         onChange:function(){
             data.constructionContent  = $(this).textbox('getText');
-            console.log(data.constructionContent);
+           
         }
     });
     $('#b_22').textbox({
@@ -890,7 +952,7 @@ $(function(){
         labelWidth:80,
         onChange:function(){
             data.projectNumber  = $(this).textbox('getText');
-            console.log(data.projectNumber);
+           
         }
     });
     $('#b_23').textbox({
@@ -901,7 +963,7 @@ $(function(){
         labelWidth:80,
         onChange:function(){
             data.constructionPlace  = $(this).textbox('getText');
-            console.log(data.constructionPlace);
+         
         }
     });
     $('#b_24').textbox({
@@ -912,7 +974,7 @@ $(function(){
         labelWidth:80,
         onChange:function(){
             data.constructionCompany  = $(this).textbox('getText');
-            console.log(data.constructionCompany);
+            
         }
     });
     $('#b_25').datebox({
@@ -922,8 +984,8 @@ $(function(){
         labelPosition:'left',
         labelWidth:80,
         onSelect:function(date){
-            data.startTimeCon = new Date(date);
-            alert(data.startTimeCon);
+            data.startTime = new Date(date);
+           
         }
     });
     $('#b_26').datebox({
@@ -933,8 +995,8 @@ $(function(){
         labelPosition:'left',
         labelWidth:80,
         onSelect:function(date){
-            data.endTimeCon = new Date(date);
-            alert(data.endTimeCon);
+            data.endTime = new Date(date);
+            
         }
     });
     $('#b_27').textbox({
@@ -945,18 +1007,18 @@ $(function(){
         labelWidth:130,
         onChange:function(){
             data.releaseInvestment  = $(this).textbox('getText');
-            console.log(data.releaseInvestment);
+           
         }
     });
     // div title c  
     $('#c_1').combotree({
-        width:300,
-        labelWidth:80,
+        width:320,
+        labelWidth:100,
         required:true,
-        label:'审批进展：',
+        label:'建设阶段：',
         onChange:function(){
             data.constructionPhase = $('#c_1').combotree('getText');
-            alert(data.constructionPhase);
+         
         } 
     })
     $('#c_1').combotree('loadData',[
@@ -976,13 +1038,13 @@ $(function(){
     ]);
 
     $('#c_2').combotree({
-        width:300,
-        labelWidth:80,
+        width:320,
+        labelWidth:100,
         required:true,
         label:'初步设计',
         onChange:function(){
             data.firstDesign = $('#c_2').combotree('getText');
-            alert(data.firstDesign);
+           
         } 
     })
     $('#c_2').combotree('loadData',[
@@ -1002,13 +1064,13 @@ $(function(){
     ]);
 
     $('#c_3').combotree({
-        width:300,
-        labelWidth:80,
+        width:320,
+        labelWidth:100,
         required:true,
         label:'招标采购：',
         onChange:function(){
             data.bidding = $('#c_3').combotree('getText');
-            alert(data.bidding);
+          
         } 
     })
     $('#c_3').combotree('loadData',[
@@ -1032,13 +1094,13 @@ $(function(){
     ]);
 
     $('#c_4').combotree({
-        width:300,
-        labelWidth:110,
+        width:320,
+        labelWidth:100,
         required:true,
         label:'施工图设计：',
         onChange:function(){
             data.constructionDesign = $('#c_4').combotree('getText');
-            alert(data.constructionDesign);
+           
         } 
     })
     $('#c_4').combotree('loadData',[
@@ -1061,72 +1123,70 @@ $(function(){
   
    
     $('#c_5').datebox({
-        width:200,
+        width:320,
         required:true,
         label:'开工时间:',
         labelPosition:'left',
         labelWidth:100,
         onSelect:function(date){
-            data.startTime = new Date(date);
-            alert(data.startTime);
+            data.startTimeCon = new Date(date);
+            
         }
 
     });
     $('#c_6').datebox({
-        width:200,
+        width:320,
         required:true,
         label:'初验时间:',
         labelPosition:'left',
         labelWidth:100,
         onSelect:function(date){
-            data.testTime = new Date(date);
-            alert(data.testTime);
+            data.testTimeCon = new Date(date);
+         
         }
     });
     $('#c_7').datebox({
-        width:200,
+        width:320,
         required:true,
         label:'竣工时间:',
         labelPosition:'left',
         labelWidth:100,
         onSelect:function(date){
-            data.endTime = new Date(date);
-            alert(data.endTime);
+            data.endTimeCon = new Date(date);
+         
         }
     });
     $('#reason').textbox({
-        width:1000,
-        multiline:true,
-        height:70,
+        width:320,
         required:true,
         label:'未开工原因:',
         labelPosition:'left',
-        labelWidth:120,
+        labelWidth:100,
         onChange:function(){
             data.reason = $('#reason').textbox('getText');
-            alert(data.reason);
+            
         } 
     });
     $('#c_8').textbox({
-        width:240,
+        width:320,
         required:true,
         label:'工程进度（工程完成率%）:',
         labelPosition:'left',
         labelWidth:180,
         onChange:function(){
-            data.projectProgress = $('#c_8').textbox('getText')+'%';
-            alert(data.projectProgress);
+            data.projectProgress = $('#c_8').textbox('getText');
+            
         } 
     });
     $('#c_9').textbox({
-        width:250,
+        width:320,
         required:true,
         label:'完成投资（万元）:',
         labelPosition:'left',
-        labelWidth:130,
+        labelWidth:140,
         onChange:function(){
             data.completedInvestment = $('#c_9').textbox('getText');
-            alert(data.completedInvestment);
+            
         } 
     });
     $('#c_10').textbox({
@@ -1135,11 +1195,11 @@ $(function(){
         multiline:true,
         required:true,
         label:'已形成能力:',
-        labelPosition:'left',
+        labelPosition:'top',
         labelWidth:100,
         onChange:function(){
             data.formedAbility = $('#c_10').textbox('getText');
-            alert(data.formedAbility);
+           
         } 
     });
     $('#c_11').textbox({
@@ -1147,12 +1207,12 @@ $(function(){
         height:150,
         multiline:true,
         required:true,
-        label:'完工后预期<br>形成能力:',
-        labelPosition:'left',
-        labelWidth:100,
+        label:'完工后预期形成能力:',
+        labelPosition:'top',
+        labelWidth:200,
         onChange:function(){
             data.designedAbility = $('#c_11').textbox('getText');
-            alert(data.designedAbility);
+           
         } 
     });
     $('#c_12').textbox({
@@ -1161,11 +1221,11 @@ $(function(){
         multiline:true,
         required:true,
         label:'备注:',
-        labelPosition:'left',
+        labelPosition:'top',
         labelWidth:100,
         onChange:function(){
             data.remarks = $('#c_12').textbox('getText');
-            alert(data.remarks);
+           
         } 
     });
 });

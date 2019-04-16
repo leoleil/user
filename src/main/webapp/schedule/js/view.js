@@ -16,6 +16,7 @@ function add_zero(temp){
 }
 setInterval(getCurDate,1000);
 
+// 从后台解析时间戳的方法 
 function add0(m){
     return m<10?'0'+m:m;
 }
@@ -41,13 +42,13 @@ var page;
 var begin;
 var end;
 $(document).ready(function display(){
-    len = $("#tbody tr").length - 1;
+    len = $("#tbody tr").length ;
     page = len % pageSize==0 ? len/pageSize : Math.floor(len/pageSize)+1;
     curPage=1;
     displayPage(1);
 
     document.getElementById("btn0").innerHTML="当前 " + curPage + "/" + page + " 页    每页 ";
-    document.getElementById("sum").innerHTML="共计 " + len + "条"+'&nbsp;&nbsp;';        // 显示数据量
+    document.getElementById("sum").innerHTML="共计" + len + "条"+'&nbsp;&nbsp;';        // 显示数据量
     document.getElementById("pageSize").value = pageSize;
 
     $("#btn1").click(function firstPage(){   //首页
@@ -120,6 +121,8 @@ function displayPage() {
 }
 
 // 总体进度点击事件
+
+
 $('#sumbtn').on('click',function (){
     var sHeight = document.documentElement.scrollHeight;
     var sWidth = document.documentElement.scrollWidth;
@@ -154,63 +157,77 @@ $('#state1').combotree({
 $('#state1').combotree('loadData',[{
     "id":"east",
     "text":"东部战区",
-    "state":"close",
+    "iconCls":"icon-blank",
+    "state":"closed",
     "children":[{
         "id":"eo",
         "state":"closed",
+        "iconCls":"icon-blank",
         "text":"东海"
     },{
         "id":"et",
+        "iconCls":"icon-blank",
         "state":"closed",
         "text":"台海"
     }]
 },{
     "id":"south",
+    "iconCls":"icon-blank",
     "text":"南部战区",
-    "state":"close",
+    "state":"closed",
     "children":[{
         "id":"so",
+        "iconCls":"icon-blank",
         "state":"closed",
         "text":"南海"
     },{
         "id":"cv",
+        "iconCls":"icon-blank",
         "state":"closed",
         "text":"中越"
     },{
         "id":"cm",
+        "iconCls":"icon-blank",
         "state":"closed",
         "text":"中缅"
     }]
 },{
     "id":"west",
+    "iconCls":"icon-blank",
     "text":"西部战区",
-    "state":"close",
+    "state":"closed",
     "children":[{
         "id":"cr",
+        "iconCls":"icon-blank",
         "state":"closed",
         "text":"中俄"
     },{
         "id":"ci",
+        "iconCls":"icon-blank",
         "state":"closed",
         "text":"中印"
     }]
 },{
     "id":"north",
+    "iconCls":"icon-blank",
     "text":"北部战区",
-    "state":"close",
+    "state":"closed",
     "children":[{
         "id":"cg",
+        "iconCls":"icon-blank",
         "state":"closed",
         "text":"中蒙"
     },{
         "id":"ck",
+        "iconCls":"icon-blank",
         "state":"closed",
         "text":"中朝"
     }]
 },{
     "id":"middle",
+    "iconCls":"icon-blank",
     "text":"中部战区",
-    "state":"close",
+    "state":"closed",
 }]);
 $('#state2').combotree({
     multiple:true,
@@ -270,23 +287,30 @@ $('#state2').combotree({
 $('#state2').combotree('loadData',[{
     "id":"1",
     "text":"战场设施建设计划",
+    "iconCls":"icon-blank",
     "state":"close",
     "children":[{
         "id":"1a",
+        "iconCls":"icon-blank",
         "text":"“十二五”战场建设计划"
+
     },{
         "id":"1b",
+        "iconCls":"icon-blank",
         "text":"“十二五”第四批立项调整项目"
     },{
         "id":"1c",
+        "iconCls":"icon-blank",
         "text":"“十三五”战场建设计划"
     }]
 },{
     "id":"2",
+    "iconCls":"icon-blank",
     "text":"“210工程”建设计划",
     "state":"close",
 },{
     "id":"3",
+    "iconCls":"icon-blank",
     "text":"专项工程",
     "state":"close",
 }]);
@@ -330,7 +354,7 @@ dList.forEach((item, index) => {
     <tr>
         <td>${index+1}</td><td>${item.documentDate}</td><td>${item.projectName}</td><td>${item.submitCompany}</td>
         <td>
-            <div class="easyui-progressbar" data-options="value:'${item.projectProgress}'" style="width:200px;margin-left:15%;margin-right:-50px;"></div>
+            <div class="easyui-progressbar" data-options="value:'${item.projectProgress}'" style="width:250px;margin-left:25px;"></div>
         </td>
         <td >
             <button class="btn" id="edit__${index}"><img src="img/编辑.png" /><span>编辑</span></button>
@@ -346,8 +370,8 @@ dList.forEach((item, index) => {
 
 //编辑btn 点击事件
 $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的Button
-    $( this ).bind("click" , function(){//绑定当前点击的按钮
-        var ids = $( this).attr( "id");//获取它的id属性值
+    $(this).bind("click" , function(){//绑定当前点击的按钮
+        var ids = $(this).attr("id");//获取它的id属性值
         var arr = ids.split("__" );
         var listNumber = arr[1];
         console.log(dList[listNumber]);        
@@ -567,6 +591,9 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 }]
             });
             $('#a_1').combotree({
+                width:250,
+                labelPosition:'top',
+                labelWidth:100,
                 required:true,
                 label:'战略方向：',
                 onChange:function(){
@@ -596,8 +623,9 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             }]);
             $('#a_1').combotree('setText',dList[listNumber].level1);
             $('#a_2').combotree({
-                width:300,
+                width:250,
                 labelWidth:120,
+                labelPosition:'top',
                 required:true,
                 label:'二级战略方向：',
                 onChange:function(){
@@ -645,7 +673,9 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
 
             $('#a_3').combotree({
                 required:true,
-                width:350,
+                width:250,
+                labelWidth:120,
+                labelPosition:'top',
                 label:'项目名称：',
                 onSelect: function (node) {
                     //获取选中项的父节点
@@ -662,119 +692,171 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                    
                 }
             });
-            $('#a_3').combotree('loadData',[
-                {
-                    "id":'build',
-                    "text":"战场设施建设计划",
+           $('#a_3').combotree('loadData',[
+        {
+            "id":'build',
+            "text":"战场设施建设计划",
+            "state":"closed",
+            "iconCls":"icon-blank",
+            "children":[{
+                "id":"plan_a",
+                "state":"closed",
+                "iconCls":"icon-blank",
+                "text":"“十二五”战场建设计划",
+                "children":[{
+                    "id":"east",
+                    "text":"东部战区",
                     "state":"closed",
+                    "iconCls":"icon-blank",
                     "children":[{
-                        "id":"plan_a",
-                        "state":"closed",
-                        "text":"“十二五”战场建设计划",
-                        "children":[{
-                            "id":"spe",
-                            "text":"东部战区",
-                            "state":"closed",
-                            "children":[{
-                                "id":"3",
-                                "text":'11项目'}]
-                        },{
-                            "text":"西部战区",
-                            "children":[{
-                                "id":"3",
-                                "text":'XXX项目'}]
-                        },{
-                            "text":"南部战区",
-                            "children":[{
-                                "id":"3",
-                                "text":'XXX项目'}]
-                        },{
-                            "text":"北部战区",
-                            "children":[{
-                                "id":"3",
-                                "text":'XXX项目'}]
-                        },{
-                            "text":"中部战区",
-                            "children":[{
-                                "id":"3",
-                                "text":'XXX项目'}]
-                        },{
-                            "text":"陆军",
-                            "children":[{
-                                "id":"3",
-                                "text":'XXX项目'}]
-                        },{
-                            "text":"海军",
-                            "children":[{
-                                "id":"3",
-                                "text":'XXX项目'}]
-                        },{
-                            "text":"空军",
-                            "children":[{
-                                "id":"3",
-                                "text":'XXX项目'}]
-                        },{
-                            "text":"火箭军",
-                            "children":[{
-                                "id":"3",
-                                "text":'XXX项目'}]
-                        },{
-                            "text":"战略支援部队",
-                            "children":[{
-                                "id":"3",
-                                "text":'XXX项目'}]
-                        },{
-                            "text":"军事航天部队",
-                            "children":[{
-                                "id":"3",
-                                "text":'XXX项目'}]
-                        },{
-                            "text":"网络空间部队",
-                            "children":[{
-                                "id":"3",
-                                "text":'XXX项目'}]
-                        },{
-                            "text":"信息通信基地",
-                            "children":[{
-                                "id":"3",
-                                "text":'XXX项目'}]
-                        },{
-                            "text":"联勤保障部队",
-                            "children":[{
-                                "id":"3",
-                                "text":'XXX项目'}]
-                        },{
-                            "text":"军委国防动员部",
-                            "children":[{
-                                "id":"3",
-                                "text":'XXX项目'}]
-                        }]
-                    },{
-                        "id":"plan_b",
-                        "text":"“十二五”第四批立项调整项目"
-                    },{
-                        "id":"plan_c",
-                        "text":"“十三五”战场建设计划"
-                    }]
+                        "id":"3",
+                        "text":'11项目'}]
                 },{
-                    "id":"210",
-                    "text":"210工程",
-                    "state":"closed"
-                },{
-                    "id":"zx",
+                    "id":'west',
+                    "text":"西部战区",
                     "state":"closed",
-                    "text":"专项工程"
-                }
-            ]);
+                    "iconCls":"icon-blank",
+                    "children":[{
+                        "id":"4",
+                        "text":'XXX项目'}]
+                },{
+                    "id":'south',
+                    "text":"南部战区",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
+                    "children":[{
+                        "id":"3",
+                        "text":'XXX项目'}]
+                },{
+                    "id":'north',
+                    "text":"北部战区",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
+                    "children":[{
+                        "id":"3",
+                        "text":'XXX项目'}]
+                },{
+                    "id":'middle',
+                    "text":"中部战区",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
+                    "children":[{
+                        "id":"3",
+                        "text":'XXX项目'}]
+                },{
+                    "id":'land',
+                    "text":"陆军",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
+                    "children":[{
+                        "id":"3",
+                        "text":'XXX项目'}]
+                },{
+                    "id":'navy',
+                    "text":"海军",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
+                    "children":[{
+                        "id":"3",
+                        "text":'XXX项目'}]
+                },{
+                    "id":'air',
+                    "text":"空军",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
+                    "children":[{
+                        "id":"3",
+                        "text":'XXX项目'}]
+                },{
+                    "id":'rocket',
+                    "text":"火箭军",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
+                    "children":[{
+                        "id":"3",
+                        "text":'XXX项目'}]
+                },{
+                    "id":'strategic_support',
+                    "text":"战略支援部队",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
+                    "children":[{
+                        "id":"3",
+                        "text":'XXX项目'}]
+                },{
+                    "id":'space',
+                    "text":"军事航天部队",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
+                    "children":[{
+                        "id":"3",
+                        "text":'XXX项目'}]
+                },{
+                    "id":'network',
+                    "text":"网络空间部队",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
+                    "children":[{
+                        "id":"3",
+                        "text":'XXX项目'}]
+                },{
+                    "id":'info',
+                    "text":"信息通信基地",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
+                    "children":[{
+                        "id":"3",
+                        "text":'XXX项目'}]
+                },{
+                    "id":'service',
+                    "text":"联勤保障部队",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
+                    "children":[{
+                        "id":"3",
+                        "text":'XXX项目'}]
+                },{
+                    "id":'military_commission',
+                    "text":"军委国防动员部",
+                    "state":"closed",
+                    "iconCls":"icon-blank",
+                    "children":[{
+                        "id":"3",
+                        "text":'XXX项目'}]
+                }]
+            },{
+                "id":"plan_b",
+                "text":"“十二五”第四批立项调整项目",
+                "state":"closed",
+                "iconCls":"icon-blank"
 
+            },{
+                "id":"plan_c",
+                "text":"“十三五”战场建设计划",
+                "state":"closed",
+                "iconCls":"icon-blank",
+            }]
+        },{
+            "id":"210",
+            "text":"210工程",
+            "state":"closed",
+            "iconCls":"icon-blank"
+        },{
+            "id":"zx",
+            "state":"closed",
+            "text":"专项工程",
+            "iconCls":"icon-blank"
+        }
+    ]);
             $('#a_3').combotree('setText',dList[listNumber].level5);
 
             /*文件名需要回显options*/ 
             $('#a_4').combotree({
-                width:220,
-                labelWidth:80,
+                width:250,
+                labelWidth:180,
                 required:true,
-                label:'文件名：',
+                labelPosition:"top",
+                label:'规划/计划文件文件名：',
                 onChange:function(){
                     data.documentName = $('#a_4').combotree('getText');
                 } 
@@ -783,33 +865,41 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 {
                     "id":"dh",
                     "text":"东海1号",
+                    "iconCls":"icon-blank"
                 },{
                     "id":"th",
                     "text":"台海1号",
+                    "iconCls":"icon-blank"
                 },{
                     "id":"nh",
                     "text":"南海1号",
+                    "iconCls":"icon-blank"
                 },{
                     "id":"zy",
                     "text":"中越1号",
+                    "iconCls":"icon-blank"
                 },{
                     "id":"zm",
                     "text":"中缅1号",
+                    "iconCls":"icon-blank"
                 },{
                     "id":"zyin",
                     "text":"中印1号",
+                    "iconCls":"icon-blank"
                 },{
                     "id":"zc",
                     "text":"中朝1号",
+                    "iconCls":"icon-blank"
                 }
             ]);
             $('#a_4').combotree('setText',dList[listNumber].documentName);
            /*文号需要回显options*/ 
            $('#a_5').combotree({
-                width:300,
-                labelWidth:80,
+                width:250,
+                labelWidth:180,
+                labelPosition:"top",
                 required:true,
-                label:'文号：',
+                label:'规划/计划文件文号：',
                 onChange:function(){
                     data.documentNumber = $('#a_5').combotree('getText');
                 } 
@@ -818,34 +908,42 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 {
                     "id":"dh",
                     "text":"东海1号下的00号文件",
+                    "iconCls":"icon-blank"
                 },{
                     "id":"th",
                     "text":"台海1号下的00号文件",
+                    "iconCls":"icon-blank"
                 },{
                     "id":"nh",
                     "text":"南海1号下的00号文件",
+                    "iconCls":"icon-blank"
                 },{
                     "id":"zy",
                     "text":"中越1号下的00号文件",
+                    "iconCls":"icon-blank"
                 },{
                     "id":"zm",
                     "text":"中缅1号下的00号文件",
+                    "iconCls":"icon-blank"
                 },{
                     "id":"zyin",
                     "text":"中印1号下的00号文件",
+                    "iconCls":"icon-blank"
                 },{
                     "id":"zc",
                     "text":"中朝1号下的00号文件",
+                    "iconCls":"icon-blank"
                 }
             ]);
+            
             $('#a_5').combotree('setText',dList[listNumber].documentNumber);
 
             $('#a_6').datebox({
                 required:true,
-                width:200,
-                label:'时间：',
-                labelPosition:'left',
-                labelWidth:60,
+                width:250,
+                label:'规划/计划文件时间：',
+                labelPosition:'top',
+                labelWidth:180,
                 onSelect:function(date){
                     data.documentDate = new Date(date);
                 }
@@ -859,7 +957,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 editable:true,
                 hasDownArrow:false,
                 label:'规划/计划投资（万元）：',
-                labelPosition:'left',
+                labelPosition:'top',
                 labelWidth:180,
                 onChange:function(){
                     data.investmentamount = $('#a_7').textbox('getText');
@@ -868,10 +966,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#a_7').textbox('setText',dList[listNumber].investmentamount);
 
             $('#a_8').combotree({
-                width:300,
-                labelWidth:80,
+                width:250,
+                labelWidth:180,
                 required:true,
                 label:'审批权限：',
+                labelPosition:'top',
                 onChange:function(){
                     data.approvalAuthority = $('#a_8').combotree('getText');
                 } 
@@ -899,10 +998,10 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
 
             $('#a_9').textbox({
                 required:true,
-                width:220,
+                width:250,
                 editable:true,
                 label:'建设周期（年）：',
-                labelPosition:'left',
+                labelPosition:'top',
                 labelWidth:130,
                 onChange:function(){
                     data.constructionPeriod = $(this).textbox('getText');
@@ -912,12 +1011,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#a_9').textbox('setText',dList[listNumber].constructionPeriod);
 
             $('#a_10').combotree({
-                width:330,
+                width:250,
                 labelWidth:280,
                 required:true,
                 label:'规划纲要重点项目：',
-                labelPosition:'left',
-                labelWidth:150,
+                labelPosition:'top',
                 onChange:function(){
                     data.isimportent = $('#a_10').combotree('getValue');
                    
@@ -939,7 +1037,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 required:true,
                 width:350,
                 label:"子项目名称：",
-                labelPosition:'left',
+                labelPosition:'top',
                 labelWidth:120,
                 onChange:function(){
                     data.subName  = $(this).textbox('getText');
@@ -952,7 +1050,7 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                 width:350,
                 required:true,
                 label:'填报单位:',
-                labelPosition:'left',
+                labelPosition:'top',
                 labelWidth:120,
                 onChange:function(){
                     data.department  = $(this).textbox('getText');
@@ -962,11 +1060,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_2').textbox('setText',dList[listNumber].department);
 
             $('#b_3').textbox({
-                width:300,
+                width:350,
                 required:true,
-                label:'文件名:',
-                labelPosition:'left',
-                labelWidth:80,
+                label:'立项送审文件名:',
+                labelPosition:'top',
+                labelWidth:280,
                 onChange:function(){
                     data.submitFileName  = $(this).textbox('getText');
                  
@@ -975,11 +1073,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_3').textbox('setText',dList[listNumber].submitFileName);
 
             $('#b_4').textbox({
-                width:300,
+                width:350,
                 required:true,
-                label:'送审单位:',
-                labelPosition:'left',
-                labelWidth:80,
+                label:'立项送审送审单位:',
+                labelPosition:'top',
+                labelWidth:280,
                 onChange:function(){
                     data.submitDepartment  = $(this).textbox('getText');
                   
@@ -988,11 +1086,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_4').textbox('setText',dList[listNumber].submitDepartment);
 
             $('#b_5').textbox({
-                width:200,
+                width:350,
                 required:true,
-                label:'文号:',
-                labelPosition:'left',
-                labelWidth:80,
+                label:'立项送审文号:',
+                labelPosition:'top',
+                labelWidth:280,
                 onChange:function(){
                     data.submitNumber  = $(this).textbox('getText');
                    
@@ -1001,11 +1099,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_5').textbox('setText',dList[listNumber].submitNumber);
 
             $('#b_6').datebox({
-                width:200,
+                width:350,
                 required:true,
-                label:'时间:',
-                labelPosition:'left',
-                labelWidth:80,
+                label:'立项送审时间:',
+                labelPosition:'top',
+                labelWidth:280,
                 onSelect:function(date){
                     data.submitDate =  new Date(date);
                   
@@ -1015,11 +1113,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_6').datebox('setValue',submitDate);
 
             $('#b_7').textbox({
-                width:300,
+                width:350,
                 required:true,
-                label:'文件名:',
-                labelPosition:'left',
-                labelWidth:80,
+                label:'立项批复文件名:',
+                labelPosition:'top',
+                labelWidth:280,
                 onChange:function(){
                     data.approvalName  = $(this).textbox('getText');
                  
@@ -1028,11 +1126,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_7').textbox('setText',dList[listNumber].approvalName);
 
             $('#b_8').textbox({
-                width:300,
+                width:350,
                 required:true,
-                label:'审批单位:',
-                labelPosition:'left',
-                labelWidth:80,
+                label:'立项批复审批单位:',
+                labelPosition:'top',
+                labelWidth:280,
                 onChange:function(){
                     data.approvalDepartment  = $(this).textbox('getText');
                     
@@ -1041,11 +1139,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_8').textbox('setText',dList[listNumber].approvalDepartment);
 
             $('#b_9').textbox({
-                width:200,
+                width:350,
                 required:true,
-                label:'文号:',
-                labelPosition:'left',
-                labelWidth:80,
+                label:'立项批复文号:',
+                labelPosition:'top',
+                labelWidth:280,
                 onChange:function(){
                     data.approvalNumber  = $(this).textbox('getText');
                    
@@ -1054,11 +1152,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_9').textbox('setText',dList[listNumber].approvalNumber);
 
             $('#b_10').datebox({
-                width:200,
+                width:350,
                 required:true,
-                label:'时间:',
-                labelPosition:'left',
-                labelWidth:80,
+                label:'立项批复时间:',
+                labelPosition:'top',
+                labelWidth:280,
                 onSelect:function(date){
                     data.approvalDate = new Date(date);
                   
@@ -1068,11 +1166,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_10').datebox('setValue',approvalDate);
             
             $('#b_11').textbox({
-                width:300,
+                width:350,
                 required:true,
-                label:'文件名:',
-                labelPosition:'left',
-                labelWidth:80,
+                label:'设计任务书送审文件名:',
+                labelPosition:'top',
+                labelWidth:280,
                 onChange:function(){
                     data.submitFileNameTa  = $(this).textbox('getText');
                     
@@ -1081,11 +1179,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_11').textbox('setText',dList[listNumber].submitFileNameTa);
 
             $('#b_12').textbox({
-                width:300,
+                width:350,
                 required:true,
-                label:'送审单位:',
-                labelPosition:'left',
-                labelWidth:80,
+                label:'设计任务书送审送审单位:',
+                labelPosition:'top',
+                labelWidth:280,
                 onChange:function(){
                     data.submitDepartmentTa  = $(this).textbox('getText');
                    
@@ -1094,11 +1192,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_12').textbox('setText',dList[listNumber].submitDepartmentTa);
 
             $('#b_13').textbox({
-                width:200,
+                width:350,
                 required:true,
-                label:'文号:',
-                labelPosition:'left',
-                labelWidth:80,
+                label:'设计任务书送审文号:',
+                labelPosition:'top',
+                labelWidth:280,
                 onChange:function(){
                     data.submitNumberTa  = $(this).textbox('getText');
                    
@@ -1107,11 +1205,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_13').textbox('setText',dList[listNumber].submitNumberTa);
 
             $('#b_14').datebox({
-                width:200,
+                width:350,
                 required:true,
-                label:'时间:',
-                labelPosition:'left',
-                labelWidth:80,
+                label:'下达设计任务书、建设计划（批复）送审时间:',
+                labelPosition:'top',
+                labelWidth:380,
                 onSelect:function(date){
                     data.submitDateTa =new Date(date);
                     
@@ -1121,11 +1219,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_14').datebox('setValue',submitDateTa);
 
             $('#b_15').textbox({
-                width:300,
+                width:350,
                 required:true,
-                label:'文件名:',
-                labelPosition:'left',
-                labelWidth:80,
+                label:'下达设计任务书、建设计划（批复）文件名:',
+                labelPosition:'top',
+                labelWidth:380,
                 onChange:function(){
                     data.approvalNameTa  = $(this).textbox('getText');
                    
@@ -1134,11 +1232,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_15').textbox('setText',dList[listNumber].approvalNameTa);
 
             $('#b_16').textbox({
-                width:300,
+                width:350,
                 required:true,
-                label:'审批单位:',
-                labelPosition:'left',
-                labelWidth:80,
+                label:'下达设计任务书、建设计划（批复）审批单位:',
+                labelPosition:'top',
+                labelWidth:380,
                 onChange:function(){
                     data.approvalDepartmentTa  = $(this).textbox('getText');
                    
@@ -1147,11 +1245,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_16').textbox('setText',dList[listNumber].approvalDepartmentTa);
 
             $('#b_17').textbox({
-                width:200,
+                width:350,
                 required:true,
-                label:'文号:',
-                labelPosition:'left',
-                labelWidth:80,
+                label:'下达设计任务书、建设计划（批复）文号:',
+                labelPosition:'top',
+                labelWidth:380,
                 onChange:function(){
                     data.approvalNumberTa  = $(this).textbox('getText');
                    
@@ -1160,11 +1258,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_17').textbox('setText',dList[listNumber].approvalNumberTa);
 
             $('#b_18').datebox({
-                width:200,
+                width:350,
                 required:true,
-                label:'时间:',
-                labelPosition:'left',
-                labelWidth:80,
+                label:'下达设计任务书、建设计划（批复）时间:',
+                labelPosition:'top',
+                labelWidth:380,
                 onSelect:function(date){
                     data.approvalDateTa = new Date(date);
                    
@@ -1174,10 +1272,10 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_18').datebox('setValue',approvalDateTa);
 
             $('#b_19').datebox({
-                width:320,
+                width:350,
                 required:true,
                 label:'军委机关审核意见回复时间:',
-                labelPosition:'left',
+                labelPosition:'top',
                 labelWidth:200,
                 onSelect:function(date){
                     data.replyDate = new Date(date);
@@ -1188,8 +1286,9 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_18').datebox('setValue',replyDate);
 
             $('#b_20').combotree({
-                width:300,
-                labelWidth:80,
+                width:350,
+                labelWidth:280,
+                labelPosition:'top',
                 required:true,
                 label:'审批进展：',
                 onChange:function(){
@@ -1215,12 +1314,12 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_20').combotree('setText',dList[listNumber].approvalProgress);
 
             $('#b_21').textbox({
-                width:1000,
+                width:880,
                 height:200,
                 multiline:true,
                 required:true,
                 label:'主要建设内容和工程量：',
-                labelPosition:"left",
+                labelPosition:"top",
                 labelWidth:200,
                 onChange:function(){
                     data.constructionContent  = $(this).textbox('getText');
@@ -1230,11 +1329,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_21').textbox('setText',dList[listNumber].constructionContent);
 
             $('#b_22').textbox({
-                width:300,
+                width:350,
                 required:true,
                 label:'工程代号:',
-                labelPosition:'left',
-                labelWidth:80,
+                labelPosition:'top',
+                labelWidth:280,
                 onChange:function(){
                     data.projectNumber  = $(this).textbox('getText');
                    
@@ -1243,11 +1342,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_22').textbox('setText',dList[listNumber].projectNumber);
 
             $('#b_23').textbox({
-                width:300,
+                width:350,
                 required:true,
                 label:'建设地点:',
-                labelPosition:'left',
-                labelWidth:80,
+                labelPosition:'top',
+                labelWidth:280,
                 onChange:function(){
                     data.constructionPlace  = $(this).textbox('getText');
                  
@@ -1256,11 +1355,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_23').textbox('setText',dList[listNumber].constructionPlace);
 
             $('#b_24').textbox({
-                width:300,
+                width:350,
                 required:true,
                 label:'建设单位:',
-                labelPosition:'left',
-                labelWidth:80,
+                labelPosition:'top',
+                labelWidth:280,
                 onChange:function(){
                     data.constructionCompany  = $(this).textbox('getText');
                     
@@ -1269,11 +1368,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_24').textbox('setText',dList[listNumber].constructionCompany);
 
             $('#b_25').datebox({
-                width:300,
+                width:350,
                 required:true,
                 label:'开工时间:',
-                labelPosition:'left',
-                labelWidth:80,
+                labelPosition:'top',
+                labelWidth:280,
                 onSelect:function(date){
                     data.startTime = new Date(date);
                    
@@ -1283,11 +1382,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_25').datebox('setValue',startTime);
 
             $('#b_26').datebox({
-                width:300,
+                width:350,
                 required:true,
                 label:'竣工时间:',
-                labelPosition:'left',
-                labelWidth:80,
+                labelPosition:'top',
+                labelWidth:280,
                 onSelect:function(date){
                     data.endTime = new Date(date);
                     
@@ -1297,11 +1396,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#b_26').datebox('setValue',endTime);
 
             $('#b_27').textbox({
-                width:300,
+                width:350,
                 required:true,
                 label:'下达投资（万元）:',
-                labelPosition:'left',
-                labelWidth:130,
+                labelPosition:'top',
+                labelWidth:280,
                 onChange:function(){
                     data.releaseInvestment  = $(this).textbox('getText');
                    
@@ -1311,8 +1410,9 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
 
             // div title c  
             $('#c_1').combotree({
-                width:300,
-                labelWidth:80,
+                width:350,
+                labelWidth:280,
+                labelPosition:'top',
                 required:true,
                 label:'审批进展：',
                 onChange:function(){
@@ -1338,8 +1438,9 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#c_1').combotree('setText',dList[listNumber].constructionPhase);
 
             $('#c_2').combotree({
-                width:300,
-                labelWidth:80,
+                width:350,
+                labelWidth:280,
+                labelPosition:'top',
                 required:true,
                 label:'初步设计',
                 onChange:function(){
@@ -1366,8 +1467,9 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
 
         
             $('#c_3').combotree({
-                width:300,
-                labelWidth:80,
+                width:350,
+                labelWidth:280,
+                labelPosition:'top',
                 required:true,
                 label:'招标采购：',
                 onChange:function(){
@@ -1398,9 +1500,9 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
 
         
             $('#c_4').combotree({
-                width:300,
-                labelWidth:110,
-                required:true,
+                width:350,
+                labelWidth:280,
+                labelPosition:'top',
                 label:'施工图设计：',
                 onChange:function(){
                     data.constructionDesign = $('#c_4').combotree('getText');
@@ -1425,11 +1527,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#c_4').combotree('setText',dList[listNumber].constructionDesign);
 
             $('#c_5').datebox({
-                width:200,
                 required:true,
                 label:'开工时间:',
-                labelPosition:'left',
-                labelWidth:100,
+                width:350,
+                labelWidth:280,
+                labelPosition:'top',
                 onSelect:function(date){
                     data.startTimeCon = new Date(date);   
                 }
@@ -1438,11 +1540,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#c_5').datebox('setValue',startTimeCon);
 
             $('#c_6').datebox({
-                width:200,
                 required:true,
                 label:'初验时间:',
-                labelPosition:'left',
-                labelWidth:100,
+                width:350,
+                labelWidth:280,
+                labelPosition:'top',
                 onSelect:function(date){
                     data.testTimeCon = new Date(date);
                  
@@ -1452,11 +1554,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#c_6').datebox('setValue',testTimeCon);
 
             $('#c_7').datebox({
-                width:200,
+                width:350,
+                labelWidth:280,
+                labelPosition:'top',
                 required:true,
                 label:'竣工时间:',
-                labelPosition:'left',
-                labelWidth:100,
                 onSelect:function(date){
                     data.endTimeCon = new Date(date);
                  
@@ -1466,13 +1568,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#c_7').datebox('setValue',endTimeCon);
 
             $('#reason').textbox({
-                width:1000,
-                multiline:true,
-                height:70,
+                width:350,
+                labelWidth:280,
+                labelPosition:'top',
                 required:true,
                 label:'未开工原因:',
-                labelPosition:'left',
-                labelWidth:120,
                 onChange:function(){
                     data.reason = $('#reason').textbox('getText');
                     
@@ -1481,11 +1581,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#reason').textbox('setText',dList[listNumber].reason);
 
             $('#c_8').textbox({
-                width:240,
                 required:true,
                 label:'工程进度（请输入整数）:',
-                labelPosition:'left',
-                labelWidth:180,
+                width:350,
+                labelWidth:280,
+                labelPosition:'top',
                 onChange:function(){
                     data.projectProgress = $('#c_8').textbox('getText');
                 } 
@@ -1493,11 +1593,11 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#c_8').textbox('setText',dList[listNumber].projectProgress);
 
             $('#c_9').textbox({
-                width:250,
+                width:350,
+                labelWidth:280,
+                labelPosition:'top',
                 required:true,
                 label:'完成投资（万元）:',
-                labelPosition:'left',
-                labelWidth:130,
                 onChange:function(){
                     data.completedInvestment = $('#c_9').textbox('getText');
                     
@@ -1506,12 +1606,12 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#c_9').textbox('setText',dList[listNumber].completedInvestment);
 
             $('#c_10').textbox({
-                width:1000,
-                height:150,
+                width:880,
+                height:200,
                 multiline:true,
                 required:true,
                 label:'已形成能力:',
-                labelPosition:'left',
+                labelPosition:'top',
                 labelWidth:100,
                 onChange:function(){
                     data.formedAbility = $('#c_10').textbox('getText');
@@ -1521,13 +1621,13 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#c_10').textbox('setText',dList[listNumber].formedAbility);
 
             $('#c_11').textbox({
-                width:1000,
-                height:150,
+                width:880,
+                height:200,
                 multiline:true,
                 required:true,
-                label:'完工后预期<br>形成能力:',
-                labelPosition:'left',
-                labelWidth:100,
+                label:'完工后预期形成能力:',
+                labelPosition:'top',
+                labelWidth:280,
                 onChange:function(){
                     data.designedAbility = $('#c_11').textbox('getText');
                    
@@ -1536,12 +1636,12 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
             $('#c_11').textbox('setText',dList[listNumber].designedAbility);
 
             $('#c_12').textbox({
-                width:1000,
-                height:150,
+                width:880,
+                height:100,
                 multiline:true,
                 required:true,
                 label:'备注:',
-                labelPosition:'left',
+                labelPosition:'top',
                 labelWidth:100,
                 onChange:function(){
                     data.remarks = $('#c_12').textbox('getText');

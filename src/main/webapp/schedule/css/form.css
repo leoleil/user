@@ -135,6 +135,9 @@ body{
 }
 /* easyui部分 */
 #box {
+    position: relative;
+    top:40px;
+    border: none;
     margin: 0 auto;
     width: 90%;
     height: 800px;
@@ -144,4 +147,68 @@ body{
 }
 .hr{
     margin: 10px 0
+}
+
+/* table css */
+#a_input{
+    margin: 0 auto;
+    margin-top:50px;
+    width: 90%;
+}
+#a_input td{
+    padding: 10px;
+    width: 25%;
+    height: 30px;
+    line-height: 30px;
+    text-align: left;
+}
+#a_input th{
+    padding: 10px;
+    height: 50px;
+    line-height: 50px;
+    text-align: left;
+}
+#b_input{
+    margin: 0 auto;
+    margin-top:50px;
+    width: 90%;
+}
+#b_input td{
+    padding: 10px;
+    height: 30px;
+    line-height: 30px;
+    text-align: left;
+}
+#c_input{
+    margin: 0 auto;
+    margin-top:50px;
+    width: 90%;
+}
+#c_input td{
+    padding: 10px;
+    height: 30px;
+    line-height: 30px;
+    text-align: left;
+}
+.separate{
+    width: 10%;
+}
+/* tree 下拉列表 */
+.tree-title{
+    position: relative;
+    left:-16px;
+}
+/* panel 面板背景颜色 */
+.panel-body{
+    background:#112951;
+    border: none;
+    color: #fff;
+}
+.combo-panel {
+    background: #1e3a69;
+    border: #ddd 1px solid;
+}
+/* border */
+.tabs-header, .tabs-scroller-left, .tabs-scroller-right, .tabs-tool, .tabs, .tabs-panels, .tabs li .tabs-inner, .tabs li.tabs-selected .tabs-inner, .tabs-header-bottom .tabs li.tabs-selected .tabs-inner, .tabs-header-left .tabs li.tabs-selected .tabs-inner, .tabs-header-right .tabs li.tabs-selected .tabs-inner{
+    border:none;
 }
