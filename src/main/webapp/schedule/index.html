@@ -2,9 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>index测试</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>系统主页</title>
+    <script src="js/vue.js"></script>
+    <link rel="stylesheet" href="css/iview.css">
+    <script src="js/iView.js"></script>
+    <script src="js/echarts.js"></script>
+    <script src="js/axios.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    
 </head>
 <body>
-<h1>index success</h1>
+    <div class="header_container">
+        <div class="header">
+            <img id="logo" src="img/logo.png" alt="logo">
+            <p id="title">校园十十十十十十十十十十系统<br/><span id="eng-title">THE PLA'S INFORMATION SUPPORT AND ASSURANCE COMBAT READINESS DUTY MANAGEMENT SYSTEM</span></p>
+            <div class="divide"></div>
+            <p id="sub-title">系统主页</p>
+            <div class="divide"></div>
+            <div class="right-wrap">
+                <div id="divide"></div>
+                <div id="duty">测试测试 名称一<br/>测试测试 名称二</div>
+                <div id="tduty">今日<br/>值班</div>    
+                <div id="divide"></div>
+                <div id="right-title">测试用的测试用的测试<br/><span id="divTime"></span></div>    
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="menu-bar">
+            <ul id="back-bar">
+                <li><a href="index.html">系统主页</a></li>
+                <!-- <li><a href="view.html">工程进度</a></li> -->
+            </ul>
+            <ul id="icon-ul">
+                <li><img src="img/关闭.png" alt="close"></li>
+                <li><img src="img/全屏.png" alt="fullScreen"></li>
+                <li><img src="img/刷新.png" alt="refresh"></li>
+            </ul>
+        </div>    
+        <div class="clear"></div>
+    </div>
+
+    <!-- 主要内容部分 -->
+    <div class="app" id="app">
+        <z-selects @status="handleStatus" @hsrc1 = "handleSrc1" @hsrc2 = "handleSrc2"  @hsrc3 = "handleSrc3" @hper1="handlePer1" @hper2="handlePer2" @hper3="handlePer3"></z-selects>
+
+        <i-col span="8" class="z-item">
+            <template>   
+                <z-pie identify="z-pie-one" :color="['#f6e3a1', '#C10514']" subtitle="完成率" :percent="per_1"></z-pie>
+                
+                <z-rect identify="z-rect-one" :color="['#f6e3a1', '#C10514']" :src="src_1"></z-rect>
+            </template>
+        </i-col>
+        <i-col span="8" class="z-item z-middle">
+            <template>
+                <z-pie identify="z-pie-two" :color="['#71C8B1', '#06B5D7']" subtitle='完工率' :percent="per_2"></z-pie>
+                
+                <z-rect identify="z-rect-two" :color="['#71C8B1', '#06B5D7']" :src="src_2"></z-rect>
+            </template>    
+        </i-col>
+        <i-col span="8" class="z-item">
+            <template>
+                <z-pie identify="z-pie-thr" :color="['#5fc0ce', '#0b61a4']" subtitle='开工率' :percent='per_3'></z-pie>
+                
+                <z-rect identify="z-rect-thr" :color="['#5fc0ce', '#0b61a4']" :src="src_3"></z-rect>
+            </template>
+        </i-col>
+    </div>
 </body>
+
+<script src="js/jquery3.3.1.js"></script>
+<script src="js/index.js"></script>
 </html>

@@ -16,629 +16,846 @@ function add_zero(temp){
 }
 setInterval(getCurDate,1000);
 
-$('#view').on('click',function(){
-    window.location.href="view.html";
-  })
+// 饼图组件
+Vue.component('z-pie', {
+    props: ['identify', 'color', 'subtitle', 'percent'],
+    template: `
+        <div class="z-pie" :class="identify">
+            <div :id="identify"></div>
+        </div>
+    `,
+    data(){
+        return {
+            charts: '',
+            option: {
+                title: {
+                    text: 100*this.percent+'%',
+                    x: 'center',
+                    y: '65',
+                    textStyle: {
+                        fontWeight: 'normal',
+                        color: this.color[1],
+                        fontSize: '62'
+                    },
+                    subtext: this.subtitle,
+                    subtextStyle: {
+                        color: '#cccccc',
+                        fontSize: '25',
 
-var intro = document.getElementById('intro-con');
-var myChart = echarts.init(intro);
-option = null;
-var app={};
-option = {
-    backgroundColor: '#112951',
-    tooltip : {
-        formatter: "{a} <br/>{c} {b}"
-    },
-  
-    series : [
-        {
-            name:'东部战区',
-            type:'gauge',
-            min:0,
-            max:100,
-            splitNumber:10,
-            center:['20%','50%'],
-            radius: '60%',
-            axisLine: {            // 坐标轴线
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: [[0.09, 'lime'],[0.82, '#1e90ff'],[1, '#ff4500']],
-                    width: 3,
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            axisLabel: {            // 坐标轴小标记
-                textStyle: {       // 属性lineStyle控制线条样式
-                    fontWeight: 'bolder',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            axisTick: {            // 坐标轴小标记
-                length :15,        // 属性length控制线长
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: 'auto',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            splitLine: {           // 分隔线
-                length :25,         // 属性length控制线长
-                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
-                    width:3,
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            pointer: {           // 分隔线
-                shadowColor : '#fff', //默认透明
-                shadowBlur: 5
-            },
-            title : {
-                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: 'bolder',
-                    fontSize: 20,
-                    fontStyle: 'italic',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            detail : {
-                backgroundColor: 'rgba(30,144,255,0.8)',
-                borderWidth: 1,
-                borderColor: '#fff',
-                shadowColor : '#fff', //默认透明
-                shadowBlur: 5,
-                offsetCenter: [0, '50%'],       // x, y，单位px
-                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: 'bolder',
-                    color: '#fff'
-                }
-            },
-            data:[{value: 53, name: '东部战区'}]
-        },
-        {
-            name:'西部战区',
-            type:'gauge',
-            min:0,
-            max:100,
-            splitNumber:10,
-            center:['35%','50%'],
-            radius: '60%',
-            axisLine: {            // 坐标轴线
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: [[0.09, 'lime'],[0.82, '#1e90ff'],[1, '#ff4500']],
-                    width: 3,
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            axisLabel: {            // 坐标轴小标记
-                textStyle: {       // 属性lineStyle控制线条样式
-                    fontWeight: 'bolder',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            axisTick: {            // 坐标轴小标记
-                length :15,        // 属性length控制线长
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: 'auto',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            splitLine: {           // 分隔线
-                length :25,         // 属性length控制线长
-                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
-                    width:3,
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            pointer: {           // 分隔线
-                shadowColor : '#fff', //默认透明
-                shadowBlur: 5
-            },
-            title : {
-                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: 'bolder',
-                    fontSize: 20,
-                    fontStyle: 'italic',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            detail : {
-                backgroundColor: 'rgba(30,144,255,0.8)',
-                borderWidth: 1,
-                borderColor: '#fff',
-                shadowColor : '#fff', //默认透明
-                shadowBlur: 5,
-                offsetCenter: [0, '50%'],       // x, y，单位px
-                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: 'bolder',
-                    color: '#fff'
-                }
-            },
-            data:[{value: 8, name: '西部战区'}]
-        },
-        {
-            name:'中部战区',
-            type:'gauge',
-            min:0,
-            max:100,
-            splitNumber:10,
-            center:['50%','50%'],
-            radius: '60%',
-            axisLine: {            // 坐标轴线
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: [[0.09, 'lime'],[0.82, '#1e90ff'],[1, '#ff4500']],
-                    width: 3,
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            axisLabel: {            // 坐标轴小标记
-                textStyle: {       // 属性lineStyle控制线条样式
-                    fontWeight: 'bolder',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            axisTick: {            // 坐标轴小标记
-                length :15,        // 属性length控制线长
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: 'auto',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            splitLine: {           // 分隔线
-                length :25,         // 属性length控制线长
-                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
-                    width:3,
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            pointer: {           // 分隔线
-                shadowColor : '#fff', //默认透明
-                shadowBlur: 5
-            },
-            title : {
-                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: 'bolder',
-                    fontSize: 20,
-                    fontStyle: 'italic',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            detail : {
-                backgroundColor: 'rgba(30,144,255,0.8)',
-                borderWidth: 1,
-                borderColor: '#fff',
-                shadowColor : '#fff', //默认透明
-                shadowBlur: 5,
-                offsetCenter: [0, '50%'],       // x, y，单位px
-                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: 'bolder',
-                    color: '#fff'
-                }
-            },
-            data:[{value: 43, name: '中部战区'}]
-        },
-        {
-            name:'南部战区',
-            type:'gauge',
-            min:0,
-            max:100,
-            splitNumber:10,
-            center:['65%','50%'],
-            radius: '60%',
-            axisLine: {            // 坐标轴线
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: [[0.09, 'lime'],[0.82, '#1e90ff'],[1, '#ff4500']],
-                    width: 3,
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            axisLabel: {            // 坐标轴小标记
-                textStyle: {       // 属性lineStyle控制线条样式
-                    fontWeight: 'bolder',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            axisTick: {            // 坐标轴小标记
-                length :15,        // 属性length控制线长
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: 'auto',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            splitLine: {           // 分隔线
-                length :25,         // 属性length控制线长
-                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
-                    width:3,
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            pointer: {           // 分隔线
-                shadowColor : '#fff', //默认透明
-                shadowBlur: 5
-            },
-            title : {
-                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: 'bolder',
-                    fontSize: 20,
-                    fontStyle: 'italic',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            detail : {
-                backgroundColor: 'rgba(30,144,255,0.8)',
-                borderWidth: 1,
-                borderColor: '#fff',
-                shadowColor : '#fff', //默认透明
-                shadowBlur: 5,
-                offsetCenter: [0, '50%'],       // x, y，单位px
-                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: 'bolder',
-                    color: '#fff'
-                }
-            },
-            data:[{value: 73, name: '南部战区'}]
-        },
-        {
-            name:'北部战区',
-            type:'gauge',
-            min:0,
-            max:100,
-            splitNumber:10,
-            center:['80%','50%'],
-            radius: '60%',
-            axisLine: {            // 坐标轴线
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: [[0.09, 'lime'],[0.82, '#1e90ff'],[1, '#ff4500']],
-                    width: 3,
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            axisLabel: {            // 坐标轴小标记
-                textStyle: {       // 属性lineStyle控制线条样式
-                    fontWeight: 'bolder',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            axisTick: {            // 坐标轴小标记
-                length :15,        // 属性length控制线长
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: 'auto',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            splitLine: {           // 分隔线
-                length :25,         // 属性length控制线长
-                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
-                    width:3,
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            pointer: {           // 分隔线
-                shadowColor : '#fff', //默认透明
-                shadowBlur: 5
-            },
-            title : {
-                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: 'bolder',
-                    fontSize: 20,
-                    fontStyle: 'italic',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            detail : {
-                backgroundColor: 'rgba(30,144,255,0.8)',
-                borderWidth: 1,
-                borderColor: '#fff',
-                shadowColor : '#fff', //默认透明
-                shadowBlur: 5,
-                offsetCenter: [0, '50%'],       // x, y，单位px
-                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: 'bolder',
-                    color: '#fff'
-                }
-            },
-            data:[{value: 86, name: '北部战区'}]
-        },
-      
-       
-    ]
-};
-if (option && typeof option === "object") {
-    myChart.setOption(option, true);
-};
-
-// 条形图部分
-var bar =document.getElementById('bar-con');
-var myBar = echarts.init(bar);
-var app={};
-option= null;
-var option={
-    backgroundColor:'#112951',
-    dataset: {
-        source: [
-            ['score', '百分比', 'product'],
-            [100, , '特殊部队3'],
-            [57.1, , '特殊部队2'],
-            [74.4, , '特殊部队1'],
-            [50.1, , '火箭军'],
-            [29.7, , '空军'],
-            [38.1, , '海军'],
-            [18.1, ,'陆军']
-        ]
-    },
-    grid: {containLabel: true},
-    xAxis: {
-        name: '百分比',
-        nameTextStyle:{
-            color:'#fff'
-        },
-        axisLine:{
-            lineStyle:{
-                color:'#fff'
-            }
-        },
-        axisLabel:{
-            color:''
-        }
-    },
-    yAxis: {
-        name:'军种',
-        type: 'category',
-        nameTextStyle:{
-            color:'#fff'
-        },
-        axisLine:{
-            lineStyle:{
-                color:'#fff'
-            }
-        },
-        splitLine:{
-            show:true,
-        }
-    },
-    visualMap: {
-        orient: 'horizontal',
-        left: 'center',
-        min: 20,
-        max: 100,
-        text: ['完成度高', '完成度低'],
-        // Map the score column to color
-        dimension: 0,
-        textStyle:{
-            color:'#fff',
-        },
-        inRange: {
-            color: ['#ff4100', '#ffc873']
-        }
-    },
-    series: [
-        {
-            type: 'bar',
-            encode: {
-                // Map the "amount" column to X axis.
-                x: 'amount',
-                // Map the "product" column to Y axis
-                y: 'product'
-            }
-        }
-    ]
-};
-if (option && typeof option === "object") {
-    myBar.setOption(option, true);
-}
-$('#btn1').on('click',function(){
-    $('#btn2').css('backgroundColor','#112951');
-    $('#btn1').css('backgroundColor','#060c18');
-    $('.content').css('display','block');
-    $('.heatMap').css('opacity','0');
-});
-$('#btn2').on('click',function(){
-    $('#btn1').css('backgroundColor','#112951');
-    $('#btn2').css('backgroundColor','#060c18');
-    $('.content').css('display','none');
-    $('.heatMap').css('opacity','1');
-    $('.heatMAp').css('display','block')
-});
-
-//解决dom获取不到百分比的宽高 
-
-var heatMap=document.getElementById('heatMap-con');
-var myHeat=echarts.init(heatMap);
-var app={};
-option=null;
-var hours = ['1月', '2月', '3月', '4月', '5月', '6月', '7月',
-        '8月', '9月', '10月','11月','12月'];
-var days = ['X部队', 'X部队', 'X部队',
-        '火箭军', '空军', '海军', '陆军'];
-
-var data = [[0,0,4],[0,1,10],[0,2,16],[0,3,20],[0,4,45],[0,5,50],[0,6,65],[0,7,70],[0,8,77],[0,9,89],[0,10,94],[0,11,97],[1,0,17],[1,1,37],[1,2,58],[1,3,77],[1,4,90],[1,5,98],[1,6,100],[1,7,100],[1,8,100],[1,9,100],[1,10,100],[1,11,100],[2,0,1],[2,1,12],[2,2,20],[2,3,30],[2,4,40],[2,5,50],[2,6,60],[2,7,77],[2,8,80],[2,9,90],[2,10,93],[2,11,100],[3,0,7],[3,1,23],[3,2,33],[3,3,50],[3,4,60],[3,5,65],[3,6,77],[3,7,90],[3,8,100],[3,9,100],[3,10,100],[3,11,100],[4,0,21],[4,1,23],[4,2,54],[4,3,66],[4,4,70],[4,5,81],[4,6,88],[4,7,90],[4,8,100],[4,9,100],[4,10,100],[4,11,100],[5,0,2],[5,1,11],[5,2,30],[5,3,33],[5,4,40],[5,5,50],[5,6,60],[5,7,70],[5,8,82],[5,9,90],[5,10,94],[5,11,100],[6,0,1],[6,1,10],[6,2,20],[6,3,30],[6,4,40],[6,5,50],[6,6,60],[6,7,70],[6,8,70],[6,9,80],[6,10,91],[6,11,100]];
-
-data = data.map(function (item) {
-    return [item[1], item[0], item[2] || '-'];
-});
-
-option = {
-    backgroundColor:'#112951',
-    title:{
-      text:'各军兵种2019工程完成统计',
-      left:'center',
-      top:'20px',
-      textStyle:{
-          color:'#fff'
-      }
-    },
-    tooltip: {
-        position: 'top'
-    },
-    animation: false,
-    grid: {
-        height: '60%',
-        y: '10%'
-    },
-    xAxis: {
-        type: 'category',
-        data: hours,
-        splitArea: {
-            show: true
-        },
-        axisLabel:{
-            color:'#fff'
-        }
-    },
-    yAxis: {
-        type: 'category',
-        data: days,
-        splitArea: {
-            show: true
-        },
-        axisLabel:{
-            color:'#fff',
-            rotate:35
-        },
-        
-    },
-    visualMap: {
-        min: 0,
-        max: 100,
-        calculable: true,
-        orient: 'horizontal',
-        left: 'center',
-        bottom: '15%',
-        textStyle:{
-            color:'#fff'
-        }
-    },
-    series: [{
-        name: 'Punch Card',
-        type: 'heatmap',
-        data: data,
-        label: {
-            normal: {
-                show: true
-            }
-        },
-        itemStyle: {
-            emphasis: {
-                shadowBlur: 10,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-        }
-    }]
-};;
-if (option && typeof option === "object") {
-    myHeat.setOption(option, true);
-}
-// echarts下钻时间
-option={
-    backgroundColor: '#112951',
-        
-            title: {
-                text: 'Customized Pie',
-                left: 'center',
-                top: 20,
-                textStyle: {
-                    color: '#ccc'
-                }
-            },
-        
-            tooltip : {
-                trigger: 'item',
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
-            },
-        
-            visualMap: {
-                show: false,
-                min: 80,
-                max: 600,
-                inRange: {
-                    colorLightness: [0, 1]
-                }
-            },
-            series : [
-                {
-                    name:'访问来源',
-                    type:'pie',
-                    radius : '55%',
-                    center: ['50%', '50%'],
-                    data:[
-                        {value:335, name:'直接访问'},
-                        {value:310, name:'邮件营销'},
-                        {value:274, name:'联盟广告'},
-                        {value:235, name:'视频广告'},
-                        {value:400, name:'搜索引擎'}
-                    ].sort(function (a, b) { return a.value - b.value; }),
-                    roseType: 'radius',
-                    label: {
+                    }
+                },
+                color: ['#A7A7A7'],
+                series: [{
+                    name: 'Line 1',
+                    type: 'pie',
+                    clockWise: true,
+                    radius: ['78%', '92%'],
+                    itemStyle: {
                         normal: {
-                            textStyle: {
-                                color: 'rgba(255, 255, 255, 0.3)'
+                            label: {
+                                show: false
+                            },
+                            labelLine: {
+                                show: false
                             }
                         }
                     },
-                    labelLine: {
-                        normal: {
-                            lineStyle: {
-                                color: 'rgba(255, 255, 255, 0.3)'
-                            },
-                            smooth: 0.2,
-                            length: 10,
-                            length2: 20
+                    hoverAnimation: true,
+                    data: [{
+                        value: 100*this.percent,
+                        name: '01',
+                        itemStyle: {
+                            normal: {
+                                color: { // 完成的圆环的颜色
+                                    colorStops: [{
+                                        offset: 0,
+                                        color: this.color[0] // 0% 处的颜色
+                                    }, {
+                                        offset: 1,
+                                        color: this.color[1] // 100% 处的颜色
+                                    }]
+                                },
+                                shadowColor: this.color[0],
+                                shadowBlur: 12,
+                                label: {
+                                    show: false
+                                },
+                                labelLine: {
+                                    show: false
+                                }
+                            }
                         }
-                    },
-                    itemStyle: {
-                        normal: {
-                            color: '#c23531',
-                            shadowBlur: 200,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }, {
+                        name: '02',
+                        value: 100*(1-this.percent),
+                        itemStyle: {
+                            shadowColor: '#ccc',
+                            shadowBlur: 5
                         }
-                    },
-        
-                    animationType: 'scale',
-                    animationEasing: 'elasticOut',
-                    animationDelay: function (idx) {
-                        return Math.random() * 200;
-                    }
+
+                    }]
+                }]
+            }
+        }
+    },
+    methods: {
+        initPieOne: function () {
+            this.charts = echarts.init(document.getElementById(this.identify));
+            this.charts.setOption(this.option);
+        }
+    },
+    mounted: function () {
+        this.initPieOne();
+    },
+    watch: {
+        percent: {
+            handler(newVal, oldVal){
+                if(newVal){
+                    console.log('new');
+                    console.log(newVal);
+                    this.option.series[0].data[0].value = newVal*100;
+                    this.option.series[0].data[1].value = (1-newVal)*100;
+                    this.option.title.text = `${Math.round(newVal*100)}%`;
+                    this.charts.setOption(this.option);
+                }else{
+                    console.log('old');
                 }
-            ]
-}
-myChart.on('click',{name:'东部战区'},function(){
-    alert("111");
-    myChart.setOption(option);
-})
+            }
+        }
+    }
+});
+
+// 柱状图组件
+Vue.component('z-rect', {
+    props: ['identify', 'color', 'src'],
+    template: `
+        <div class="z-rect" :class="identify">
+            <div :id="identify">
+                
+            </div>
+        </div>
+    `,
+    data(){
+        return {
+            option: {
+                dataset: {
+                    source: this.src
+                },
+                grid: {
+                    containLabel: true,
+                    top: 10,
+                    left: 10,
+                    width: '82%',
+                    height: '85%',
+
+                },
+                xAxis: {
+                    name: '%',
+                    axisLabel: {
+                        color: '#ccc'
+                        // formatter: '{value}'
+                    },
+                    splitLine: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#ccc'
+                        }
+                    }
+                },
+                yAxis: {
+                    type: 'category',
+                    axisLabel: {
+                        color: '#ccc'
+                        // formatter: '{value}'
+                    },
+                    splitLine: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#ccc'
+                        }
+                    }
+                },
+                visualMap: {
+                    orient: 'horizontal',
+                    left: 'center',
+                    min: 10,
+                    max: 100,
+                    textStyle: {
+                        color: '#ccc'
+                    },
+                    itemWidth: 10,
+
+                    text: ['低', '高'],
+                    // Map the score column to color
+                    dimension: 0,
+                    inRange: {
+                        color: this.color
+                    }
+                },
+                series: [
+                    {
+                        type: 'bar',
+                        barWidth: '12',
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true,
+                                    position: 'right',
+                                    formatter: ('{c}'.split(','))
+                                }
+                            }
+                        },
+                        encode: {
+                            // Map the "amount" column to X axis.
+                            x: 1,
+                            // Map the "product" column to Y axis
+                            y: 2
+                        }
+                    }
+                ]
+            },
+            chart: ''
+        }
+    },
+    methods: {
+        initRect: function(){
+            this.chart = echarts.init(document.getElementById(this.identify));
+
+            this.chart.setOption(this.option);
+        }
+    },
+    mounted: function(){
+        this.initRect();
+    },
+    watch: {
+        // option: {
+        //     handle(newVal, oldVal){
+        //         if(this.chart){
+        //             if(newVal){
+        //                 this.chart.setOption(newVal);
+        //                 console.log('new');
+        //             }else{
+        //                 this.chart.setOption(oldVal);
+        //                 console.log('old');
+        //             }
+        //         }else{
+        //             this.initRect();
+        //             console.log('nothing');
+        //         }
+        //     }
+        // },
+        src: {
+            handler(newVal, oldVal){
+                if(newVal){
+                    console.log('new');
+                    console.log(newVal);
+                    this.option.dataset.source = newVal;
+                    this.chart.setOption(this.option);
+                }else{
+                    console.log('old');
+                }
+            }
+        }
+    }
+});
+
+// select组件
+Vue.component('z-selects', {
+    props: ['statusList'],
+    template: `
+        <div class='z-selects'>
+            <div class='z-select-1'>
+                年限: 
+                <i-select v-model="model1" @on-change="status" placeholder="请选择年限" style="width:200px;">
+                    <i-option v-for="item in planList" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+                </i-select>
+            </div>
+            
+            <div class='z-select-2'>
+                战区: 
+                <i-select v-model="model2" @on-change="status" placeholder="请选择战区" style="width:200px;">
+                    <i-option v-for="item in direList" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+                </i-select>
+            </div>
+
+            <div class='z-select-3'>
+                军种: 
+                <i-select v-model="model3" @on-change="status" placeholder="请选择兵种" style="width:200px;">
+                    <i-option v-for="item in typeList" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+                </i-select>
+            </div>
+        </div>
+    `,
+    data: function(){
+        return {
+            planList: [
+                {
+                    value: '115',
+                    label: '十一五'
+                },
+                {
+                    value: '125',
+                    label: '十二五'
+                },
+                {
+                    value: '135',
+                    label: '十三五'
+                },
+                {
+                    value: '145',
+                    label: '十四五'
+                },
+                {
+                    value: '155',
+                    label: '十五五'
+                },
+            ],
+            direList: [
+                {
+                    value: 'allD',
+                    label: '全战区'
+                },
+                {
+                    value: 'east',
+                    label: '东部战区'
+                },
+                {
+                    value: 'south',
+                    label: '南部战区'
+                },
+                {
+                    value: 'west',
+                    label: '西部战区'
+                },
+                {
+                    value: 'north',
+                    label: '北部战区'
+                },
+                {
+                    value: 'middle',
+                    label: '中部战区'
+                }
+            ],
+            typeList: [
+                {
+                    value: 'allT',
+                    label: '全军种'
+                },
+                {
+                    value: 'nv',
+                    label: '海军'
+                },
+                {
+                    value: 'lf',
+                    label: '陆军'
+                },
+                {
+                    value: 'af',
+                    label: '空军'
+                },
+                {
+                    value: 'rk',
+                    label: '火箭军'
+                },
+                {
+                    value: 't1',
+                    label: '某部队一'
+                },
+                {
+                    value: 't2',
+                    label: '某部队二'
+                },
+                {
+                    value: 't3',
+                    label: '某部队三'
+                }
+            ],
+            model1: "135",
+            model2: "east",
+            model3: "allT",
+            dataList: {
+                src_1: [
+                    ['score', 'amount', 'name']
+                ],
+                src_2: [
+                    ['score', 'amount', 'name']
+                ],
+                src_3: [
+                    ['score', 'amount', 'name']
+                ],
+                per_1: 0,
+                per_2: 0,
+                per_3: 0
+            }
+        }
+    },
+    methods: {
+        initDataList: function(){
+            this.dataList = {
+                src_1: [
+                    ['score', 'amount', 'name']
+                ],
+                src_2: [
+                    ['score', 'amount', 'name']
+                ],
+                src_3: [
+                    ['score', 'amount', 'name']
+                ],
+                per_1: 0,
+                per_2: 0,
+                per_3: 0
+            };
+        },
+        handleJSON: function(dataList, item, name){
+            let fwr = Math.round(item.finishWorkingRatio);
+            let swr = Math.round(item.starWorkingRatio);
+            let pro = Math.round(item.progress*100);
+
+            dataList.src_1.push([pro, pro, name]);
+            dataList.src_2.push([fwr, fwr, name]);
+            dataList.src_3.push([swr, swr, name]);
+
+        },
+        status: function(){
+            const _this = this;
+
+            const ajaxPromise = param => {
+                return new Promise((resolve, reject) => {
+                    $.ajax({
+                        url: '/onps/schedule/getProjectScheduleSummarize.do',
+                        type: 'POST',
+                        async: false,
+                        data: param,
+                        success: function(res){
+                            resolve(res);
+                        },
+                        error: function(err){
+                            reject(err);
+                        }
+                    });
+            });
+            }
+
+            if( this.model2!='allD' && this.model3=='allT' ){
+
+                this.initDataList()
+
+                // 总体
+                var step1 = function(){
+                    ajaxPromise({
+                        projectName: '',
+                        level1: '',
+                        level2: '',
+                        level3: '',
+                        level4: '',
+                        level5: ''
+                    }).then(function(res){
+                        _this.dataList.per_1 = res.entity.progress;
+                        _this.dataList.per_2 = Math.round(res.entity.finishWorkingRatio)/100;
+                        _this.dataList.per_3 = Math.round(res.entity.starWorkingRatio)/100;
+                        step2();
+                        console.log(res);
+                        console.log(_this.dataList);
+                    }).catch( err => {
+                        console.log(err);
+                    })
+                };
+
+                let step2 = function(){
+                    ajaxPromise({
+                        projectName: '',
+                        level1: '',
+                        level2: '',
+                        level3: '',
+                        level4: '',
+                        level5: ''
+                    }).then(function(res){
+                        if(res.status == 'S00001'){
+                            _this.handleJSON(_this.dataList, res.entity, '海军');
+                        }
+                        step3();
+                    }).catch( err => {
+                        console.log('第二个请求失败');
+                    })
+                };
+
+                let step3 = function(){
+                    ajaxPromise({
+                        projectName: '',
+                        level1: '',
+                        level2: '',
+                        level3: '',
+                        level4: '',
+                        level5: ''
+                    }).then(function(res){
+                        if(res.status == 'S00001'){
+                            _this.handleJSON(_this.dataList, res.entity, '陆军');
+                        }
+                        step4();
+                    }).catch( err => {
+                        console.log('第三个请求失败');
+                    })
+                };
+
+                let step4 = function(){
+                    ajaxPromise({
+                        projectName: '',
+                        level1: '',
+                        level2: '',
+                        level3: '',
+                        level4: '',
+                        level5: ''
+                    }).then(function(res){
+                        if(res.status == 'S00001'){
+                            _this.handleJSON(_this.dataList, res.entity, '空军');
+                        }
+                        step5();
+                    }).catch( err => {
+                        console.log(第四个请求失败);
+                    })
+                };
+
+                let step5 = function(){
+                    ajaxPromise({
+                        projectName: '',
+                        level1: '',
+                        level2: '',
+                        level3: '',
+                        level4: '',
+                        level5: ''
+                    }).then(function(res){
+                        if(res.status == 'S00001'){
+                            _this.handleJSON(_this.dataList, res.entity, '火箭军');
+                        }
+                        step6();
+                    }).catch( err => {
+                        console.log('第五个请求失败');
+                    })
+                };
+
+                let step6 = function(){
+                    ajaxPromise({
+                        projectName: '',
+                        level1: '',
+                        level2: '',
+                        level3: '',
+                        level4: '',
+                        level5: ''
+                    }).then(function(res){
+                        if(res.status == 'S00001'){
+                            _this.handleJSON(_this.dataList, res.entity, '某部队1');
+                        }
+                        step7();
+                    }).catch( err => {
+                        console.log('第六个请求失败');
+                    })
+                };
+
+                let step7 = function(){
+                    ajaxPromise({
+                        projectName: '',
+                        level1: '',
+                        level2: '',
+                        level3: '',
+                        level4: '',
+                        level5: ''
+                    }).then(function(res){
+                        if(res.status == 'S00001'){
+                            _this.handleJSON(_this.dataList, res.entity, '某部队2');
+                        }
+                        step8();
+                    }).catch( err => {
+                        console.log('第七个请求失败');
+                    })
+                };
+
+                let step8 = function(){
+                    ajaxPromise({
+                        projectName: '',
+                        level1: '',
+                        level2: '',
+                        level3: '',
+                        level4: '',
+                        level5: ''
+                    }).then(function(res){
+                        if(res.status == 'S00001'){
+                            _this.handleJSON(_this.dataList, res.entity, '某部队3');
+                        }
+
+                        _this.$emit('hsrc1', _this.dataList.src_1);
+                        _this.$emit('hsrc2', _this.dataList.src_2);
+                        _this.$emit('hsrc3', _this.dataList.src_3);
+                        _this.$emit('hper1', _this.dataList.per_1);
+                        _this.$emit('hper2', _this.dataList.per_2);
+                        _this.$emit('hper3', _this.dataList.per_3);
+                    }).catch( err => {
+                        console.log('第八个请求失败');
+                    })
+                };
+
+                step1();
+            }else if( this.model2=='allD' && this.model3!='allT' ){
+
+                this.initDataList();
+
+                // 总体
+                let step1 = function(){
+                    ajaxPromise({
+                        projectName: '',
+                        level1: '',
+                        level2: '',
+                        level3: '',
+                        level4: '',
+                        level5: ''
+                    }).then(function(res){
+                        _this.dataList.per_1 = res.entity.progress;
+                        _this.dataList.per_2 = (Math.round(res.entity.finishWorkingRatio))/100;
+                        _this.dataList.per_3 = (Math.round(res.entity.starWorkingRatio))/100;
+                        step2();
+                    }).catch( err => {
+                        console.log('第一个请求失败');
+                })
+                };
+
+                let step2 = function(){
+                    ajaxPromise({
+                        projectName: '',
+                        level1: '',
+                        level2: '',
+                        level3: '',
+                        level4: '',
+                        level5: ''
+                    }).then(function(res){
+                        if(res.status == 'S00001'){
+                            _this.handleJSON(_this.dataList, res.entity, '东部');
+                        }
+                        step3();
+                    }).catch( err => {
+                        console.log('第二个请求失败');
+                })
+                };
+
+                let step3 = function(){
+                    ajaxPromise({
+                        projectName: '',
+                        level1: '',
+                        level2: '',
+                        level3: '',
+                        level4: '',
+                        level5: ''
+                    }).then(function(res){
+                        if(res.status == 'S00001'){
+                            _this.handleJSON(_this.dataList, res.entity, '西部');
+                        }
+                        step4();
+                    }).catch( err => {
+                        console.log('第三个请求失败');
+                })
+                };
+
+                let step4 = function(){
+                    ajaxPromise({
+                        projectName: '',
+                        level1: '',
+                        level2: '',
+                        level3: '',
+                        level4: '',
+                        level5: ''
+                    }).then(function(res){
+                        if(res.status == 'S00001'){
+                            _this.handleJSON(_this.dataList, res.entity, '南部');
+                        }
+                        step5();
+                    }).catch( err => {
+                        console.log('第四个请求失败');
+                })
+                };
+
+                let step5 = function(){
+                    ajaxPromise({
+                        projectName: '',
+                        level1: '',
+                        level2: '',
+                        level3: '',
+                        level4: '',
+                        level5: ''
+                    }).then(function(res){
+                        if(res.status == 'S00001'){
+                            _this.handleJSON(_this.dataList, res.entity, '北部');
+                        }
+                        step6();
+                    }).catch( err => {
+                        console.log('第五个请求失败');
+                })
+                };
+
+                let step6 = function(){
+                    ajaxPromise({
+                        projectName: '',
+                        level1: '',
+                        level2: '',
+                        level3: '',
+                        level4: '',
+                        level5: ''
+                    }).then(function(res){
+                        if(res.status == 'S00001'){
+                            _this.handleJSON(_this.dataList, res.entity, '中部');
+                        }
+                        _this.$emit('hsrc1', _this.dataList.src_1);
+                        _this.$emit('hsrc2', _this.dataList.src_2);
+                        _this.$emit('hsrc3', _this.dataList.src_3);
+                        _this.$emit('hper1', _this.dataList.per_1);
+                        _this.$emit('hper2', _this.dataList.per_2);
+                        _this.$emit('hper3', _this.dataList.per_3);
+                    }).catch( err => {
+                        console.log('第六个请求失败');
+                })
+                };
+
+                step1();
+            }else if( this.model2!='allD' && this.model3!='allT' ){
+                this.initDataList();
+
+                let step = function(){
+                    ajaxPromise({
+                        projectName: '',
+                        level1: '',
+                        level2: '',
+                        level3: '',
+                        level4: '',
+                        level5: ''
+                    }).then(function(res){
+                        _this.dataList.per_1 = res.entity.progress;
+                        _this.dataList.per_2 = (Math.round(res.entity.finishWorkingRatio))/100;
+                        _this.dataList.per_3 = (Math.round(res.entity.starWorkingRatio))/100;
+
+                        _this.$emit('hsrc1', _this.dataList.src_1);
+                        _this.$emit('hsrc2', _this.dataList.src_2);
+                        _this.$emit('hsrc3', _this.dataList.src_3);
+                        _this.$emit('hper1', _this.dataList.per_1);
+                        _this.$emit('hper2', _this.dataList.per_2);
+                        _this.$emit('hper3', _this.dataList.per_3);
+                    }).catch( err => {
+                        console.log('第一个请求失败');
+                    })
+
+                };
+
+                step();
+            }
+
+            /*if( this.model2!='allD' && this.model3=='allT' ){
+                axios
+                  .post('http://localhost:3000/allType',{
+                    direct: this.model2,
+                    type: this.model3
+                  })
+                  .then( response => {
+                    this.dataList = response.data.data;
+                    console.log(this.dataList);
+
+                    this.$emit('hsrc1', this.dataList.src_1);
+                    this.$emit('hsrc2', this.dataList.src_2);
+                    this.$emit('hsrc3', this.dataList.src_3);
+                    this.$emit('hper1', this.dataList.per_1);
+                    this.$emit('hper2', this.dataList.per_2);
+                    this.$emit('hper3', this.dataList.per_3);
+
+                });
+            }else if( this.model2=='allD' && this.model3!='allT' ){
+                axios
+                  .post('http://localhost:3000/allDirect')
+                  .then( response => {
+                    this.dataList = response.data.data;
+                    console.log(this.dataList);
+
+                    // console.log(this.dataList.src_2);
+                    this.$emit('hsrc1', this.dataList.src_1);
+                    this.$emit('hsrc2', this.dataList.src_2);
+                    this.$emit('hsrc3', this.dataList.src_3);
+                    this.$emit('hper1', this.dataList.per_1);
+                    this.$emit('hper2', this.dataList.per_2);
+                    this.$emit('hper3', this.dataList.per_3);
+
+                });
+            }else{
+
+            }*/
+        }
+    }
+});
+
+var app = new Vue({
+    el: '#app',
+    data: {
+        src_1: [
+            ['score', 'amount', 'name'],
+            [8.3, 8.3, '海军'],
+            [57.1, 57.1, '陆军'],
+            [74.4,74.4, '空军'],
+            [30.1, 30.1, '火箭军'],
+            [49.7, 49.7, '某部队1'],
+            [8, 8, '某部队2'],
+            [13.2, 13.2, '某部队3']
+        ],
+        src_2: [
+            ['score', 'amount', 'name'],
+            [70.2, 70.2, '海军'],
+            [6.1, 6.1, '陆军'],
+            [3.6, 3.6, '空军'],
+            [65.3, 65.3, '火箭军'],
+            [15.6, 15.6, '某部队1'],
+            [28, 28, '某部队2'],
+            [52.1, 52.1, '某部队3']
+        ],
+        src_3: [
+            ['score', 'amount', 'name'],
+            [55.2, 55.2, '海军'],
+            [7.1, 7.1, '陆军'],
+            [41.4, 41.4, '空军'],
+            [23.1, 23.1, '火箭军'],
+            [9.9, 9.9, '某部队1'],
+            [27.4, 27.4, '某部队2'],
+            [2.1, 2.1, '某部队3']
+        ],
+        statusList: null,
+        per_1: 0.8,
+        per_2: 0.6,
+        per_3: 0.43
+    },
+    methods: {
+        handleStatus: function(status){
+            this.statusList = status;
+            console.log(this.statusList);
+        },
+        handleSrc1: function(src1){
+            this.src_1 = src1;
+            console.log(this.src_1);
+        },
+        handleSrc2: function(src2){
+            this.src_2 = src2;
+            console.log(this.src_2);
+        },
+        handleSrc3: function(src3){
+            this.src_3 = src3;
+            console.log(this.src_3);
+        },
+        handlePer1: function(per1){
+            this.per_1 = per1;
+            console.log(this.per_1);
+        },
+        handlePer2: function(per2){
+            this.per_2 = per2;
+            console.log(this.per_2);
+        },
+        handlePer3: function(per3){
+            this.per_3 = per3;
+            console.log(this.per_3);
+        }
+    },
+
+});

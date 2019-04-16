@@ -401,19 +401,19 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
     public ProjectScheduleSummarizeVO getProjectScheduleSummarize(String projectName, String level1,
                                                                         String level2, String level3,
                                                                         String level4, String level5) {
-        int subProjectNumber = 0;//子项目数量
+        int subProjectNumber = 100;//子项目数量
 
-        int startWorkingNumber = 0;//开工数量
+        int startWorkingNumber = 50;//开工数量
 
-        double starWorkingRatio =0;//开工率
+        double starWorkingRatio = 50.0;//开工率
 
-        double progress = 0;//总体进度
+        double progress = 40.0;//总体进度
 
-        int finishWorkingNumber = 0;//完工数量
+        int finishWorkingNumber = 60;//完工数量
 
-        double finishWorkingRatio = 0;//完工率
+        double finishWorkingRatio = 60.0;//完工率
 
-        int approvalProgressNumber = 0;//正在审批数
+        int approvalProgressNumber = 50;//正在审批数
 
         ProjectExample projectExample = new ProjectExample();
         ProjectExample.Criteria criteria = projectExample.createCriteria();
@@ -492,7 +492,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
                 progress = Double.valueOf(subprogress) + progress;
             }
         }
-        progress = progress / subProjectNumber;//总体比例
+        progress = progress / subProjectNumber/100;//总体比例
         ProjectScheduleSummarizeVO projectScheduleSummarizeVO = new ProjectScheduleSummarizeVO();
         projectScheduleSummarizeVO.setApprovalProgressNumber(approvalProgressNumber);
         projectScheduleSummarizeVO.setFinishWorkingNumber(finishWorkingNumber);
@@ -501,6 +501,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
         projectScheduleSummarizeVO.setStarWorkingRatio(starWorkingRatio);
         projectScheduleSummarizeVO.setProgress(progress);
         projectScheduleSummarizeVO.setProjectName(projectName);
+        projectScheduleSummarizeVO.setSubProjectNumber(subProjectNumber);
         projectScheduleSummarizeVO.setLevel1(level1);
         projectScheduleSummarizeVO.setLevel2(level2);
         projectScheduleSummarizeVO.setLevel3(level3);

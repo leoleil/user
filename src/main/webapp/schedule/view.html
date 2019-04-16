@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>View</title>
     <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
-    <link rel="stylesheet" href="easyui/themes/default/easyui.css">
+    <link rel="stylesheet" href="easyui/themes/metro/easyui.css">
     <link rel="stylesheet" href="easyui/themes/icon.css">
     <link rel="stylesheet" href="css/view.css">
 
@@ -17,7 +17,7 @@
         <img id="logo" src="img/logo.png" alt="logo">
         <p id="title">全军十十十十十十十十十十系统<br/><span id="eng-title">THE PLA'S INFORMATION SUPPORT AND ASSURANCE COMBAT READINESS DUTY MANAGEMENT SYSTEM</span></p>
         <div class="divide"></div>
-        <p id="sub-title">测试用的测试用的测试</p>
+        <p id="sub-title">项目总览</p>
         <div class="divide"></div>
         <div class="right-wrap">
             <div id="divide"></div>
@@ -30,8 +30,7 @@
     <div class="menu-bar">
         <ul id="back-bar">
             <li><a href="index.html">填报系统></a></li>
-            <li><a href="view.html">工程进度></a></li>
-            <li><a href="form.html">填报界面</a></li>
+            <li><a href="form.html">项目总览</a></li>
         </ul>
         <ul id="icon-ul">
             <li><img src="img/关闭.png" alt="close"></li>
@@ -42,11 +41,17 @@
     <div class="content">
         <div class="con-bar">
             <p>全军项目提报情况</p>
-            <div class="summary">
+            <div class="excel">      
+            </div>
+            <div class="excel" style="position:relative;left:110px;">
+                    <span class="icons" ><img style="width:14px;height:14px;position:relative;top:-2px;right:-25px;"  src="img/导出.png"></span>
+                    <a id="excel" href="/onps/schedule/excel.do">导出</a>
+            </div>
+            <div class="summary" style="position:relative;left:120px;">
                 <span class="icons"><img src="img/summary.png"></span>
                 <input type="button" value="总体进度"  id="sumbtn">
             </div>
-            <div class="box">
+            <div class="box" style="position:relative;left:100px;">
                 <input type="text" name="search" placeholder="|关键字">
                 <button id="search">查询</button>
             </div>
@@ -54,7 +59,7 @@
         <table>
             <thead>
                 <tr>
-                    <th class="fix">序号</th><th>日期</th><th>项目名称</th><th>单位</th><th class="fix">填报进度</th><th class="fix">操作</th>
+                    <th class="fix">序号</th><th>日期</th><th>项目名称</th><th>单位</th><th class="fix" style="max-width:100px">填报进度</th><th class="fix">操作</th>
                 </tr>
             </thead>
             <tbody id="tbody"></tbody>
@@ -86,6 +91,7 @@
             <p class="mTitle">总体进度</p>
         </div>
         <div class="mCon">
+            <p>请选择战略方向以及计划名称：<br><br></p>
             <input id="state1"> <br><br>
             <input id="state2">
             <div id="sumdiv"></div>

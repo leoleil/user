@@ -151,19 +151,34 @@ body{
     font-weight: bold;
 }
 .con-bar .icons{
+    
     float: left;
     line-height: 36px;
     position: relative;
     z-index: 11;
-    top: 2px;
+    top: 1px;
     left:14px;
+}
+.con-bar #excel{
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 0 0 45px;
+    background: #112951;
+    border: none;
+    border-radius: 3px;
+    /*color: #fff;*/
+    display: block;
+    text-decoration: none;
+    font-size: 14px;
+    outline: none;
 }
 .con-bar #sumbtn{
     position: relative;
     top:-36px;
     padding: 0 0 0 25px;
-    border: 1px solid #112951;
-    border-radius: 5px;
+    border: none;
+    border-radius: 3px;
     width: 108px;
     height: 30px;
     float: left;
@@ -174,9 +189,9 @@ body{
     line-height: 32px;
     cursor:pointer;
 }
-.con-bar .summary{
+.con-bar .summary,.excel{
     float: right;
-    width: 100px;
+    width: 118px;
     height: 30px;
     font-size: 14px;
     margin: 15px auto;
@@ -192,7 +207,7 @@ body{
 }
 .con-bar .box input{
     border: 1px solid #112951;
-    border-radius: 5px 0px 0px 5px;
+    border-radius: 3px 0px 0px 3px;
     width: 202px;
     height: 30px;   
     float: left;
@@ -204,7 +219,7 @@ body{
 }
 .con-bar .box #search{
     border: 1px solid #112951;
-    border-radius: 0px 5px 5px 0px;
+    border-radius: 0px 3px 3px 0px;
     width: 78px;
     height: 30px;
     float: right;
@@ -256,8 +271,8 @@ body{
 .content table td{
     border: #1e3a69 solid 1px;
 }
-content table .fix{
-    width: 180px;
+content table th.fix{
+    width: 10px;
 }
 .content table thead{
     background: #1e3a69;
@@ -303,6 +318,14 @@ content table .fix{
 } 
 
 /*总体 遮罩层 */
+.textbox-text{
+    background: #060606;
+    color:#fff;
+}
+.combo-panel{
+    background: #060606;
+    color:#fff;
+}
 #mask{
     z-index: 1000;
     background-color: #000000;
@@ -313,28 +336,30 @@ content table .fix{
     top: 0;
 }
 .maskCon{
+    border: #255daa 2px solid;
+    border-radius: 3px;
     z-index: 1001;
     display:none ;
     position: absolute;
     top: 50%;
     left:50%;
     transform: translate(-50%,-50%); 
-    width: 70%;
+    width: 80%;
     height: 80%;
-    background: #1e3a69;
+    background: #112951;
 }
 .maskCon .conHeader{
     color: #fff;
     height: 40px;
     line-height: 40px;
-    background: #112951;
+    background: #1e3a69;
 }
 .maskCon .conHeader .mTitle{
     margin:  0 0 0 20px;
 }
 .maskCon #mclose{
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     background: url("../img/关闭.png") no-repeat ;
     -webkit-background-size: 100% auto;
     -moz-background-size: 100% auto;
@@ -345,7 +370,6 @@ content table .fix{
     top:10px;
 }
 .mCon{
-    max-height: 80%;
     min-height: 80%;
     width: 90%;
     margin: 50px auto;
@@ -357,7 +381,7 @@ content table .fix{
 #fmask{
     z-index: 1000;
     background-color: #000000;
-    opacity: 0.1;
+    opacity: 0.5;
     filter:alpha(opacity=50);
     position: absolute;
     left: 0;

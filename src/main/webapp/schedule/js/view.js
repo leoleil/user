@@ -16,6 +16,20 @@ function add_zero(temp){
 }
 setInterval(getCurDate,1000);
 
+function add0(m){
+    return m<10?'0'+m:m;
+}
+function format(shijianchuo){
+    //shijianchuo是整数，否则要parseInt转换
+    var time = new Date(shijianchuo);
+    var y = time.getFullYear();
+    var m = time.getMonth()+1;
+    var d = time.getDate();
+    var h = time.getHours();
+    var mm = time.getMinutes();
+    var s = time.getSeconds();
+    return y+'-'+add0(m)+'-'+add0(d);
+}
 
 // 分页
 var pageSize=10;
@@ -107,7 +121,6 @@ function displayPage() {
 
 // 总体进度点击事件
 $('#sumbtn').on('click',function (){
-    alert('1111');
     var sHeight = document.documentElement.scrollHeight;
     var sWidth = document.documentElement.scrollWidth;
     var wHeight=document.documentElement.clientHeight;
@@ -215,7 +228,7 @@ $('#state2').combotree({
              <input class="easyui-textbox" style="width:30px">
         `;
         var content = `
-            
+            <br><br>
                 <p class="sump">
                     <span style="color:#63dc90">${txt1}</span>共安排<span style="color:#63dc90">${fx}</span>信息通信设施建设项目${input}项，
                     已开工${input}项,开工率${input}%，
@@ -837,7 +850,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                     data.documentDate = new Date(date);
                 }
             });
-            //$('#a_6').datebox('setValue',dList[listNumber].documentDate);
+            var documentDate =  format(dList[listNumber].documentDate);
+            $('#a_6').datebox('setValue',documentDate);
 
             $('#a_7').textbox({
                 required:true,
@@ -997,7 +1011,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                   
                 }
             });
-            //$('#b_6').datebox('setValue',dList[listNumber].submitDate);
+            var submitDate =  format(dList[listNumber].submitDate);
+            $('#b_6').datebox('setValue',submitDate);
 
             $('#b_7').textbox({
                 width:300,
@@ -1049,7 +1064,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                   
                 }
             });
-            //$('#b_10').datebox('setValue',dList[listNumber].approvalDate);
+            var approvalDate =  format(dList[listNumber].approvalDate);
+            $('#b_10').datebox('setValue',approvalDate);
             
             $('#b_11').textbox({
                 width:300,
@@ -1101,7 +1117,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                     
                 }
             });
-            //$('#b_14').datebox('setValue',dList[listNumber].submitDateTa);
+            var submitDateTa =  format(dList[listNumber].submitDateTa);
+            $('#b_14').datebox('setValue',submitDateTa);
 
             $('#b_15').textbox({
                 width:300,
@@ -1153,7 +1170,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                    
                 }
             });
-            //$('#b_18').datebox('setValue',dList[listNumber].approvalDateTa);
+            var approvalDateTa =  format(dList[listNumber].approvalDateTa);
+            $('#b_18').datebox('setValue',approvalDateTa);
 
             $('#b_19').datebox({
                 width:320,
@@ -1166,7 +1184,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                    
                 }
             });
-            //$('#b_19').datebox('setValue',dList[listNumber].replyDate);
+            var replyDate =  format(dList[listNumber].replyDate);
+            $('#b_18').datebox('setValue',replyDate);
 
             $('#b_20').combotree({
                 width:300,
@@ -1260,7 +1279,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                    
                 }
             });
-            //$('#b_25').datebox('setValue',dList[listNumber].startTime);
+            var startTime =  format(dList[listNumber].startTime);
+            $('#b_25').datebox('setValue',startTime);
 
             $('#b_26').datebox({
                 width:300,
@@ -1273,7 +1293,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                     
                 }
             });
-            //$('#b_26').datebox('setValue',dList[listNumber].endTime);
+            var endTime =  format(dList[listNumber].endTime);
+            $('#b_26').datebox('setValue',endTime);
 
             $('#b_27').textbox({
                 width:300,
@@ -1413,7 +1434,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                     data.startTimeCon = new Date(date);   
                 }
             });
-            //$('#c_5').datebox('setValue',dList[listNumber].startTimeCon);
+            var startTimeCon =  format(dList[listNumber].startTimeCon);
+            $('#c_5').datebox('setValue',startTimeCon);
 
             $('#c_6').datebox({
                 width:200,
@@ -1426,7 +1448,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                  
                 }
             });
-            //$('#c_6').datebox('setValue',dList[listNumber].testTimeCon);
+            var testTimeCon =  format(dList[listNumber].testTimeCon);
+            $('#c_6').datebox('setValue',testTimeCon);
 
             $('#c_7').datebox({
                 width:200,
@@ -1439,7 +1462,8 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
                  
                 }
             });
-            //$('#c_7').datebox('setValue',dList[listNumber].endTimeCon);
+            var endTimeCon =  format(dList[listNumber].endTimeCon);
+            $('#c_7').datebox('setValue',endTimeCon);
 
             $('#reason').textbox({
                 width:1000,
@@ -1530,21 +1554,3 @@ $( "button[id^='edit_']" ).each( function(){//获取所有的id为edit_开头的
     });
 
 });
-// $('.btn').on('click',function (){
-//     var sHeight = document.documentElement.scrollHeight;
-//     var sWidth = document.documentElement.scrollWidth;
-//     var wHeight=document.documentElement.clientHeight;
-//     var wWidth=document.documentElement.clientWidth;
-//     var mask = document.createElement('div');
-//     mask.id="fmask";
-//     mask.style.height=sHeight+"px";
-//     mask.style.width = sWidth+"px";
-//     document.body.appendChild(mask);
-//     var con = document.getElementsByClassName('formCon');
-//     con[0].style.display = 'block'; 
-//     var close = document.getElementById("fclose");
-//     mask.onclick=close.onclick=function () {
-//         document.body.removeChild(mask);
-//         con[0].style.display='none';
-//     }
-//   });
