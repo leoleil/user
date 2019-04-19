@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <!-- 基本配置 -->
   <modelVersion>4.0.0</modelVersion><!-- pom模型的版本，maven2和3只能使用4.0.0-->
   <groupId>com</groupId><!-- 组ID 用于定位-->
@@ -114,12 +114,12 @@
       <artifactId>poi</artifactId>
       <version>4.0.0</version>
     </dependency>
-    <dependency>
+    <!--<dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi-ooxml</artifactId>
       <version>4.0.0</version>
-    </dependency>
-     <!--第二部分：Servlet web -->
+    </dependency>-->
+    <!-- 第二部分：Servlet web -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
@@ -254,6 +254,12 @@
         <directory>src/main/java</directory>
         <includes>
           <include>**/*.xml</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>**</include>
         </includes>
       </resource>
     </resources>
