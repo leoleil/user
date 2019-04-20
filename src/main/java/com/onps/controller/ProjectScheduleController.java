@@ -10,6 +10,7 @@ import com.onps.service.ProjectScheduleService;
 import com.onps.utils.ConstantString;
 import com.onps.utils.resultUtils.BaseResult;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,7 @@ public class ProjectScheduleController {
     ProjectScheduleExcelService projectScheduleExcelService;
 
     @RequestMapping("/submitProjectSchedule")
+    @RequiresRoles("user")
     @ResponseBody
     public BaseResult<ProjectScheduleVO> submitProjectSchedule(ProjectScheduleVO projectScheduleVO){
         System.out.println("进入submitProjectSchedule");
@@ -61,6 +63,7 @@ public class ProjectScheduleController {
         return info;
     }
     @RequestMapping("/getProjectSchedule")
+    @RequiresRoles("user")
     @ResponseBody
     public BaseResult<ProjectScheduleVO> getProjectScheduleList(){
         BaseResult<ProjectScheduleVO> info = new BaseResult<ProjectScheduleVO>();
@@ -72,6 +75,7 @@ public class ProjectScheduleController {
     }
 
     @RequestMapping("/getProjectScheduleSummarize")
+    @RequiresRoles("user")
     @ResponseBody
     public BaseResult<ProjectScheduleSummarizeVO> getProjectScheduleSummarize(String projectName, String level1,
                                                                               String level2, String level3,
@@ -96,6 +100,7 @@ public class ProjectScheduleController {
         return info;
     }
     @RequestMapping("/excel")
+    @RequiresRoles("user")
     public void excelOut(HttpServletResponse response){
         try {
             projectScheduleExcelService.makeProjectExcel(response);
