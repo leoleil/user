@@ -32,7 +32,7 @@ public class ExcelController {
 
         try {
             FileInputStream fis = (FileInputStream) excelFile.getInputStream();
-            inportExcel.excelImport(fis,"ok.xls");
+            inportExcel.excelImport(fis,excelFile.getOriginalFilename());
             info.setMessage("成功");
             info.setStatus(ConstantString.STATUS_SUCCESS);
             return info;
