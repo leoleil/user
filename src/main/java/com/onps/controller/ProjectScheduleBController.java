@@ -6,15 +6,18 @@ import com.onps.utils.ConstantString;
 import com.onps.utils.resultUtils.BaseResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
 @Controller
+@RequestMapping("/schedule")
 public class ProjectScheduleBController {
     @Resource
     ProjectScheduleFormBService projectScheduleFormBService;
 
     @RequestMapping("/updateB")
+    @ResponseBody
     public BaseResult<ProjectScheduleVO> update(ProjectScheduleVO projectScheduleVO){
         BaseResult<ProjectScheduleVO> info = new BaseResult<ProjectScheduleVO>();
         if((!projectScheduleVO.getProjectName().equals("")) && projectScheduleVO.getProjectName() != null
@@ -40,6 +43,7 @@ public class ProjectScheduleBController {
         }
     }
     @RequestMapping("/deleteB")
+    @ResponseBody
     public BaseResult<ProjectScheduleVO> delete(ProjectScheduleVO projectScheduleVO){
         BaseResult<ProjectScheduleVO> info = new BaseResult<ProjectScheduleVO>();
         if((!projectScheduleVO.getProjectName().equals("")) && projectScheduleVO.getProjectName() != null

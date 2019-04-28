@@ -3,8 +3,10 @@ package com.onps.controller;
 
 import com.onps.model.Project;
 import com.onps.model.User;
+import com.onps.model.vo.ProjectScheduleReturnVO;
 import com.onps.model.vo.ProjectScheduleSummarizeVO;
 import com.onps.model.vo.ProjectScheduleVO;
+import com.onps.model.vo.SubProjectScheduleReturnVO;
 import com.onps.service.ProjectScheduleExcelService;
 import com.onps.service.ProjectScheduleService;
 import com.onps.utils.ConstantString;
@@ -62,15 +64,28 @@ public class ProjectScheduleController {
         }
         return info;
     }
-    @RequestMapping("/getProjectSchedule")
-    @RequiresRoles("user")
-    @ResponseBody
+
     public BaseResult<ProjectScheduleVO> getProjectScheduleList(){
         BaseResult<ProjectScheduleVO> info = new BaseResult<ProjectScheduleVO>();
         List<ProjectScheduleVO> projectScheduleVOList = projectScheduleService.getProjectScheduleList();
         info.setList(projectScheduleVOList);
         info.setStatus(ConstantString.STATUS_SUCCESS);
         info.setMessage("项目规划详细信息数据");
+        return info;
+    }
+
+    @RequestMapping("/getProjectSchedule")
+    @RequiresRoles("user")
+    @ResponseBody
+    public BaseResult<ProjectScheduleReturnVO> getProjectSchelduleList(String projectName, String level1,
+                                                                       String level2, String level3,
+                                                                       String level4, String level5){
+        BaseResult<ProjectScheduleReturnVO> info = new BaseResult<ProjectScheduleReturnVO>();
+        info.setList(projectScheduleService.getProjectScheduleList(projectName,level1,
+                level2,level3,
+                level4,level5));
+        info.setStatus(ConstantString.STATUS_SUCCESS);
+
         return info;
     }
 
@@ -108,5 +123,6 @@ public class ProjectScheduleController {
             e.printStackTrace();
         }
     }
+
 
 }

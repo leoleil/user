@@ -15,6 +15,15 @@ import java.util.Map;
 
 public class DaoTest {
     private ApplicationContext applicationContext;
+    public static void main(String []args){
+        java.text.NumberFormat percentFormat=java.text.NumberFormat.getPercentInstance();
+        percentFormat.setMaximumFractionDigits(2);
+        percentFormat.setMaximumIntegerDigits(3);
+        percentFormat.setMinimumFractionDigits(0);
+        percentFormat.setMinimumIntegerDigits(1);
+        String a="0.21";
+        System.out.println(percentFormat.format(Double.parseDouble(a)));
+    }
     @Test
     public void userTest(){
         String configLocation = "classpath:spring/applicationContext.xml";

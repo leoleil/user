@@ -13,17 +13,17 @@
                 type: "post",
                 async: false,
                 data: {
-                    "projectName": $("#projectName").val(),
-                    "level1": $("#level1").val(),//五个地理位置
-                    "level2": $("#level2").val(),//二级地理位置
-                    "level3": $("#level3").val(),//建设计划
-                    "level4": $("#level4").val(),//十几五建设计划
-                    "level5": $("#level5").val()//军区军兵种后勤
+                    "projectName": '',
+                    "level1": '',//五个地理位置
+                    "level2": '',//二级地理位置
+                    "level3": '',//建设计划
+                    "level4": '',//十几五建设计划
+                    "level5": ''//军区军兵种后勤
                 },
                 success: function (data) {
                     console.log(data);
                     if (data.status == 'S00001') {
-                        alert(data.message);
+                        //alert(data.message);
                         /*data.entity={
                             projectName: //项目名
 

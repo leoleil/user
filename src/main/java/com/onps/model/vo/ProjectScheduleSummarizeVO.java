@@ -13,20 +13,21 @@ public class ProjectScheduleSummarizeVO {
 
     private String level5;//军区军兵种后勤
 
-    private int subProjectNumber;//子项目数量
+    private double subProjectNumber;//子项目数量
 
-    private int startWorkingNumber;//开工数量
+    private double startWorkingNumber;//开工数量
 
     private double starWorkingRatio;//开工率
 
     private double progress;//总体进度
 
-    private int finishWorkingNumber;//完工数量
+    private double finishWorkingNumber;//完工数量
 
     private double finishWorkingRatio;//完工率
 
-    private int approvalProgressNumber;//审批进展
+    private double approvalProgressNumber;//需要审批数量
 
+    private double approvalRatio;//审批率
 
     public String getProjectName() {
         return projectName;
@@ -76,19 +77,19 @@ public class ProjectScheduleSummarizeVO {
         this.level5 = level5;
     }
 
-    public int getSubProjectNumber() {
+    public double getSubProjectNumber() {
         return subProjectNumber;
     }
 
-    public void setSubProjectNumber(int subProjectNumber) {
+    public void setSubProjectNumber(double subProjectNumber) {
         this.subProjectNumber = subProjectNumber;
     }
 
-    public int getStartWorkingNumber() {
+    public double getStartWorkingNumber() {
         return startWorkingNumber;
     }
 
-    public void setStartWorkingNumber(int startWorkingNumber) {
+    public void setStartWorkingNumber(double startWorkingNumber) {
         this.startWorkingNumber = startWorkingNumber;
     }
 
@@ -108,11 +109,11 @@ public class ProjectScheduleSummarizeVO {
         this.progress = progress;
     }
 
-    public int getFinishWorkingNumber() {
+    public double getFinishWorkingNumber() {
         return finishWorkingNumber;
     }
 
-    public void setFinishWorkingNumber(int finishWorkingNumber) {
+    public void setFinishWorkingNumber(double finishWorkingNumber) {
         this.finishWorkingNumber = finishWorkingNumber;
     }
 
@@ -124,11 +125,19 @@ public class ProjectScheduleSummarizeVO {
         this.finishWorkingRatio = finishWorkingRatio;
     }
 
-    public void setApprovalProgressNumber(int approvalProgressNumber) {
+    public double getApprovalProgressNumber() {
+        return approvalProgressNumber;
+    }
+
+    public void setApprovalProgressNumber(double approvalProgressNumber) {
         this.approvalProgressNumber = approvalProgressNumber;
     }
 
-    public int getApprovalProgressNumber() {
-        return approvalProgressNumber;
+    public double getApprovalRatio() {
+        return approvalRatio;
+    }
+
+    public void setApprovalRatio(double approvalRatio) {
+        this.approvalRatio = approvalRatio;
     }
 }

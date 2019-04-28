@@ -2,6 +2,7 @@ package com.onps.service;
 
 import com.onps.model.Project;
 import com.onps.model.vo.ProjectScheduleHomeSummarizeVO;
+import com.onps.model.vo.ProjectScheduleReturnVO;
 import com.onps.model.vo.ProjectScheduleSummarizeVO;
 import com.onps.model.vo.ProjectScheduleVO;
 
@@ -21,6 +22,20 @@ public interface ProjectScheduleService {
      * @return 返回项目数据的列表
      */
     List<ProjectScheduleVO> getProjectScheduleList();
+
+    /**
+     * 根据条件获取项目数据
+     * @param projectName
+     * @param level1
+     * @param level2
+     * @param level3
+     * @param level4
+     * @param level5
+     * @return
+     */
+    List<ProjectScheduleReturnVO> getProjectScheduleList(String projectName, String level1,
+                                                         String level2, String level3,
+                                                         String level4, String level5);
 
     /**
      * 分层次获取项目的汇总信息

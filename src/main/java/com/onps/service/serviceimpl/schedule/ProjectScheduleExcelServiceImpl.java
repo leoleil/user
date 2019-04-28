@@ -1102,7 +1102,13 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                     cell43.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getProjectprogress()!=null){
                     HSSFCell cell44=row.createCell(44);
-                    cell44.setCellValue((String)subprojects.get(0).getProjectprogress());
+                    java.text.NumberFormat percentFormat=java.text.NumberFormat.getPercentInstance();
+                    percentFormat.setMaximumFractionDigits(2);
+                    percentFormat.setMaximumIntegerDigits(3);
+                    percentFormat.setMinimumFractionDigits(0);
+                    percentFormat.setMinimumIntegerDigits(1);
+                    System.out.println(percentFormat.format(Double.parseDouble((String)subprojects.get(0).getProjectprogress())));
+                    cell44.setCellValue(percentFormat.format( Double.parseDouble((String)subprojects.get(0).getProjectprogress())));
                     cell44.setCellStyle(contextStyle);}
                 if(subprojects.get(0).getCompletedinvestment()!=null){
                     HSSFCell cell45=row.createCell(45);
@@ -1317,7 +1323,14 @@ public class ProjectScheduleExcelServiceImpl implements ProjectScheduleExcelServ
                         cell43.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getProjectprogress()!=null){
                         HSSFCell cell44=rowX.createCell(44);
-                        cell44.setCellValue((String)subprojects.get(i).getProjectprogress());
+                        java.text.NumberFormat percentFormat=java.text.NumberFormat.getPercentInstance();
+                        percentFormat.setMaximumFractionDigits(2);
+                        percentFormat.setMaximumIntegerDigits(3);
+                        percentFormat.setMinimumFractionDigits(0);
+                        percentFormat.setMinimumIntegerDigits(1);
+                        subprojects.get(i).getProjectprogress();
+                        //System.out.println(percentFormat.format( );
+                        cell44.setCellValue(percentFormat.format(Double.parseDouble((String)subprojects.get(i).getProjectprogress())));
                         cell44.setCellStyle(contextStyle);}
                     if(subprojects.get(i).getCompletedinvestment()!=null){
                         HSSFCell cell45=rowX.createCell(45);
