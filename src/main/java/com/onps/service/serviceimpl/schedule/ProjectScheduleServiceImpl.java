@@ -591,7 +591,7 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
         //查完工数量
         List<Object> String2 = new ArrayList<>();
         String2.add("竣工");
-        String2.add("已完工");
+        //String2.add("已完工");
         SubprojectExample subprojectExampleFinishWorkingNumber = new SubprojectExample();
         subprojectExampleFinishWorkingNumber.createCriteria()
                 .andProjectidIn(projectIdList)
@@ -631,7 +631,8 @@ public class ProjectScheduleServiceImpl implements ProjectScheduleService {
         //计算审批率
         SubprojectExample subprojectExampleForApprovalRatio = new SubprojectExample();
         subprojectExampleForApprovalRatio.createCriteria()
-                .andApprovalprogressEqualTo("已审批");
+                .andProjectidIn(projectIdList)
+                .andApprovalprogressEqualTo("审核通过");
         int approvalNum = subprojectMapper.countByExample(subprojectExampleForApprovalRatio);
         approvalRatio = approvalNum * 100 / subProjectNumber;
 

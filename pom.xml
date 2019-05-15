@@ -215,7 +215,7 @@
   <!-- 构建配置 -->
   <build>
     <!-- 该元素设置了项目源码目录，当构建项目的时候，构建系统会编译目录里的源码。该路径是相对于pom.xml的相对路径-->
-    <finalName>project</finalName>
+    <finalName>onps</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>
