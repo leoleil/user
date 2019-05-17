@@ -29,7 +29,12 @@
 		</bean>
 		
 		<!--配置注解driven ,默认会生成处理器映射器和处理器适配器,不需要再另外配置-->
-		<mvc:annotation-driven/>
+	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<bean class="com.onps.resovler.PageInfoResolver"/>
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+
 		<mvc:default-servlet-handler/>
 		<!--<mvc:resources location="/js/" mapping="/js/**"/>
         <mvc:resources location="/css/" mapping="/css/**" />

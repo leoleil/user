@@ -51,4 +51,21 @@
         department = #{department}
         where id = #{id}
     </update>
+
+
+    <select id="getUserByPageInfo" resultMap="User">
+        SELECT * FROM
+        (
+        SELECT A.*, ROWNUM RN
+        FROM (SELECT * FROM my_user) A
+        WHERE ROWNUM <![CDATA[ < ]]> #{end}
+        )
+        WHERE RN <![CDATA[ >= ]]> #{start}
+    </select>
+
+    <select id="countAllUser" resultType="Integer">
+        SELECT count(id) FROM my_user
+    </select>
+
+
 </mapper>

@@ -1,9 +1,12 @@
 package com.onps.utils.resultUtils;
 
+import com.onps.utils.ConstantString;
+
 import java.util.List;
 
 /**
  * 向前端返回数据的工具类
+ *
  * @param <T> 需要返回的实体对象的类型
  */
 public class BaseResult<T> {
@@ -30,7 +33,7 @@ public class BaseResult<T> {
         this.entity = entity;
     }
 
-    public BaseResult( String status,List<T> list) {
+    public BaseResult(String status, List<T> list) {
         this.list = list;
         this.status = status;
     }
@@ -41,6 +44,25 @@ public class BaseResult<T> {
     }
 
     public BaseResult() {
+    }
+
+
+    /**
+     * 创建成功的返回结果
+     *
+     * @return
+     */
+    public static <T> BaseResult createSuccessResult(T data) {
+        return new BaseResult(ConstantString.STATUS_SUCCESS, data);
+    }
+
+    /**
+     * 创建失败的返回结果
+     *
+     * @return
+     */
+    public static <T> BaseResult createFailResult(T data) {
+        return new BaseResult(ConstantString.STATUS_FAIL, data);
     }
 
     public BaseResult(String status) {
