@@ -34,15 +34,6 @@ public class UserServiceImpl implements UserService {
     @Resource
     private MyUserMapper myUserMapper;
 
-    @Resource
-    private UserDAO userDAO;
-
-
-    //TODO  原来就有的方法
-    @Override
-    public TMgtUser login(String userName, String pw) throws Exception {
-        return null;
-    }
 
     /**
      * 新增用户的基本操作

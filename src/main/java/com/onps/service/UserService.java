@@ -17,16 +17,6 @@ import com.onps.model.po.UserPO;
 public interface UserService {
 
     /**
-     * 用户登陆的操作
-     *
-     * @param userName
-     * @param pw
-     * @return
-     * @throws Exception
-     */
-    public TMgtUser login(String userName, String pw) throws Exception;
-
-    /**
      * 新增用户的基本操作
      *
      * @param username   用户名
