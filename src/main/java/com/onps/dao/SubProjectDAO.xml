@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onps.dao.SubProjectDAO">
+
+    <!--   将某个项目授予某个用户  start  -->
+
+    <update id="updateProjectToSomeOne">
+        update SUBPROJECT
+        set USERID=#{userID}
+        where ID=#{subProjectId}
+    </update>
+
+    <!--   将某个项目授予某个用户  end  -->
+
+</mapper>

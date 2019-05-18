@@ -4,10 +4,8 @@ import com.onps.base.PageInfo;
 import com.onps.dao.MyUserMapper;
 import com.onps.dao.UserDAO;
 import com.onps.model.MyUser;
-import com.onps.model.TMgtUser;
 import com.onps.model.po.UserPO;
 import com.onps.service.UserService;
-import com.sun.org.apache.xml.internal.resolver.readers.ExtendedXMLCatalogReader;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -33,6 +31,9 @@ public class UserServiceImpl implements UserService {
      */
     @Resource
     private MyUserMapper myUserMapper;
+
+    @Resource
+    private UserDAO userDAO;
 
 
     /**
