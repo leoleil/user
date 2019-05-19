@@ -43,6 +43,12 @@ public class BaseResult<T> {
         this.entity = entity;
     }
 
+    private BaseResult(String status, String message, T entity) {
+        this.status = status;
+        this.message = message;
+        this.entity = entity;
+    }
+
     public BaseResult() {
     }
 
@@ -53,7 +59,7 @@ public class BaseResult<T> {
      * @return
      */
     public static <T> BaseResult createSuccessResult(T data) {
-        return new BaseResult(ConstantString.STATUS_SUCCESS, data);
+        return new BaseResult(ConstantString.STATUS_SUCCESS, "操作成功", data);
     }
 
     /**
@@ -62,7 +68,7 @@ public class BaseResult<T> {
      * @return
      */
     public static <T> BaseResult createFailResult(T data) {
-        return new BaseResult(ConstantString.STATUS_FAIL, data);
+        return new BaseResult(ConstantString.STATUS_FAIL, "操作失败", data);
     }
 
     public BaseResult(String status) {

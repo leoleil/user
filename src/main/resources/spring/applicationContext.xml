@@ -47,16 +47,20 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
+
 	
 	<!-- 配置通知 -->
+	<!--  赵立刚增加了两个  add grant  还有增加了  rollback-for="java.lang.Exception" 用于回滚   -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 	<tx:attributes>
     <!--以name开头的方法运行的时候都受事务管理限制-->
-	<tx:method name="save*" propagation="REQUIRED" />
+	<tx:method name="save*" propagation="REQUIRED"/>
 	<tx:method name="update*" propagation="REQUIRED" />
 	<tx:method name="delete*" propagation="REQUIRED" />
 	<tx:method name="insert*" propagation="REQUIRED" />
-	<tx:method name="*" propagation="REQUIRED" />	
+	<tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+	<tx:method name="grant*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+	<tx:method name="*" propagation="REQUIRED" />
 	</tx:attributes>
 	
 	</tx:advice>
@@ -97,6 +101,13 @@
 				/user/js/** = anon
 				/user/css/** = anon
 				/user/image/** = anon
+				<!-- 用户的管理  -->
+				<!--  赵立刚测试了  已经注释掉了 -->
+				<!--/manage/user/** = anon-->
+				<!--/manage/project/** = anon-->
+				<!--/manage/permission/** = anon-->
+				<!--/manage/role/** = anon-->
+
 				<!--perms:资源必须授予资源权限才能访问-->
 				<!--/admin/toAdmin.do=perms[ok]-->
 				<!-- 需要管理员角色才能访问此页面 -->

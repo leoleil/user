@@ -12,11 +12,18 @@
         select * from ONPS_ROLE
         where name = #{roleName}
     </select>
-    <insert id="insertPermission">
+
+    <select id="getRoleByRoleId" resultMap="roleList">
+        select * from ONPS_ROLE
+        where id = #{roleId}
+    </select>
+
+
+    <insert id="insertRole">
         insert into ONPS_ROLE (name)
         values (#{name})
     </insert>
-    <delete id="deletePermission">
+    <delete id="deleteRole">
         delete from ONPS_ROLE
         where id = #{id}
     </delete>

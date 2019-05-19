@@ -15,7 +15,7 @@
         values (#{0},#{1})
     </insert>
     <insert id="saveRolePermission">
-        insert into role_permission
+        insert into role_permission(role_id,permission_id)
         values (#{0},#{1})
     </insert>
     <delete id="removeUserRole">
@@ -35,7 +35,7 @@
         onps_role.id = role_permission.role_id and
         permission.id = role_permission.permission_id
     </select>
-    <select id="getRoleByUsername"  resultMap="roleList">
+    <select id="getRoleByUsername" resultMap="roleList">
         select onps_role.id as id , onps_role.name as name
         from my_user, onps_role,user_role
         where my_user.username = #{username} and
@@ -49,5 +49,20 @@
         onps_role.id = role_permission.role_id and
         permission.id = role_permission.permission_id
     </select>
+
+
+    <!--  删除用户所有的角色  -->
+
+    <delete id="deleteAllRoleFromUser">
+        delete from user_role
+        where user_id=#{userId}
+    </delete>
+
+    <!-- 删除角色所有的权限  -->
+    <delete id="deleteAllPermissionFromRole">
+        delete from role_permission
+        where role_id=#{roleId}
+    </delete>
+
 
 </mapper>
