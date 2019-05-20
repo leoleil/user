@@ -10,25 +10,159 @@
     <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
 </head>
 <body class="easyui-layout">
+<div id="adduser" class="easyui-window" title="用户添加" closed="true" style="width:500px;height:300px;">
+    <form style="padding:10px 20px 10px 40px;">
+        <p>用户名: <input name="username" class="numberinput" type="text"></p>
+        <p>密码: <input  name="password" class="numberinput" type="password"></p>
+        <div style="padding:5px;text-align:center;">
+            <a href="#" class="easyui-linkbutton" icon="icon-ok">Ok</a>
+            <a href="javascript:CloseWindows()" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+<div id="deleteuser" class="easyui-window" title="用户删除" closed="true" style="width:500px;height:300px;">
+    <form style="padding:10px 20px 10px 40px;">
+        <p>用户选择:<select name="deleteusername" id="selectdeleteusername" class="selectuser">
+            <option value="0" >用户0</option> 
+            <option value="0">用户1</option> 
+            <option value="0">用户2</option> 
+        </select> </p>
+        <div style="padding:5px;text-align:center;">
+            <a href="#" class="easyui-linkbutton" icon="icon-ok">Ok</a>
+            <a href="javascript:CloseWindows()" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+<div id="changepassword" class="easyui-window" title="密码修改" closed="true" style="width:500px;height:300px;">
+    <form style="padding:10px 20px 10px 40px;">
+        <p>用户选择:<select name="deleteusername" id="selectdeleteusername" class="selectuser">
+            <option value="0" >用户0</option> 
+            <option value="0">用户1</option> 
+            <option value="0">用户2</option> 
+        </select> </p>
+        <p>新密码: <input class="numberinput" type="password"></p>
+        <div style="padding:5px;text-align:center;">
+            <a href="#" class="easyui-linkbutton" icon="icon-ok">Ok</a>
+            <a href="javascript:CloseWindows()" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+
+
 <div data-options="region:'north',border:false" style="height:100px;padding:10px">
     <h2>光网络规划系统控制面板</h2>
 </div>
-<div data-options="region:'west',split:true,title:'功能面板'" style="width:150px;padding:10px;">
-    <a href="#" class="easyui-linkbutton">用户管理</a>
-    <p></p>
-    <a href="#" class="easyui-linkbutton">角色管理</a>
-    <p></p>
-    <a href="#" class="easyui-linkbutton">权限管理</a>
-    <p></p>
+<div data-options="region:'west',split:true,title:'功能面板'" style="width:200px;padding:10px;">
+    <div id="mainmenu" class="mainfunction" style="width:100px;padding:10px;">
+        <a href="javascript:Usermannagement()" class="easyui-linkbutton">用户管理</a>
+        <p></p>
+        <a href="#" class="easyui-linkbutton">角色管理</a>
+        <p></p>
+        <a href="#" class="easyui-linkbutton">权限管理</a>
+        <p></p>
+    </div>
+    <div id="usermannagement" class="subfunction" style="width:80%;padding:10px; display: none;">
+        <a id="btn_adduser" href="#" class="easyui-linkbutton">用户添加</a>
+        <p></p>
+        <a id="btn_deleteuser" href="#" class="easyui-linkbutton">用户删除</a>
+        <p></p>
+        <a id="btn_changepassword" href="#" class="easyui-linkbutton">密码修改</a>
+        <p></p>
+        <a href="javascript:Back()" class="easyui-linkbutton">返回上一级</a>
+        <p></p>
+    </div>
+    <div id="Rolemannagement" class="subfunction" style="width:80%;padding:10px; display: none;">
+        <a href="#" class="easyui-linkbutton">用户添加</a>
+        <p></p>
+        <a href="#" class="easyui-linkbutton">用户删除</a>
+        <p></p>
+        <a href="#" class="easyui-linkbutton">密码修改</a>
+        <p></p>
+        <a href="javascript:Back()" class="easyui-linkbutton">返回上一级</a>
+        <p></p>
+    </div>
+    <div id="Powermannagement" class="subfunction" style="width:80%;padding:10px; display: none;">
+        <a href="#" class="easyui-linkbutton">用户添加</a>
+        <p></p>
+        <a href="#" class="easyui-linkbutton">用户删除</a>
+        <p></p>
+        <a href="#" class="easyui-linkbutton">密码修改</a>
+        <p></p>
+        <a href="javascript:Back()" class="easyui-linkbutton">返回上一级</a>
+        <p></p>
+    </div>
 </div>
-<div data-options="region:'east',split:true,title:'说明面板'" style="width:100px;padding:10px;">
-
-</div>
+<div data-options="region:'center',split:true,title:'用户列表'" ">
+    <div class="datagrid-wrap panel-body panel-body-noheader" title="" style="width: 100%; height: auto;"  fit="true">
+        <div class="datagrid-view" style="width: 100%; height: auto;">
+            <table id="UserList" class="easyui-datagrid" style="width: 100%;" fit="false">                          
+                <thead style="width: 100%;">                
+                    <tr style="width: 100%;" >
+                        <th width = "30%" data-options="field:'id',align:'center'" >用户ID</th>
+                        <th width = "10%" data-options="field:'username',align:'center'">用户名</th>
+                        <th width = "10%" data-options="field:'password',align:'center'">密码</th>
+                        <th width = "10%" data-options="field:'department',align:'center'">部门</th>
+                        <th width = "20%" data-options="field:'date',align:'center'">日期</th>
+                        <th width = "10%" data-options="field:'zq',align:'center'">战区</th>
+                        <th width = "10%" data-options="field:'jbz',align:'center'">jbz</th>
+                    </tr>
+                </thead>
+                <tbody>  
+                    <tr> <td>1</td><td>2</td><td>3</td> <td>4</td><td>5</td><td>6</td><td>7</td> </tr> 
+                    <tr> <td>1</td><td>2</td><td>3</td> <td>4</td><td>5</td><td>6</td><td>7</td> </tr> 
+                    <tr> <td>1</td><td>2</td><td>3</td> <td>4</td><td>5</td><td>6</td><td>7</td> </tr> 
+             </tbody>  
+            </table>
+        </div>
+    </div>
+</div>>
 <div data-options="region:'south',border:false" style="height:100px;padding:10px;">
     <p>单位：<a href="https://www.bupt.edu.cn/">北京邮电大学</a></p>
     <p><a href="https://ipoc.bupt.edu.cn/index.do">北京邮电大学信息光子学与光通信研究院</a>研制</p>
 
 </div>
-<div data-options="region:'center',title:'管理主页'"></div>
+
+
+<script type="text/javascript">
+
+    $('#btn_adduser').click(function(){
+        CloseWindows();
+        $('#adduser').window('open');
+    });
+    $('#btn_deleteuser').click(function(){
+        CloseWindows();
+        $('#deleteuser').window('open');
+    }); 
+    $('#btn_changepassword').click(function(){
+        CloseWindows();
+        $('#changepassword').window('open');
+    });    
+    function CloseWindows(){
+        $('#adduser').window('close');
+        $('#deleteuser').window('close');
+        $('#changepassword').window('close');
+        $(":input").each(function(){
+            this.value="";
+        });
+    }
+    
+    function Back(){
+        var maindiv=document.getElementById("mainmenu");
+        var subdiv=document.getElementsByClassName("subfunction");
+        for (var i = 0;i<subdiv.length;i++) {
+                subdiv[i].style.display="none";
+            };
+        maindiv.style.display="block";
+        CloseWindows();
+        
+    }
+    function Usermannagement(){
+            var subdiv=document.getElementById("usermannagement");
+            var maindiv=document.getElementById("mainmenu");
+            maindiv.style.display="none";
+            subdiv.style.display="block";
+            
+    }
+</script>>
 </body>
 </html>
