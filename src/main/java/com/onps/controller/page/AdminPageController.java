@@ -30,4 +30,9 @@ public class AdminPageController {
     public String toPermissionMangement(){
         return "admin/permission";
     }
+
+    @RequestMapping("/ajax")
+    public String toAJAX(){
+        return "admin/ajax";
+    }
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajsx测试</title>
+    <script src="js/jquery-3.3.1.js"></script>
+</head>
+<script type="text/javascript">
+    $(function () {
+        $('#submit').click(function () {
+            $.ajax({
+                url: "/onps/manage/user/getUserByPageInfo.do",
+                type: "get",
+                async: false,
+                data: {
+                    "pageSize ":10,
+                    "currentPage ":1
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data.status == 'S00001') {
+                        console.log(data);
+                        data.data.forEach(function () {
+                            
+                        });
+
+                    } else {
+                        console.log(data);
+                    }
+
+                },
+                error: function (data) {
+                    alert("请求失败!");
+                }
+            });
+        });
+    })
+</script>
+<body>
+<input type="button" id="submit" value="获取"/>
+<div id="content"></div>
+</body>
+</html>
