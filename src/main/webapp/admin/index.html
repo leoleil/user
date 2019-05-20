@@ -9,9 +9,53 @@
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
 </head>
 <body class="easyui-layout">
+<div id="adduser" class="easyui-window" title="用户添加" closed="true" style="width:500px;height:300px;">
+    <form style="padding:10px 20px 10px 40px;">
+        <p>用户名: <input id="add_username" class="numberinput" type="text"></p>
+        <p>密码: <input  id="add_password" class="numberinput" type="text"></p>
+        <p>重新输入密码: <input  id="add_rePassword" class="numberinput" type="text"></p>
+        <p>战区: <input  id="add_zq" class="numberinput" type="text"></p>
+        <p>军兵种:  <input  id="add_jbz" class="numberinput" type="text"></p>
+        <p>部门: <input  id="add_department" class="numberinput" type="text"></p>
+        <div style="padding:5px;text-align:center;">
+            <a id="btn_adduserconfirm" href="javascript:SubmitAdd()" class="easyui-linkbutton" icon="icon-ok">Ok</a>
+            <a href="javascript:CloseWindows()" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+<div id="deleteuser" class="easyui-window" title="用户删除" closed="true" style="width:500px;height:300px;">
+    <form style="padding:10px 20px 10px 40px;">
+        <p>用户选择:<select id="selectdeleteusername" class="selectuser">
+            <option value="0" >用户0</option>
+            <option value="0">用户1</option>
+            <option value="0">用户2</option>
+        </select> </p>
+        <div style="padding:5px;text-align:center;">
+            <a href="#" class="easyui-linkbutton" icon="icon-ok">Ok</a>
+            <a href="javascript:CloseWindows()" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+<div id="changepassword" class="easyui-window" title="密码修改" closed="true" style="width:500px;height:300px;">
+    <form style="padding:10px 20px 10px 40px;">
+        <p>用户选择:<select name="changeusername" id="selectchangeusername" class="selectuser">
+            <option value="0" >用户0</option>
+            <option value="0">用户1</option>
+            <option value="0">用户2</option>
+        </select> </p>
+        <p>原密码: <input id="oriPassword" class="numberinput" type="text"></p>
+        <p>新密码: <input id="password" class="numberinput" type="text"></p>
+        <p>确认新密码: <input id="rePassword" class="numberinput" type="text"></p>
+        <div style="padding:5px;text-align:center;">
+            <a href="#" class="easyui-linkbutton" icon="icon-ok">Ok</a>
+            <a href="javascript:CloseWindows()" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+
+
 <div data-options="region:'north',border:false" style="height:100px;padding:10px">
     <h2>光网络规划系统控制面板</h2>
 </div>
@@ -55,77 +99,33 @@
         <p></p>
     </div>
 </div>
-<div data-options="region:'center',split:true,title:'用户列表'" ">
-    <div class="datagrid-wrap panel-body panel-body-noheader" title="" style="width: 100%; height: auto;"  fit="true">
-        <div class="datagrid-view" style="width: 100%; height: auto;">
-            <table id="UserList" class="easyui-datagrid" style="width: 100%;" fit="false">
-                <thead style="width: 100%;">
-                    <tr style="width: 100%;" >
-                        <th width = "30%" data-options="field:'id',align:'center'" >用户ID</th>
-                        <th width = "10%" data-options="field:'username',align:'center'">用户名</th>
-                        <th width = "10%" data-options="field:'password',align:'center'">密码</th>
-                        <th width = "10%" data-options="field:'department',align:'center'">部门</th>
-                        <th width = "20%" data-options="field:'date',align:'center'">日期</th>
-                        <th width = "10%" data-options="field:'zq',align:'center'">战区</th>
-                        <th width = "10%" data-options="field:'jbz',align:'center'">jbz</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr> <td>1</td><td>2</td><td>3</td> <td>4</td><td>5</td><td>6</td><td>7</td> </tr>
-                    <tr> <td>1</td><td>2</td><td>3</td> <td>4</td><td>5</td><td>6</td><td>7</td> </tr>
-                    <tr> <td>1</td><td>2</td><td>3</td> <td>4</td><td>5</td><td>6</td><td>7</td> </tr>
-             </tbody>
-            </table>
-        </div>
+<div data-options="region:'center',split:true,title:'用户列表'" >
+<div class="datagrid-wrap panel-body panel-body-noheader" title="" style="width: 100%; height: auto;"  fit="true">
+    <div class="datagrid-view" style="width: 100%; height: auto;">
+        <table id="UserList" class="easyui-datagrid" style="width: 100%;" fit="false">
+            <thead style="width: 100%;">
+            <tr style="width: 100%;" >
+                <th width = "30%" data-options="field:'id',align:'center'" >用户ID</th>
+                <th width = "10%" data-options="field:'username',align:'center'">用户名</th>
+                <th width = "10%" data-options="field:'password',align:'center'">密码</th>
+                <th width = "10%" data-options="field:'department',align:'center'">部门</th>
+                <th width = "20%" data-options="field:'date',align:'center'">日期</th>
+                <th width = "10%" data-options="field:'zq',align:'center'">战区</th>
+                <th width = "10%" data-options="field:'jbz',align:'center'">jbz</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
     </div>
+</div>
 </div>>
 <div data-options="region:'south',border:false" style="height:100px;padding:10px;">
     <p>单位：<a href="https://www.bupt.edu.cn/">北京邮电大学</a></p>
     <p><a href="https://ipoc.bupt.edu.cn/index.do">北京邮电大学信息光子学与光通信研究院</a>研制</p>
 
 </div>
-
-
-<script type="text/javascript">
-
-    $('#btn_adduser').click(function(){
-        CloseWindows();
-        $('#adduser').window('open');
-    });
-    $('#btn_deleteuser').click(function(){
-        CloseWindows();
-        $('#deleteuser').window('open');
-    });
-    $('#btn_changepassword').click(function(){
-        CloseWindows();
-        $('#changepassword').window('open');
-    });
-    function CloseWindows(){
-        $('#adduser').window('close');
-        $('#deleteuser').window('close');
-        $('#changepassword').window('close');
-        $(":input").each(function(){
-            this.value="";
-        });
-    }
-
-    function Back(){
-        var maindiv=document.getElementById("mainmenu");
-        var subdiv=document.getElementsByClassName("subfunction");
-        for (var i = 0;i<subdiv.length;i++) {
-                subdiv[i].style.display="none";
-            };
-        maindiv.style.display="block";
-        CloseWindows();
-
-    }
-    function Usermannagement(){
-            var subdiv=document.getElementById("usermannagement");
-            var maindiv=document.getElementById("mainmenu");
-            maindiv.style.display="none";
-            subdiv.style.display="block";
-
-    }
-</script>>
 </body>
+<script type="text/javascript" src="js/index.js?v=4"></script>
 </html>
