@@ -3,6 +3,7 @@ package com.onps.service;
 import com.onps.base.PageInfo;
 import com.onps.model.TMgtUser;
 import com.onps.model.po.UserPO;
+import com.onps.model.vo.UserVo;
 
 
 /**
@@ -58,7 +59,7 @@ public interface UserService {
      * @return
      * @throws Exception
      */
-    PageInfo<UserPO> getUserByPageInfo(PageInfo pageInfo) throws Exception;
+    PageInfo<UserVo> getUserByPageInfo(PageInfo pageInfo) throws Exception;
 
 
 }

@@ -2,6 +2,8 @@ package com.onps.dao;
 
 import com.onps.model.po.PermissionPO;
 import com.onps.model.po.RolePO;
+import com.onps.model.vo.PermissionVo;
+import com.onps.model.vo.RoleVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -18,9 +20,20 @@ public interface UserManagementDAO {
 
     List<PermissionPO> getPermissionByUsername(String username);
 
+
+
     List<RolePO> getRoleByUsername(String username);
 
     List<PermissionPO> getPermissionByRolename(String rolename);
+
+    /**
+     *
+     * @param userId
+     * @return
+     */
+    List<RoleVo> getRoleByUserId(@Param("userId") String userId);
+
+    List<PermissionVo> getPermissionByRoleId(@Param("roleId") String roleId);
 
     /**
      * 删除用户所有的角色

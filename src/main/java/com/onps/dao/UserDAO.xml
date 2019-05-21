@@ -52,8 +52,17 @@
         where id = #{id}
     </update>
 
+    <resultMap id="userVo" type="com.onps.model.vo.UserVo">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="ZQ" property="ZQ"/>
+        <result column="JBZ" property="JBZ"/>
+        <result column="department" property="department"/>
+        <result column="timestamp" property="date"/>
+    </resultMap>
 
-    <select id="getUserByPageInfo" resultMap="User">
+    <select id="getUserByPageInfo" resultMap="userVo">
         SELECT * FROM
         (
         SELECT A.*, ROWNUM RN

@@ -35,18 +35,49 @@
         onps_role.id = role_permission.role_id and
         permission.id = role_permission.permission_id
     </select>
+
+
     <select id="getRoleByUsername" resultMap="roleList">
         select onps_role.id as id , onps_role.name as name
         from my_user, onps_role,user_role
         where my_user.username = #{username} and
         my_user.id = user_role.user_id and
         onps_role.id = user_role.role_id
+
     </select>
+
+    <resultMap id="roleVo" type="com.onps.model.vo.RoleVo">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+    </resultMap>
+
+    <select id="getRoleByUserId" resultMap="roleVo">
+        select onps_role.id as id , onps_role.name as name
+        from onps_role,user_role
+        where user_role.user_id = #{userId} and
+        onps_role.id = user_role.role_id
+    </select>
+
+
     <select id="getPermissionByRolename" resultMap="permissionList">
         select permission.id as id , permission.name as name
         from onps_role, permission, role_permission
         where onps_role.name = #{rolename} and
         onps_role.id = role_permission.role_id and
+        permission.id = role_permission.permission_id
+    </select>
+
+
+    <resultMap id="permissionVo" type="com.onps.model.vo.PermissionVo">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+    </resultMap>
+
+
+    <select id="getPermissionByRoleId" resultMap="permissionVo">
+        select permission.id as id , permission.name as name
+        from permission, role_permission
+        where role_permission.role_id = #{roleId} and
         permission.id = role_permission.permission_id
     </select>
 

@@ -2,6 +2,7 @@ package com.onps.dao;
 
 import com.onps.model.User;
 import com.onps.model.po.UserPO;
+import com.onps.model.vo.UserVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -28,7 +29,7 @@ public interface UserDAO {
      * 查询用户的操作
      */
 
-    List<UserPO> getUserByPageInfo(@Param("start") int start, @Param("end") int end);
+    List<UserVo> getUserByPageInfo(@Param("start") int start, @Param("end") int end);
 
     /**
      * 计算所有的用户的数量

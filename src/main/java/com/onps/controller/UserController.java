@@ -2,6 +2,7 @@ package com.onps.controller;
 
 import com.onps.base.PageInfo;
 import com.onps.model.po.UserPO;
+import com.onps.model.vo.UserVo;
 import com.onps.utils.ConstantString;
 import com.onps.utils.resultUtils.BaseResult;
 import com.onps.model.TMgtUser;
@@ -47,7 +48,7 @@ public class UserController {
 
             if (PageInfo.SUCCESS_STATUS == pageInfo.getStatus()) {
                 //成功封装的操作
-                PageInfo<UserPO> userByPageInfo = userService.getUserByPageInfo(pageInfo);
+                PageInfo<UserVo> userByPageInfo = userService.getUserByPageInfo(pageInfo);
 
                 return BaseResult.createSuccessResult(userByPageInfo);
             } else {

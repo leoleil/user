@@ -3,8 +3,13 @@ package com.onps.service.serviceimpl;
 import com.onps.base.PageInfo;
 import com.onps.dao.MyUserMapper;
 import com.onps.dao.UserDAO;
+import com.onps.dao.UserManagementDAO;
 import com.onps.model.MyUser;
+import com.onps.model.MyUserExample;
 import com.onps.model.po.UserPO;
+import com.onps.model.vo.PermissionVo;
+import com.onps.model.vo.RoleVo;
+import com.onps.model.vo.UserVo;
 import com.onps.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
@@ -13,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +40,12 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserDAO userDAO;
+
+    /**
+     * 查询用户的权限的基本操作
+     */
+    @Resource
+    private UserManagementDAO userManagementDAO;
 
 
     /**
@@ -81,27 +93,43 @@ public class UserServiceImpl implements UserService {
         }
 
 
-        /**
-         * 服务器的时间
-         */
+        synchronized (UserServiceImpl.class) {
+            /**
+             * 校验重复性
+             */
+            MyUserExample myUserExample = new MyUserExample();
 
-        Date nowTime = new Date();
+            myUserExample.createCriteria().andUsernameEqualTo(username);
+
+            List<MyUser> myUsers = myUserMapper.selectByExample(myUserExample);
+
+            if (null != myUsers && myUsers.size() > 0) {
+                throw new Exception("用户已经存在");
+            }
 
 
-        MyUser myUser = new MyUser();
-        myUser.setUsername(username);
-        myUser.setPassword(password);
-        myUser.setZq(ZQ);
-        myUser.setJbz(JBZ);
-        myUser.setDepartment(department);
-        myUser.setTimestamp(nowTime);
+            /**
+             * 服务器的时间
+             */
+
+            Date nowTime = new Date();
 
 
-        try {
-            int i = myUserMapper.insertSelective(myUser);
-            return "OK";
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
+            MyUser myUser = new MyUser();
+            myUser.setUsername(username);
+            myUser.setPassword(password);
+            myUser.setZq(ZQ);
+            myUser.setJbz(JBZ);
+            myUser.setDepartment(department);
+            myUser.setTimestamp(nowTime);
+
+
+            try {
+                int i = myUserMapper.insertSelective(myUser);
+                return "OK";
+            } catch (Exception e) {
+                throw new Exception(e.getMessage());
+            }
         }
 
     }
@@ -252,7 +280,7 @@ public class UserServiceImpl implements UserService {
      * @throws Exception
      */
     @Override
-    public PageInfo<UserPO> getUserByPageInfo(PageInfo pageInfo) throws Exception {
+    public PageInfo<UserVo> getUserByPageInfo(PageInfo pageInfo) throws Exception {
 
 
         int allUserCount = userDAO.countAllUser();
@@ -267,7 +295,28 @@ public class UserServiceImpl implements UserService {
 
         int end = start + pageSize;
 
-        List<UserPO> userByPageInfo = userDAO.getUserByPageInfo(start, end);
+        List<UserVo> userByPageInfo = userDAO.getUserByPageInfo(start, end);
+
+        /**
+         * 查询数据并且进行返回
+         */
+        if (null != userByPageInfo && userByPageInfo.size() > 0) {
+            for (UserVo userVo : userByPageInfo) {
+                List<RoleVo> roleByUserId = userManagementDAO.getRoleByUserId(userVo.getId());
+                userVo.setRoleVoList(roleByUserId);
+                if (null != roleByUserId && roleByUserId.size() > 0) {
+                    for (RoleVo roleVo : roleByUserId) {
+                        List<PermissionVo> permissionByRoleId = userManagementDAO.getPermissionByRoleId(roleVo.getId());
+                        roleVo.setPermissionVoList(permissionByRoleId);
+                    }
+
+                }
+            }
+
+        } else {
+            userByPageInfo = Collections.emptyList();
+        }
+
 
         pageInfo.setData(userByPageInfo);
 
