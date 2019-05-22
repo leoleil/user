@@ -19,4 +19,12 @@ public interface ManageRoleService {
      * @throws Exception
      */
     Object grantRolesToSomeOne(String userId, String[] rolesId) throws Exception;
+
+    /**
+     * 查询所有角色
+     *
+     * @return
+     * @throws Exception
+     */
+    Object selectAllRole() throws Exception;
 }

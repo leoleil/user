@@ -16,4 +16,12 @@ public interface SubProjectService {
      * @throws Exception
      */
     Object addSubProjectToSomeOne(String subProjectId, String userId) throws Exception;
+
+    /**
+     * 查询所有的子项目
+     *
+     * @return
+     * @throws Exception
+     */
+    Object selectAllSubProject() throws Exception;
 }

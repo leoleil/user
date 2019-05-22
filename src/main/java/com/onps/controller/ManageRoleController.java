@@ -56,4 +56,25 @@ public class ManageRoleController {
 
     }
 
+    /**
+     * 查询所有的角色
+     *
+     * @return
+     */
+    @RequestMapping(value = "/selectAllRole", method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectAllRole() {
+
+        try {
+            /**
+             * 请求操作
+             */
+            Object o = manageRoleService.selectAllRole();
+            return BaseResult.createSuccessResult(o);
+        } catch (Exception e) {
+            return BaseResult.createFailResult(e.getMessage());
+        }
+
+    }
+
 }

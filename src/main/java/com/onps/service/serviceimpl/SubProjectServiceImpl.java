@@ -3,6 +3,7 @@ package com.onps.service.serviceimpl;
 import com.onps.dao.SubProjectDAO;
 import com.onps.dao.SubprojectMapper;
 import com.onps.model.Subproject;
+import com.onps.model.SubprojectExample;
 import com.onps.service.SubProjectService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Scope;
@@ -82,5 +83,22 @@ public class SubProjectServiceImpl implements SubProjectService {
             throw new Exception(e.getMessage());
         }
 
+    }
+
+    /**
+     * 查询的操作返回
+     *
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Object selectAllSubProject() throws Exception {
+        try {
+
+            SubprojectExample subprojectExample = new SubprojectExample();
+            return subprojectMapper.selectByExample(subprojectExample);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 }

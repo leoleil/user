@@ -1,5 +1,6 @@
 package com.onps.service.serviceimpl;
 
+import com.onps.dao.PermissionDAO;
 import com.onps.dao.RoleDAO;
 import com.onps.dao.UserManagementDAO;
 import com.onps.model.po.RolePO;
@@ -31,6 +32,9 @@ public class ManagePermissionsServiceImpl implements ManagePermissionsService {
 
     @Resource
     private UserManagementDAO userManagementDAO;
+
+    @Resource
+    private PermissionDAO permissionDAO;
 
 
     /**
@@ -73,5 +77,20 @@ public class ManagePermissionsServiceImpl implements ManagePermissionsService {
         }
 
 
+    }
+
+    /**
+     * 查询所有的权限
+     *
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Object selectAllPermission() throws Exception {
+        try {
+            return permissionDAO.getPermissionList();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 }

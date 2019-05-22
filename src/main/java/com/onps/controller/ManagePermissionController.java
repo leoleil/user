@@ -43,8 +43,26 @@ public class ManagePermissionController {
             /**
              * 请求操作
              */
-            System.out.println(permissionIds.length);
             Object o = managePermissionsService.grantPermissionsToSomeRole(roleId, permissionIds);
+            return BaseResult.createSuccessResult(o);
+        } catch (Exception e) {
+            return BaseResult.createFailResult(e.getMessage());
+        }
+
+    }
+
+    /**
+     * 查询所有的权限
+     * @return
+     */
+    @RequestMapping(value = "/selectAllPermission", method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectAllPermission() {
+        try {
+            /**
+             * 请求操作
+             */
+            Object o = managePermissionsService.selectAllPermission();
             return BaseResult.createSuccessResult(o);
         } catch (Exception e) {
             return BaseResult.createFailResult(e.getMessage());

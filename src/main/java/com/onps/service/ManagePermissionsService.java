@@ -16,4 +16,11 @@ public interface ManagePermissionsService {
      * @return
      */
     Object grantPermissionsToSomeRole(String roleId, String[] permissionIds) throws Exception;
+
+    /**
+     * 查询所有的权限
+     * @return
+     * @throws Exception
+     */
+    Object selectAllPermission() throws Exception;
 }

@@ -1,6 +1,7 @@
 package com.onps.service.serviceimpl;
 
 import com.onps.dao.MyUserMapper;
+import com.onps.dao.RoleDAO;
 import com.onps.dao.UserManagementDAO;
 import com.onps.model.MyUser;
 import com.onps.service.ManageRoleService;
@@ -31,6 +32,9 @@ public class ManageRoleServiceImpl implements ManageRoleService {
 
     @Resource
     private UserManagementDAO userManagementDAO;
+
+    @Resource
+    private RoleDAO roleDAO;
 
     /**
      * 注意 这个方法也可以给用户取消权限
@@ -76,6 +80,23 @@ public class ManageRoleServiceImpl implements ManageRoleService {
             throw new Exception(e.getMessage());
         }
 
+
+    }
+
+    /**
+     * 查询所有的用户的角色
+     *
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Object selectAllRole() throws Exception {
+
+        try {
+            return roleDAO.getRoleList();
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
 
     }
 }
