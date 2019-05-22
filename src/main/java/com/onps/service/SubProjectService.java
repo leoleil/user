@@ -1,5 +1,7 @@
 package com.onps.service;
 
+import com.onps.base.PageInfo;
+
 /**
  * 项目的基本操作
  *
@@ -23,5 +25,5 @@ public interface SubProjectService {
      * @return
      * @throws Exception
      */
-    Object selectAllSubProject() throws Exception;
+    PageInfo selectAllSubProject(PageInfo pageInfo) throws Exception;
 }

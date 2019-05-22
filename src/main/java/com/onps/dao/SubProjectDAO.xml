@@ -12,4 +12,19 @@
 
     <!--   将某个项目授予某个用户  end  -->
 
+    <select id="countAllSubProject" resultType="Integer">
+        select count(ID) from SUBPROJECT
+    </select>
+
+    <select id="getSubProjectByPageInfo" resultMap="com.onps.dao.SubprojectMapper.BaseResultMap">
+        SELECT <include refid="com.onps.dao.SubprojectMapper.Base_Column_List"/> FROM
+        (
+        SELECT A.*, ROWNUM RN
+        FROM (SELECT * FROM SUBPROJECT) A
+        WHERE ROWNUM <![CDATA[ < ]]> #{end}
+        )
+        WHERE RN <![CDATA[ >= ]]> #{start}
+    </select>
+
+
 </mapper>

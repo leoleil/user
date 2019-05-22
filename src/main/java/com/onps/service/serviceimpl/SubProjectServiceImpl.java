@@ -1,5 +1,6 @@
 package com.onps.service.serviceimpl;
 
+import com.onps.base.PageInfo;
 import com.onps.dao.SubProjectDAO;
 import com.onps.dao.SubprojectMapper;
 import com.onps.model.Subproject;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 项目的基本操作
@@ -92,12 +94,38 @@ public class SubProjectServiceImpl implements SubProjectService {
      * @throws Exception
      */
     @Override
-    public Object selectAllSubProject() throws Exception {
+    public PageInfo selectAllSubProject(PageInfo pageInfo) throws Exception {
         try {
 
-            SubprojectExample subprojectExample = new SubprojectExample();
-            return subprojectMapper.selectByExample(subprojectExample);
+            int allSubProject = subProjectDAO.countAllSubProject();
+
+            int currentPage = pageInfo.getCurrentPage();
+
+            int pageSize = pageInfo.getPageSize();
+
+            int start = (currentPage - 1) * pageSize + 1;
+
+            int end = start + pageSize;
+
+            List<Subproject> subProjectByPageInfo = subProjectDAO.getSubProjectByPageInfo(start, end);
+
+
+            pageInfo.setData(subProjectByPageInfo);
+
+            pageInfo.setDataTotal(allSubProject);
+
+            int pageTotal = allSubProject / pageSize + 1;
+
+            pageInfo.setPageTotal(pageTotal);
+
+            int nextPage = (currentPage == pageTotal) ? pageTotal : (currentPage + 1);
+
+            pageInfo.setNextPage(nextPage);
+
+            return pageInfo;
+
         } catch (Exception e) {
+            e.printStackTrace();
             throw new Exception(e.getMessage());
         }
     }

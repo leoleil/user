@@ -1,5 +1,6 @@
 package com.onps.controller;
 
+import com.onps.base.PageInfo;
 import com.onps.service.SubProjectService;
 import com.onps.utils.resultUtils.BaseResult;
 import org.springframework.stereotype.Controller;
@@ -53,13 +54,13 @@ public class SubProjectController {
 
     @RequestMapping(value = "/selectAllSubProject",method = RequestMethod.GET)
     @ResponseBody
-    public Object selectAllSubProject() {
+    public Object selectAllSubProject(PageInfo pageInfo) {
 
         try {
             /**
              * 操作成功的返回
              */
-            Object o = subProjectService.selectAllSubProject();
+            Object o = subProjectService.selectAllSubProject(pageInfo);
             return BaseResult.createSuccessResult(o);
         } catch (Exception e) {
             /**
