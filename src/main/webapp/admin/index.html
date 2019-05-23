@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <title>管理面板</title>
     <link rel="stylesheet" type="text/css" href="css/themes/gray/easyui.css">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="http://www.jeasyui.com/easyui/datagrid-detailview.js"></script>
 </head>
 <body class="easyui-layout">
 <div id="adduser" class="easyui-window" title="用户添加" closed="true" style="width:500px;height:300px;">
@@ -20,41 +22,84 @@
         <p>军兵种:  <input  id="add_jbz" class="numberinput" type="text"></p>
         <p>部门: <input  id="add_department" class="numberinput" type="text"></p>
         <div style="padding:5px;text-align:center;">
-            <a id="btn_adduserconfirm" href="javascript:SubmitAdd()" class="easyui-linkbutton" icon="icon-ok">Ok</a>
+            <a href="javascript:SubmitAdd()" class="easyui-linkbutton" icon="icon-ok">Ok</a>
             <a href="javascript:CloseWindows()" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
         </div>
     </form>
 </div>
 <div id="deleteuser" class="easyui-window" title="用户删除" closed="true" style="width:500px;height:300px;">
     <form style="padding:10px 20px 10px 40px;">
-        <p>用户选择:<select id="selectdeleteusername" class="selectuser">
-            <option value="0" >用户0</option>
-            <option value="0">用户1</option>
-            <option value="0">用户2</option>
+        <p>用户选择:<select id="delete_selectuserid" class="selectuserid">
         </select> </p>
         <div style="padding:5px;text-align:center;">
-            <a href="#" class="easyui-linkbutton" icon="icon-ok">Ok</a>
+            <a href="javascript:SubmitDeleteUser()" class="easyui-linkbutton" icon="icon-ok">Ok</a>
             <a href="javascript:CloseWindows()" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
         </div>
     </form>
 </div>
 <div id="changepassword" class="easyui-window" title="密码修改" closed="true" style="width:500px;height:300px;">
     <form style="padding:10px 20px 10px 40px;">
-        <p>用户选择:<select name="changeusername" id="selectchangeusername" class="selectuser">
-            <option value="0" >用户0</option>
-            <option value="0">用户1</option>
-            <option value="0">用户2</option>
+        <p>用户选择:<select id="change_selectuserid" class="selectuserid" >
         </select> </p>
-        <p>原密码: <input id="oriPassword" class="numberinput" type="text"></p>
-        <p>新密码: <input id="password" class="numberinput" type="text"></p>
-        <p>确认新密码: <input id="rePassword" class="numberinput" type="text"></p>
+        <p>原密码: <input id="change_oriPassword" class="numberinput" type="text"></p>
+        <p>新密码: <input id="change_password" class="numberinput" type="text"></p>
+        <p>确认新密码: <input id="change_rePassword" class="numberinput" type="text"></p>
         <div style="padding:5px;text-align:center;">
-            <a href="#" class="easyui-linkbutton" icon="icon-ok">Ok</a>
+            <a href="javascript:SubmitChangepassword()" class="easyui-linkbutton" icon="icon-ok">Ok</a>
+            <a href="javascript:CloseWindows()" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+<div id="updateinfo" class="easyui-window" title="用户基本信息修改" closed="true" style="width:500px;height:300px;">
+    <form style="padding:10px 20px 10px 40px;">
+        <p>用户选择:<select id="update_selectuserid" class="selectuserid">
+        </select> </p>
+        <p>战区: <input id="update_zq" class="numberinput" type="text"></p>
+        <p>军兵种: <input id="update_jbz" class="numberinput" type="text"></p>
+        <p>部门: <input id="update_department" class="numberinput" type="text"></p>
+        <div style="padding:5px;text-align:center;">
+            <a href="javascript:SubmitUpdateinfo()" class="easyui-linkbutton" icon="icon-ok">Ok</a>
+            <a href="javascript:CloseWindows()" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+<div id="addroletouser" class="easyui-window" title="用户角色添加" closed="true" style="width:500px;height:300px;">
+    <form style="padding:10px 20px 10px 40px;">
+        <p>用户选择:<select id="addrole_selectuserid" class="selectuserid">
+        </select> </p>
+        <p>角色选择:<select id="addrole_multiselectroleid" multiple="multiple">
+        </select></p>
+        <div style="padding:5px;text-align:center;">
+            <a href="javascript:SubmitAddrole()" class="easyui-linkbutton" icon="icon-ok">Ok</a>
+            <a href="javascript:CloseWindows()" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+<div id="addpermissiontorole" class="easyui-window" title="子项目添加" closed="true" style="width:500px;height:300px;">
+    <form style="padding:10px 20px 10px 40px;">
+        <p>角色选择:<select id="addpermission_selectroleid" >
+        </select> </p>
+        <p>权限选择:<select id="addpermission_selectpermissionid" multiple="multiple">
+        </select></p>
+        <div style="padding:5px;text-align:center;">
+            <a href="javascript:SubmitAddpermissiontorole()" class="easyui-linkbutton" icon="icon-ok">Ok</a>
             <a href="javascript:CloseWindows()" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
         </div>
     </form>
 </div>
 
+<div id="addsubprojecttouser" class="easyui-window" title="用户角色添加" closed="true" style="width:500px;height:300px;">
+    <form style="padding:10px 20px 10px 40px;">
+        <p>用户选择:<select id="addsubproject_selectuserid" class="selectuserid">
+        </select> </p>
+        <p>选择:<select id="addsubproject_selectsubprojectid" >
+        </select>></p>
+        <div style="padding:5px; text-align:center;">
+            <a href="javascript:Submitaddsubprojecttouser()" class="easyui-linkbutton" icon="icon-ok">Ok</a>
+            <a href="javascript:CloseWindows()" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
 
 <div data-options="region:'north',border:false" style="height:100px;padding:10px">
     <h2>光网络规划系统控制面板</h2>
@@ -63,9 +108,9 @@
     <div id="mainmenu" class="mainfunction" style="width:100px;padding:10px;">
         <a href="javascript:Usermannagement()" class="easyui-linkbutton">用户管理</a>
         <p></p>
-        <a href="#" class="easyui-linkbutton">角色管理</a>
+        <a id="btn_addpermissiontorole" href="#" class="easyui-linkbutton">角色添加权限</a>
         <p></p>
-        <a href="#" class="easyui-linkbutton">权限管理</a>
+        <a id="btn_addsubjecttouser" href="#" class="easyui-linkbutton">子项目添加</a>
         <p></p>
     </div>
     <div id="usermannagement" class="subfunction" style="width:80%;padding:10px; display: none;">
@@ -75,49 +120,18 @@
         <p></p>
         <a id="btn_changepassword" href="#" class="easyui-linkbutton">密码修改</a>
         <p></p>
-        <a href="javascript:Back()" class="easyui-linkbutton">返回上一级</a>
+        <a id="btn_addroletouser" href="#" class="easyui-linkbutton">用户角色添加</a>
         <p></p>
-    </div>
-    <div id="Rolemannagement" class="subfunction" style="width:80%;padding:10px; display: none;">
-        <a href="#" class="easyui-linkbutton">用户添加</a>
-        <p></p>
-        <a href="#" class="easyui-linkbutton">用户删除</a>
-        <p></p>
-        <a href="#" class="easyui-linkbutton">密码修改</a>
-        <p></p>
-        <a href="javascript:Back()" class="easyui-linkbutton">返回上一级</a>
-        <p></p>
-    </div>
-    <div id="Powermannagement" class="subfunction" style="width:80%;padding:10px; display: none;">
-        <a href="#" class="easyui-linkbutton">用户添加</a>
-        <p></p>
-        <a href="#" class="easyui-linkbutton">用户删除</a>
-        <p></p>
-        <a href="#" class="easyui-linkbutton">密码修改</a>
+        <a id="btn_updateinfo" href="#" class="easyui-linkbutton">用户基本信息修改</a>
         <p></p>
         <a href="javascript:Back()" class="easyui-linkbutton">返回上一级</a>
         <p></p>
     </div>
 </div>
 <div data-options="region:'center',split:true,title:'用户列表'" >
-<div class="datagrid-wrap panel-body panel-body-noheader" title="" style="width: 100%; height: auto;"  fit="true">
+<div class="datagrid-wrap panel-body panel-body-noheader" title="" style="width: 100%; height: auto;"  fit="true" fitColumns="true">
     <div class="datagrid-view" style="width: 100%; height: auto;">
-        <table id="UserList" class="easyui-datagrid" style="width: 100%;" fit="false">
-            <thead style="width: 100%;">
-            <tr style="width: 100%;" >
-                <th width = "30%" data-options="field:'id',align:'center'" >用户ID</th>
-                <th width = "10%" data-options="field:'username',align:'center'">用户名</th>
-                <th width = "10%" data-options="field:'password',align:'center'">密码</th>
-                <th width = "10%" data-options="field:'department',align:'center'">部门</th>
-                <th width = "20%" data-options="field:'date',align:'center'">日期</th>
-                <th width = "10%" data-options="field:'zq',align:'center'">战区</th>
-                <th width = "10%" data-options="field:'jbz',align:'center'">jbz</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
+        <table id="UserList" class="easyui-datagrid" style="width: 100%;" fit="false"></table>
     </div>
 </div>
 </div>>
@@ -127,5 +141,5 @@
 
 </div>
 </body>
-<script type="text/javascript" src="js/index.js?v=4"></script>
+<script type="text/javascript" src="js/index.js?v=1.0.2"></script>
 </html>
