@@ -99,4 +99,30 @@ public class ManageRoleServiceImpl implements ManageRoleService {
         }
 
     }
+
+    /**
+     * 查询
+     *
+     * @param roleId
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Object selectPermissionByRoleId(String roleId) throws Exception {
+
+        /**
+         * 校验基本信息
+         */
+        if (StringUtils.isEmpty(roleId)) {
+            throw new Exception("角色Id为空");
+        }
+
+
+        try {
+
+            return userManagementDAO.getPermissionByRoleId(roleId);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }

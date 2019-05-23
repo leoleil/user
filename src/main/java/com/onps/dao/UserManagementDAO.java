@@ -50,4 +50,5 @@ public interface UserManagementDAO {
      * @return
      */
     void deleteAllPermissionFromRole(@Param("roleId") String roleId);
+
 }
