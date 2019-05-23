@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <title>管理面板</title>
     <link rel="stylesheet" type="text/css" href="css/themes/gray/easyui.css">
@@ -10,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="http://www.jeasyui.com/easyui/datagrid-detailview.js"></script>
+    <script type="text/javascript" src="js/datagrid-detailview.js"></script>
 </head>
 <body class="easyui-layout">
 <div id="adduser" class="easyui-window" title="用户添加" closed="true" style="width:500px;height:300px;">
@@ -22,7 +21,7 @@
         <p>军兵种:  <input  id="add_jbz" class="numberinput" type="text"></p>
         <p>部门: <input  id="add_department" class="numberinput" type="text"></p>
         <div style="padding:5px;text-align:center;">
-            <a href="javascript:SubmitAdd()" class="easyui-linkbutton" icon="icon-ok">Ok</a>
+            <a id="btn_adduserconfirm" href="javascript:SubmitAdd()" class="easyui-linkbutton" icon="icon-ok">Ok</a>
             <a href="javascript:CloseWindows()" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
         </div>
     </form>

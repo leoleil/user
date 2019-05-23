@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="project" />
         <module name="SpringMVC+Spring+Mybatis" />
+        <module name="user" />
       </profile>
     </annotationProcessing>
   </component>
