@@ -35,6 +35,10 @@ public interface UserService {
     /**
      * 删除用户
      *
+     * 1。就要讲这个用户的所有角色删除掉
+     *
+     * 2。如果该用户被授予子项目~不能删除~
+     *
      * @param userID
      * @return
      * @throws Exception
