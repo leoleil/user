@@ -21,13 +21,11 @@ public interface UserManagementDAO {
     List<PermissionPO> getPermissionByUsername(String username);
 
 
-
     List<RolePO> getRoleByUsername(String username);
 
     List<PermissionPO> getPermissionByRolename(String rolename);
 
     /**
-     *
      * @param userId
      * @return
      */
@@ -36,12 +34,13 @@ public interface UserManagementDAO {
     List<PermissionVo> getPermissionByRoleId(@Param("roleId") String roleId);
 
     /**
-     * 删除用户所有的角色
+     * 删除用户的角色
      *
      * @param userId
+     * @param roleId
      * @return
      */
-    void deleteAllRoleFromUser(@Param("userId") String userId);
+    void deleteAllRoleFromUser(@Param("userId") String userId, @Param("roleId") String roleId);
 
     /**
      * 删除角色所有的权限
@@ -49,6 +48,6 @@ public interface UserManagementDAO {
      * @param roleId
      * @return
      */
-    void deleteAllPermissionFromRole(@Param("roleId") String roleId);
+    void deleteAllPermissionFromRole(@Param("roleId") String roleId, @Param("permissionId") String permissionId);
 
 }

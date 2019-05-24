@@ -17,8 +17,20 @@ public interface ManagePermissionsService {
      */
     Object grantPermissionsToSomeRole(String roleId, String[] permissionIds) throws Exception;
 
+
+    /**
+     * 删除权限
+     *
+     * @param roleId        角色Id
+     * @param permissionIds 权限
+     * @return
+     * @throws Exception
+     */
+    Object revokePermissionsFromSomeRole(String roleId, String[] permissionIds) throws Exception;
+
     /**
      * 查询所有的权限
+     *
      * @return
      * @throws Exception
      */

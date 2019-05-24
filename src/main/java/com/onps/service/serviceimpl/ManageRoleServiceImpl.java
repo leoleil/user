@@ -65,7 +65,7 @@ public class ManageRoleServiceImpl implements ManageRoleService {
 
         try {
             /*   删除用户的一切权限  start */
-            userManagementDAO.deleteAllRoleFromUser(userId);
+            userManagementDAO.deleteAllRoleFromUser(userId, null);
             /*   删除用户的一切权限  end */
 
             /*  给用户增权限 start  */
@@ -81,6 +81,43 @@ public class ManageRoleServiceImpl implements ManageRoleService {
         }
 
 
+    }
+
+    /**
+     * @param userId  用户ID
+     * @param rolesId roleId
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Object revokeRolesFromSomeOne(String userId, String[] rolesId) throws Exception {
+
+        /**
+         * 校验基本信息
+         */
+        if (StringUtils.isEmpty(userId)) {
+            throw new Exception("用户Id为空");
+        }
+
+        MyUser myUser = myUserMapper.selectByPrimaryKey(userId);
+
+        if (null == myUser) {
+            throw new Exception("你想授予的用户不存在");
+        }
+
+        try {
+
+            /*  给用户增权限 start  */
+            if (null != rolesId && rolesId.length > 0) {
+                //有权限的时候在进行操作
+                for (String roleId : rolesId) {
+                    userManagementDAO.deleteAllRoleFromUser(userId, roleId);
+                }
+            }
+            return "OK";
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     /**

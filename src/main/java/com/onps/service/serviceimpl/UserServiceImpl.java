@@ -186,7 +186,7 @@ public class UserServiceImpl implements UserService {
                 throw new Exception("用户已经分配子项目，不能删除");
             }
             //没有分配子项目的情况  我们这时候应当关注删除用户的角色
-            userManagementDAO.deleteAllRoleFromUser(userID);
+            userManagementDAO.deleteAllRoleFromUser(userID,null);
             // 删除成功后  再次删除  用户的本身的信息
             int i = myUserMapper.deleteByPrimaryKey(userID);
             return "OK";

@@ -20,6 +20,17 @@ public interface ManageRoleService {
      */
     Object grantRolesToSomeOne(String userId, String[] rolesId) throws Exception;
 
+
+    /**
+     * 取消用户权限
+     *
+     * @param userId 用户ID
+     * @param rolesId roleId
+     * @return
+     * @throws Exception
+     */
+    Object revokeRolesFromSomeOne(String userId, String[] rolesId) throws Exception;
+
     /**
      * 查询所有角色
      *

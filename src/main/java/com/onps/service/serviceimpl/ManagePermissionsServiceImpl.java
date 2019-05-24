@@ -61,7 +61,7 @@ public class ManagePermissionsServiceImpl implements ManagePermissionsService {
 
         try {
 
-            userManagementDAO.deleteAllPermissionFromRole(roleId);
+            userManagementDAO.deleteAllPermissionFromRole(roleId, null);
 
 
             if (null != permissionIds) {
@@ -77,6 +77,34 @@ public class ManagePermissionsServiceImpl implements ManagePermissionsService {
         }
 
 
+    }
+
+    @Override
+    public Object revokePermissionsFromSomeRole(String roleId, String[] permissionIds) throws Exception {
+        /**
+         * 校验基本信息
+         */
+        if (StringUtils.isEmpty(roleId)) {
+            throw new Exception("角色ID为空");
+        }
+
+        RolePO roleByRoleId = roleDAO.getRoleByRoleId(roleId);
+
+        if (null == roleByRoleId) {
+            throw new Exception("该角色不存在");
+        }
+
+        try {
+            if (null != permissionIds) {
+                for (String permissionId : permissionIds) {
+                    userManagementDAO.deleteAllPermissionFromRole(roleId, permissionId);
+                }
+
+            }
+            return "OK";
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     /**
