@@ -366,8 +366,8 @@ function SubmitAddpermissiontorole(){
         type: "post",
         async: false,
         data: {
-            "userId":$("#addpermission_selectroleid").val(),
-            "roleIds": function(){
+            "roleId":$("#addpermission_selectroleid").val(),
+            "permissionIds": function(){
                 var permissionIdarray=new Array();
                 $("#addpermission_selectpermissionid option:selected").each(function () {
                     console.log($(this).val());
@@ -455,6 +455,9 @@ function CloseWindows(){
     $('#addpermissiontorole').window('close');
     $('#addsubprojecttouser').window('close');
     $(":input").each(function(){
+        this.value="";
+    });
+    $(":select").each(function(){
         this.value="";
     });
 }
