@@ -86,13 +86,31 @@
 
     <delete id="deleteAllRoleFromUser">
         delete from user_role
-        where user_id=#{userId}
+        <where>
+            <trim prefix="and" prefixOverrides="and">
+                <if test="null!=userId">
+                    and user_id=#{userId}
+                </if>
+                <if test="null!=roleId">
+                    and role_id=#{roleId}
+                </if>
+            </trim>
+        </where>
     </delete>
 
     <!-- 删除角色所有的权限  -->
     <delete id="deleteAllPermissionFromRole">
         delete from role_permission
-        where role_id=#{roleId}
+        <where>
+            <trim prefixOverrides="and" prefix="and">
+                <if test="null!=roleId">
+                    and role_id=#{roleId}
+                </if>
+                <if test="null!=permissionId">
+                    and permission_id=#{permissionId}
+                </if>
+            </trim>
+        </where>
     </delete>
 
 

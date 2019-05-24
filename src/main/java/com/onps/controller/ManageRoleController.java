@@ -57,6 +57,29 @@ public class ManageRoleController {
     }
 
     /**
+     * 取消权限
+     *
+     * @param userId
+     * @param roleIds
+     * @return
+     */
+    @RequestMapping(value = "/revokeRolesFromSomeOne", method = RequestMethod.POST)
+    @ResponseBody
+    public Object revokeRolesFromSomeOne(@RequestParam("userId") String userId,
+                                         @RequestParam("roleIds") String[] roleIds) {
+        try {
+            /**
+             * 请求操作
+             */
+            Object o = manageRoleService.revokeRolesFromSomeOne(userId, roleIds);
+            return BaseResult.createSuccessResult(o);
+        } catch (Exception e) {
+            return BaseResult.createFailResult(e.getMessage());
+        }
+
+    }
+
+    /**
      * 查询所有的角色
      *
      * @return
@@ -80,7 +103,7 @@ public class ManageRoleController {
     /**
      * 查询角色的权限
      *
-     * @param roleId  FA77D4F2C2504C3F8AE45C25EC30D557
+     * @param roleId FA77D4F2C2504C3F8AE45C25EC30D557
      * @return
      */
     @RequestMapping(value = "/getPermissionByRoleId", method = RequestMethod.GET)

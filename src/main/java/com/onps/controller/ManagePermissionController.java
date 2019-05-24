@@ -41,7 +41,7 @@ public class ManagePermissionController {
                                              @RequestParam("permissionIds") String[] permissionIds) {
         try {
             /**
-             * 请求操作
+             * 请求操作1
              */
             Object o = managePermissionsService.grantPermissionsToSomeRole(roleId, permissionIds);
             return BaseResult.createSuccessResult(o);
@@ -52,7 +52,31 @@ public class ManagePermissionController {
     }
 
     /**
+     * 回收权限
+     *
+     * @param roleId
+     * @param permissionIds
+     * @return
+     */
+    @RequestMapping(value = "/revokePermissionsFromSomeRole", method = RequestMethod.POST)
+    @ResponseBody
+    public Object revokePermissionsFromSomeRole(@RequestParam("roleId") String roleId,
+                                                @RequestParam("permissionIds") String[] permissionIds) {
+        try {
+            /**
+             * 请求操作1
+             */
+            Object o = managePermissionsService.revokePermissionsFromSomeRole(roleId, permissionIds);
+            return BaseResult.createSuccessResult(o);
+        } catch (Exception e) {
+            return BaseResult.createFailResult(e.getMessage());
+        }
+
+    }
+
+    /**
      * 查询所有的权限
+     *
      * @return
      */
     @RequestMapping(value = "/selectAllPermission", method = RequestMethod.GET)
