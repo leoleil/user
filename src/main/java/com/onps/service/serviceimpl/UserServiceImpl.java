@@ -1,11 +1,8 @@
 package com.onps.service.serviceimpl;
 
 import com.onps.base.PageInfo;
-import com.onps.dao.MyUserMapper;
-import com.onps.dao.UserDAO;
-import com.onps.dao.UserManagementDAO;
-import com.onps.model.MyUser;
-import com.onps.model.MyUserExample;
+import com.onps.dao.*;
+import com.onps.model.*;
 import com.onps.model.po.UserPO;
 import com.onps.model.vo.PermissionVo;
 import com.onps.model.vo.RoleVo;
@@ -46,6 +43,12 @@ public class UserServiceImpl implements UserService {
      */
     @Resource
     private UserManagementDAO userManagementDAO;
+
+    @Resource
+    private SubprojectMapper subprojectMapper;
+
+    @Resource
+    private ProjectMapper projectMapper;
 
 
     /**
@@ -135,6 +138,16 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    /**
+     * 2。如果该用户被授予子项目~不能删除~
+     * * 1。就要讲这个用户的所有角色删除掉
+     * *
+     * *
+     *
+     * @param userID
+     * @return
+     * @throws Exception
+     */
     @Override
     public Object deleteUser(String userID) throws Exception {
 
@@ -145,6 +158,36 @@ public class UserServiceImpl implements UserService {
             throw new Exception("请求参数里面没有userID");
         }
         try {
+
+            /**
+             * 2。校验该用户有没有分配子项目
+             */
+
+            ProjectExample projectExample=new ProjectExample();
+
+            projectExample.createCriteria().andUseridEqualTo(userID);
+
+            List<Project> projects = projectMapper.selectByExample(projectExample);
+
+            if (null != projects && projects.size() > 0) {
+                //说明 用户已经分配子项目了  所以不能进行删除
+                throw new Exception("用户已经分配项目，不能删除");
+            }
+
+
+            SubprojectExample subprojectExample = new SubprojectExample();
+
+            subprojectExample.createCriteria().andUseridEqualTo(userID);
+
+            List<Subproject> subprojects = subprojectMapper.selectByExample(subprojectExample);
+
+            if (null != subprojects && subprojects.size() > 0) {
+                //说明 用户已经分配子项目了  所以不能进行删除
+                throw new Exception("用户已经分配子项目，不能删除");
+            }
+            //没有分配子项目的情况  我们这时候应当关注删除用户的角色
+            userManagementDAO.deleteAllRoleFromUser(userID);
+            // 删除成功后  再次删除  用户的本身的信息
             int i = myUserMapper.deleteByPrimaryKey(userID);
             return "OK";
         } catch (Exception e) {

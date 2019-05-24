@@ -56,7 +56,7 @@
     <!--以name开头的方法运行的时候都受事务管理限制-->
 	<tx:method name="save*" propagation="REQUIRED"/>
 	<tx:method name="update*" propagation="REQUIRED" />
-	<tx:method name="delete*" propagation="REQUIRED" />
+	<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
 	<tx:method name="insert*" propagation="REQUIRED" />
 	<tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
 	<tx:method name="grant*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>

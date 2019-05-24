@@ -77,4 +77,26 @@ public class ManageRoleController {
 
     }
 
+    /**
+     * 查询角色的权限
+     *
+     * @param roleId  FA77D4F2C2504C3F8AE45C25EC30D557
+     * @return
+     */
+    @RequestMapping(value = "/getPermissionByRoleId", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getPermissionByRoleId(@RequestParam("roleId") String roleId) {
+
+        try {
+            /**
+             * 请求操作
+             */
+            Object o = manageRoleService.selectPermissionByRoleId(roleId);
+            return BaseResult.createSuccessResult(o);
+        } catch (Exception e) {
+            return BaseResult.createFailResult(e.getMessage());
+        }
+
+    }
+
 }

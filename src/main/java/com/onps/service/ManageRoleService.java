@@ -27,4 +27,14 @@ public interface ManageRoleService {
      * @throws Exception
      */
     Object selectAllRole() throws Exception;
+
+
+    /**
+     * 查询roleId 下面的所包含的权限
+     *
+     * @param roleId
+     * @return
+     * @throws Exception
+     */
+    Object selectPermissionByRoleId(String roleId) throws Exception;
 }
