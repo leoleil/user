@@ -30,9 +30,11 @@ $(function () {
         success: function (data) {
             console.log(data);
             if (data.status == 'S00001') {
+                $("#addpermission_selectroleid").append("<option  selected='selected''>" +"------请选择角色------"+ "</option>");
                 for(var i=0;i<data.entity.length;i++){
                     var newRole=new role(data.entity[i].id,data.entity[i].name);
                     Allrole.push(newRole);
+                    $("#addpermission_selectroleid").append("<option value='" + newRole.id + "'>" + newRole.name + "</option>");
                 }
             } else {
                 console.log(data);
@@ -179,7 +181,29 @@ $('#addpermission_selectroleid').change(function () {
     for (var i=0;i<Allrole.length;i++){
         if(val==Allrole[i].id){
             var currentUserPermissionList=new Array();
-            // todo 需要ajax 获取当前选中角色的权限list
+            $.ajax({
+                url: "/onps/manage/role/getPermissionByRoleId.do",
+                type: "get",
+                async: false,
+                data:{
+                    roleId:$('#addpermission_selectroleid').val()
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data.status == 'S00001') {
+                        for(var i=0;i<data.entity.length;i++){
+                            var newPermission=new permission(data.entity[i].id,data.entity[i].name);
+                            currentUserPermissionList.push(newPermission);
+                        }
+                    } else {
+                        console.log(data);
+                    }
+                },
+                error: function (data) {
+                    alert("请求失败!");
+                }
+            });
+
             for(var k=0;k<Allpermission.length;k++) {
                 var bool=true;
                 for (var j = 0; j < currentUserPermissionList.length; j++) {
