@@ -18,7 +18,9 @@ function subproject(id,name){
 
 var Alluser=new Array();
 var Allrole=new Array();
+var currentroles=new Array();
 var Allpermission=new Array();
+var currentpermission=new Array();
 var Allsubproject=new Array();
 var x=0;
 
@@ -156,6 +158,7 @@ $("#UserList").datagrid({
 
 
 $('#addrole_selectuserid').change(function () {
+    currentroles=[];//赋值空数组清空数组
     var val=$('#addrole_selectuserid').val();
     var addrolelist = $("#addrole_multiselectroleid");
     $("option", addrolelist).remove(); //清空原有的选项
@@ -165,6 +168,7 @@ $('#addrole_selectuserid').change(function () {
             for(var k=0;k<Allrole.length;k++) {
                 var bool=true;
                 for (var j = 0; j < Alluser[i].rolearray.length; j++) {
+                    currentroles.push(Alluser[i].rolearray[j].id);
                     if(Allrole[k].id==Alluser[i].rolearray[j].id) bool=false;
                 }
                 if(bool) addrolelist.append("<option value='" + Allrole[k].id + "'>" + Allrole[k].name + "</option>");
@@ -173,7 +177,22 @@ $('#addrole_selectuserid').change(function () {
     }
 });
 
+$('#deleterole_selectuserid').change(function () {
+    var val=$('#deleterole_selectuserid').val();
+    var deleterolelist = $("#deleterole_multiselectroleid");
+    $("option", deleterolelist).remove(); //清空原有的选项
+    deleterolelist.append("<option >" + "------请选择角色------"+ "</option>");
+    for (var i=0;i<Alluser.length;i++){
+        if(val==Alluser[i].id){
+                for (var j = 0; j < Alluser[i].rolearray.length; j++) {
+                    deleterolelist.append("<option value='" + Alluser[i].rolearray[j].id + "'>" + Alluser[i].rolearray[j].name + "</option>");
+                }
+        }
+    }
+});
+
 $('#addpermission_selectroleid').change(function () {
+    currentpermission=[];
     var val=$('#addpermission_selectroleid').val();
     var addpermissionlist = $("#addpermission_selectpermissionid");
     $("option", addpermissionlist).remove(); //清空原有的选项
@@ -207,7 +226,8 @@ $('#addpermission_selectroleid').change(function () {
             for(var k=0;k<Allpermission.length;k++) {
                 var bool=true;
                 for (var j = 0; j < currentUserPermissionList.length; j++) {
-                    if(currentUserPermissionList.id==Allpermission[k].id) bool=false;
+                    currentpermission.push(currentUserPermissionList.id);
+                    if(currentUserPermissionList[j].id==Allpermission[k].id) bool=false;
                 }
                 if(bool) addpermissionlist.append("<option value='" + Allpermission[k].id + "'>" + Allpermission[k].name + "</option>");
             }
@@ -215,6 +235,45 @@ $('#addpermission_selectroleid').change(function () {
     }
 });
 
+$('#deletepermission_selectroleid').change(function () {
+    currentpermission=[];
+    var val=$('#deletepermission_selectroleid').val();
+    var deletepermissionlist = $("#deletepermission_selectpermissionid");
+    $("option", deletepermissionlist).remove(); //清空原有的选项
+    deletepermissionlist.append("<option >" + "------请选择权限------"+ "</option>");
+    for (var i=0;i<Allrole.length;i++){
+        if(val==Allrole[i].id){
+            var currentUserPermissionList=new Array();
+            $.ajax({
+                url: "/onps/manage/role/getPermissionByRoleId.do",
+                type: "get",
+                async: false,
+                data:{
+                    roleId:$('#deletepermission_selectroleid').val()
+                },
+                success: function (data) {
+                    console.log(data);
+                    if (data.status == 'S00001') {
+                        for(var i=0;i<data.entity.length;i++){
+                            var newPermission=new permission(data.entity[i].id,data.entity[i].name);
+                            currentUserPermissionList.push(newPermission);
+                        }
+                    } else {
+                        console.log(data);
+                    }
+                },
+                error: function (data) {
+                    alert("请求失败!");
+                }
+            });
+
+                for (var j = 0; j < currentUserPermissionList.length; j++) {
+                    currentpermission.push(currentUserPermissionList.id);
+                    deletepermissionlist.append("<option value='" + currentUserPermissionList[j].id + "'>" + currentUserPermissionList[j].name + "</option>");
+                }
+        }
+    }
+});
 
 
 function SubmitAdd(){
@@ -341,6 +400,39 @@ function SubmitAddrole(){
                     console.log($(this).val());
                     roleIdarray.push($(this).val());
                 });
+                roleIdarray.push.apply(roleIdarray,currentroles);
+                return roleIdarray;
+            }
+        },
+        success: function (data) {
+            console.log(data);
+            if (data.status == 'S00001') {
+                console.log(data);
+                location.reload(true);
+            } else {
+                console.log(data);
+            }
+
+        },
+        error: function (data) {
+            alert("请求失败!");
+        }
+    });
+}
+function Submitdeleterole(){
+    //todo
+    $.ajax({
+        url: "/onps/manage/role/grantRolesFromSomeOne.do",
+        type: "post",
+        async: false,
+        data: {
+            "userId":$("#deleterole_selectuserid").val(),
+            "roleIds": function(){
+                var roleIdarray=new Array();
+                $("#deleterole_multiselectroleid option:selected").each(function () {
+                    console.log($(this).val());
+                    roleIdarray.push($(this).val());
+                });
                 return roleIdarray;
             }
         },
@@ -373,6 +465,7 @@ function SubmitAddpermissiontorole(){
                     console.log($(this).val());
                     permissionIdarray.push($(this).val());
                 });
+                permissionIdarray.push.apply(permissionIdarray,currentpermission);
                 return permissionIdarray;
             }
         },
@@ -391,6 +484,40 @@ function SubmitAddpermissiontorole(){
         }
     });
 }
+
+function SubmitDeletepermissiontorole(){
+    $.ajax({
+        url: "/onps/manage/permission/revokePermissionsFromSomeRole.do",
+        type: "post",
+        async: false,
+        data: {
+            "roleId":$("#deletepermission_selectroleid").val(),
+            "permissionIds": function(){
+                var permissionIdarray=new Array();
+                $("#deletepermission_selectpermissionid option:selected").each(function () {
+                    console.log($(this).val());
+                    permissionIdarray.push($(this).val());
+                });
+                permissionIdarray.push.apply(permissionIdarray,currentpermission);
+                return permissionIdarray;
+            }
+        },
+        success: function (data) {
+            console.log(data);
+            if (data.status == 'S00001') {
+                console.log(data);
+                location.reload(true);
+            } else {
+                console.log(data);
+            }
+
+        },
+        error: function (data) {
+            alert("请求失败!");
+        }
+    });
+}
+
 function Submitaddsubprojecttouser(){
     $.ajax({
         url: "/onps/manage/project/grantSubProjectToSomeOne.do",
@@ -438,9 +565,17 @@ $('#btn_addroletouser').click(function(){
     CloseWindows();
     $('#addroletouser').window('open');
 });
+$('#btn_deleteroletouser').click(function(){
+    CloseWindows();
+    $('#deleteroletouser').window('open');
+});
 $('#btn_addpermissiontorole').click(function(){
     CloseWindows();
     $('#addpermissiontorole').window('open');
+});
+$('#btn_deletepermissiontorole').click(function(){
+    CloseWindows();
+    $('#deletepermissiontorole').window('open');
 });
 $('#btn_addsubjecttouser').click(function(){
     CloseWindows();
@@ -452,7 +587,9 @@ function CloseWindows(){
     $('#updateinfo').window('close');
     $('#changepassword').window('close');
     $('#addroletouser').window('close');
+    $('#deleteroletouser').window('close');
     $('#addpermissiontorole').window('close');
+    $('#deletepermissiontorole').window('close');
     $('#addsubprojecttouser').window('close');
     $(":input").each(function(){
         this.value="";
