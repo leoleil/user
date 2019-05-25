@@ -32,12 +32,13 @@ $(function () {
         success: function (data) {
             console.log(data);
             if (data.status == 'S00001') {
-                $("#addpermission_selectroleid").append("<option  selected='selected''>" +"------请选择角色------"+ "</option>");
+                $(".selectroleid").append("<option  selected='selected''>" +"------请选择角色------"+ "</option>");
                 for(var i=0;i<data.entity.length;i++){
                     var newRole=new role(data.entity[i].id,data.entity[i].name);
                     Allrole.push(newRole);
-                    $("#addpermission_selectroleid").append("<option value='" + newRole.id + "'>" + newRole.name + "</option>");
+                    $(".selectroleid").append("<option value='" + newRole.id + "'>" + newRole.name + "</option>");
                 }
+                console.log(Allrole.length);
             } else {
                 console.log(data);
             }
@@ -163,15 +164,17 @@ $('#addrole_selectuserid').change(function () {
     var addrolelist = $("#addrole_multiselectroleid");
     $("option", addrolelist).remove(); //清空原有的选项
     addrolelist.append("<option >" + "------请选择角色------"+ "</option>");
+    var x=0;
     for (var i=0;i<Alluser.length;i++){
         if(val==Alluser[i].id){
             for(var k=0;k<Allrole.length;k++) {
                 var bool=true;
                 for (var j = 0; j < Alluser[i].rolearray.length; j++) {
-                    currentroles.push(Alluser[i].rolearray[j].id);
+                    if(x==0)currentroles.push(Alluser[i].rolearray[j].id);
                     if(Allrole[k].id==Alluser[i].rolearray[j].id) bool=false;
                 }
                 if(bool) addrolelist.append("<option value='" + Allrole[k].id + "'>" + Allrole[k].name + "</option>");
+                x++;
             }
         }
     }
@@ -222,14 +225,15 @@ $('#addpermission_selectroleid').change(function () {
                     alert("请求失败!");
                 }
             });
-
+            var x=0;
             for(var k=0;k<Allpermission.length;k++) {
                 var bool=true;
                 for (var j = 0; j < currentUserPermissionList.length; j++) {
-                    currentpermission.push(currentUserPermissionList.id);
+                   if(x==0) currentpermission.push(currentUserPermissionList[j].id);
                     if(currentUserPermissionList[j].id==Allpermission[k].id) bool=false;
                 }
                 if(bool) addpermissionlist.append("<option value='" + Allpermission[k].id + "'>" + Allpermission[k].name + "</option>");
+                x++;
             }
         }
     }
@@ -400,6 +404,7 @@ function SubmitAddrole(){
                     console.log($(this).val());
                     roleIdarray.push($(this).val());
                 });
+                //console.log("选择长度"+roleIdarray.length+"现有长度"+currentroles.length);
                 roleIdarray.push.apply(roleIdarray,currentroles);
                 return roleIdarray;
             }
@@ -422,7 +427,7 @@ function SubmitAddrole(){
 function Submitdeleterole(){
     //todo
     $.ajax({
-        url: "/onps/manage/role/grantRolesFromSomeOne.do",
+        url: "/onps/manage/role/revokeRolesFromSomeOne.do",
         type: "post",
         async: false,
         data: {
@@ -592,9 +597,6 @@ function CloseWindows(){
     $('#deletepermissiontorole').window('close');
     $('#addsubprojecttouser').window('close');
     $(":input").each(function(){
-        this.value="";
-    });
-    $(":select").each(function(){
         this.value="";
     });
 }
