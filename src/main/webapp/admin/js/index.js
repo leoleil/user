@@ -525,12 +525,12 @@ function SubmitDeletepermissiontorole(){
 
 function Submitaddsubprojecttouser(){
     $.ajax({
-        url: "/onps/manage/project/grantSubProjectToSomeOne.do",
+        url: "/onps/manage/project/addSubProjectToSomeOne.do",
         type: "post",
         async: false,
         data: {
             "userId":$("#addsubproject_selectuserid").val(),
-            "SubProjectId": $('#addsubproject_selectsubprojectid').val()
+            "subProjectId": $('#addsubproject_selectsubprojectid').val()
         },
         success: function (data) {
             console.log(data);
