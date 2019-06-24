@@ -38,6 +38,16 @@ public class Project {
 
     private String submitcompany;
 
+    private int level5sort;
+
+    public int getLevel5sort() {
+        return level5sort;
+    }
+
+    public void setLevel5sort(int level5sort) {
+        this.level5sort = level5sort;
+    }
+
     public String getId() {
         return id;
     }

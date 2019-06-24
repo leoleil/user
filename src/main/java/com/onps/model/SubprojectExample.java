@@ -235,6 +235,15 @@ public class SubprojectExample {
             addCriterion("SUBNAME not between", value1, value2, "subname");
             return (Criteria) this;
         }
+        /**
+         * 添加子项目名模糊查询功能
+         * @param value
+         * @return
+         */
+        public Criteria andSubnameLike(String value) {
+            addCriterion("SUBNAME like", value, "subname");
+            return (Criteria) this;
+        }
 
         public Criteria andStarttimeIsNull() {
             addCriterion("STARTTIME is null");

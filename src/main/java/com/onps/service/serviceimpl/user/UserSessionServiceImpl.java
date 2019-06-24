@@ -6,7 +6,6 @@ import com.onps.model.User;
 import com.onps.model.po.PermissionPO;
 import com.onps.model.po.RolePO;
 import com.onps.service.UserSessionService;
-import com.onps.service.modules.user.IUserCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;

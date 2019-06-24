@@ -23,9 +23,15 @@ public class ProjectScheduleSummarizeVO {
 
     private double finishWorkingNumber;//完工数量
 
+    private double completedWorkingNumber;//竣工数量
+
     private double finishWorkingRatio;//完工率
 
+    private double completedWorkingRatio;//竣工率
+
     private double approvalProgressNumber;//需要审批数量
+
+    private double approvalFinishNumber;//完成审批数量
 
     private double approvalRatio;//审批率
 
@@ -139,5 +145,29 @@ public class ProjectScheduleSummarizeVO {
 
     public void setApprovalRatio(double approvalRatio) {
         this.approvalRatio = approvalRatio;
+    }
+
+    public double getCompletedWorkingNumber() {
+        return completedWorkingNumber;
+    }
+
+    public void setCompletedWorkingNumber(double completedWorkingNumber) {
+        this.completedWorkingNumber = completedWorkingNumber;
+    }
+
+    public double getCompletedWorkingRatio() {
+        return completedWorkingRatio;
+    }
+
+    public void setCompletedWorkingRatio(double completedWorkingRatio) {
+        this.completedWorkingRatio = completedWorkingRatio;
+    }
+
+    public double getApprovalFinishNumber() {
+        return approvalFinishNumber;
+    }
+
+    public void setApprovalFinishNumber(double approvalFinishNumber) {
+        this.approvalFinishNumber = approvalFinishNumber;
     }
 }

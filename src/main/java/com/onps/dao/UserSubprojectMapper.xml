@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.onps.dao.UserSubprojectMapper" >
+  <resultMap id="BaseResultMap" type="com.onps.model.UserSubproject" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="PROJECTID" property="projectid" jdbcType="VARCHAR" />
+    <result column="SUBPROJECTID" property="subprojectid" jdbcType="VARCHAR" />
+    <result column="LEVEL1" property="level1" jdbcType="VARCHAR" />
+    <result column="LEVEL2" property="level2" jdbcType="VARCHAR" />
+    <result column="LEVEL3" property="level3" jdbcType="VARCHAR" />
+    <result column="LEVEL4" property="level4" jdbcType="VARCHAR" />
+    <result column="LEVEL5" property="level5" jdbcType="VARCHAR" />
+    <result column="ISCORRECT" property="iscorrect" jdbcType="VARCHAR" />
+    <result column="USERID" property="userid" jdbcType="VARCHAR" />
+    <result column="DEFAULTDESCRIPTION" property="defaultdescription" jdbcType="VARCHAR" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="TIMESTAP" property="timestap" jdbcType="TIMESTAMP" />
+    <result column="ADD1" property="add1" jdbcType="VARCHAR" />
+    <result column="ADD2" property="add2" jdbcType="VARCHAR" />
+    <result column="ADD3" property="add3" jdbcType="TIMESTAMP" />
+    <result column="ADD4" property="add4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, PROJECTID, SUBPROJECTID, LEVEL1, LEVEL2, LEVEL3, LEVEL4, LEVEL5, ISCORRECT, USERID, 
+    DEFAULTDESCRIPTION, UPDATETIME, TIMESTAP, ADD1, ADD2, ADD3, ADD4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.onps.model.UserSubprojectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from USER_SUBPROJECT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from USER_SUBPROJECT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from USER_SUBPROJECT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.onps.model.UserSubprojectExample" >
+    delete from USER_SUBPROJECT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.onps.model.UserSubproject" >
+    insert into USER_SUBPROJECT (ID, PROJECTID, SUBPROJECTID, 
+      LEVEL1, LEVEL2, LEVEL3, 
+      LEVEL4, LEVEL5, ISCORRECT, 
+      USERID, DEFAULTDESCRIPTION, UPDATETIME, 
+      TIMESTAP, ADD1, ADD2, 
+      ADD3, ADD4)
+    values (#{id,jdbcType=VARCHAR}, #{projectid,jdbcType=VARCHAR}, #{subprojectid,jdbcType=VARCHAR}, 
+      #{level1,jdbcType=VARCHAR}, #{level2,jdbcType=VARCHAR}, #{level3,jdbcType=VARCHAR}, 
+      #{level4,jdbcType=VARCHAR}, #{level5,jdbcType=VARCHAR}, #{iscorrect,jdbcType=VARCHAR}, 
+      #{userid,jdbcType=VARCHAR}, #{defaultdescription,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{timestap,jdbcType=TIMESTAMP}, #{add1,jdbcType=VARCHAR}, #{add2,jdbcType=VARCHAR}, 
+      #{add3,jdbcType=TIMESTAMP}, #{add4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.onps.model.UserSubproject" >
+    insert into USER_SUBPROJECT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="projectid != null" >
+        PROJECTID,
+      </if>
+      <if test="subprojectid != null" >
+        SUBPROJECTID,
+      </if>
+      <if test="level1 != null" >
+        LEVEL1,
+      </if>
+      <if test="level2 != null" >
+        LEVEL2,
+      </if>
+      <if test="level3 != null" >
+        LEVEL3,
+      </if>
+      <if test="level4 != null" >
+        LEVEL4,
+      </if>
+      <if test="level5 != null" >
+        LEVEL5,
+      </if>
+      <if test="iscorrect != null" >
+        ISCORRECT,
+      </if>
+      <if test="userid != null" >
+        USERID,
+      </if>
+      <if test="defaultdescription != null" >
+        DEFAULTDESCRIPTION,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+      <if test="timestap != null" >
+        TIMESTAP,
+      </if>
+      <if test="add1 != null" >
+        ADD1,
+      </if>
+      <if test="add2 != null" >
+        ADD2,
+      </if>
+      <if test="add3 != null" >
+        ADD3,
+      </if>
+      <if test="add4 != null" >
+        ADD4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="projectid != null" >
+        #{projectid,jdbcType=VARCHAR},
+      </if>
+      <if test="subprojectid != null" >
+        #{subprojectid,jdbcType=VARCHAR},
+      </if>
+      <if test="level1 != null" >
+        #{level1,jdbcType=VARCHAR},
+      </if>
+      <if test="level2 != null" >
+        #{level2,jdbcType=VARCHAR},
+      </if>
+      <if test="level3 != null" >
+        #{level3,jdbcType=VARCHAR},
+      </if>
+      <if test="level4 != null" >
+        #{level4,jdbcType=VARCHAR},
+      </if>
+      <if test="level5 != null" >
+        #{level5,jdbcType=VARCHAR},
+      </if>
+      <if test="iscorrect != null" >
+        #{iscorrect,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultdescription != null" >
+        #{defaultdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timestap != null" >
+        #{timestap,jdbcType=TIMESTAMP},
+      </if>
+      <if test="add1 != null" >
+        #{add1,jdbcType=VARCHAR},
+      </if>
+      <if test="add2 != null" >
+        #{add2,jdbcType=VARCHAR},
+      </if>
+      <if test="add3 != null" >
+        #{add3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="add4 != null" >
+        #{add4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.onps.model.UserSubprojectExample" resultType="java.lang.Integer" >
+    select count(*) from USER_SUBPROJECT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update USER_SUBPROJECT
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectid != null" >
+        PROJECTID = #{record.projectid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subprojectid != null" >
+        SUBPROJECTID = #{record.subprojectid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level1 != null" >
+        LEVEL1 = #{record.level1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level2 != null" >
+        LEVEL2 = #{record.level2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level3 != null" >
+        LEVEL3 = #{record.level3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level4 != null" >
+        LEVEL4 = #{record.level4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level5 != null" >
+        LEVEL5 = #{record.level5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.iscorrect != null" >
+        ISCORRECT = #{record.iscorrect,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        USERID = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultdescription != null" >
+        DEFAULTDESCRIPTION = #{record.defaultdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetime != null" >
+        UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.timestap != null" >
+        TIMESTAP = #{record.timestap,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.add1 != null" >
+        ADD1 = #{record.add1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.add2 != null" >
+        ADD2 = #{record.add2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.add3 != null" >
+        ADD3 = #{record.add3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.add4 != null" >
+        ADD4 = #{record.add4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update USER_SUBPROJECT
+    set ID = #{record.id,jdbcType=VARCHAR},
+      PROJECTID = #{record.projectid,jdbcType=VARCHAR},
+      SUBPROJECTID = #{record.subprojectid,jdbcType=VARCHAR},
+      LEVEL1 = #{record.level1,jdbcType=VARCHAR},
+      LEVEL2 = #{record.level2,jdbcType=VARCHAR},
+      LEVEL3 = #{record.level3,jdbcType=VARCHAR},
+      LEVEL4 = #{record.level4,jdbcType=VARCHAR},
+      LEVEL5 = #{record.level5,jdbcType=VARCHAR},
+      ISCORRECT = #{record.iscorrect,jdbcType=VARCHAR},
+      USERID = #{record.userid,jdbcType=VARCHAR},
+      DEFAULTDESCRIPTION = #{record.defaultdescription,jdbcType=VARCHAR},
+      UPDATETIME = #{record.updatetime,jdbcType=TIMESTAMP},
+      TIMESTAP = #{record.timestap,jdbcType=TIMESTAMP},
+      ADD1 = #{record.add1,jdbcType=VARCHAR},
+      ADD2 = #{record.add2,jdbcType=VARCHAR},
+      ADD3 = #{record.add3,jdbcType=TIMESTAMP},
+      ADD4 = #{record.add4,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onps.model.UserSubproject" >
+    update USER_SUBPROJECT
+    <set >
+      <if test="projectid != null" >
+        PROJECTID = #{projectid,jdbcType=VARCHAR},
+      </if>
+      <if test="subprojectid != null" >
+        SUBPROJECTID = #{subprojectid,jdbcType=VARCHAR},
+      </if>
+      <if test="level1 != null" >
+        LEVEL1 = #{level1,jdbcType=VARCHAR},
+      </if>
+      <if test="level2 != null" >
+        LEVEL2 = #{level2,jdbcType=VARCHAR},
+      </if>
+      <if test="level3 != null" >
+        LEVEL3 = #{level3,jdbcType=VARCHAR},
+      </if>
+      <if test="level4 != null" >
+        LEVEL4 = #{level4,jdbcType=VARCHAR},
+      </if>
+      <if test="level5 != null" >
+        LEVEL5 = #{level5,jdbcType=VARCHAR},
+      </if>
+      <if test="iscorrect != null" >
+        ISCORRECT = #{iscorrect,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        USERID = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultdescription != null" >
+        DEFAULTDESCRIPTION = #{defaultdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timestap != null" >
+        TIMESTAP = #{timestap,jdbcType=TIMESTAMP},
+      </if>
+      <if test="add1 != null" >
+        ADD1 = #{add1,jdbcType=VARCHAR},
+      </if>
+      <if test="add2 != null" >
+        ADD2 = #{add2,jdbcType=VARCHAR},
+      </if>
+      <if test="add3 != null" >
+        ADD3 = #{add3,jdbcType=TIMESTAMP},
+      </if>
+      <if test="add4 != null" >
+        ADD4 = #{add4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onps.model.UserSubproject" >
+    update USER_SUBPROJECT
+    set PROJECTID = #{projectid,jdbcType=VARCHAR},
+      SUBPROJECTID = #{subprojectid,jdbcType=VARCHAR},
+      LEVEL1 = #{level1,jdbcType=VARCHAR},
+      LEVEL2 = #{level2,jdbcType=VARCHAR},
+      LEVEL3 = #{level3,jdbcType=VARCHAR},
+      LEVEL4 = #{level4,jdbcType=VARCHAR},
+      LEVEL5 = #{level5,jdbcType=VARCHAR},
+      ISCORRECT = #{iscorrect,jdbcType=VARCHAR},
+      USERID = #{userid,jdbcType=VARCHAR},
+      DEFAULTDESCRIPTION = #{defaultdescription,jdbcType=VARCHAR},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      TIMESTAP = #{timestap,jdbcType=TIMESTAMP},
+      ADD1 = #{add1,jdbcType=VARCHAR},
+      ADD2 = #{add2,jdbcType=VARCHAR},
+      ADD3 = #{add3,jdbcType=TIMESTAMP},
+      ADD4 = #{add4,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

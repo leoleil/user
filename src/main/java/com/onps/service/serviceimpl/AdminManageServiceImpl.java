@@ -9,7 +9,6 @@ import com.onps.model.po.PermissionPO;
 import com.onps.model.po.RolePO;
 import com.onps.model.po.UserPO;
 import com.onps.service.AdminManageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,3 @@
-import com.onps.dao.MyUserMapper;
-import com.onps.dao.ProjectMapper;
-import com.onps.dao.SubprojectMapper;
 import com.onps.model.MyUser;
 import com.onps.model.Project;
 import com.onps.model.ProjectExample;

@@ -1,9 +1,10 @@
 package com.onps.dao;
-import java.util.List;
 
 import com.onps.model.MyUser;
 import com.onps.model.MyUserExample;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface MyUserMapper {
     int countByExample(MyUserExample example);

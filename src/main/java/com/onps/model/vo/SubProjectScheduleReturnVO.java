@@ -88,6 +88,8 @@ public class SubProjectScheduleReturnVO {
 
     private String department;//提交部门
 
+    private boolean iscorrect;//是否被确认
+
     public String getSubprojectId() {
         return subprojectId;
     }
@@ -414,5 +416,13 @@ public class SubProjectScheduleReturnVO {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public boolean isIscorrect() {
+        return iscorrect;
+    }
+
+    public void setIscorrect(boolean iscorrect) {
+        this.iscorrect = iscorrect;
     }
 }

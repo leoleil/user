@@ -19,6 +19,7 @@
     <result column="LEVEL5" jdbcType="OTHER" property="level5" />
     <result column="TIMESTAMP" jdbcType="TIMESTAMP" property="timestamp" />
     <result column="USERID" jdbcType="VARCHAR" property="userid" />
+    <result column="LEVEL5SORT" jdbcType="DECIMAL" property="level5sort" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -81,7 +82,7 @@
   <sql id="Base_Column_List">
     ID, SUBMITCOMPANY, PROJECTNAME, DOCUMENTNAME, DOCUMENTNUMBER, DOCUMENTDATE, INVESTMENTAMOUNT, 
     APPROVALAUTHORITY, CONSTRUCTIONPERIOD, ISIMPORTENT, LEVEL1, LEVEL2, LEVEL3, LEVEL4, 
-    LEVEL5, TIMESTAMP, USERID
+    LEVEL5, TIMESTAMP, USERID,level5sort
   </sql>
   <select id="selectByExample" parameterType="com.onps.model.ProjectExample" resultMap="BaseResultMap">
     select
@@ -102,6 +103,12 @@
     <include refid="Base_Column_List" />
     from PROJECT
     where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByDefinedOrder"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from PROJECT
+    order by DECODE(${LEVEL5},$(string1),1,$(string2),2,$(string3),3,4)
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from PROJECT

@@ -236,6 +236,16 @@ public class ProjectExample {
             return (Criteria) this;
         }
 
+        /**
+         * 添加项目名模糊查询功能
+         * @param value
+         * @return
+         */
+        public Criteria andProjectnameLike(String value) {
+            addCriterion("PROJECTNAME like", value, "projectname");
+            return (Criteria) this;
+        }
+
         public Criteria andDocumentnameIsNull() {
             addCriterion("DOCUMENTNAME is null");
             return (Criteria) this;
@@ -773,6 +783,16 @@ public class ProjectExample {
 
         public Criteria andLevel2NotBetween(Object value1, Object value2) {
             addCriterion("LEVEL2 not between", value1, value2, "level2");
+            return (Criteria) this;
+        }
+
+        /**
+         * 陈雷雨添加leve2模糊查询功能
+         * @param value
+         * @return
+         */
+        public Criteria andLevel2Like(String value) {
+            addCriterion("LEVEL2 like", value, "level2");
             return (Criteria) this;
         }
 
