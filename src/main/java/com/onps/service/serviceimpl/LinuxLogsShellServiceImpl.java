@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 日志的基本操作
+ * 日志的基本操作   linux系统命令
  *
  * @author :breakpoint/赵立刚
  * @date : 2019/06/27
@@ -98,6 +98,8 @@ public class LinuxLogsShellServiceImpl implements LogsShellService {
          * 访问  之后统计
          */
 
+        System.out.println("'" + pageInfo.getKeyWord() + "'");
+
         ProcessBuilder processBuilder = new ProcessBuilder(getProjectResourcePath() + "/linuxPs.sh", pageInfo.getKeyWord(), LOGS_FILE_PATH, pageStart + "", pageSize + "");
 
         Process start = processBuilder.start();
@@ -105,11 +107,13 @@ public class LinuxLogsShellServiceImpl implements LogsShellService {
         start.waitFor();
 
         InputStream in = start.getInputStream();
-        BufferedReader read = new BufferedReader(new InputStreamReader(in));
 
+        /**
+         * 修改编码的问题
+         */
+        BufferedReader read = new BufferedReader(new InputStreamReader(in, "utf-8"));
 
         logsFileVos = new ArrayList<>(16);
-
 
         String line = null;
         while ((line = read.readLine()) != null) {
@@ -134,7 +138,7 @@ public class LinuxLogsShellServiceImpl implements LogsShellService {
 
                 pageInfo.setNextPage(nextPage);
 
-            }else {
+            } else {
                 /**
                  * 其他的数据的处理
                  */
@@ -148,8 +152,7 @@ public class LinuxLogsShellServiceImpl implements LogsShellService {
             }
 
 
-
-           // System.out.println(line);
+            // System.out.println(line);
         }
 
         if (null == logsFileVos) {

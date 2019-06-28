@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 日志的基本操作
+ * 日志的基本操作  windows命令
  *
  * @author :breakpoint/赵立刚
  * @date : 2019/06/27

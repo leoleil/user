@@ -7,6 +7,7 @@ import com.onps.utils.resultUtils.BaseResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -30,6 +31,11 @@ public class UserLogController {
     private UserLogService userLogService;
 
 
+    /**
+     * 获取到所有的日志文件的名称
+     *
+     * @return
+     */
     @RequestMapping(value = "getAllLogsFile", method = RequestMethod.GET)
     @ResponseBody
     public Object getAllLogsFile() {
@@ -47,6 +53,12 @@ public class UserLogController {
 
     }
 
+    /**
+     * 根据关键字查找基本的日志内容
+     *
+     * @param pageInfo
+     * @return
+     */
     @RequestMapping(value = "getAllLogsFileNameByKeyWords", method = RequestMethod.GET)
     @ResponseBody
     public Object getAllLogsFileNameByKeyWords(PageInfo pageInfo) {
@@ -54,7 +66,6 @@ public class UserLogController {
         try {
 
             Object o = userLogService.getAllLogsFileNameByKeyWords(pageInfo);
-
             return BaseResult.createSuccessResult(o);
 
         } catch (Exception e) {
