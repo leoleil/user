@@ -61,6 +61,13 @@ public class PageInfoResolver implements HandlerMethodArgumentResolver {
 
 
             /**
+             * 设置查询的关键字
+             */
+            String keyWords = request.getParameter("keyWords");
+            pageInfo.setKeyWord(keyWords);
+
+
+            /**
              * 获取到当前页
              */
             int currentPage = 0;
