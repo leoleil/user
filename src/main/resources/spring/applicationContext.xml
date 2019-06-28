@@ -60,7 +60,8 @@
 	<tx:method name="insert*" propagation="REQUIRED" />
 	<tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
 	<tx:method name="grant*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
-	<tx:method name="*" propagation="REQUIRED" />
+	<tx:method name="revoke*" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+	<tx:method name="*" propagation="REQUIRED" read-only="true"/>
 	</tx:attributes>
 	
 	</tx:advice>
@@ -107,6 +108,7 @@
 				<!--/manage/project/** = anon-->
 				<!--/manage/permission/** = anon-->
 				<!--/manage/role/** = anon-->
+				<!--/manage/logs/** = anon-->
 
 				<!--perms:资源必须授予资源权限才能访问-->
 				<!--/admin/toAdmin.do=perms[ok]-->
