@@ -44,6 +44,10 @@ public class PageInfoResolver implements HandlerMethodArgumentResolver {
          */
         HttpServletRequest request = nativeWebRequest.getNativeRequest(HttpServletRequest.class);
         HttpServletResponse response = nativeWebRequest.getNativeResponse(HttpServletResponse.class);
+//
+//        request.setCharacterEncoding("UTF-8");
+//        response.setCharacterEncoding("UTF-8");
+        //response.setHeader();
 
         try {
 
@@ -61,9 +65,18 @@ public class PageInfoResolver implements HandlerMethodArgumentResolver {
 
 
             /**
+             * 设置查询的关键字
+             */
+            String keyWords = request.getParameter("keyWords");
+            pageInfo.setKeyWord(keyWords);
+
+            System.out.println(keyWords);
+
+
+            /**
              * 获取到当前页
              */
-            int currentPage = 0;
+            int currentPage = 1;
 
 
             if (StringUtils.isEmpty(request.getParameter("currentPage"))) {

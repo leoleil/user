@@ -12,8 +12,8 @@ public class PageInfo<T> {
     /**
      * 封装的状态
      */
-    public static final int SUCCESS_STATUS=0;
-    public static final int FAIL_STATUS=1;
+    public static final int SUCCESS_STATUS = 0;
+    public static final int FAIL_STATUS = 1;
 
     /**
      * 上一页 页码
@@ -56,6 +56,11 @@ public class PageInfo<T> {
      * 返回的数据
      */
     private T data;
+
+    /**
+     * 关键字
+     */
+    private String keyWord;
 
 
     public int getPrePage() {
@@ -128,5 +133,13 @@ public class PageInfo<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public String getKeyWord() {
+        return keyWord;
+    }
+
+    public void setKeyWord(String keyWord) {
+        this.keyWord = keyWord;
     }
 }
