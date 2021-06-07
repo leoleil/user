@@ -178,7 +178,7 @@
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>1.1.1</version>
+      <version>1.2.0</version>
     </dependency>
     <!-- 第五部分:Shiro -->
     <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring -->
